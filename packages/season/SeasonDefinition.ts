@@ -113,9 +113,9 @@ export interface TestItem {
  * The available difficulty levels of tests. 
  */
 export enum Level {
-  foundation = "BEGINNER",
-  intermediate = "INTERMEDIATE",
-  advanced = "ADVANCED",
+  Foundation = "BEGINNER",
+  Intermediate = "INTERMEDIATE",
+  Advanced = "ADVANCED",
 }
 
 /**
@@ -232,10 +232,10 @@ export interface Badge {
  * * "public": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.
  */
 export enum Maturity {
-  pending = "pending",
-  alpha = "alpha",
-  beta = "beta",
-  public = "public",
+  Pending = "pending",
+  Alpha = "alpha",
+  Beta = "beta",
+  Public = "public",
 }
 
 /**
