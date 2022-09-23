@@ -1,10 +1,10 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
 import { getAuthorizationHeader } from "./auth.js";
-import { deployCompetences } from "./competences";
+import { deployCompetences } from "./competences.js";
 // import { deployFeedbackQuestions } from "./feedback-question.js";
 // import { deploySignalModules } from "./signal.js";
-// import { deployTestItems } from "./test-item.js";
+import { deployTestItems } from "./test-item.js";
 import { parse } from "yaml";
 
 export const deploySeasons = async (
@@ -27,4 +27,5 @@ export const deploySeasons = async (
   const path = join("..", "season.yaml"); // TODO
   const season = parse(await readFile(path, "utf-8"));
   await deployCompetences(baseUrl, authorization, season.competenceAreas);
+  await deployTestItems(baseUrl, authorization, season.competenceAreas);
 };

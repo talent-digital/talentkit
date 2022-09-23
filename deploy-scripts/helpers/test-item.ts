@@ -6,9 +6,11 @@ import { join } from "path";
 import { parse } from "yaml";
 
 type TestItem = {
-  subcompetence: number;
+  documentation: string;
+  eventType: string;
   level: string;
-  documentation: { en: string; de: string };
+  subCompetenceId: number;
+  testId: string;
 };
 
 enum levels {
@@ -18,77 +20,71 @@ enum levels {
   HIGHLY_SKILLED = "HIGHLY_SPECIALISED",
 }
 
+// TODO: Prefix variable
 export const deployTestItems = async (
   baseUrl: string,
-  seasonId: string,
-  authorization: string
+  authorization: string,
+  data: any // SeasonDefinition["competenceAreas"]
 ) => {
-  const path = join("season", seasonId, "test-item");
+  const prefix = "season-episode-prefix"; // TODO
+  const testItemList = extractTestItems(data, prefix);
 
-  try {
-    access(path, constants.R_OK);
+  const multibar = new cliProgress.MultiBar(
+    {
+      clearOnComplete: false,
+      hideCursor: true,
+      format: `{bar} {prefix}    {testId}`,
+    },
+    cliProgress.Presets.shades_classic
+  );
 
-    const testItemFiles = await readdir(path);
+  const bars = {};
+  bars[prefix] = multibar.create(Object.keys(data).length, 0, {
+    prefix,
+    testId: "",
+  });
 
-    if (testItemFiles.length === 0) return;
-
-    console.log("Deploying test-items\n");
-
-    const multibar = new cliProgress.MultiBar(
-      {
-        clearOnComplete: false,
-        hideCursor: true,
-        format: `{bar} {prefix}    {testId}`,
-      },
-      cliProgress.Presets.shades_classic
-    );
-
-    const bars = {};
-
-    for (const testItemFile of testItemFiles) {
-      const data = parse(
-        await readFile(join(path, testItemFile), "utf-8")
-      ) as Record<string, TestItem>;
-      const prefix = testItemFile.replace(".yml", "");
-
-      console.log("data", data);
-
-      debugger;
-
-      bars[prefix] = multibar.create(Object.keys(data).length, 0, {
-        prefix,
-        testId: "",
-      });
-
-      for (const [
-        testId,
-        { subcompetence, level, documentation },
-      ] of Object.entries(data)) {
-        try {
-          await got
-            .post(`${baseUrl}/api/v1/test-item`, {
-              headers: {
-                authorization,
-              },
-              json: {
-                eventType: `${prefix}.${testId}`,
-                subCompetenceId: subcompetence,
-                level: levels[level],
-                documentation: JSON.stringify(documentation),
-              },
-            })
-            .json();
-        } catch (err) {
-          console.log(`error while posting ${prefix}.${testId}`, err);
-          continue;
-        } finally {
-          bars[prefix].increment({ testId });
-        }
-      }
+  for (const testItem of testItemList) {
+    try {
+      await got
+        .post(`${baseUrl}/api/v1/test-item`, {
+          headers: {
+            authorization,
+          },
+          json: testItem,
+        })
+        .json();
+    } catch (err) {
+      console.log(`error while posting ${testItem.eventType}`, err);
+      continue;
+    } finally {
+      bars[prefix].increment({ testId: testItem.testId });
     }
-
-    multibar.stop();
-  } catch (err) {
-    console.error(err);
   }
+
+  multibar.stop();
+};
+
+const extractTestItems = (competenceAreas: any, prefix: string): TestItem[] => {
+  return Object.values(competenceAreas).flatMap((area: any) => {
+    return Object.values(area.competences).flatMap((competence: any) => {
+      return Object.keys(competence.subCompetences).flatMap(
+        (subCompetenceKey: any) => {
+          const subCompetence = competence.subCompetences[subCompetenceKey];
+
+          return Object.keys(subCompetence.testItems).map((testItemKey) => {
+            const testItem = subCompetence.testItems[testItemKey];
+
+            return {
+              documentation: JSON.stringify(testItem.documentation),
+              eventType: `${prefix}.${testItemKey}`,
+              level: levels[testItem.level],
+              subCompetenceId: Number(subCompetenceKey),
+              testId: testItemKey,
+            };
+          });
+        }
+      );
+    });
+  });
 };

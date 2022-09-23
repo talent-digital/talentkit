@@ -22,31 +22,6 @@ export const deployCompetences = async (
   authorization: string,
   data: any // SeasonDefinition["competenceAreas"]
 ) => {
-  const adaptToCompetenceArea = (competenceAreas: any): CompetenceArea[] => {
-    return Object.keys(competenceAreas).map((areaKey) => {
-      const competences = competenceAreas[areaKey].competences;
-
-      return {
-        id: Number(areaKey),
-        competences: Object.keys(competences).map((competenceKey) => {
-          const subCompetences = competences[competenceKey].subCompetences;
-
-          return {
-            id: Number(competenceKey),
-            subCompetences: Object.keys(subCompetences).map(
-              (subCompetenceKey) => {
-                return {
-                  id: Number(subCompetenceKey),
-                  name: subCompetences[subCompetenceKey].name.de,
-                };
-              }
-            ),
-          };
-        }),
-      };
-    });
-  };
-
   try {
     await got.post(`${baseUrl}/api/v1/profile2/competences/competences-tree`, {
       headers: {
@@ -59,4 +34,29 @@ export const deployCompetences = async (
   } catch (err) {
     console.error("Error during competences deploy", JSON.stringify(err));
   }
+};
+
+const adaptToCompetenceArea = (competenceAreas: any): CompetenceArea[] => {
+  return Object.keys(competenceAreas).map((areaKey) => {
+    const competences = competenceAreas[areaKey].competences;
+
+    return {
+      id: Number(areaKey),
+      competences: Object.keys(competences).map((competenceKey) => {
+        const subCompetences = competences[competenceKey].subCompetences;
+
+        return {
+          id: Number(competenceKey),
+          subCompetences: Object.keys(subCompetences).map(
+            (subCompetenceKey) => {
+              return {
+                id: Number(subCompetenceKey),
+                name: subCompetences[subCompetenceKey].name.de,
+              };
+            }
+          ),
+        };
+      }),
+    };
+  });
 };
