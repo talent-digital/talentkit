@@ -20,7 +20,7 @@ export interface SeasonDefinition {
 
   /**
    * The episodes (learning modules) to verify the competences.
-   * The ID can be simply e.g. "01", "02", ... 
+   * The ID can be simply e.g. "01", "02", ...
    * It permits rearranging episodes in a season without loosing any previously generated data from players.
    */
   episodes: { [id in string]: EpisodeDefinition };
@@ -32,15 +32,15 @@ export interface SeasonDefinition {
 }
 
 /**
- * A competence area is a broad educational subject, such as security, compliance etc. 
+ * A competence area is a broad educational subject, such as security, compliance etc.
  * All competence areas of all seasons published in a tenant are merged into a competence model
  * that is shown to users. Competence areas and competences may be reused across seasons.
  */
 export interface CompetenceArea {
   /**
-   * The name of the competence area as shown in the user interface. 
+   * The name of the competence area as shown in the user interface.
    */
-  name: LocalizedString | undefined;
+  name?: LocalizedString;
 
   /**
    * The more detailed competences in this competence area.
@@ -55,7 +55,7 @@ export interface Competence {
   /**
    * The name of the competence as shown in the user interface.
    */
-  name: LocalizedString | undefined;
+  name?: LocalizedString;
 
   /**
    * The granular sub competences that are actually tested.
@@ -68,19 +68,19 @@ export interface Competence {
  */
 export interface SubCompetence {
   /**
-   * The name of the subcompetence as shown in the user interface. 
+   * The name of the subcompetence as shown in the user interface.
    */
-  name: LocalizedString | undefined;
+  name?: LocalizedString;
 
   /**
    * The tests to validate the subcompetence.
    */
-  testItems: { [id in string]: TestItem } | undefined;
+  testItems?: { [id in string]: TestItem };
 
   /**
    * Attitude-related questions towards the subcompetence.
    */
-  feedbackItems: { [id in string]: FeedbackItem } | undefined;
+  feedbackItems?: { [id in string]: FeedbackItem };
 }
 
 /**
@@ -104,13 +104,13 @@ export interface TestItem {
 
   /**
    * The type of tool that is used for the test. E.g., "chat" or "video-conferencing".
-   * This tool is matched against the tools configured by the administrator for the organization. 
+   * This tool is matched against the tools configured by the administrator for the organization.
    */
-  toolType: ToolType | undefined;
+  toolType?: ToolType;
 }
 
 /**
- * The available difficulty levels of tests. 
+ * The available difficulty levels of tests.
  */
 export enum Level {
   Foundation = "BEGINNER",
@@ -145,17 +145,17 @@ export type LocalizedSearchDefinition = {
   /**
    * A list of search queries to find education material.
    */
-  generic: string[] | undefined;
+  generic?: string[];
 
   /**
    * A list of tool-specific search queries to find education material. These search queries get the user-configured tool added.
    */
-   tool: string[] | undefined;
+   tool?: string[];
 
-   /** 
+   /**
    * A list of links with known education material.
   */
-  links: string[] | undefined;
+  links?: string[];
 }
 
 /**
@@ -172,7 +172,7 @@ export interface FeedbackItem {
  */
 export interface EpisodeDefinition {
   /**
-   * The title of the episode as shown in the user interface. 
+   * The title of the episode as shown in the user interface.
    */
   title: LocalizedString;
 
@@ -182,13 +182,13 @@ export interface EpisodeDefinition {
   description: LocalizedString;
 
   /**
-   * The development status of the episode. 
+   * The development status of the episode.
    * This determines if the episode can be accessed by players generally in the user interface, or only through specific URLs.
    */
   maturity: Maturity;
 
   /**
-   * The URL of an SVG preview image for the episode shown in the user interface. 
+   * The URL of an SVG preview image for the episode shown in the user interface.
    */
   imageUrl: URL;
 
@@ -205,7 +205,7 @@ export interface EpisodeDefinition {
   /**
    * Badges that can be obtained by playing the episode.
    */
-  badges: { [id in string]: Badge } | undefined;
+  badges?: { [id in string]: Badge };
 }
 
 /**
@@ -224,8 +224,8 @@ export interface Badge {
   image: URL;
 }
 
-/** 
- * The maturity of the episode. 
+/**
+ * The maturity of the episode.
  * * "pending": Still under development.
  * * "alpha": Ready for alpha testing (e.g., first guided testing to determine usability issues).
  * * "beta": Ready for beta testing (e.g., unguided testing to determine test item differentiation).
@@ -248,14 +248,14 @@ export enum LanguageCode {
 
 /**
  * Localized strings represent text that is available in multiple languages.
- * The user is shown text in their language, if the text in their language is configured; 
+ * The user is shown text in their language, if the text in their language is configured;
  * otherwise they see the text in the configured language, if only one language is configured;
  * otherwise they see the text in the reference language ("de"?).
  */
 export type LocalizedString = { [key in LanguageCode]: string | undefined };
 
 /**
- * A URL to an asset or app. The URL is either relative to the current repository or 
+ * A URL to an asset or app. The URL is either relative to the current repository or
  * absolute to an already deployed asset or app.
  */
 export type URL = string;

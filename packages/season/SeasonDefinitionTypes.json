@@ -43,7 +43,7 @@
     },
     "CompetenceArea": {
       "additionalProperties": false,
-      "description": "A competence area is a broad educational subject, such as security, compliance etc.  All competence areas of all seasons published in a tenant are merged into a competence model that is shown to users. Competence areas and competences may be reused across seasons.",
+      "description": "A competence area is a broad educational subject, such as security, compliance etc. All competence areas of all seasons published in a tenant are merged into a competence model that is shown to users. Competence areas and competences may be reused across seasons.",
       "properties": {
         "competences": {
           "additionalProperties": {
@@ -91,7 +91,7 @@
         },
         "maturity": {
           "$ref": "#/definitions/Maturity",
-          "description": "The development status of the episode.  This determines if the episode can be accessed by players generally in the user interface, or only through specific URLs."
+          "description": "The development status of the episode. This determines if the episode can be accessed by players generally in the user interface, or only through specific URLs."
         },
         "title": {
           "$ref": "#/definitions/LocalizedString",
@@ -164,7 +164,7 @@
     },
     "LocalizedString": {
       "additionalProperties": false,
-      "description": "Localized strings represent text that is available in multiple languages. The user is shown text in their language, if the text in their language is configured;  otherwise they see the text in the configured language, if only one language is configured; otherwise they see the text in the reference language (\"de\"?).",
+      "description": "Localized strings represent text that is available in multiple languages. The user is shown text in their language, if the text in their language is configured; otherwise they see the text in the configured language, if only one language is configured; otherwise they see the text in the reference language (\"de\"?).",
       "properties": {
         "de": {
           "type": "string"
@@ -176,7 +176,7 @@
       "type": "object"
     },
     "Maturity": {
-      "description": "The maturity of the episode. \n* \"pending\": Still under development.\n* \"alpha\": Ready for alpha testing (e.g., first guided testing to determine usability issues).\n* \"beta\": Ready for beta testing (e.g., unguided testing to determine test item differentiation).\n* \"public\": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.",
+      "description": "The maturity of the episode.\n* \"pending\": Still under development.\n* \"alpha\": Ready for alpha testing (e.g., first guided testing to determine usability issues).\n* \"beta\": Ready for beta testing (e.g., unguided testing to determine test item differentiation).\n* \"public\": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.",
       "enum": [
         "pending",
         "alpha",
@@ -228,7 +228,7 @@
           "additionalProperties": {
             "$ref": "#/definitions/EpisodeDefinition"
           },
-          "description": "The episodes (learning modules) to verify the competences. The ID can be simply e.g. \"01\", \"02\", ...  It permits rearranging episodes in a season without loosing any previously generated data from players.",
+          "description": "The episodes (learning modules) to verify the competences. The ID can be simply e.g. \"01\", \"02\", ... It permits rearranging episodes in a season without loosing any previously generated data from players.",
           "type": "object"
         },
         "info": {
@@ -320,7 +320,7 @@
       "type": "string"
     },
     "URL": {
-      "description": "A URL to an asset or app. The URL is either relative to the current repository or  absolute to an already deployed asset or app.",
+      "description": "A URL to an asset or app. The URL is either relative to the current repository or absolute to an already deployed asset or app.",
       "type": "string"
     }
   }
