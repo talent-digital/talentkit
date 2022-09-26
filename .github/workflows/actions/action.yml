@@ -1,0 +1,7 @@
+name: "Just testing"
+description: "Only for test folks"
+author: "Me"
+
+runs:
+  using: "node16"
+  main: "./index.js"
