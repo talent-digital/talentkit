@@ -1,9 +1,5 @@
 import cliProgress from "cli-progress";
-import { constants } from "fs";
-import { access, readdir, readFile } from "fs/promises";
 import got from "got";
-import { join } from "path";
-import { parse } from "yaml";
 
 export interface FeedbackQuestion {
   question: {
@@ -17,64 +13,83 @@ export interface FeedbackQuestion {
   }[];
 }
 
+interface FeebackSomething {
+  id: string;
+  question: any;
+  answers: any;
+}
+
 export const deployFeedbackQuestions = async (
   baseUrl: string,
-  seasonId: string,
-  authorization: string
+  authorization: string,
+  data: any // SeasonDefinition["competenceAreas"]
 ) => {
-  const path = join("season", seasonId, "feedback-question");
+  console.log("Deploying feedback-questions\n");
 
-  try {
-    await access(path, constants.R_OK);
+  const episode = "season-episode"; // TODO
+  const feedbackQuestions = extractFeedbackQuestions(data);
 
-    const feedbackQuestionFiles = await readdir(path);
+  const multibar = new cliProgress.MultiBar(
+    {
+      clearOnComplete: false,
+      hideCursor: true,
+      format: `{bar} {episode}    {id}`,
+    },
+    cliProgress.Presets.shades_classic
+  );
 
-    if (feedbackQuestionFiles.length === 0) return;
+  const bars = {};
 
-    console.log("Deploying feedback-questions\n");
+  bars[episode] = multibar.create(Object.keys(data).length, 0, {
+    episode,
+    id: "",
+  });
 
-    const multibar = new cliProgress.MultiBar(
-      {
-        clearOnComplete: false,
-        hideCursor: true,
-        format: `{bar} {episode}    {id}`,
-      },
-      cliProgress.Presets.shades_classic
-    );
-
-    const bars = {};
-
-    for (const feedbackQuestionFile of feedbackQuestionFiles) {
-      const data = parse(
-        await readFile(join(path, feedbackQuestionFile), "utf-8")
-      ) as Record<string, FeedbackQuestion>;
-
-      const episode = feedbackQuestionFile.replace(".yml", "");
-
-      bars[episode] = multibar.create(Object.keys(data).length, 0, {
-        episode,
-        id: "",
-      });
-
-      for (const [id, { question, answers }] of Object.entries(data)) {
-        await got
-          .post(`${baseUrl}/api/v1/profile2/feedback-questions`, {
-            headers: {
-              authorization,
-            },
-            json: {
-              id: `${episode}.${id}`,
-              question: JSON.stringify(question),
-              answers: JSON.stringify(answers),
-            },
-          })
-          .json();
-
-        bars[episode].increment({ id });
-      }
+  for (const feedbackQuestion of feedbackQuestions) {
+    try {
+      await got
+        .post(`${baseUrl}/api/v1/profile2/feedback-questions`, {
+          headers: {
+            authorization,
+          },
+          json: {
+            id: feedbackQuestion.id,
+            question: JSON.stringify(feedbackQuestion.question),
+            answers: JSON.stringify(feedbackQuestion.answers),
+          },
+        })
+        .json();
+    } catch (err) {
+      console.log(`error while posting ${feedbackQuestion.id}`, err);
+      continue;
+    } finally {
+      bars[episode].increment({ id: feedbackQuestion.id });
     }
-    multibar.stop();
-  } catch (err) {
-    console.log(`Season ${seasonId} has no feedback-questions`);
   }
+
+  multibar.stop();
+};
+
+const extractFeedbackQuestions = (competenceAreas: any): FeebackSomething[] => {
+  return Object.values(competenceAreas).flatMap((area: any) => {
+    return Object.values(area.competences).flatMap((competence: any) => {
+      return Object.keys(competence.subCompetences).flatMap(
+        (subCompetenceKey: any) => {
+          const subCompetence = competence.subCompetences[subCompetenceKey];
+
+          return Object.keys(subCompetence.feedbackItems).map(
+            (feedbackItemKey) => {
+              const feedbackItem = subCompetence.feedbackItems[feedbackItemKey];
+
+              return {
+                id: feedbackItemKey, // TODO: should this be more unique?
+                question: feedbackItem.question,
+                answers: feedbackItem.answers,
+              };
+            }
+          );
+        }
+      );
+    });
+  });
 };
