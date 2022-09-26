@@ -1,0 +1,33 @@
+{
+  "name": "deploy-scripts",
+  "version": "1.0.0",
+  "description": "Application that deploys data models to tanants",
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./build/index.js"
+      }
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build": "ncc build src/index.ts -o dist",
+    "deploy": "ts-node-esm -r dotenv/config src/index.ts",
+    "deploy:build": "node -r dotenv/config dist/index.js"
+  },
+  "author": "talent::digital",
+  "license": "See license.md",
+  "devDependencies": {
+    "@types/cli-progress": "^3.11.0",
+    "@types/node": "^18.7.18",
+    "cli-progress": "^3.11.2",
+    "dotenv": "^16.0.1",
+    "got": "^12.1.0",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4",
+    "yaml": "^2.1.1"
+  },
+  "dependencies": {
+    "@vercel/ncc": "^0.34.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "outDir": "build",
+    "skipLibCheck": true,
+    "target": "es2017"
+  },
+  "include": ["./src/index.ts"],
+  "exclude": ["node_modules"]
+}

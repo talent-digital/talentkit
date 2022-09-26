@@ -1,0 +1,7 @@
+name: "Deploy scripts"
+description: "Application that deploys data models to tanants"
+author: "talent::digital"
+
+runs:
+  using: "node16"
+  main: "./dist/index.js"

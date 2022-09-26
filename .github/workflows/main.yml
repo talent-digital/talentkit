@@ -10,11 +10,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  hello_world_job:
+  deploy-metadata:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Deploy metadata
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Deploy season metadata
-        uses: ./github-actions
+        uses: ./deploy-scripts
