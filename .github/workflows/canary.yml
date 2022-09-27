@@ -9,9 +9,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-defaults:
-  run:
-
 jobs:
   deploy-metadata:
     runs-on: ubuntu-latest
