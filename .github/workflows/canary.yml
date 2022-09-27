@@ -3,7 +3,7 @@ name: Canary
 on:
   push:
     paths:
-      - "apps/canary/**.*"
+      - "apps/canary/**"
     branches: ["feature/TI-2015-deploy-scripts-github-actions"]
 
   # Allows you to run this workflow manually from the Actions tab
