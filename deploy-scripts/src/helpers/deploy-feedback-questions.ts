@@ -1,4 +1,3 @@
-import cliProgress from "cli-progress";
 import got from "got";
 import { SeasonDefinition } from "./SeasonDefinition";
 
@@ -22,24 +21,7 @@ export const deployFeedbackQuestions = async (
 ) => {
   console.log("Deploying feedback-questions\n");
 
-  const episode = "season-episode"; // TODO
   const feedbackQuestions = extractFeedbackQuestions(data);
-
-  const multibar = new cliProgress.MultiBar(
-    {
-      clearOnComplete: false,
-      hideCursor: true,
-      format: `{bar} {episode}    {id}`,
-    },
-    cliProgress.Presets.shades_classic
-  );
-
-  const bars = {};
-
-  bars[episode] = multibar.create(Object.keys(data).length, 0, {
-    episode,
-    id: "",
-  });
 
   for (const feedbackQuestion of feedbackQuestions) {
     try {
@@ -58,12 +40,8 @@ export const deployFeedbackQuestions = async (
     } catch (err) {
       console.log(`error while posting ${feedbackQuestion.id}`, err);
       continue;
-    } finally {
-      bars[episode].increment({ id: feedbackQuestion.id });
     }
   }
-
-  multibar.stop();
 };
 
 const extractFeedbackQuestions = (
@@ -80,7 +58,7 @@ const extractFeedbackQuestions = (
               const feedbackItem = subCompetence.feedbackItems[feedbackItemKey];
 
               return {
-                id: feedbackItemKey, // TODO: should this be more unique?
+                id: `${feedbackItem.prefix}.${feedbackItemKey}`,
                 question: feedbackItem.question,
                 answers: Object.values(feedbackItem.answers).map(
                   (answer, index) => ({

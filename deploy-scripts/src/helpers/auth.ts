@@ -6,7 +6,7 @@ export const getAuthorizationHeader = async (
   clientId: string,
   clientSecret: string
 ): Promise<string> => {
-  const { token_type, access_token } = await got
+  const { token_type, access_token }: any = await got
     .post(
       `https://${environmemt}.${domain}/auth/realms/talentdigital-${environmemt}/protocol/openid-connect/token`,
       {
