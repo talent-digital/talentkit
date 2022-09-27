@@ -2,6 +2,8 @@ name: Canary
 
 on:
   push:
+    paths:
+      - "**.py"
     branches: ["feature/TI-2015-deploy-scripts-github-actions"]
 
   # Allows you to run this workflow manually from the Actions tab
