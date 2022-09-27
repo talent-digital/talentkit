@@ -20,5 +20,7 @@ jobs:
       - name: Deploy season metadata
         uses: ./deploy-scripts
         env:
-          Action_Rooth_Path: "apps/canary/"
+          SEASON_FILE_PATH: "apps/canary/"
+          ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
           EPISODES_PROVISIONER_CLIENT_PASSWORD: ${{ secrets.EPISODES_PROVISIONER_CLIENT_PASSWORD }}
+          TARGET_DOMAIN: ${{ secrets.TARGET_DOMAIN }}

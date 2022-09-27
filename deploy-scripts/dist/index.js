@@ -51,7 +51,7 @@ var __webpack_exports__ = {};
 (() => {
 var _a;
 const fs = __nccwpck_require__(147);
-const rootPath = (_a = process.env.Action_Rooth_Path) !== null && _a !== void 0 ? _a : "./";
+const rootPath = (_a = process.env.SEASON_FILE_PATH) !== null && _a !== void 0 ? _a : "./";
 const run = async () => {
     console.log("...start");
     console.log("process.env", process.env);

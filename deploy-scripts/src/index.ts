@@ -1,7 +1,7 @@
 import { deploySeasons } from "./helpers/deploy-season.js";
 const fs = require("fs");
 
-const rootPath = process.env.Action_Rooth_Path ?? "./";
+const rootPath = process.env.SEASON_FILE_PATH ?? "./";
 
 const run = async () => {
   console.log("...start");
