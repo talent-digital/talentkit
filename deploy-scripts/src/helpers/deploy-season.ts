@@ -6,6 +6,8 @@ import { deployFeedbackQuestions } from "./deploy-feedback-questions.js";
 import { deployTestItems } from "./deploy-test-items.js";
 import { parse } from "yaml";
 
+const rootPath = process.env.SEASON_FILE_PATH ?? "./";
+
 export const deploySeasons = async (
   domain: string,
   baseUrl: string,
@@ -19,7 +21,7 @@ export const deploySeasons = async (
     clientId,
     clientSecret
   );
-  const path = join("./season.yaml"); // TODO
+  const path = join(rootPath, "season.yaml"); // TODO
   const season = parse(await readFile(path, "utf-8"));
   await deployCompetences(baseUrl, authorization, season.competenceAreas);
   await deployTestItems(baseUrl, authorization, season.competenceAreas);
