@@ -1,12 +1,10 @@
 name: Canary
 
 on:
-  paths:
-    - "apps/canary/**"
   push:
     branches: ["feature/TI-2015-deploy-scripts-github-actions"]
-  pull_request:
-    branches: ["feature/TI-2015-deploy-scripts-github-actions"]
+    paths:
+      - "apps/canary/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
