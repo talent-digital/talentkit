@@ -18,5 +18,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy season metadata
-        working-directory: ./apps/canary
         uses: ./deploy-scripts
