@@ -29,14 +29,3 @@ jobs:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-jobs:
-  deploy-metadata:
-    runs-on: ubuntu-latest
-    name: Deploy metadata
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Deploy season metadata
-        uses: ./deploy-scripts
