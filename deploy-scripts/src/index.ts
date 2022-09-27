@@ -1,10 +1,12 @@
 import { deploySeasons } from "./helpers/deploy-season.js";
 const fs = require("fs");
 
+const rootPath = process.env.actionRoothPath ?? "./";
+
 const run = async () => {
   console.log("...start");
 
-  fs.readFile("./targetfilehere.txt", "utf8", function (err, data) {
+  fs.readFile(`${rootPath}targetfilehere.txt`, "utf8", function (err, data) {
     console.log(data);
   });
 
