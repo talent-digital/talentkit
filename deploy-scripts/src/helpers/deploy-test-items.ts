@@ -1,5 +1,6 @@
 import cliProgress from "cli-progress";
 import got from "got";
+import { SeasonDefinition, Level } from "./SeasonDefinition";
 
 type TestItem = {
   documentation: string;
@@ -9,18 +10,11 @@ type TestItem = {
   testId: string;
 };
 
-enum levels {
-  BEGINNER = "FOUNDATION",
-  INTERMEDIATE = "INTERMEDIATE",
-  ADVANCED = "ADVANCED",
-  HIGHLY_SKILLED = "HIGHLY_SPECIALISED",
-}
-
 // TODO: Prefix variable
 export const deployTestItems = async (
   baseUrl: string,
   authorization: string,
-  data: any // SeasonDefinition["competenceAreas"]
+  data: SeasonDefinition["competenceAreas"]
 ) => {
   const prefix = "season-episode-prefix"; // TODO
   const testItemList = extractTestItems(data, prefix);
@@ -61,11 +55,14 @@ export const deployTestItems = async (
   multibar.stop();
 };
 
-const extractTestItems = (competenceAreas: any, prefix: string): TestItem[] => {
-  return Object.values(competenceAreas).flatMap((area: any) => {
-    return Object.values(area.competences).flatMap((competence: any) => {
+const extractTestItems = (
+  competenceAreas: SeasonDefinition["competenceAreas"],
+  prefix: string
+): TestItem[] => {
+  return Object.values(competenceAreas).flatMap((area) => {
+    return Object.values(area.competences).flatMap((competence) => {
       return Object.keys(competence.subCompetences).flatMap(
-        (subCompetenceKey: any) => {
+        (subCompetenceKey) => {
           const subCompetence = competence.subCompetences[subCompetenceKey];
 
           return Object.keys(subCompetence.testItems).map((testItemKey) => {
@@ -74,7 +71,7 @@ const extractTestItems = (competenceAreas: any, prefix: string): TestItem[] => {
             return {
               documentation: JSON.stringify(testItem.documentation),
               eventType: `${prefix}.${testItemKey}`,
-              level: levels[testItem.level],
+              level: Level[testItem.level],
               subCompetenceId: Number(subCompetenceKey),
               testId: testItemKey,
             };

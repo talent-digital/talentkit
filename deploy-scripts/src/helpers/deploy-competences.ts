@@ -1,4 +1,5 @@
 import got from "got";
+import { SeasonDefinition } from "./SeasonDefinition";
 
 type SubCompetence = {
   id: number;
@@ -20,7 +21,7 @@ type CompetenceArea = {
 export const deployCompetences = async (
   baseUrl: string,
   authorization: string,
-  data: any // SeasonDefinition["competenceAreas"]
+  data: SeasonDefinition["competenceAreas"]
 ) => {
   try {
     await got.post(`${baseUrl}/api/v1/profile2/competences/competences-tree`, {
@@ -36,7 +37,9 @@ export const deployCompetences = async (
   }
 };
 
-const adaptToCompetenceArea = (competenceAreas: any): CompetenceArea[] => {
+const adaptToCompetenceArea = (
+  competenceAreas: SeasonDefinition["competenceAreas"]
+): CompetenceArea[] => {
   return Object.keys(competenceAreas).map((areaKey) => {
     const competences = competenceAreas[areaKey].competences;
 

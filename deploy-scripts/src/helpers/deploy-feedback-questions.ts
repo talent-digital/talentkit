@@ -1,23 +1,24 @@
 import cliProgress from "cli-progress";
 import got from "got";
+import { SeasonDefinition } from "./SeasonDefinition";
 
 interface FeedbackQuestion {
   id: string;
   question: {
-    en: string;
-    de: string;
+    en?: string;
+    de?: string;
   };
   answers: {
     id: number;
-    en: string;
-    de: string;
+    en?: string;
+    de?: string;
   }[];
 }
 
 export const deployFeedbackQuestions = async (
   baseUrl: string,
   authorization: string,
-  data: any // SeasonDefinition["competenceAreas"]
+  data: SeasonDefinition["competenceAreas"]
 ) => {
   console.log("Deploying feedback-questions\n");
 
@@ -65,11 +66,13 @@ export const deployFeedbackQuestions = async (
   multibar.stop();
 };
 
-const extractFeedbackQuestions = (competenceAreas: any): FeedbackQuestion[] => {
-  return Object.values(competenceAreas).flatMap((area: any) => {
-    return Object.values(area.competences).flatMap((competence: any) => {
+const extractFeedbackQuestions = (
+  competenceAreas: SeasonDefinition["competenceAreas"]
+): FeedbackQuestion[] | null => {
+  return Object.values(competenceAreas).flatMap((area) => {
+    return Object.values(area.competences).flatMap((competence) => {
       return Object.keys(competence.subCompetences).flatMap(
-        (subCompetenceKey: any) => {
+        (subCompetenceKey) => {
           const subCompetence = competence.subCompetences[subCompetenceKey];
 
           return Object.keys(subCompetence.feedbackItems).map(
@@ -79,7 +82,13 @@ const extractFeedbackQuestions = (competenceAreas: any): FeedbackQuestion[] => {
               return {
                 id: feedbackItemKey, // TODO: should this be more unique?
                 question: feedbackItem.question,
-                answers: feedbackItem.answers,
+                answers: Object.values(feedbackItem.answers).map(
+                  (answer, index) => ({
+                    id: index, // TODO
+                    en: answer.en,
+                    de: answer.de,
+                  })
+                ),
               };
             }
           );

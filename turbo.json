@@ -1,5 +1,13 @@
 {
   "$schema": "https://turborepo.org/schema.json",
+  "globalEnv": [
+    "SEASON_FILE_PATH",
+    "ENVIRONMENT_NAME",
+    "TARGET_DOMAIN",
+    "EPISODES_PROVISIONER_CLIENT",
+    "EPISODES_PROVISIONER_CLIENT_PASSWORD",
+    "PW"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],

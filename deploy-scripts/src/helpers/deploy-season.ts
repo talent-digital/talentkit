@@ -21,7 +21,7 @@ export const deploySeasons = async (
     clientId,
     clientSecret
   );
-  const path = join(rootPath, "season.yaml"); // TODO
+  const path = join(rootPath, "season.yaml");
   const season = parse(await readFile(path, "utf-8"));
   await deployCompetences(baseUrl, authorization, season.competenceAreas);
   await deployTestItems(baseUrl, authorization, season.competenceAreas);
