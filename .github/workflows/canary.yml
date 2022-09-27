@@ -6,9 +6,6 @@ on:
     #   - "apps/canary/**"
     branches: ["feature/TI-2015-deploy-scripts-github-actions"]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 jobs:
   deploy-metadata:
     runs-on: ubuntu-latest
