@@ -5,5 +5,3 @@ author: "talent::digital"
 runs:
   using: "node16"
   main: "./dist/index.js"
-  env:
-    haha: "123123"

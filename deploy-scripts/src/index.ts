@@ -7,7 +7,10 @@ const run = async () => {
   console.log("...start");
   console.log("process.env", process.env);
   console.log("rootPath", rootPath);
-  console.log("process.env.haha", process.env.haha);
+  console.log(
+    "process.env.EPISODES_PROVISIONER_CLIENT_PASSWORD",
+    process.env.EPISODES_PROVISIONER_CLIENT_PASSWORD
+  );
 
   fs.readFile(`${rootPath}targetfilehere.txt`, "utf8", function (err, data) {
     console.log(data);

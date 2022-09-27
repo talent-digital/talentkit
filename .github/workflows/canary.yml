@@ -21,3 +21,4 @@ jobs:
         uses: ./deploy-scripts
         env:
           Action_Rooth_Path: "apps/canary/"
+          EPISODES_PROVISIONER_CLIENT_PASSWORD: ${{ secrets.EPISODES_PROVISIONER_CLIENT_PASSWORD }}
