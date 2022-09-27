@@ -22,3 +22,5 @@ jobs:
 
       - name: Deploy season metadata
         uses: ./deploy-scripts
+        env:
+          Action_Rooth_Path: "apps/canary/"
