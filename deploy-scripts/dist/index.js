@@ -49,13 +49,17 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
+var _a;
 const fs = __nccwpck_require__(147);
+const rootPath = (_a = process.env.Action_Rooth_Path) !== null && _a !== void 0 ? _a : "./";
 const run = async () => {
     console.log("...start");
-    fs.readFile("./targetfilehere.txt", "utf8", function (err, data) {
+    console.log("process.env", process.env);
+    console.log("rootPath", rootPath);
+    fs.readFile(`${rootPath}targetfilehere.txt`, "utf8", function (err, data) {
         console.log(data);
     });
-    console.log("...END3?");
+    console.log("...END4?");
 };
 run();
 
