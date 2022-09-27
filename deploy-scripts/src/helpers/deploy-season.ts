@@ -19,7 +19,7 @@ export const deploySeasons = async (
     clientId,
     clientSecret
   );
-  const path = join("./mock-season.yaml"); // TODO
+  const path = join("./season.yaml"); // TODO
   const season = parse(await readFile(path, "utf-8"));
   await deployCompetences(baseUrl, authorization, season.competenceAreas);
   await deployTestItems(baseUrl, authorization, season.competenceAreas);
