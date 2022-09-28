@@ -4372,7 +4372,7 @@ module.exports = (options = {}, connect = tls.connect) => new Promise((resolve, 
 
 /***/ }),
 
-/***/ 1469:
+/***/ 4332:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -9709,6 +9709,7 @@ const getAuthorizationHeader = async (domain, environmemt, clientId, clientSecre
 ;// CONCATENATED MODULE: ./src/helpers/deploy-competences.ts
 
 const deployCompetences = async (baseUrl, authorization, data) => {
+    console.log("Deploying: competences");
     try {
         await got_dist_source.post(`${baseUrl}/api/v1/profile2/competences/competences-tree`, {
             headers: {
@@ -9716,7 +9717,7 @@ const deployCompetences = async (baseUrl, authorization, data) => {
             },
             json: adaptToCompetenceArea(data),
         });
-        console.log("Competences deployed\n");
+        console.log("Deploy completed: competences\n");
     }
     catch (err) {
         console.error("Error during competences deploy", JSON.stringify(err));
@@ -9746,7 +9747,7 @@ const adaptToCompetenceArea = (competenceAreas) => {
 ;// CONCATENATED MODULE: ./src/helpers/deploy-feedback-questions.ts
 
 const deployFeedbackQuestions = async (baseUrl, authorization, data) => {
-    console.log("Deploying feedback-questions\n");
+    console.log("Deploying: feedback-questions");
     const feedbackQuestions = extractFeedbackQuestions(data);
     for (const feedbackQuestion of feedbackQuestions) {
         try {
@@ -9761,6 +9762,7 @@ const deployFeedbackQuestions = async (baseUrl, authorization, data) => {
                 },
             })
                 .json();
+            console.log("Deploy completed: feedback-questions\n");
         }
         catch (err) {
             console.log(`error while posting ${feedbackQuestion.id}`, err);
@@ -9790,56 +9792,17 @@ const extractFeedbackQuestions = (competenceAreas) => {
     });
 };
 
-;// CONCATENATED MODULE: ./src/helpers/SeasonDefinition.ts
-/**
- * The available difficulty levels of tests.
- */
-var Level;
-(function (Level) {
-    Level["Foundation"] = "BEGINNER";
-    Level["Intermediate"] = "INTERMEDIATE";
-    Level["Advanced"] = "ADVANCED";
-})(Level = Level || (Level = {}));
-/**
- * The available tool types that can be configured in the user interface.
- */
-var ToolType;
-(function (ToolType) {
-    ToolType["videoConference"] = "video-conference";
-    ToolType["chat"] = "chat";
-    ToolType["chatbot"] = "chatbot";
-    ToolType["calendarServices"] = "calendar-services";
-    ToolType["projectCollaboration"] = "project-collaboration";
-    ToolType["crm"] = "crm";
-    ToolType["documentCreation"] = "document-creation";
-})(ToolType = ToolType || (ToolType = {}));
-/**
- * The maturity of the episode.
- * * "pending": Still under development.
- * * "alpha": Ready for alpha testing (e.g., first guided testing to determine usability issues).
- * * "beta": Ready for beta testing (e.g., unguided testing to determine test item differentiation).
- * * "public": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.
- */
-var Maturity;
-(function (Maturity) {
-    Maturity["Pending"] = "pending";
-    Maturity["Alpha"] = "alpha";
-    Maturity["Beta"] = "beta";
-    Maturity["Public"] = "public";
-})(Maturity = Maturity || (Maturity = {}));
-/**
- * Language codes used for internationalised strings.
- */
-var LanguageCode;
-(function (LanguageCode) {
-    LanguageCode["de"] = "de";
-    LanguageCode["en"] = "en";
-})(LanguageCode = LanguageCode || (LanguageCode = {}));
-
 ;// CONCATENATED MODULE: ./src/helpers/deploy-test-items.ts
 
-
+var levels;
+(function (levels) {
+    levels["BEGINNER"] = "FOUNDATION";
+    levels["INTERMEDIATE"] = "INTERMEDIATE";
+    levels["ADVANCED"] = "ADVANCED";
+    levels["HIGHLY_SKILLED"] = "HIGHLY_SPECIALISED";
+})(levels || (levels = {}));
 const deployTestItems = async (baseUrl, authorization, data) => {
+    console.log("Deploying: test items");
     const testItemList = extractTestItems(data);
     for (const testItem of testItemList) {
         try {
@@ -9850,6 +9813,7 @@ const deployTestItems = async (baseUrl, authorization, data) => {
                 json: testItem,
             })
                 .json();
+            console.log("Deploy completed: test items\n");
         }
         catch (err) {
             console.log(`error while posting ${testItem.eventType}`, err);
@@ -9867,7 +9831,7 @@ const extractTestItems = (competenceAreas) => {
                     return {
                         documentation: JSON.stringify(testItem.documentation),
                         eventType: `${testItem.prefix}.${testItemKey}`,
-                        level: Level[testItem.level],
+                        level: levels[testItem.level],
                         subCompetenceId: Number(subCompetenceKey),
                         testId: testItemKey,
                     };
@@ -9905,7 +9869,7 @@ const deploySeasons = async (domain, baseUrl, environmemt, clientId, clientSecre
 /***/ ((module, __unused_webpack___webpack_exports__, __nccwpck_require__) => {
 
 __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__) => {
-/* harmony import */ var _helpers_deploy_season_js__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1469);
+/* harmony import */ var _helpers_deploy_season_js__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(4332);
 
 const { ENVIRONMENT_NAME, TARGET_DOMAIN, EPISODES_PROVISIONER_CLIENT, EPISODES_PROVISIONER_CLIENT_PASSWORD, PW, } = process.env;
 let baseUrl;

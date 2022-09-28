@@ -1,5 +1,5 @@
 import got from "got";
-import { SeasonDefinition } from "./SeasonDefinition";
+import { SeasonDefinition } from "./SeasonDefinition.js";
 
 type SubCompetence = {
   id: number;
@@ -23,6 +23,8 @@ export const deployCompetences = async (
   authorization: string,
   data: SeasonDefinition["competenceAreas"]
 ) => {
+  console.log("Deploying: competences");
+
   try {
     await got.post(`${baseUrl}/api/v1/profile2/competences/competences-tree`, {
       headers: {
@@ -31,7 +33,7 @@ export const deployCompetences = async (
       json: adaptToCompetenceArea(data),
     });
 
-    console.log("Competences deployed\n");
+    console.log("Deploy completed: competences\n");
   } catch (err) {
     console.error("Error during competences deploy", JSON.stringify(err));
   }

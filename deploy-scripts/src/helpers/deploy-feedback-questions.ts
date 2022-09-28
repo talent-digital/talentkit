@@ -1,5 +1,5 @@
 import got from "got";
-import { SeasonDefinition } from "./SeasonDefinition";
+import { SeasonDefinition } from "./SeasonDefinition.js";
 
 interface FeedbackQuestion {
   id: string;
@@ -19,7 +19,7 @@ export const deployFeedbackQuestions = async (
   authorization: string,
   data: SeasonDefinition["competenceAreas"]
 ) => {
-  console.log("Deploying feedback-questions\n");
+  console.log("Deploying: feedback-questions");
 
   const feedbackQuestions = extractFeedbackQuestions(data);
 
@@ -37,6 +37,8 @@ export const deployFeedbackQuestions = async (
           },
         })
         .json();
+
+      console.log("Deploy completed: feedback-questions\n");
     } catch (err) {
       console.log(`error while posting ${feedbackQuestion.id}`, err);
       continue;

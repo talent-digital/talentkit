@@ -1,5 +1,5 @@
 import got from "got";
-import { SeasonDefinition, Level } from "./SeasonDefinition";
+import { SeasonDefinition } from "./SeasonDefinition.js";
 
 type TestItem = {
   documentation: string;
@@ -9,11 +9,20 @@ type TestItem = {
   testId: string;
 };
 
+enum levels {
+  BEGINNER = "FOUNDATION",
+  INTERMEDIATE = "INTERMEDIATE",
+  ADVANCED = "ADVANCED",
+  HIGHLY_SKILLED = "HIGHLY_SPECIALISED",
+}
+
 export const deployTestItems = async (
   baseUrl: string,
   authorization: string,
   data: SeasonDefinition["competenceAreas"]
 ) => {
+  console.log("Deploying: test items");
+
   const testItemList = extractTestItems(data);
 
   for (const testItem of testItemList) {
@@ -26,6 +35,8 @@ export const deployTestItems = async (
           json: testItem,
         })
         .json();
+
+      console.log("Deploy completed: test items\n");
     } catch (err) {
       console.log(`error while posting ${testItem.eventType}`, err);
       continue;
@@ -48,7 +59,7 @@ const extractTestItems = (
             return {
               documentation: JSON.stringify(testItem.documentation),
               eventType: `${testItem.prefix}.${testItemKey}`,
-              level: Level[testItem.level],
+              level: levels[testItem.level],
               subCompetenceId: Number(subCompetenceKey),
               testId: testItemKey,
             };
