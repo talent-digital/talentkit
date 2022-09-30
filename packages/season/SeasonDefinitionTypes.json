@@ -1,0 +1,327 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Badge": {
+      "additionalProperties": false,
+      "description": "A badge is an award for \"special performance\" that can be given to the user. It is shown in the \"Badges\" tab to the user.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/URL",
+          "description": "The URL of an image representing the badge."
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "The text that is shown with the badge."
+        }
+      },
+      "required": [
+        "name",
+        "image"
+      ],
+      "type": "object"
+    },
+    "Competence": {
+      "additionalProperties": false,
+      "description": "The more detailed competences in a competence area. E.g. \"IT security\" in the security competence area.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "The name of the competence as shown in the user interface."
+        },
+        "subCompetences": {
+          "additionalProperties": {
+            "$ref": "#/definitions/SubCompetence"
+          },
+          "description": "The granular sub competences that are actually tested.",
+          "type": "object"
+        }
+      },
+      "required": [
+        "subCompetences"
+      ],
+      "type": "object"
+    },
+    "CompetenceArea": {
+      "additionalProperties": false,
+      "description": "A competence area is a broad educational subject, such as security, compliance etc. All competence areas of all seasons published in a tenant are merged into a competence model that is shown to users. Competence areas and competences may be reused across seasons.",
+      "properties": {
+        "competences": {
+          "additionalProperties": {
+            "$ref": "#/definitions/Competence"
+          },
+          "description": "The more detailed competences in this competence area.",
+          "type": "object"
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "The name of the competence area as shown in the user interface."
+        }
+      },
+      "required": [
+        "competences"
+      ],
+      "type": "object"
+    },
+    "EpisodeDefinition": {
+      "additionalProperties": false,
+      "description": "An episode of a season in talent::digital. An episode is a learning module of typically 5-20 minutes duration that tests some of the subcompetences in the season and offers learning material for failed tests.",
+      "properties": {
+        "badges": {
+          "additionalProperties": {
+            "$ref": "#/definitions/Badge"
+          },
+          "description": "Badges that can be obtained by playing the episode.",
+          "type": "object"
+        },
+        "description": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "The description of the episode as shown in the user interface."
+        },
+        "format": {
+          "$ref": "#/definitions/URL",
+          "description": "The URL of the app that is run when the user runs the episode."
+        },
+        "formatConfiguration": {
+          "$ref": "#/definitions/URL",
+          "description": "The URL of a configuration file that is passed to the app when it is run, e.g., to set up quiz questions."
+        },
+        "imageUrl": {
+          "$ref": "#/definitions/URL",
+          "description": "The URL of an SVG preview image for the episode shown in the user interface."
+        },
+        "maturity": {
+          "$ref": "#/definitions/Maturity",
+          "description": "The development status of the episode. This determines if the episode can be accessed by players generally in the user interface, or only through specific URLs."
+        },
+        "title": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "The title of the episode as shown in the user interface."
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "maturity",
+        "imageUrl",
+        "format",
+        "formatConfiguration"
+      ],
+      "type": "object"
+    },
+    "FeedbackItem": {
+      "additionalProperties": false,
+      "description": "Attitude-related questions towards the subcompetence.",
+      "properties": {
+        "answers": {
+          "additionalProperties": {
+            "$ref": "#/definitions/LocalizedString"
+          },
+          "type": "object"
+        },
+        "question": {
+          "$ref": "#/definitions/LocalizedString"
+        }
+      },
+      "required": [
+        "question",
+        "answers"
+      ],
+      "type": "object"
+    },
+    "LanguageCode": {
+      "description": "Language codes used for internationalised strings.",
+      "enum": [
+        "de",
+        "en"
+      ],
+      "type": "string"
+    },
+    "Level": {
+      "description": "The available difficulty levels of tests.",
+      "enum": [
+        "BEGINNER",
+        "INTERMEDIATE",
+        "ADVANCED"
+      ],
+      "type": "string"
+    },
+    "LocalizedSearchDefinition": {
+      "additionalProperties": false,
+      "description": "A search specification for finding educational material for a topic depending on the language of the user.",
+      "properties": {
+        "de": {
+          "$ref": "#/definitions/SearchDefinition"
+        },
+        "en": {
+          "$ref": "#/definitions/SearchDefinition"
+        }
+      },
+      "required": [
+        "de",
+        "en"
+      ],
+      "type": "object"
+    },
+    "LocalizedString": {
+      "additionalProperties": false,
+      "description": "Localized strings represent text that is available in multiple languages. The user is shown text in their language, if the text in their language is configured; otherwise they see the text in the configured language, if only one language is configured; otherwise they see the text in the reference language (\"de\"?).",
+      "properties": {
+        "de": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Maturity": {
+      "description": "The maturity of the episode.\n* \"pending\": Still under development.\n* \"alpha\": Ready for alpha testing (e.g., first guided testing to determine usability issues).\n* \"beta\": Ready for beta testing (e.g., unguided testing to determine test item differentiation).\n* \"public\": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.",
+      "enum": [
+        "pending",
+        "alpha",
+        "beta",
+        "public"
+      ],
+      "type": "string"
+    },
+    "SearchDefinition": {
+      "additionalProperties": false,
+      "description": "A search specification for finding educational material for a topic in a particular language.",
+      "properties": {
+        "generic": {
+          "description": "A list of search queries to find education material.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "links": {
+          "description": "A list of links with known education material.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tool": {
+          "description": "A list of tool-specific search queries to find education material. These search queries get the user-configured tool added.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SeasonDefinition": {
+      "additionalProperties": false,
+      "description": "Configuration of a season in talent::digital.",
+      "properties": {
+        "competenceAreas": {
+          "additionalProperties": {
+            "$ref": "#/definitions/CompetenceArea"
+          },
+          "description": "The competences that this season addresses in the talent::digital competence model. The ID identifies the competence and should be globally unique.",
+          "type": "object"
+        },
+        "episodes": {
+          "additionalProperties": {
+            "$ref": "#/definitions/EpisodeDefinition"
+          },
+          "description": "The episodes (learning modules) to verify the competences. The ID can be simply e.g. \"01\", \"02\", ... It permits rearranging episodes in a season without loosing any previously generated data from players.",
+          "type": "object"
+        },
+        "info": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "A description of what the season is about."
+        },
+        "seasonEndMessage": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "A rewarding message to the player when they finish the season."
+        },
+        "title": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "The title of the season."
+        }
+      },
+      "required": [
+        "title",
+        "info",
+        "competenceAreas",
+        "episodes",
+        "seasonEndMessage"
+      ],
+      "type": "object"
+    },
+    "SubCompetence": {
+      "additionalProperties": false,
+      "description": "A sub competence is actually tested by talent::digital test items. E.g., \"Password security\" in the \"IT security\" competence.",
+      "properties": {
+        "feedbackItems": {
+          "additionalProperties": {
+            "$ref": "#/definitions/FeedbackItem"
+          },
+          "description": "Attitude-related questions towards the subcompetence.",
+          "type": "object"
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "The name of the subcompetence as shown in the user interface."
+        },
+        "testItems": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TestItem"
+          },
+          "description": "The tests to validate the subcompetence.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "TestItem": {
+      "additionalProperties": false,
+      "description": "Test items are tests executed in talent::digital episodes as evidence that a user possesses a certain subcompetence.",
+      "properties": {
+        "documentation": {
+          "$ref": "#/definitions/LocalizedString",
+          "description": "A text describing the action required for the test."
+        },
+        "level": {
+          "$ref": "#/definitions/Level",
+          "description": "The difficulty level of the test item."
+        },
+        "search": {
+          "$ref": "#/definitions/LocalizedSearchDefinition",
+          "description": "A search specification for finding educational material around the test and the subcompetence."
+        },
+        "toolType": {
+          "$ref": "#/definitions/ToolType",
+          "description": "The type of tool that is used for the test. E.g., \"chat\" or \"video-conferencing\". This tool is matched against the tools configured by the administrator for the organization."
+        }
+      },
+      "required": [
+        "level",
+        "documentation",
+        "search"
+      ],
+      "type": "object"
+    },
+    "ToolType": {
+      "description": "The available tool types that can be configured in the user interface.",
+      "enum": [
+        "video-conference",
+        "chat",
+        "chatbot",
+        "calendar-services",
+        "project-collaboration",
+        "crm",
+        "document-creation"
+      ],
+      "type": "string"
+    },
+    "URL": {
+      "description": "A URL to an asset or app. The URL is either relative to the current repository or absolute to an already deployed asset or app.",
+      "type": "string"
+    }
+  }
+}
