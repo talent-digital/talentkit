@@ -8,7 +8,7 @@ interface FeedbackQuestion {
     de?: string;
   };
   answers: {
-    id: number;
+    id: string;
     en?: string;
     de?: string;
   }[];
@@ -60,15 +60,13 @@ const extractFeedbackQuestions = (
               const feedbackItem = subCompetence.feedbackItems[feedbackItemKey];
 
               return {
-                id: `${feedbackItem.prefix}.${feedbackItemKey}`,
+                id: feedbackItem.id,
                 question: feedbackItem.question,
-                answers: Object.values(feedbackItem.answers).map(
-                  (answer, index) => ({
-                    id: index, // TODO
-                    en: answer.en,
-                    de: answer.de,
-                  })
-                ),
+                answers: Object.keys(feedbackItem.answers).map((key) => ({
+                  id: key,
+                  en: feedbackItem.answers[key].en,
+                  de: feedbackItem.answers[key].de,
+                })),
               };
             }
           );

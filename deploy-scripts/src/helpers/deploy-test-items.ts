@@ -58,7 +58,7 @@ const extractTestItems = (
 
             return {
               documentation: JSON.stringify(testItem.documentation),
-              eventType: `${testItem.prefix}.${testItemKey}`,
+              eventType: testItem.id,
               level: levels[testItem.level],
               subCompetenceId: Number(subCompetenceKey),
               testId: testItemKey,

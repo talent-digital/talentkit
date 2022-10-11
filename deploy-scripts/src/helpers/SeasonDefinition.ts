@@ -107,11 +107,7 @@ export interface TestItem {
    * This tool is matched against the tools configured by the administrator for the organization.
    */
   toolType?: ToolType;
-
-  /**
-   * The season and episode to which this item belongs to, e.g. season01episode01
-   */
-  prefix: string;
+  id: string;
 }
 
 /**
@@ -167,10 +163,7 @@ export interface SearchDefinition {
  * Attitude-related questions towards the subcompetence.
  */
 export interface FeedbackItem {
-  /**
-   * The season and episode to which this item belongs to, e.g. season01episode01
-   */
-  prefix: string;
+  id: string;
   question: LocalizedString;
   answers: { [id in string]: LocalizedString };
 }

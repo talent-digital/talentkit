@@ -15,7 +15,7 @@ competenceAreas:
               en: Solution-oriented sales
             testItems:
               "costToSolution":
-                prefix: season01episode01
+                id: season01episode01
                 level: BEGINNER
                 documentation:
                   de: Ich habe eine Gelegenheit zu einer lösungsorientierten Diskussion erzeugt.
@@ -29,7 +29,7 @@ competenceAreas:
                       - solution selling
             feedbackItems:
               "digitalpotential":
-                prefix: season01episode01
+                id: season01episode01
                 question:
                   de: Wie schätzt du selber das Potential von digitalen Lösungen im Building Management ein?
                   en: What is your impression of the impact of digital solutions in the building management area?
