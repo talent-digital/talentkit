@@ -9778,12 +9778,12 @@ const extractFeedbackQuestions = (competenceAreas) => {
                 return Object.keys(subCompetence.feedbackItems).map((feedbackItemKey) => {
                     const feedbackItem = subCompetence.feedbackItems[feedbackItemKey];
                     return {
-                        id: `${feedbackItem.prefix}.${feedbackItemKey}`,
+                        id: feedbackItem.id,
                         question: feedbackItem.question,
-                        answers: Object.values(feedbackItem.answers).map((answer, index) => ({
-                            id: index,
-                            en: answer.en,
-                            de: answer.de,
+                        answers: Object.keys(feedbackItem.answers).map((key) => ({
+                            id: key,
+                            en: feedbackItem.answers[key].en,
+                            de: feedbackItem.answers[key].de,
                         })),
                     };
                 });
@@ -9830,7 +9830,7 @@ const extractTestItems = (competenceAreas) => {
                     const testItem = subCompetence.testItems[testItemKey];
                     return {
                         documentation: JSON.stringify(testItem.documentation),
-                        eventType: `${testItem.prefix}.${testItemKey}`,
+                        eventType: testItem.id,
                         level: levels[testItem.level],
                         subCompetenceId: Number(subCompetenceKey),
                         testId: testItemKey,
@@ -9844,7 +9844,6 @@ const extractTestItems = (competenceAreas) => {
 // EXTERNAL MODULE: ../node_modules/.pnpm/yaml@2.1.1/node_modules/yaml/dist/index.js
 var yaml_dist = __nccwpck_require__(8155);
 ;// CONCATENATED MODULE: ./src/helpers/deploy-season.ts
-var _a;
 
 
 
@@ -9852,7 +9851,7 @@ var _a;
 
 
 
-const rootPath = (_a = process.env.SEASON_FILE_PATH) !== null && _a !== void 0 ? _a : "./";
+const rootPath = process.env.SEASON_FILE_PATH ?? "./";
 const deploySeasons = async (domain, baseUrl, environmemt, clientId, clientSecret) => {
     const authorization = await getAuthorizationHeader(domain, environmemt, clientId, clientSecret);
     const path = (0,external_path_namespaceObject.join)(rootPath, "season.yaml");
