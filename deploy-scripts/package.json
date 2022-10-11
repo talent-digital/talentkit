@@ -18,6 +18,7 @@
   "author": "talent::digital",
   "license": "See license.md",
   "devDependencies": {
+    "@talentkit/sdk": "workspace:*",
     "@types/node": "^18.7.18",
     "dotenv": "^16.0.1",
     "got": "^12.1.0",

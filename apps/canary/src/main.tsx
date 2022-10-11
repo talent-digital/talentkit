@@ -4,6 +4,7 @@ import App from "./App";
 import "./index.css";
 
 import TdSdk from "@talentkit/sdk";
+
 const config = {
   realm: "talentdigital-devtd2",
   url: "https://devtd2.talentdigit.al/auth",

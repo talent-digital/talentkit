@@ -1,5 +1,5 @@
 import got from "got";
-import { SeasonDefinition } from "./SeasonDefinition.js";
+import { SeasonDefinition } from "@talentkit/sdk";
 
 type SubCompetence = {
   id: number;
