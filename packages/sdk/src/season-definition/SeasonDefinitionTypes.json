@@ -14,7 +14,10 @@
           "description": "The text that is shown with the badge."
         }
       },
-      "required": ["name", "image"],
+      "required": [
+        "name",
+        "image"
+      ],
       "type": "object"
     },
     "Competence": {
@@ -33,7 +36,9 @@
           "type": "object"
         }
       },
-      "required": ["subCompetences"],
+      "required": [
+        "subCompetences"
+      ],
       "type": "object"
     },
     "CompetenceArea": {
@@ -52,7 +57,9 @@
           "description": "The name of the competence area as shown in the user interface."
         }
       },
-      "required": ["competences"],
+      "required": [
+        "competences"
+      ],
       "type": "object"
     },
     "EpisodeDefinition": {
@@ -105,30 +112,41 @@
       "additionalProperties": false,
       "description": "Attitude-related questions towards the subcompetence.",
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "answers": {
           "additionalProperties": {
             "$ref": "#/definitions/LocalizedString"
           },
           "type": "object"
         },
+        "id": {
+          "type": "string"
+        },
         "question": {
           "$ref": "#/definitions/LocalizedString"
         }
       },
-      "required": ["id", "question", "answers"],
+      "required": [
+        "id",
+        "question",
+        "answers"
+      ],
       "type": "object"
     },
     "LanguageCode": {
       "description": "Language codes used for internationalised strings.",
-      "enum": ["de", "en"],
+      "enum": [
+        "de",
+        "en"
+      ],
       "type": "string"
     },
     "Level": {
       "description": "The available difficulty levels of tests.",
-      "enum": ["BEGINNER", "INTERMEDIATE", "ADVANCED"],
+      "enum": [
+        "BEGINNER",
+        "INTERMEDIATE",
+        "ADVANCED"
+      ],
       "type": "string"
     },
     "LocalizedSearchDefinition": {
@@ -142,7 +160,10 @@
           "$ref": "#/definitions/SearchDefinition"
         }
       },
-      "required": ["de", "en"],
+      "required": [
+        "de",
+        "en"
+      ],
       "type": "object"
     },
     "LocalizedString": {
@@ -160,7 +181,12 @@
     },
     "Maturity": {
       "description": "The maturity of the episode.\n* \"pending\": Still under development.\n* \"alpha\": Ready for alpha testing (e.g., first guided testing to determine usability issues).\n* \"beta\": Ready for beta testing (e.g., unguided testing to determine test item differentiation).\n* \"public\": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.",
-      "enum": ["pending", "alpha", "beta", "public"],
+      "enum": [
+        "pending",
+        "alpha",
+        "beta",
+        "public"
+      ],
       "type": "string"
     },
     "SearchDefinition": {
@@ -260,12 +286,12 @@
       "additionalProperties": false,
       "description": "Test items are tests executed in talent::digital episodes as evidence that a user possesses a certain subcompetence.",
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "documentation": {
           "$ref": "#/definitions/LocalizedString",
           "description": "A text describing the action required for the test."
+        },
+        "id": {
+          "type": "string"
         },
         "level": {
           "$ref": "#/definitions/Level",
@@ -280,7 +306,12 @@
           "description": "The type of tool that is used for the test. E.g., \"chat\" or \"video-conferencing\". This tool is matched against the tools configured by the administrator for the organization."
         }
       },
-      "required": ["id", "level", "documentation", "search"],
+      "required": [
+        "level",
+        "documentation",
+        "search",
+        "id"
+      ],
       "type": "object"
     },
     "ToolType": {

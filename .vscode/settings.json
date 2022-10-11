@@ -1,0 +1,5 @@
+{
+  "yaml.schemas": {
+    "packages/sdk/src/season-definition/SeasonDefinition.json": "apps/**/season.yaml"
+  }
+}
