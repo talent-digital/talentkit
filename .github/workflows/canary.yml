@@ -4,8 +4,7 @@ on:
   push:
     paths:
       - "apps/canary/**"
-    branches-ignore:
-      - main
+    branches: ["main"]
 
 jobs:
   deploy-metadata:
