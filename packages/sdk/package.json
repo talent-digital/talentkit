@@ -1,13 +1,14 @@
 {
   "name": "@talentdigital/sdk",
   "version": "1.0.4",
-  "description": "",
+  "description": "talent::digital Software Development Kit",
   "type": "module",
   "files": [
     "dist"
   ],
   "main": "./dist/sdk.umd.cjs",
   "module": "./dist/sdk.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/sdk.js",
@@ -19,8 +20,8 @@
     "build": "tsc && vite build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "talent::digital",
+  "license": "SEE LICENSE IN LICENCE.md",
   "devDependencies": {
     "@types/node": "^18.7.18",
     "eslint-config-custom": "workspace:*",
