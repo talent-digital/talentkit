@@ -10,6 +10,9 @@ export default defineConfig({
       name: "@talentdigital/sdk",
       fileName: "sdk",
     },
+    rollupOptions: {
+      external: ["keycloak-js", "ky"],
+    },
   },
   plugins: [dts()],
 });
