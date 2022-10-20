@@ -1,6 +1,6 @@
-import { useTdSdk } from "@talentkit/react";
-import TdSdk from "@talentkit/sdk";
-import { Episode } from "@talentkit/sdk/src/episode";
+import { useTdSdk } from "@talentdigital/react";
+import TdSdk from "@talentdigital/sdk";
+import { Episode } from "@talentdigital/sdk/src/episode";
 import { useEffect, useState } from "react";
 import "./App.css";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { AuthConfig } from "@talentkit/sdk/src/interfaces";
-import TdSdk from "@talentkit/sdk";
+import { AuthConfig } from "@talentdigital/sdk/src/interfaces";
+import TdSdk from "@talentdigital/sdk";
 
 export const useTdSdk = ({ realm, url, clientId }: AuthConfig) => {
   let pending = false;

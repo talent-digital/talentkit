@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-import TdSdk from "@talentkit/sdk";
+import TdSdk from "@talentdigital/sdk";
 const config = {
   realm: "talentdigital-devtd2",
   url: "https://devtd2.talentdigit.al/auth",
