@@ -2,7 +2,7 @@
   "name": "@talentdigital/sdk",
   "version": "1.0.1",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/sdk.mjs",
   "scripts": {
     "test": "vitest",
     "build": "tsc && vite build",
