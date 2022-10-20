@@ -5,8 +5,7 @@
   "main": "dist/sdk.mjs",
   "scripts": {
     "test": "vitest",
-    "build": "tsc && vite build",
-    "publish": "pnpm publish --access public"
+    "build": "tsc && vite build"
   },
   "keywords": [],
   "author": "",
