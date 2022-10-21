@@ -9,6 +9,7 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "@talentdigital/sdk",
       fileName: "sdk",
+      formats: ["es"],
     },
     rollupOptions: {
       external: ["keycloak-js", "ky"],

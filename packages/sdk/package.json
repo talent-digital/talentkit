@@ -6,13 +6,11 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/sdk.umd.cjs",
   "module": "./dist/sdk.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/sdk.js",
-      "require": "./dist/sdk.umd.cjs"
+      "import": "./dist/sdk.js"
     }
   },
   "scripts": {
