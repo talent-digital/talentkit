@@ -9,7 +9,7 @@ export default defineConfig({
     rollupOptions: { external: ["react"] },
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "@talentkit/react",
+      name: "@talentdigital/react",
       fileName: "react",
     },
   },

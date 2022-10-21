@@ -1,24 +1,38 @@
 {
-  "name": "@talentkit/sdk",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/index.ts",
+  "name": "@talentdigital/sdk",
+  "version": "0.1.0",
+  "description": "talent::digital Software Development Kit",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/sdk.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/sdk.js"
+    }
+  },
   "scripts": {
     "test": "vitest",
     "build": "tsc && vite build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "talent::digital",
+  "license": "SEE LICENSE IN LICENCE.md",
   "devDependencies": {
     "@types/node": "^18.7.18",
     "eslint-config-custom": "workspace:*",
-    "keycloak-js": "^19.0.2",
-    "ky": "^0.31.3",
+    "keycloak-js": "^19.0.3",
+    "ky": "^0.31.4",
     "tsconfig": "workspace:*",
     "typescript": "^4.8.3",
     "vite": "^3.1.0",
     "vite-plugin-dts": "^1.6.4",
     "vitest": "^0.23.2"
+  },
+  "peerDependencies": {
+    "keycloak-js": "^19.0.3",
+    "ky": "^0.31.4"
   }
 }
