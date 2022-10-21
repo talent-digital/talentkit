@@ -1,6 +1,6 @@
-import { useTdSdk } from "@talentdigital/react";
+// import { useTdSdk } from "@talentdigital/react";
 import TdSdk from "@talentdigital/sdk";
-import { Episode } from "@talentdigital/sdk/src/episode";
+import { Episode } from "@talentdigital/sdk/dist/episode";
 import { useEffect, useState } from "react";
 import "./App.css";
 
@@ -12,13 +12,17 @@ const config = {
 
 function App({ kit }: { kit: TdSdk }) {
   // const kit = useTdSdk(config);
-  const [episode, setEpisode] = useState<Episode | undefined>();
+  const [episode, setEpisode] = useState<Episode | null>(null);
 
   const [done, setDone] = useState(false);
 
   useEffect(() => {
     if (kit) {
-      kit.createEpisode("id").then(setEpisode);
+      kit.createEpisode("id").then((episode) => {
+        if (episode) {
+          setEpisode(episode);
+        }
+      });
     }
   }, [kit]);
 
