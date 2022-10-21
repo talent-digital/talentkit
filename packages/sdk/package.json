@@ -1,6 +1,6 @@
 {
   "name": "@talentdigital/sdk",
-  "version": "1.0.4",
+  "version": "0.1.0",
   "description": "talent::digital Software Development Kit",
   "type": "module",
   "files": [
