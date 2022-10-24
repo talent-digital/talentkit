@@ -15,5 +15,5 @@ export default defineConfig({
       external: ["keycloak-js", "ky"],
     },
   },
-  plugins: [dts({ insertTypesEntry: true })],
+  plugins: [dts()],
 });
