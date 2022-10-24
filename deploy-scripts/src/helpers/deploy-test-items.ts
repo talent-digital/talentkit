@@ -1,5 +1,5 @@
 import got from "got";
-import { SeasonDefinition } from "@talentkit/sdk";
+import { SeasonDefinition } from "@talentdigital/sdk";
 
 type TestItem = {
   documentation: string;

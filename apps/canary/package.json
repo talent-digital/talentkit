@@ -1,5 +1,5 @@
 {
-  "name": "@talentkit/canary",
+  "name": "@talentdigital/canary",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@talentkit/react": "workspace:*",
-    "@talentkit/sdk": "workspace:*",
+    "@talentdigital/react": "workspace:*",
+    "@talentdigital/sdk": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

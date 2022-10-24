@@ -9728,18 +9728,24 @@ const adaptToCompetenceArea = (competenceAreas) => {
         const competences = competenceAreas[areaKey].competences;
         return {
             id: Number(areaKey),
-            competences: Object.keys(competences).map((competenceKey) => {
-                const subCompetences = competences[competenceKey].subCompetences;
-                return {
-                    id: Number(competenceKey),
-                    subCompetences: Object.keys(subCompetences).map((subCompetenceKey) => {
-                        return {
-                            id: Number(subCompetenceKey),
-                            name: subCompetences[subCompetenceKey].name.de,
-                        };
-                    }),
-                };
-            }),
+            competences: adaptToCompetences(competences),
+        };
+    });
+};
+const adaptToCompetences = (competences) => {
+    return Object.keys(competences).map((competenceKey) => {
+        const subCompetences = competences[competenceKey].subCompetences;
+        return {
+            id: Number(competenceKey),
+            subCompetences: adaptToSubCompetences(subCompetences),
+        };
+    });
+};
+const adaptToSubCompetences = (subCompetences) => {
+    return Object.keys(subCompetences).map((subCompetenceKey) => {
+        return {
+            id: Number(subCompetenceKey),
+            name: subCompetences[subCompetenceKey].name.de,
         };
     });
 };
