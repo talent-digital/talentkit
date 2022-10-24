@@ -1,27 +1,31 @@
 import got from "got";
-import { SeasonDefinition } from "@talentkit/sdk";
+import { CompetenceArea, Competence, SubCompetence } from "@talentkit/sdk";
 
-type SubCompetence = {
+type CompetenceAreas = { [id in string]: CompetenceArea };
+type Competences = { [id in string]: Competence };
+type SubCompetences = { [id in string]: SubCompetence };
+
+type RequestSubCompetence = {
   id: number;
   name: string;
 };
 
-type Competence = {
+type RequestCompetence = {
   id: number;
   name?: string;
-  subCompetences: SubCompetence[];
+  subCompetences: RequestSubCompetence[];
 };
 
-type CompetenceArea = {
+type RequestCompetenceArea = {
   id: number;
   name?: string;
-  competences: Competence[];
+  competences: RequestCompetence[];
 };
 
 export const deployCompetences = async (
   baseUrl: string,
   authorization: string,
-  data: SeasonDefinition["competenceAreas"]
+  data: CompetenceAreas
 ) => {
   console.log("Deploying: competences");
 
@@ -40,28 +44,34 @@ export const deployCompetences = async (
 };
 
 const adaptToCompetenceArea = (
-  competenceAreas: SeasonDefinition["competenceAreas"]
-): CompetenceArea[] => {
+  competenceAreas: CompetenceAreas
+): RequestCompetenceArea[] => {
   return Object.keys(competenceAreas).map((areaKey) => {
     const competences = competenceAreas[areaKey].competences;
 
     return {
       id: Number(areaKey),
-      competences: Object.keys(competences).map((competenceKey) => {
-        const subCompetences = competences[competenceKey].subCompetences;
+      competences: adaptToCompetences(competences),
+    };
+  });
+};
 
-        return {
-          id: Number(competenceKey),
-          subCompetences: Object.keys(subCompetences).map(
-            (subCompetenceKey) => {
-              return {
-                id: Number(subCompetenceKey),
-                name: subCompetences[subCompetenceKey].name.de,
-              };
-            }
-          ),
-        };
-      }),
+const adaptToCompetences = (competences: Competences) => {
+  return Object.keys(competences).map((competenceKey) => {
+    const subCompetences = competences[competenceKey].subCompetences;
+
+    return {
+      id: Number(competenceKey),
+      subCompetences: adaptToSubCompetences(subCompetences),
+    };
+  });
+};
+
+const adaptToSubCompetences = (subCompetences: SubCompetences) => {
+  return Object.keys(subCompetences).map((subCompetenceKey) => {
+    return {
+      id: Number(subCompetenceKey),
+      name: subCompetences[subCompetenceKey].name.de,
     };
   });
 };
