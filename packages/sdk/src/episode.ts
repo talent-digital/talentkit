@@ -13,9 +13,9 @@ export class Episode {
     return new Episode(id, sdk);
   }
 
-  start() {}
+  start = () => {};
 
-  end() {
+  end = async (navigateToDashboard = true) => {
     const events = [
       {
         eventTypeId: "episode.end",
@@ -23,24 +23,32 @@ export class Episode {
         episode: this.id,
       },
     ];
-    return this.sdk
-      .request("1/event/profile2", "post", {
-        json: { applicationId, events },
-      })
-      .then(() => {
-        window.location.href = "http://localhost:3000/#/seasons/93";
-      });
-  }
 
-  test(testId: string, value: 0 | 1) {
+    if (navigateToDashboard) {
+      return this.sdk
+        .request("1/event/profile2", "post", {
+          json: { applicationId, events },
+        })
+        .then(() => {
+          this.sdk.navigateToDashboard();
+        });
+    } else {
+      return this.sdk.request("1/event/profile2", "post", {
+        json: { applicationId, events },
+      });
+    }
+  };
+
+  test = (testId: string, value: 0 | 1) => {
     const events = [
       { type: "test.complete", result: { id: `${this.id}.${testId}`, value } },
     ];
+
     return this.sdk.request("1/event/profile2", "post", {
       json: { applicationId, events },
       retry: {
         limit: 3,
       },
     });
-  }
+  };
 }
