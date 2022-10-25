@@ -1,9 +1,9 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { getAuthorizationHeader } from "./auth.js";
-import { deployCompetences } from "./deploy-competences.js";
-import { deployFeedbackQuestions } from "./deploy-feedback-questions.js";
-import { deployTestItems } from "./deploy-test-items.js";
+import { getAuthorizationHeader } from "./auth";
+import { deployCompetences } from "./deploy-competences";
+import { deployFeedbackQuestions } from "./deploy-feedback-questions";
+import { deployTestItems } from "./deploy-test-items";
 import { parse } from "yaml";
 
 type DeploySeasonInput = {

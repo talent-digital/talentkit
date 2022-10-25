@@ -12,21 +12,17 @@
   "type": "module",
   "scripts": {
     "build": "ncc build src/index.ts -o dist",
-    "deploy": "ts-node-esm -r dotenv/config src/index.ts",
-    "deploy:build": "node -r dotenv/config dist/index.js"
+    "deploy": "npm run build && node -r dotenv/config dist/index.js"
   },
   "author": "talent::digital",
   "license": "See license.md",
   "devDependencies": {
     "@talentdigital/sdk": "workspace:*",
     "@types/node": "^18.7.18",
+    "@vercel/ncc": "^0.34.0",
     "dotenv": "^16.0.1",
     "got": "^12.1.0",
-    "ts-node": "^10.8.1",
     "typescript": "^4.7.4",
     "yaml": "^2.1.1"
-  },
-  "dependencies": {
-    "@vercel/ncc": "^0.34.0"
   }
 }
