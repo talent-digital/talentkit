@@ -9857,8 +9857,7 @@ var yaml_dist = __nccwpck_require__(8155);
 
 
 
-const rootPath = process.env.SEASON_FILE_PATH ?? "./";
-const deploySeasons = async (domain, baseUrl, environmemt, clientId, clientSecret) => {
+const deploySeasons = async ({ baseUrl, clientId, clientSecret, domain, environmemt, rootPath, }) => {
     const authorization = await getAuthorizationHeader(domain, environmemt, clientId, clientSecret);
     const path = (0,external_path_namespaceObject.join)(rootPath, "season.yaml");
     const season = (0,yaml_dist/* parse */.Qc)(await (0,promises_namespaceObject.readFile)(path, "utf-8"));
@@ -9876,24 +9875,25 @@ const deploySeasons = async (domain, baseUrl, environmemt, clientId, clientSecre
 __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var _helpers_deploy_season_js__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(4332);
 
-const { ENVIRONMENT_NAME, TARGET_DOMAIN, EPISODES_PROVISIONER_CLIENT, EPISODES_PROVISIONER_CLIENT_PASSWORD, PW, } = process.env;
+const { INPUT_ENVIRONMENT_NAME, INPUT_EPISODES_PROVISIONER_CLIENT_PASSWORD, INPUT_EPISODES_PROVISIONER_CLIENT, INPUT_SEASON_FILE_PATH, INPUT_TARGET_DOMAIN, PW, } = process.env;
 let baseUrl;
 let environmemt;
 let domain;
-if (!!ENVIRONMENT_NAME && !!TARGET_DOMAIN) {
-    baseUrl = `https://${ENVIRONMENT_NAME}.${TARGET_DOMAIN}`;
-    environmemt = ENVIRONMENT_NAME;
-    domain = TARGET_DOMAIN;
+if (!!INPUT_ENVIRONMENT_NAME && !!INPUT_TARGET_DOMAIN) {
+    baseUrl = `https://${INPUT_ENVIRONMENT_NAME}.${INPUT_TARGET_DOMAIN}`;
+    environmemt = INPUT_ENVIRONMENT_NAME;
+    domain = INPUT_TARGET_DOMAIN;
 }
 else {
     baseUrl = "http://localhost:8081";
     environmemt = "devtd2";
     domain = "talentdigit.al";
 }
-const clientId = EPISODES_PROVISIONER_CLIENT || "episodes-provisioner-client";
+const rootPath = INPUT_SEASON_FILE_PATH ?? "./";
+const clientId = INPUT_EPISODES_PROVISIONER_CLIENT || "episodes-provisioner-client";
 let clientSecret;
-if (EPISODES_PROVISIONER_CLIENT_PASSWORD) {
-    clientSecret = EPISODES_PROVISIONER_CLIENT_PASSWORD;
+if (INPUT_EPISODES_PROVISIONER_CLIENT_PASSWORD) {
+    clientSecret = INPUT_EPISODES_PROVISIONER_CLIENT_PASSWORD;
 }
 else {
     if (PW) {
@@ -9906,7 +9906,15 @@ else {
 console.log(`Base URL: ${baseUrl}`);
 console.log(`Environment: ${environmemt}`);
 console.log(`Domain: ${domain}`);
-await (0,_helpers_deploy_season_js__WEBPACK_IMPORTED_MODULE_0__/* .deploySeasons */ .D)(domain, baseUrl, environmemt, clientId, clientSecret);
+console.log(`RootPath: ${rootPath}`);
+await (0,_helpers_deploy_season_js__WEBPACK_IMPORTED_MODULE_0__/* .deploySeasons */ .D)({
+    baseUrl,
+    clientId,
+    clientSecret,
+    domain,
+    environmemt,
+    rootPath,
+});
 
 __webpack_handle_async_dependencies__();
 }, 1);

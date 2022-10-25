@@ -16,8 +16,9 @@ jobs:
 
       - name: Deploy season metadata
         uses: ./deploy-scripts
-        env:
-          SEASON_FILE_PATH: "apps/canary/"
-          ENVIRONMENT_NAME: ${{ secrets.ENVIRONMENT_NAME }}
-          EPISODES_PROVISIONER_CLIENT_PASSWORD: ${{ secrets.EPISODES_PROVISIONER_CLIENT_PASSWORD }}
-          TARGET_DOMAIN: ${{ secrets.TARGET_DOMAIN }}
+        with:
+          environment_name: "devtd2"
+          episodes_provisioner_client_password: ${{ secrets.EPISODES_PROVISIONER_CLIENT_PASSWORD }}
+          episodes_provisioner_client: "episodes-provisioner-client"
+          season_file_path: "apps/canary/"
+          target_domain: "talentdigit.al"

@@ -1,10 +1,11 @@
 import { deploySeasons } from "./helpers/deploy-season.js";
 
 const {
-  ENVIRONMENT_NAME,
-  TARGET_DOMAIN,
-  EPISODES_PROVISIONER_CLIENT,
-  EPISODES_PROVISIONER_CLIENT_PASSWORD,
+  INPUT_ENVIRONMENT_NAME,
+  INPUT_EPISODES_PROVISIONER_CLIENT_PASSWORD,
+  INPUT_EPISODES_PROVISIONER_CLIENT,
+  INPUT_SEASON_FILE_PATH,
+  INPUT_TARGET_DOMAIN,
   PW,
 } = process.env;
 
@@ -12,22 +13,25 @@ let baseUrl: string;
 let environmemt: string;
 let domain: string;
 
-if (!!ENVIRONMENT_NAME && !!TARGET_DOMAIN) {
-  baseUrl = `https://${ENVIRONMENT_NAME}.${TARGET_DOMAIN}`;
-  environmemt = ENVIRONMENT_NAME;
-  domain = TARGET_DOMAIN;
+if (!!INPUT_ENVIRONMENT_NAME && !!INPUT_TARGET_DOMAIN) {
+  baseUrl = `https://${INPUT_ENVIRONMENT_NAME}.${INPUT_TARGET_DOMAIN}`;
+  environmemt = INPUT_ENVIRONMENT_NAME;
+  domain = INPUT_TARGET_DOMAIN;
 } else {
   baseUrl = "http://localhost:8081";
   environmemt = "devtd2";
   domain = "talentdigit.al";
 }
 
-const clientId = EPISODES_PROVISIONER_CLIENT || "episodes-provisioner-client";
+const rootPath = INPUT_SEASON_FILE_PATH ?? "./";
+
+const clientId =
+  INPUT_EPISODES_PROVISIONER_CLIENT || "episodes-provisioner-client";
 
 let clientSecret: string;
 
-if (EPISODES_PROVISIONER_CLIENT_PASSWORD) {
-  clientSecret = EPISODES_PROVISIONER_CLIENT_PASSWORD;
+if (INPUT_EPISODES_PROVISIONER_CLIENT_PASSWORD) {
+  clientSecret = INPUT_EPISODES_PROVISIONER_CLIENT_PASSWORD;
 } else {
   if (PW) {
     clientSecret = PW;
@@ -41,5 +45,13 @@ if (EPISODES_PROVISIONER_CLIENT_PASSWORD) {
 console.log(`Base URL: ${baseUrl}`);
 console.log(`Environment: ${environmemt}`);
 console.log(`Domain: ${domain}`);
+console.log(`RootPath: ${rootPath}`);
 
-await deploySeasons(domain, baseUrl, environmemt, clientId, clientSecret);
+await deploySeasons({
+  baseUrl,
+  clientId,
+  clientSecret,
+  domain,
+  environmemt,
+  rootPath,
+});
