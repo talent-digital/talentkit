@@ -64,7 +64,13 @@ class TdSdk {
     const params = new URLSearchParams(window.location.search);
 
     const state: AppState = Object.fromEntries(params.entries());
-
+    if (!state.sid || !state.eid) {
+      if (state.redirectUrl?.length) {
+        window.location.href = state.redirectUrl;
+      } else {
+        window.history.back();
+      }
+    }
     return state;
   };
 }
