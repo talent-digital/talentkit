@@ -2,8 +2,6 @@ name: Canary
 
 on:
   push:
-    paths:
-      - "apps/canary/**"
     branches: ["ti-2015-testing-github-inputs"]
 
 jobs:
