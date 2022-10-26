@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "apps/canary/**"
-    branches: ["main"]
+    branches: ["ti-2015-testing-github-inputs"]
 
 jobs:
   deploy-metadata:
