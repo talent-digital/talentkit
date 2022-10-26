@@ -10,22 +10,14 @@ import { MockAuthService, mockKy } from "./mocks";
 class TdSdk {
   private episode?: Episode;
 
-  private _state: AppState = {};
-
-  public get state(): AppState {
-    return this._state;
-  }
-
-  public get auth(): AuthService | MockAuthService {
-    return this._auth;
-  }
+  readonly state: AppState = {};
 
   private constructor(
-    private _auth: AuthService | MockAuthService,
+    readonly auth: AuthService | MockAuthService,
     private http: HttpClient,
-    private config: AppConfig
+    processUrl?: boolean
   ) {
-    if (config.processUrl) this._state = this.processUrl();
+    if (processUrl) this.state = this.processUrl();
   }
 
   static async create(config: AppConfig) {
@@ -33,14 +25,14 @@ class TdSdk {
       const auth = await MockAuthService.create(config.auth, () => {});
       const http = mockKy.create({});
 
-      return new TdSdk(auth, http, config);
+      return new TdSdk(auth, http, config.processUrl);
     }
 
     const auth = await AuthService.create(config.auth);
     const http = auth?.createHttp();
 
     if (auth && http) {
-      return new TdSdk(auth, http, config);
+      return new TdSdk(auth, http, config.processUrl);
     }
 
     throw new Error(`Coudn't initialize the library`);
@@ -71,20 +63,14 @@ class TdSdk {
   private processUrl = (): AppState => {
     const params = new URLSearchParams(window.location.search);
 
-    const state: AppState = {
-      redirectUrl: params.get("redirectUrl") || "",
-      sid: params.get("sid") || "",
-      eid: params.get("eid") || "",
-    };
-
-    if (!state.sid?.length || !state.eid?.length) {
-      if (state?.redirectUrl?.length) {
+    const state: AppState = Object.fromEntries(params.entries());
+    if (!state.sid || !state.eid) {
+      if (state.redirectUrl?.length) {
         window.location.href = state.redirectUrl;
       } else {
         window.history.back();
       }
     }
-
     return state;
   };
 }
