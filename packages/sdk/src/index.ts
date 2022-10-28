@@ -2,7 +2,7 @@ import { AuthService } from "./auth.service";
 import { Episode } from "./episode";
 import { AppConfig, AppState, HttpClient } from "./interfaces";
 import { MockAuthService, mockKy } from "./mocks";
-import { Storage } from "./storage/storage";
+import { TdStorage } from "./storage";
 
 const processUrl = (): AppState => {
   const params = new URLSearchParams(window.location.search);
@@ -25,7 +25,7 @@ const processUrl = (): AppState => {
 class TdSdk {
   public episode?: Episode;
 
-  public storage?: Storage;
+  public storage?: TdStorage;
 
   readonly state: AppState = {};
 
@@ -75,7 +75,11 @@ class TdSdk {
 
   async createStorage() {
     if (this.state.sid && this.state.eid) {
-      this.storage = await Storage.create(this.state.sid, this.state.eid, this);
+      this.storage = await TdStorage.create(
+        this.state.sid,
+        this.state.eid,
+        this
+      );
 
       return this.storage;
     }

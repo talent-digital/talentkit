@@ -3,7 +3,7 @@ import { DBStore, UserProfile } from "./interfaces";
 
 const applicationId = "talentApplicationProfileTwo";
 
-export class Storage {
+export class TdStorage {
   private state: Record<string, any> = {};
 
   private constructor(
@@ -13,7 +13,7 @@ export class Storage {
   ) {}
 
   static async create(sid: string, eid: string, sdk: TdSdk) {
-    const storage = new Storage(sdk, sid, eid);
+    const storage = new TdStorage(sdk, sid, eid);
     storage.state = await storage.init();
 
     return storage;
