@@ -1,34 +1,39 @@
-import { KeycloakConfig, KeycloakPromise, KeycloakError } from "keycloak-js";
 import { Options, ResponsePromise } from "ky";
 import { KyInstance } from "ky/distribution/types/ky";
 import { Input } from "ky/distribution/types/options";
-import { AuthClient, HttpClient } from "./interfaces";
+import { AuthConfig, HttpClient } from "./interfaces";
 import ky from "ky";
+import { KeycloakRole } from "./auth.service";
+import Keycloak from "keycloak-js";
 
-export class MockKeycloak implements AuthClient {
-  constructor(config: KeycloakConfig) {
-    // We could protect the endpoint
-    this.config = config;
-  }
-  private config: KeycloakConfig;
+export class MockAuthService {
+  private constructor() {}
 
-  init() {
-    return Promise.resolve(true) as unknown as KeycloakPromise<
-      boolean,
-      KeycloakError
-    >;
+  static async create(_: AuthConfig, _1: () => any) {
+    const auth = new Keycloak();
+
+    return new MockAuthService();
   }
 
-  login() {
-    return Promise.resolve(true) as unknown as KeycloakPromise<void, void>;
-  }
+  createHttp = (): HttpClient => ky.create({});
 
-  updateToken() {
-    return Promise.resolve(true) as unknown as KeycloakPromise<
-      boolean,
-      boolean
-    >;
-  }
+  userHasRole = (role: KeycloakRole): boolean => {
+    return true;
+  };
+
+  getUser = () => {
+    return {};
+  };
+
+  getUserFullname = (): string => {
+    return "TestUser";
+  };
+
+  getUserEmail = (): string => {
+    return "testuser@test.com";
+  };
+
+  private updateServiceWorker = async () => {};
 }
 
 export const mockKy: HttpClient = {

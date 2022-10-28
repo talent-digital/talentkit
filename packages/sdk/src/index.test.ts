@@ -10,14 +10,14 @@ const clientId = "td-profile2";
 describe("Sdk Base Tests", async () => {
   let sdk: TdSdk;
   beforeAll(async () => {
-    sdk = await await TdSdk.create(
-      {
+    sdk = await TdSdk.create({
+      auth: {
         clientId,
         realm,
         url,
       },
-      true
-    );
+      testMode: true,
+    });
   });
 
   it("Returns a mocked client when running locally", async () => {
