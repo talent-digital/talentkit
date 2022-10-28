@@ -9,24 +9,11 @@ export type KeycloakRole =
 
 export class AuthService {
   private constructor(protected auth: AuthClient) {
-    auth.onAuthSuccess = async () => {
-      if (auth && auth.token) {
-        await this.updateServiceWorker();
-      }
-    };
-
     this.auth.onTokenExpired = async () => {
       if (this.auth && this.auth.token) {
         await this.auth.updateToken(5);
-        await this.updateServiceWorker();
       }
     };
-
-    if ("serviceWorker" in navigator)
-      navigator.serviceWorker.addEventListener(
-        "message",
-        this.updateServiceWorker
-      );
   }
 
   static async create(config: AuthConfig) {
@@ -52,16 +39,6 @@ export class AuthService {
       console.error(e);
     }
   }
-
-  private updateServiceWorker = async () => {
-    if ("serviceWorker" in navigator && this.auth && this.auth.token) {
-      await navigator.serviceWorker.ready;
-
-      navigator.serviceWorker.controller?.postMessage({
-        token: this.auth.token,
-      });
-    }
-  };
 
   createHttp = (): HttpClient => {
     return ky.create({
