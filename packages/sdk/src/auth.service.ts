@@ -10,7 +10,7 @@ export type KeycloakRole =
 export class AuthService {
   private constructor(protected auth: AuthClient) {
     this.auth.onTokenExpired = async () => {
-      if (this.auth && this.auth.token) {
+      if (this.auth.token) {
         await this.auth.updateToken(5);
       }
     };
@@ -46,11 +46,8 @@ export class AuthService {
       hooks: {
         beforeRequest: [
           async (request) => {
-            await (this.auth as AuthClient).updateToken(5);
-            request.headers.set(
-              "Authorization",
-              `Bearer ${(this.auth as AuthClient).token}`
-            );
+            await this.auth.updateToken(5);
+            request.headers.set("Authorization", `Bearer ${this.auth.token}`);
           },
         ],
       },
@@ -59,7 +56,7 @@ export class AuthService {
   };
 
   userHasRole = (role: KeycloakRole): boolean => {
-    if (this.auth && this.auth.tokenParsed) {
+    if (this.auth.tokenParsed) {
       return this.auth.tokenParsed.realm_access?.roles.includes(role) || false;
     } else {
       throw new Error("Keycloak token has not been parsed");
@@ -67,7 +64,7 @@ export class AuthService {
   };
 
   getUser = () => {
-    if (this.auth && this.auth.tokenParsed) {
+    if (this.auth.tokenParsed) {
       return this.auth.tokenParsed as any;
     } else {
       throw new Error("Keycloak token has not been parsed");
@@ -75,7 +72,7 @@ export class AuthService {
   };
 
   getUserFullname = (): string => {
-    if (this.auth && this.auth.tokenParsed) {
+    if (this.auth.tokenParsed) {
       return (this.auth.tokenParsed as any)?.name;
     } else {
       throw new Error("Keycloak token has not been parsed");
@@ -83,7 +80,7 @@ export class AuthService {
   };
 
   getUserEmail = (): string => {
-    if (this.auth && this.auth.tokenParsed) {
+    if (this.auth.tokenParsed) {
       return (this.auth.tokenParsed as any)?.email;
     } else {
       throw new Error("Keycloak token has not been parsed");
