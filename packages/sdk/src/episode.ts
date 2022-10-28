@@ -3,17 +3,16 @@ import TdSdk from ".";
 const applicationId = "talentApplicationProfileTwo";
 
 export class Episode {
+  readonly id: string;
+
   private constructor(id: string, private sdk: TdSdk) {
     this.id = id;
   }
-  id: string;
 
   static async create(id: string, sdk: TdSdk) {
     // Get the epiode payload
     return new Episode(id, sdk);
   }
-
-  start = () => {};
 
   end = async (navigateToDashboard = true) => {
     const events = [

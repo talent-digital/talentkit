@@ -1,36 +1,22 @@
-// import { useTdSdk } from "@talentdigital/react";
 import TdSdk from "@talentdigital/sdk";
-import { Episode } from "@talentdigital/sdk/dist/episode";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
-const config = {
-  realm: "talentdigital-devtd2",
-  url: "https://devtd2.talentdigit.al/auth",
-  clientId: "td-profile2",
-};
-
 function App({ kit }: { kit: TdSdk }) {
-  // const kit = useTdSdk(config);
-  const [episode, setEpisode] = useState<Episode | null>(null);
-
+  const episode = kit.episode;
+  const storage = kit.storage;
   const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    if (kit) {
-      kit.createEpisode("id").then((episode) => {
-        if (episode) {
-          setEpisode(episode);
-        }
-      });
-    }
-  }, [kit]);
 
   return (
     <div className="App">
       {episode ? (
         !done ? (
           <div>
+            <p>
+              Hey <b>{storage?.getUserProfile()?.playerName}</b>&nbsp;from&nbsp;
+              <b>{storage?.getUserProfile()?.companyName}</b>
+            </p>
+            <br />
             <p>What is 2 + 2?</p>
             <div>
               <button

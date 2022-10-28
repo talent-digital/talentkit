@@ -13,7 +13,6 @@ const config = {
 
 const kit = await TdSdk.create({
   auth: config,
-  processUrl: false,
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

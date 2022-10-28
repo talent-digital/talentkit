@@ -4,7 +4,12 @@ import Keycloak, { KeycloakConfig } from "keycloak-js";
 export interface AppConfig {
   auth: AuthConfig;
   testMode?: boolean;
-  processUrl?: boolean;
+  notProcessUrl?: boolean;
+  processedUrlData?: {
+    sid?: string;
+    eid?: string;
+    redirectUrl?: string;
+  };
 }
 
 export type AuthConfig = KeycloakConfig;
