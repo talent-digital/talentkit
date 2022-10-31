@@ -1,4 +1,4 @@
-import { deploySeasons } from "./helpers/deploy-season.js";
+import { deploySeasons } from "./helpers/deploy-season";
 
 const {
   INPUT_ENVIRONMENT_NAME,

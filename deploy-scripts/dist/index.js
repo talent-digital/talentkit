@@ -9873,7 +9873,7 @@ const deploySeasons = async ({ baseUrl, clientId, clientSecret, domain, environm
 /***/ ((module, __unused_webpack___webpack_exports__, __nccwpck_require__) => {
 
 __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__) => {
-/* harmony import */ var _helpers_deploy_season_js__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(4332);
+/* harmony import */ var _helpers_deploy_season__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(4332);
 
 const { INPUT_ENVIRONMENT_NAME, INPUT_EPISODES_PROVISIONER_CLIENT_PASSWORD, INPUT_EPISODES_PROVISIONER_CLIENT, INPUT_SEASON_FILE_PATH, INPUT_TARGET_DOMAIN, PW, } = process.env;
 let baseUrl;
@@ -9907,7 +9907,7 @@ console.log(`Base URL: ${baseUrl}`);
 console.log(`Environment: ${environmemt}`);
 console.log(`Domain: ${domain}`);
 console.log(`RootPath: ${rootPath}`);
-await (0,_helpers_deploy_season_js__WEBPACK_IMPORTED_MODULE_0__/* .deploySeasons */ .D)({
+await (0,_helpers_deploy_season__WEBPACK_IMPORTED_MODULE_0__/* .deploySeasons */ .D)({
     baseUrl,
     clientId,
     clientSecret,

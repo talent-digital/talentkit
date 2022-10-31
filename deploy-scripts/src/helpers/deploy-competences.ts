@@ -1,5 +1,5 @@
 import got from "got";
-import { CompetenceArea, Competence, SubCompetence } from "@talentdigital/sdk";
+import { CompetenceArea, Competence, SubCompetence } from "types";
 
 type CompetenceAreas = { [id in string]: CompetenceArea };
 type Competences = { [id in string]: Competence };
