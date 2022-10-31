@@ -143,7 +143,7 @@
     "Level": {
       "description": "The available difficulty levels of tests.",
       "enum": [
-        "BEGINNER",
+        "FOUNDATION",
         "INTERMEDIATE",
         "ADVANCED"
       ],
@@ -180,12 +180,12 @@
       "type": "object"
     },
     "Maturity": {
-      "description": "The maturity of the episode.\n* \"pending\": Still under development.\n* \"alpha\": Ready for alpha testing (e.g., first guided testing to determine usability issues).\n* \"beta\": Ready for beta testing (e.g., unguided testing to determine test item differentiation).\n* \"public\": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.",
+      "description": "The maturity of the episode.\n* \"PENDING\": Still under development.\n* \"ALPHA\": Ready for alpha testing (e.g., first guided testing to determine usability issues).\n* \"BETA\": Ready for beta testing (e.g., unguided testing to determine test item differentiation).\n* \"PUBLIC\": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.",
       "enum": [
-        "pending",
-        "alpha",
-        "beta",
-        "public"
+        "PENDING",
+        "ALPHA",
+        "BETA",
+        "PUBLIC"
       ],
       "type": "string"
     },
@@ -235,6 +235,10 @@
           "description": "The episodes (learning modules) to verify the competences. The ID can be simply e.g. \"01\", \"02\", ... It permits rearranging episodes in a season without loosing any previously generated data from players.",
           "type": "object"
         },
+        "id": {
+          "description": "A globally unique identifier of the season.",
+          "type": "string"
+        },
         "info": {
           "$ref": "#/definitions/LocalizedString",
           "description": "A description of what the season is about."
@@ -249,6 +253,7 @@
         }
       },
       "required": [
+        "id",
         "title",
         "info",
         "competenceAreas",
@@ -290,7 +295,8 @@
           "$ref": "#/definitions/LocalizedString",
           "description": "A text describing the action required for the test."
         },
-        "id": {
+        "eventTypeId": {
+          "description": "Used for analytics.",
           "type": "string"
         },
         "level": {
@@ -310,7 +316,7 @@
         "level",
         "documentation",
         "search",
-        "id"
+        "eventTypeId"
       ],
       "type": "object"
     },

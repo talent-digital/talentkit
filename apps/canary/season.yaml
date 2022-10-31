@@ -1,3 +1,4 @@
+id: Season0001
 title:
   de: OpenBlue Solutioneer
   en: OpenBlue Solutioneer
@@ -15,8 +16,8 @@ competenceAreas:
               en: Solution-oriented sales
             testItems:
               "costToSolution":
-                id: season01episode01
-                level: BEGINNER
+                eventTypeId: season01episode01
+                level: FOUNDATION
                 documentation:
                   de: Ich habe eine Gelegenheit zu einer lösungsorientierten Diskussion erzeugt.
                   en: I opened an opportunity for a solution-oriented discussion.
@@ -51,7 +52,7 @@ episodes:
     description:
       de: Du wirst überraschend zu einem Termin mit dem Thema "Wartungsvertrag Brandmeldetechnik" eingeladen, dabei ist der Vetrag längst unter Dach und Fach. Was ist das los?
       en: You are unexpectedly invited to an appointment with the topic "maintenance contract fire alarm technology", although the contract has long been signed and sealed. What's going on?
-    maturity: public
+    maturity: PUBLIC
     imageUrl: e01preview.svg
     format: /conversation
     formatConfiguration: dialog01.json
@@ -68,7 +69,7 @@ episodes:
     description:
       de: Dir ist es gelungen, die Situation zu drehen und das Interesse des Kunden zu wecken. Kannst du SAAT & GUT mit digitalen Mitteln aus der Klemme helfen?
       en: You have managed to turn the situation around and get the customer's interest. Can you help SAAT & GUT digitally out of a tight spot?
-    maturity: public
+    maturity: PUBLIC
     imageUrl: e02preview.svg
     format: /conversation
     formatConfiguration: dialog02.json
@@ -79,7 +80,7 @@ episodes:
     description:
       de: Auf dem Weg zu einem Kunden im "Ländle" gerätst du in ein besonderes Taxi…
       en: On the way to a customer in the "Ländle" you take a special taxi...
-    maturity: public
+    maturity: PUBLIC
     imageUrl: e03preview.svg
     format: /quiztaxi
     formatConfiguration: dialog02.json
