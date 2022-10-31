@@ -1,5 +1,5 @@
 import got from "got";
-import { SeasonDefinition } from "@talentdigital/sdk";
+import { SeasonDefinition } from "types";
 
 interface FeedbackQuestion {
   id: string;

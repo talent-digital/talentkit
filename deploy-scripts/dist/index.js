@@ -9836,7 +9836,7 @@ const extractTestItems = (competenceAreas) => {
                     const testItem = subCompetence.testItems[testItemKey];
                     return {
                         documentation: JSON.stringify(testItem.documentation),
-                        eventType: testItem.id,
+                        eventType: testItem.eventTypeId,
                         level: levels[testItem.level],
                         subCompetenceId: Number(subCompetenceKey),
                         testId: testItemKey,
