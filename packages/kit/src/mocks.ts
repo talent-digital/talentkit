@@ -1,21 +1,24 @@
 import { Options, ResponsePromise } from "ky";
 import { KyInstance } from "ky/distribution/types/ky";
 import { Input } from "ky/distribution/types/options";
-import { AuthConfig, HttpClient } from "./interfaces";
+import {
+  AuthConfig,
+  HttpClient,
+  IApiService,
+  IAuthService,
+} from "./interfaces";
 import ky from "ky";
 import { KeycloakRole } from "./auth.service";
 import Keycloak from "keycloak-js";
 
-export class MockAuthService {
+export class MockAuthService implements IAuthService {
   private constructor() {}
+  token = "";
+  updateToken = () => {};
 
-  static async create(_: AuthConfig, _1: () => any) {
-    const auth = new Keycloak();
-
+  static async create() {
     return new MockAuthService();
   }
-
-  createHttp = (): HttpClient => ky.create({});
 
   userHasRole = (role: KeycloakRole): boolean => {
     return true;
@@ -32,8 +35,6 @@ export class MockAuthService {
   getUserEmail = (): string => {
     return "testuser@test.com";
   };
-
-  private updateServiceWorker = async () => {};
 }
 
 export const mockKy: HttpClient = {
@@ -50,4 +51,8 @@ export const mockKy: HttpClient = {
   post: (url: Input, options?: Options | undefined): ResponsePromise => {
     return false as unknown as ResponsePromise;
   },
+};
+
+export const mockApiService: IApiService = {
+  request: () => Promise.resolve({}),
 };

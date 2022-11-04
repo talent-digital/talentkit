@@ -1,13 +1,17 @@
 import Keycloak from "keycloak-js";
-import { AuthClient, AuthConfig, HttpClient } from "./interfaces";
-import ky from "ky";
+import { AuthClient, Environment, IAuthService } from "./interfaces";
 
 export type KeycloakRole =
   | "talent_admin"
   | "talent_article_author"
   | "talent_company_report";
 
-export class AuthService {
+const domains: Record<Environment, string> = {
+  dev: "talentdigit.al",
+  prod: "talentdigital.eu",
+};
+
+export class AuthService implements IAuthService {
   private constructor(protected auth: AuthClient) {
     this.auth.onTokenExpired = async () => {
       if (this.auth.token) {
@@ -16,20 +20,18 @@ export class AuthService {
     };
   }
 
-  static async create(config: AuthConfig) {
-    const auth = new Keycloak(config);
+  static async create(tenant: string, environment: "dev" | "prod" = "prod") {
+    const realm = `talentdigital-${tenant}`;
+    const url = `https://${tenant}.${domains[environment]}/auth`;
+    const clientId = "td-profile2";
+
+    const auth = new Keycloak({ realm, url, clientId });
 
     try {
       const authenticated = await auth.init({
         onLoad: "check-sso",
       });
       if (authenticated) {
-        if (!("serviceWorker" in navigator)) {
-          alert(
-            "Your browser is missing Service Worker functionality. Some images and videos may not load correctly."
-          );
-        }
-
         return new AuthService(auth);
       } else {
         auth.login({ maxAge: 100000 });
@@ -40,20 +42,13 @@ export class AuthService {
     }
   }
 
-  createHttp = (): HttpClient => {
-    return ky.create({
-      prefixUrl: "/api/",
-      hooks: {
-        beforeRequest: [
-          async (request) => {
-            await this.auth.updateToken(5);
-            request.headers.set("Authorization", `Bearer ${this.auth.token}`);
-          },
-        ],
-      },
-      timeout: false,
-    });
-  };
+  get token() {
+    return this.auth.token as string;
+  }
+
+  updateToken() {
+    this.auth.updateToken(5);
+  }
 
   userHasRole = (role: KeycloakRole): boolean => {
     if (this.auth.tokenParsed) {
