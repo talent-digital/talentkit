@@ -10,9 +10,6 @@ const kit = await TalentKit.create();
 // Authenticates the user
 kit = await TalentKit.create(tenantKey);
 
-// Creates a kit with sid: 1, eid: 1
-kit = await TalentKit.create(tenantKey, { sid: 1, eid: 1 });
-
 // This sends a test event that passes.
 await kit.test("test1", "pass"); // typed as "pass" | "fail";
 // or
@@ -28,11 +25,11 @@ await kit.test("test2", "fail"); // typed as "pass" | "fail"
 // Would be really good if we coukld generate "test2" as a ts type from the config files... 🤔
 await kit.test["test2"].fail(); // Maybe ?
 
-// Stores an arbitrary value, scoped under [sid][eid];
-await kit.save("key", "value");
+// Stores an arbitrary object, scoped under [sid][eid];
+await kit.save({ foo: "bar" });
 
-// Loads an arbitrary value, scoped under [sid][eid];
-console.log(kit.load("key")); // "value"
+// Loads an arbitrary object, scoped under [sid][eid];
+const savegame = kit.load();
 
 // Awards a badge with the id "badgeId"
 kit.badges["badgeId"].award();
