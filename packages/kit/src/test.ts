@@ -1,7 +1,6 @@
 import type { Api } from "@talentdigital/api-client";
 import { applicationId } from ".";
-import { createApiClient } from "./api.service";
-import { SecurityDataType, Tests } from "./interfaces";
+import { ApiClient, SecurityDataType, State, Tests } from "./interfaces";
 
 enum TestResult {
   "fail" = 0,
@@ -9,9 +8,12 @@ enum TestResult {
 }
 
 class Test {
+  result: TestResult | undefined;
+
   constructor(
     readonly id: string,
     private prefix: string,
+    readonly bestResult: TestResult,
     private api: Api<SecurityDataType>
   ) {}
 
@@ -24,8 +26,6 @@ class Test {
     ];
     return { applicationId, events };
   }
-
-  result: TestResult | undefined;
 
   pass() {
     this.result = TestResult.pass;
@@ -42,12 +42,25 @@ class Test {
   }
 }
 
-export const instantiateTests = (
-  testIds: string[],
-  api: ReturnType<typeof createApiClient>
-): Tests => {
+export const instantiateTests = async (
+  state: State,
+  api: ApiClient
+): Promise<Tests> => {
+  const { data } =
+    await api.userAnalyticsProgressReporting.getCompetenceAreaTestDetailsReports(
+      { season: Number(state.sid), episode: Number(state.eid) }
+    );
+
+  if (!data || !data.length) return {};
+
   return Object.fromEntries(
-    testIds.map((testId) => [testId, new Test(testId, "season99episode1", api)])
+    data
+      .flatMap((ca) => ca.tests)
+      .map((test) => {
+        const [prefix, id] = test?.id?.split(".") as string[];
+        const result = test?.result as TestResult;
+        return [id, new Test(id, prefix, result, api)];
+      })
   );
 };
 

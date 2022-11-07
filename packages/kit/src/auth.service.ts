@@ -6,7 +6,9 @@ export type KeycloakRole =
   | "talent_article_author"
   | "talent_company_report";
 
-const domains: Record<Environment, string> = {
+const devTenants = ["devtd2", "internaldemo"];
+
+const domains = {
   dev: "talentdigit.al",
   prod: "talentdigital.eu",
 };
@@ -20,9 +22,11 @@ export class AuthService implements IAuthService {
     };
   }
 
-  static async create(tenant: string, environment: "dev" | "prod" = "prod") {
+  static async create(tenant: string) {
+    const domain = devTenants.includes(tenant) ? domains.dev : domains.prod;
+
     const realm = `talentdigital-${tenant}`;
-    const url = `https://${tenant}.${domains[environment]}/auth`;
+    const url = `https://${tenant}.${domain}/auth`;
     const clientId = "td-profile2";
 
     const auth = new Keycloak({ realm, url, clientId });

@@ -2,6 +2,7 @@ import { KyInstance } from "ky/distribution/types/ky";
 import Keycloak, { KeycloakConfig } from "keycloak-js";
 import Badge from "./badge";
 import Test from "./test";
+import { Api } from "@talentdigital/api-client";
 
 export interface Config {
   tenant: string;
@@ -58,3 +59,5 @@ export interface SecurityDataType {
     Authorization: string;
   };
 }
+
+export type ApiClient = Api<SecurityDataType>;

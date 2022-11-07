@@ -2,13 +2,15 @@ import TalentKit from "@talentdigital/kit";
 import "./App.css";
 
 function App({ kit }: { kit: TalentKit }) {
-  const onClick = () => {
-    kit.test.testId1.pass();
-  };
-
   return (
     <div className="App">
-      <button onClick={onClick}>Pass</button>
+      {Object.values(kit.test)
+        .filter((test) => !test.result)
+        .map((test) => (
+          <button key={test.id} onClick={() => test.pass()}>
+            {test.id}
+          </button>
+        ))}
     </div>
   );
 }

@@ -1,9 +1,7 @@
 import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
-import { Config, SecurityDataType, State, Tests } from "./interfaces";
-import Test, { instantiateTests } from "./test";
-
-import { Api } from "@talentdigital/api-client";
+import { ApiClient, Config, State, Tests } from "./interfaces";
+import { instantiateTests } from "./test";
 
 export const applicationId = "talentApplicationProfileTwo";
 
@@ -20,33 +18,32 @@ const createStateFromUrlParams = (): State => {
  * @example const sdk = await TdSdk.create(config);
  */
 class TalentKit {
-  readonly state: State = {};
-
   private constructor(
-    private api: Api<SecurityDataType>,
+    private api: ApiClient,
     public test: Tests,
-    testMode: boolean = false
-  ) {
-    this.state = testMode
-      ? { sid: "sid", eid: "eid" }
-      : createStateFromUrlParams();
-  }
+    readonly state: State = {}
+  ) {}
 
   static async create(config: Config) {
-    // TODO: Implement test mode
+    let apiClient: ApiClient;
+    const state = createStateFromUrlParams();
+    if (!state.sid || !state.eid) {
+      throw new Error("sid or eid not found");
+    }
 
-    const auth = await AuthService.create(config.tenant, "dev");
-    if (!auth) throw "Could not create Authentication Service";
+    if (config.testMode) {
+      apiClient = createApiClient();
+    } else {
+      const auth = await AuthService.create(config.tenant);
+      if (!auth) throw "Could not create Authentication Service";
 
-    const api = createApiClient(auth);
+      apiClient = createApiClient(auth);
+    }
 
-    if (auth && api) {
-      // Fetch the Tests
-      const testIds = ["testId1", "testId2"];
+    if (apiClient) {
+      const tests: Tests = await instantiateTests(state, apiClient);
 
-      const tests: Tests = instantiateTests(testIds, api);
-
-      return new TalentKit(api, tests);
+      return new TalentKit(apiClient, tests, state);
     }
 
     throw new Error(`Coudn't initialize the library`);
