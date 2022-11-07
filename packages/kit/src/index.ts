@@ -1,20 +1,11 @@
 import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
 import { Config, SecurityDataType, State, Tests } from "./interfaces";
-import Test from "./test";
+import Test, { instantiateTests } from "./test";
 
 import { Api } from "@talentdigital/api-client";
 
 export const applicationId = "talentApplicationProfileTwo";
-
-const instantiateTests = (
-  testIds: string[],
-  api: ReturnType<typeof createApiClient>
-): Tests => {
-  return Object.fromEntries(
-    testIds.map((testId) => [testId, new Test(testId, "season99episode1", api)])
-  );
-};
 
 const createStateFromUrlParams = (): State => {
   const params = new URLSearchParams(window.location.search);

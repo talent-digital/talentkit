@@ -1,6 +1,7 @@
 import type { Api } from "@talentdigital/api-client";
 import { applicationId } from ".";
-import { SecurityDataType } from "./interfaces";
+import { createApiClient } from "./api.service";
+import { SecurityDataType, Tests } from "./interfaces";
 
 enum TestResult {
   "fail" = 0,
@@ -40,5 +41,14 @@ class Test {
     );
   }
 }
+
+export const instantiateTests = (
+  testIds: string[],
+  api: ReturnType<typeof createApiClient>
+): Tests => {
+  return Object.fromEntries(
+    testIds.map((testId) => [testId, new Test(testId, "season99episode1", api)])
+  );
+};
 
 export default Test;
