@@ -1,15 +1,8 @@
-import { Options, ResponsePromise } from "ky";
+import ky, { Options, ResponsePromise } from "ky";
 import { KyInstance } from "ky/distribution/types/ky";
 import { Input } from "ky/distribution/types/options";
-import {
-  AuthConfig,
-  HttpClient,
-  IApiService,
-  IAuthService,
-} from "./interfaces";
-import ky from "ky";
 import { KeycloakRole } from "./auth.service";
-import Keycloak from "keycloak-js";
+import { HttpClient, IApiService, IAuthService } from "./interfaces";
 
 export class MockAuthService implements IAuthService {
   private constructor() {}

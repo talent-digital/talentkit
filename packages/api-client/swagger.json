@@ -1,0 +1,2682 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "talent::digital REST APIs",
+    "description": "REST APIs for configuration and talent analytics."
+  },
+  "servers": [{ "url": "https://internaldemo.talentdigit.al" }],
+  "security": [{ "bearerAuth": [] }],
+  "tags": [
+    {
+      "name": "Domain model: Missions",
+      "description": "Defining and following up on organisation competence targets."
+    },
+    {
+      "name": "User analytics: Progress reporting",
+      "description": "Feedback on user progress."
+    },
+    {
+      "name": "Utilities: Assets",
+      "description": "Storage of tenant-specific media."
+    },
+    {
+      "name": "Domain model: Talent group",
+      "description": "Grouping users into departments and teams."
+    },
+    {
+      "name": "Domain model: Certificates",
+      "description": "Certifying employee competences according to targets."
+    },
+    {
+      "name": "Domain model: Competences",
+      "description": "Defining an integrated competence model for an organisation."
+    },
+    {
+      "name": "Domain model: Events",
+      "description": "User-generated events as input for analytics."
+    },
+    {
+      "name": "Domain model: Tags",
+      "description": "Define tags for organisation analytics."
+    },
+    {
+      "name": "Utilities: Tenant configuration",
+      "description": "Key-value store for tenant-wide configuration parameters."
+    },
+    {
+      "name": "Utilities: Savegame",
+      "description": "Get and save the players game (JSON)."
+    },
+    {
+      "name": "Domain model: Talent",
+      "description": "User-related data and linking to analytics."
+    },
+    {
+      "name": "Organisation analytics: Signals",
+      "description": "Analytics insights."
+    },
+    { "name": "Organisation analytics: Report" },
+    { "name": "Domain model: Competences" },
+    {
+      "name": "Organisation analytics: Report",
+      "description": "Report general organisation statistics."
+    },
+    {
+      "name": "Utilities: Realtime",
+      "description": "Realtime collaborative gaming support."
+    },
+    { "name": "User analytics: Progress reporting" },
+    {
+      "name": "User analytics: Recommendations",
+      "description": "Engine for playing and training recommendations."
+    },
+    { "name": "Utilities: Misc" },
+    {
+      "name": "Organisation analytics: Feedback",
+      "description": "Manage feedback from your organisation."
+    },
+    {
+      "name": "Utilities: Articles",
+      "description": "Management of tenant-specific learning material."
+    }
+  ],
+  "paths": {
+    "/api/v1/talent/{userId}/update-name": {
+      "put": {
+        "tags": ["Domain model: Talent"],
+        "operationId": "updateTalentUserName",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TalentUserRestRequestString"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/talent/{userId}/update-group": {
+      "put": {
+        "tags": ["Domain model: Talent"],
+        "operationId": "updateTalentUserGroup",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TalentUserRestRequestLong"
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/talent/{userId}/tags": {
+      "put": {
+        "tags": ["Domain model: Talent"],
+        "operationId": "updateTalentUserTags",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TalentUserRestRequestLong"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/talent/{userId}/support": {
+      "put": {
+        "tags": ["Domain model: Talent"],
+        "summary": "Edit talent's \"support user\" property\n",
+        "description": "This endpoint allows you to set the value of the talent's \"support user\" property.\nTest results of the talent marked as \"support user\" are not taken\ninto account while generating company reports.\n",
+        "operationId": "updateTalentSupportUserFlag",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TalentUserRestRequestBoolean"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/talent/update-name": {
+      "put": {
+        "tags": ["Domain model: Talent"],
+        "operationId": "updateTalentUserName_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TalentUserRestRequestString"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/talent/update-group": {
+      "put": {
+        "tags": ["Domain model: Talent"],
+        "operationId": "updateTalentUserGroup_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TalentUserRestRequestLong"
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/talent/tags": {
+      "put": {
+        "tags": ["Domain model: Talent"],
+        "operationId": "updateTalentUserTags_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TalentUserRestRequestLong"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/signals/module": {
+      "put": {
+        "tags": ["Organisation analytics: Signals"],
+        "summary": "Profile 2.0 Company Signal Modules",
+        "description": "This endpoint allows for the deployment of signal modules",
+        "operationId": "upsertSignalModule",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SignalModuleWeb" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/SignalModuleWeb" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/realtime/{docId}": {
+      "put": {
+        "tags": ["Utilities: Realtime"],
+        "summary": "Realtime Document",
+        "description": "This endpoint gets document awareness information and returns document body",
+        "operationId": "getRealtimeDocument",
+        "parameters": [
+          {
+            "name": "docId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "type": "string" } } },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/RealtimeDocumentWeb" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Utilities: Realtime"],
+        "summary": "Realtime Document",
+        "description": "This endpoint creates or updates a realtime document",
+        "operationId": "sendRealtimeDocument",
+        "parameters": [
+          {
+            "name": "docId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/octet-stream": { "schema": { "type": "string" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RealtimeDocumentEntityWeb"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/config/single-value": {
+      "put": {
+        "tags": ["Utilities: Tenant configuration"],
+        "summary": "Update or save a configuration item with a single value.",
+        "description": "If there is an application configuration item with the specified name, this endpoint will update it.\n<br> Otherwise, a new item will be added. If an existing item had multiple values it will be changed to a single-valued.\n<br> Admin role required.\n",
+        "operationId": "updateSingleValueConfigItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleValueApplicationConfigItemWeb"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "The operation was successful" }
+        }
+      },
+      "post": {
+        "tags": ["Utilities: Tenant configuration"],
+        "summary": "Add a configuration item with a single value.",
+        "description": "This endpoint adds an application configuration item with a single value. <br> Admin role required.",
+        "operationId": "saveSingleValueConfigItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleValueApplicationConfigItemWeb"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "An application configuration item has been added successfully"
+          },
+          "409": {
+            "description": "An application configuration item with the specified name already existed",
+            "content": {
+              "*/*": {
+                "example": {
+                  "timestamp": "2021-02-11T11:26:56.863733Z",
+                  "path": "/api/profile/application/config/single-value",
+                  "status": "Conflict",
+                  "statusCode": 409,
+                  "messages": [
+                    "Config item with name: MY_CONFIG_ITEM already exists"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/config/multi-value": {
+      "put": {
+        "tags": ["Utilities: Tenant configuration"],
+        "summary": "Update or save a configuration item with multiple values.",
+        "description": "If there is an application configuration item with the specified name, this endpoint will update it.\n<br> Otherwise, a new item will be added. If an existing item had single value it will be changed to a multiple-valued.\n<br> Admin role required.\n",
+        "operationId": "updateMultiValueConfigItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MultiValueApplicationConfigItemWeb"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "The operation was successful" }
+        }
+      },
+      "post": {
+        "tags": ["Utilities: Tenant configuration"],
+        "summary": "Add a configuration item with multiple values.",
+        "description": "This endpoint adds an application configuration item with multiple values. <br> Admin role required.",
+        "operationId": "saveMultiValueConfigItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MultiValueApplicationConfigItemWeb"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "An application configuration item has been added successfully"
+          },
+          "409": {
+            "description": "An application configuration item with the specified name already existed",
+            "content": {
+              "*/*": {
+                "example": {
+                  "timestamp": "2021-02-11T11:26:56.863733Z",
+                  "path": "/api/profile/application/config/multi-value",
+                  "status": "Conflict",
+                  "statusCode": 409,
+                  "messages": [
+                    "Config item with name: MY_CONFIG_ITEM already exists"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/articles/{id}": {
+      "get": {
+        "tags": ["Utilities: Articles"],
+        "summary": "Return article by id.",
+        "description": "This endpoint tries to find and return an article with id equal to the value provided as a path variable",
+        "operationId": "getArticle",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/ArticleResponse" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Utilities: Articles"],
+        "summary": "Update article by id.",
+        "description": "This endpoint accepts an <a href=\"#web-ArticleRequest\"> ArticleRequest </a> object and tries\nto use it in order to update article. Value of the `id` field is not taken into account - id provided\nas a path variable is used instead.\n",
+        "operationId": "updateArticleById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ArticleRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/articles/up/{id}": {
+      "put": {
+        "tags": ["Utilities: Articles"],
+        "operationId": "articleUp",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/articles/top/{id}": {
+      "put": {
+        "tags": ["Utilities: Articles"],
+        "operationId": "articleTop",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/articles/down/{id}": {
+      "put": {
+        "tags": ["Utilities: Articles"],
+        "operationId": "articleDown",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/articles/bottom/{id}": {
+      "put": {
+        "tags": ["Utilities: Articles"],
+        "operationId": "articleBottom",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/articles": {
+      "get": {
+        "tags": ["Utilities: Articles"],
+        "summary": "Return all articles.",
+        "description": "This endpoint returns a list of articles. The request parameter named `drafts` allows\nfiltering the results.\n",
+        "operationId": "getArticles",
+        "parameters": [
+          {
+            "name": "drafts",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ArticleResponse" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Utilities: Articles"],
+        "summary": "Add or update articles.",
+        "description": "This endpoint accepts a list of <a href=\"#web-ArticleRequest\"> ArticleRequest </a> objects and tries\nto use them in order to create or update articles. If value of the `id` is set it will try to find\nand update existing article, otherwise a new article will be created.\n",
+        "operationId": "saveOrUpdateArticles",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ArticleRequest" }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "tags": ["Utilities: Articles"],
+        "summary": "Add new article.",
+        "description": "This endpoint accepts an <a href=\"#web-ArticleRequest\"> ArticleRequest </a> object and tries\nto save it. Value of the `id` field is not taken into account - it will be calculated by the database.\nIf the operation is successful, an <a href=\"#model-ArticleResponse\"> ArticleResponse </a> object\nwill be returned.\n",
+        "operationId": "addArticle",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ArticleRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/ArticleResponse" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Utilities: Articles"],
+        "summary": "Remove articles by ids.",
+        "description": "This endpoint tries to find and remove articles with ids equal to the values provided as request parameters",
+        "operationId": "deleteArticles",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": { "type": "integer", "format": "int64" }
+            }
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } }
+      }
+    },
+    "/api/v1/user": {
+      "post": {
+        "tags": ["Utilities: Misc"],
+        "summary": "Self-registration support for new users.",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateUserRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/signals/populate": {
+      "post": {
+        "tags": ["Organisation analytics: Signals"],
+        "summary": "Start the Signals Population Job",
+        "description": "This endpoint triggers the job that populates the signals table",
+        "operationId": "executeSignalsJob",
+        "responses": { "202": { "description": "Accepted" } }
+      }
+    },
+    "/api/v1/missions/target": {
+      "get": {
+        "tags": ["Domain model: Missions"],
+        "summary": "Get a target.",
+        "description": "This endpoint returns all targets",
+        "operationId": "getAllTargets",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MissionTargetEntityWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Domain model: Missions"],
+        "summary": "Create a target.",
+        "description": "This endpoint creates or updates the mission target",
+        "operationId": "createTarget",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/MissionTargetWeb" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MissionTargetEntityWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/missions/calculate": {
+      "post": {
+        "tags": ["Domain model: Missions"],
+        "summary": "Calculate the progress.",
+        "description": "This enpoint triggers the job that populates the mission_progress table",
+        "operationId": "runMissionsCalculationJob",
+        "responses": { "202": { "description": "Accepted" } }
+      }
+    },
+    "/api/v1/feedback-questions": {
+      "get": {
+        "tags": ["Organisation analytics: Feedback"],
+        "summary": "Profile 2.0 Feedback questions",
+        "description": "This endpoint returns all feedback questions",
+        "operationId": "getFeedbackQuestions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeedbackQuestionWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Organisation analytics: Feedback"],
+        "summary": "Profile 2.0 Feedback questions",
+        "description": "This endpoint adding new feedback question definition",
+        "operationId": "addNewQuestion",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/FeedbackQuestionWeb" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeedbackQuestionWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Organisation analytics: Feedback"],
+        "summary": "Profile 2.0 Feedback questions",
+        "description": "This endpoint removes the feedback question by id",
+        "operationId": "deleteQuestion",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeedbackQuestionWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/competences": {
+      "get": {
+        "tags": ["Domain model: Competences"],
+        "summary": "Returns the currently installed competence hierarchy.",
+        "description": "Returns a list of <a href=\"#model-CompetenceArea\">CompetenceArea</a> with the currently installed competence hierarchy.\n",
+        "operationId": "getCompetencesTree",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/CompetenceArea" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Domain model: Competences"],
+        "summary": "Merge a competence hierarchy into the currently installed competence hierarchy and return the updated hierarchy.",
+        "operationId": "addNewCompetence",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompetenceAreaRequest"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/CompetenceArea" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/certificate": {
+      "get": {
+        "tags": ["Domain model: Certificates"],
+        "summary": "List certificates.",
+        "description": "This endpoint returns current user's certificates",
+        "operationId": "findTalentCertificates",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Certificate" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Domain model: Certificates"],
+        "summary": "Create or update certificates.",
+        "description": "This endpoint creates new certificates or updates existing ones. If a certificate with matching name has already been assigned to current user, it will be updated. Otherwise, a new one will be created.",
+        "operationId": "createOrUpdateTalentCertificates",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateOrUpdateCertificateRequest"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Certificate" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/assets/{type}/upload": {
+      "post": {
+        "tags": ["Utilities: Assets"],
+        "operationId": "asyncS3Upload",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": ["files"],
+                "type": "object",
+                "properties": {
+                  "files": {
+                    "type": "array",
+                    "items": { "type": "string", "format": "binary" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "204": { "description": "No Content" } }
+      }
+    },
+    "/api/v1/savegame": {
+      "post": {
+        "tags": ["Utilities: Savegame"],
+        "operationId": "saveOrUpdateState",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ApplicationStateWeb" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/ApplicationStateWeb" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/campaign/{templateTag}": {
+      "post": {
+        "tags": ["Utilities: Misc"],
+        "summary": "Send an email campaign.",
+        "description": "Send out email campaigns to participants based on an email template in SendInBlue.",
+        "operationId": "createCampaignUsingTemplateWithTag",
+        "parameters": [
+          {
+            "name": "templateTag",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/v1/event": {
+      "post": {
+        "tags": ["Domain model: Events"],
+        "summary": "Saving events",
+        "description": "This endpoint accepts an <a href=\"#web-EventCreationRequest\"> EventCreationRequest </a> object and tries to save it.\nThis object should has a valid application ID (e.g. \"talentApplicationProfileTwo\").\nProviding at least one event in json format is mandatory.\nGame results in profile 2.0 is passed through \"result\" property of the event;\n\"result\" property of the event consists of the \"id\" (a string  which is test-id) and the \"value\" (numeric; failed=0, passed=1) properties.\nIf test result-ID (result.id) is not already mapped to the proper sub-competence-ID, the result will not reflected in reports.\n(See <a href=\"#operations-test-item-controller-saveTestItem\"> Test Item registry/update </a>).\n",
+        "operationId": "saveEvent",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EventCreationRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/v1/test-item": {
+      "post": {
+        "tags": ["Domain model: Competences"],
+        "summary": "Define a test item to validate a competence level.",
+        "description": "Adds a new test item or updates an existing test item.\n",
+        "operationId": "createTestItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TestItem" }
+            }
+          },
+          "required": true
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/talent/{userId}": {
+      "get": {
+        "tags": ["Domain model: Talent"],
+        "operationId": "loadTalentUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/TalentUserWeb" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/talent-groups/by-parent/{parentGroupId}": {
+      "get": {
+        "tags": ["Domain model: Talent group"],
+        "operationId": "loadTalentGroups",
+        "parameters": [
+          {
+            "name": "parentGroupId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TalentGroupEntity" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/talent-groups/by-parent": {
+      "get": {
+        "tags": ["Domain model: Talent group"],
+        "operationId": "loadTalentGroups_1",
+        "parameters": [
+          {
+            "name": "parentGroupId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TalentGroupEntity" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/talent": {
+      "get": {
+        "tags": ["Domain model: Talent"],
+        "operationId": "loadTalentUser_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/TalentUserWeb" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tags/types": {
+      "get": {
+        "tags": ["Domain model: Tags"],
+        "operationId": "loadTagsTypes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tags/by-type/{tagType}": {
+      "get": {
+        "tags": ["Domain model: Tags"],
+        "operationId": "findTagsByType",
+        "parameters": [
+          {
+            "name": "tagType",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TagEntity" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/signals": {
+      "get": {
+        "tags": ["Organisation analytics: Signals"],
+        "summary": "Profile 2.0 Company Signals",
+        "description": "This endpoint returns the currently active signals",
+        "operationId": "getWebSignals",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/WebSignalWeb" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recommendation/training": {
+      "get": {
+        "tags": ["User analytics: Recommendations"],
+        "summary": "Training Recommendations.",
+        "description": "Returns a list of training course recommendations based on play results",
+        "operationId": "getTrainingRecommendations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TrainingRecommendationWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recommendation/play": {
+      "get": {
+        "tags": ["User analytics: Recommendations"],
+        "summary": "Play recommendations.",
+        "description": "Returns a list of Season, Episodes with the number of pending tests per episode which fall within the player's mission targets",
+        "operationId": "getPlayRecommendations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlayRecommendationWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/missions/progress": {
+      "get": {
+        "tags": ["Domain model: Missions"],
+        "summary": "Get the organisation's progress on all targets.",
+        "description": "This endpoint returns aggregated mission progress",
+        "operationId": "getMissionsAggregatedProgress",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/MissionProgressWeb" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/missions/individual/progress": {
+      "get": {
+        "tags": ["Domain model: Missions"],
+        "summary": "Get your personal progress on all targets.",
+        "description": "Returns mission progress for the requesting user with overall mission progress for each mission target",
+        "operationId": "getMissionIndividualProgress",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MissionProgressIndividualWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/feedback-questions/statistics": {
+      "get": {
+        "tags": ["Organisation analytics: Feedback"],
+        "summary": "Profile 2.0 Feedback questions",
+        "description": "This endpoint returns statistics of answers for feedback questions with\nquestions and answers for provided language\n",
+        "operationId": "getStatistics",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeedbackStatisticsWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/assets/video/{fileName}": {
+      "get": {
+        "tags": ["Utilities: Assets"],
+        "operationId": "getS3Video",
+        "parameters": [
+          {
+            "name": "range",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "short": { "type": "integer", "format": "int32" },
+                    "char": { "type": "string" },
+                    "int": { "type": "integer", "format": "int32" },
+                    "long": { "type": "integer", "format": "int64" },
+                    "float": { "type": "number", "format": "float" },
+                    "double": { "type": "number", "format": "double" },
+                    "direct": { "type": "boolean" },
+                    "readOnly": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/assets/objects": {
+      "get": {
+        "tags": ["Utilities: Assets"],
+        "operationId": "getAllS3ObjectsFromBucket",
+        "parameters": [
+          {
+            "name": "defaultBucket",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/assets/image/{fileName}": {
+      "get": {
+        "tags": ["Utilities: Assets"],
+        "operationId": "getS3Image",
+        "parameters": [
+          {
+            "name": "range",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "short": { "type": "integer", "format": "int32" },
+                    "char": { "type": "string" },
+                    "int": { "type": "integer", "format": "int32" },
+                    "long": { "type": "integer", "format": "int64" },
+                    "float": { "type": "number", "format": "float" },
+                    "double": { "type": "number", "format": "double" },
+                    "direct": { "type": "boolean" },
+                    "readOnly": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-report/test-details": {
+      "get": {
+        "tags": ["User analytics: Progress reporting"],
+        "summary": "Profile 2.0 Test Details Report",
+        "description": "This endpoint returns test descriptions and results achieved by the current user.\nThe request parameters named `season` (required) and `episode` (optional) allow\nfiltering the results.\n",
+        "operationId": "getCompetenceAreaTestDetailsReports",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" }
+          },
+          {
+            "name": "episode",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompetenceAreaTestsDetailsWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-report/sub-competence": {
+      "get": {
+        "tags": ["User analytics: Progress reporting"],
+        "summary": "Profile 2.0 User Sub competences Report",
+        "description": "This endpoint returns number of passed and available tests in a given season.\nStatistics are grouped by subCompetence id and test level.\n",
+        "operationId": "getSubCompetencesTestsReports",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "format": "int32" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SubCompetenceTestResultWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-report/statistics": {
+      "get": {
+        "tags": ["User analytics: Progress reporting"],
+        "operationId": "findTalentStatistics",
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 28 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TalentDailyStatisticsWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-report/qualifications/{type}": {
+      "get": {
+        "tags": ["User analytics: Progress reporting"],
+        "summary": "Profile 2.0 Qualification improvement advices",
+        "description": "According to the user's test results and comparing to function target or department target, user may receive some advices or recommendations.\nIf user did not achieve to the target qualification level (for certain sub-competence), this endpoint returns recommendation list.\nIf user is in the same level as the target qualification, this endpoint returns advice list for improvement,\notherwise the result of the endpoint will be an empty JSON array. This endpoint accepts one mandatory 'type' parameter which just accepts 'advice' or 'recommendation' as value.\nThe result is a list of pairs contains sub-competence and current level of user in that sub-competence (target for this competences can be obtained via other endpoint).\n",
+        "operationId": "getProfileTwoQualificationAdvices",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "enum": ["ADVICE", "RECOMMENDATION"] }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QualificationHintWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-report/compare": {
+      "get": {
+        "tags": ["User analytics: Progress reporting"],
+        "summary": "Profile 2.0 Test Score Comparison",
+        "description": "This endpoint returns the player's tried & passed tests,\nthe most tried and passed tests in the player's team and\nthe most tried and passed tests in the whole organisation.\n",
+        "operationId": "getPlayerTeamOrganisationComparisonReport",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerTeamOrganisationComparison"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user-report": {
+      "get": {
+        "tags": ["User analytics: Progress reporting"],
+        "summary": "Profile 2.0 User Report",
+        "description": "This endpoint returns a high-level report for test results of current user.\nIf user is not attended in game and did not passed any test, all values in all 5 Competence areas are zero.\n",
+        "operationId": "getCompetenceAreaTestResults",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompetenceAreaTestResultReportWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/savegame/{applicationId}": {
+      "get": {
+        "tags": ["Utilities: Savegame"],
+        "operationId": "getResult",
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApplicationStateWeb" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/config/single-value/{name}": {
+      "get": {
+        "tags": ["Utilities: Tenant configuration"],
+        "summary": "Get a configuration item with a single value.",
+        "description": "\"This endpoint returns an application configuration item with a single value -\n<a href=\\\"#model-SingleValueConfigItemResponse\\\">SingleValueConfigItemResponse</a>.\n",
+        "operationId": "findSingleValueConfigItem",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An application configuration item with a single value and the specified name was found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleValueApplicationConfigItemWeb"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An application configuration item with a single value and the specified name was not found",
+            "content": {
+              "*/*": {
+                "example": {
+                  "timestamp": "2021-02-11T10:50:36.140724Z",
+                  "path": "/api/profile/application/config/single-value/CONFIG_ITEM_NAME",
+                  "status": "Not Found",
+                  "statusCode": 404,
+                  "messages": [
+                    "Single value config item with name: CONFIG_ITEM_NAME not found"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/config/multi-value/{name}": {
+      "get": {
+        "tags": ["Utilities: Tenant configuration"],
+        "summary": "Get an configuration item with multiple values.",
+        "description": "This endpoint returns an application configuration item with multiple values -\n<a href=\"#model-MultiValueConfigItemResponse\">MultiValueConfigItemResponse</a>.\n",
+        "operationId": "findMultiValueConfigItem",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An application configuration item with multiple values and the specified name was found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MultiValueApplicationConfigItemWeb"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "An application configuration item with multiple values and the specified name was not found\n",
+            "content": {
+              "*/*": {
+                "example": {
+                  "timestamp": "2021-02-11T10:50:36.140724Z",
+                  "path": "/api/profile/application/config/multi-value/CONFIG_ITEM_NAME",
+                  "status": "Not Found",
+                  "statusCode": 404,
+                  "messages": [
+                    "Multi value config item with name: CONFIG_ITEM_NAME not found"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/config": {
+      "get": {
+        "tags": ["Utilities: Tenant configuration"],
+        "summary": "Get all configuration items.",
+        "description": "This endpoint returns a list of\n<a href=\"#model-ConfigItemInfoResponse\">ConfigItemInfoResponse</a>. <br>\nAdmin role required.\n",
+        "operationId": "findAllConfigItems",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApplicationConfigItemInfoResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/company-report/tag-area/{tagType}": {
+      "get": {
+        "tags": ["Organisation analytics: Report"],
+        "summary": "Profile 2.0 Company Tag (Function) report",
+        "description": "This endpoint returns list of Tags for specified type with its related competence areas.",
+        "operationId": "getProfileTwoTagCompetenceAreas",
+        "parameters": [
+          {
+            "name": "tagType",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebTagAreaReportDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/company-report/number-of-users": {
+      "get": {
+        "tags": ["Organisation analytics: Report"],
+        "summary": "Company statistics report",
+        "description": "This endpoint returns the total number of registered users, the number of users who actively played the game in current and previous period, and the number user who created an account in current and previous period.<br> Admin role required.",
+        "operationId": "getCompanyNumberOfUsersStatistics",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyNumberOfUsersStatisticsReportWeb"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/company-report/last-completed-episodes": {
+      "get": {
+        "tags": ["Organisation analytics: Report"],
+        "summary": "Company statistics report - last completed episodes",
+        "description": "This endpoint returns information about the last completed episodes in a given season.<br> Admin role required.",
+        "operationId": "getCompanyLastCompletedEpisodeStatistics",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyLastCompletedEpisodesStatisticsReportWeb"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/company-report/general": {
+      "get": {
+        "tags": ["Organisation analytics: Report"],
+        "summary": "Profile 2.0 Company general test result report",
+        "description": "This endpoint returns aggregated test result of company. Notice that users who are already in a department (has talent-group-id) will be counted in statistics.",
+        "operationId": "getProfileTwoGeneralReport",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WebGeneralReportDTO" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/company-report/department-area": {
+      "get": {
+        "tags": ["Organisation analytics: Report"],
+        "summary": "Profile 2.0 Company Departments report",
+        "description": "This endpoint returns list of departments and in every department object, there is a list of competence areas containing statistics of that department. This statistics is aggregated from sub-departments and statistics of test results those are directly in current department (if exists any user in current department).Any depth of department hierarchy is traversed by the algorithm to generate result. This endpoint accepts user in all levels of department. If no user was connected directly to department (at any level), that department has no effect on statistics.",
+        "operationId": "getProfileTwoDepartmentAreas",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebDepartmentAreaReportDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/company-report": {
+      "get": {
+        "tags": ["Organisation analytics: Report"],
+        "summary": "Profile 2.0 Company Report",
+        "description": "This endpoint returns a high-level report of the test results for the all users in the company who are attended in tests. Normally users who are not attended in game will not taken into account in report calculations.",
+        "operationId": "getCompanyCompetenceAreaTestResults",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebAreaTestResultDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/version": {
+      "get": {
+        "tags": ["Utilities: Misc"],
+        "summary": "Get the software version.",
+        "operationId": "getVersion",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/api/v1/missions/target/{id}": {
+      "delete": {
+        "tags": ["Domain model: Missions"],
+        "summary": "Delete a target.",
+        "description": "This endpoint removes the mission target by id",
+        "operationId": "deleteTarget",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MissionTargetEntityWeb"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/assets/delete/{type}/{fileName}": {
+      "delete": {
+        "tags": ["Utilities: Assets"],
+        "operationId": "deleteS3File",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } }
+      }
+    },
+    "/api/v1/config/{name}": {
+      "delete": {
+        "tags": ["Utilities: Tenant configuration"],
+        "summary": "Remove a configuration item.",
+        "description": "This endpoint removes an application configuration item. <br> Admin role required.",
+        "operationId": "removeConfigItem",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "An application configuration item with the specified name was not found",
+            "content": {
+              "*/*": {
+                "example": {
+                  "timestamp": "2021-02-11T11:16:59.321549Z",
+                  "path": "/api/profile/application/config/TO_REMOVE",
+                  "status": "Not Found",
+                  "statusCode": 404,
+                  "messages": [
+                    "Config item with name: TO_REMOVE does not exists"
+                  ]
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "An application configuration item has been deleted successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TalentUserRestRequestString": {
+        "required": ["value"],
+        "type": "object",
+        "properties": { "value": { "type": "string" } }
+      },
+      "TalentUserRestRequestLong": {
+        "required": ["value"],
+        "type": "object",
+        "properties": { "value": { "type": "integer", "format": "int64" } }
+      },
+      "TalentUserRestRequestBoolean": {
+        "required": ["value"],
+        "type": "object",
+        "properties": { "value": { "type": "boolean" } }
+      },
+      "SignalModuleWeb": {
+        "type": "object",
+        "properties": {
+          "signalType": { "type": "integer", "format": "int64" },
+          "query": { "type": "string" }
+        }
+      },
+      "RealtimeDocumentWeb": {
+        "required": ["body", "docId"],
+        "type": "object",
+        "properties": {
+          "docId": { "type": "string" },
+          "body": { "type": "string" },
+          "awareness": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "SingleValueApplicationConfigItemWeb": {
+        "required": ["name", "value"],
+        "type": "object",
+        "properties": {
+          "name": { "maxLength": 50, "minLength": 1, "type": "string" },
+          "value": { "maxLength": 2147483647, "minLength": 1, "type": "string" }
+        }
+      },
+      "MultiValueApplicationConfigItemWeb": {
+        "required": ["name", "values"],
+        "type": "object",
+        "properties": {
+          "name": { "maxLength": 50, "minLength": 1, "type": "string" },
+          "values": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "ArticleRequest": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "categories": {
+            "type": "array",
+            "items": { "type": "integer", "format": "int32" }
+          },
+          "author": { "type": "string" },
+          "title": { "type": "string" },
+          "created": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "teaser": { "type": "string" },
+          "content": { "type": "string" },
+          "draft": { "type": "boolean" },
+          "videoFileName": { "type": "string" },
+          "abstract": { "type": "string" }
+        }
+      },
+      "CreateUserRequest": {
+        "required": ["email", "locale", "password"],
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "password": { "type": "string" },
+          "locale": { "pattern": "^[a-zA-Z]{2}$", "type": "string" },
+          "configureOtp": { "type": "boolean" }
+        }
+      },
+      "MissionTargetWeb": {
+        "type": "object",
+        "properties": {
+          "department": { "type": "integer", "format": "int32" },
+          "team": { "type": "integer", "format": "int32" },
+          "function": { "type": "integer", "format": "int32" },
+          "competenceArea": { "type": "integer", "format": "int32" },
+          "competence": { "type": "integer", "format": "int32" },
+          "subCompetence": { "type": "integer", "format": "int32" },
+          "level": { "type": "integer", "format": "int32" }
+        }
+      },
+      "MissionTargetEntityWeb": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "department": { "type": "integer", "format": "int32" },
+          "team": { "type": "integer", "format": "int32" },
+          "function": { "type": "integer", "format": "int32" },
+          "competenceArea": { "type": "integer", "format": "int32" },
+          "competence": { "type": "integer", "format": "int32" },
+          "subCompetence": { "type": "integer", "format": "int32" },
+          "level": { "type": "integer", "format": "int32" }
+        }
+      },
+      "FeedbackQuestionWeb": {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "question": { "type": "string" },
+          "answers": { "type": "string" }
+        }
+      },
+      "CompetenceAreaRequest": {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": { "minimum": 0, "type": "integer", "format": "int64" },
+          "name": { "type": "string" },
+          "competences": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CompetenceRequest" }
+          }
+        }
+      },
+      "CompetenceRequest": {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": { "minimum": 0, "type": "integer", "format": "int64" },
+          "name": { "type": "string" },
+          "subCompetences": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SubCompetenceRequest" }
+          }
+        }
+      },
+      "SubCompetenceRequest": {
+        "required": ["id", "name"],
+        "type": "object",
+        "properties": {
+          "id": { "minimum": 0, "type": "integer", "format": "int64" },
+          "name": { "type": "string" }
+        }
+      },
+      "Competence": {
+        "required": ["id", "name", "subCompetences"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique ID of the competence. IDs below 1.000 allocated to talent::digital use.",
+            "format": "int64",
+            "example": 10001
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the competence as shown in the user interface.",
+            "example": "Software Development"
+          },
+          "competenceAreaId": {
+            "type": "integer",
+            "description": "Backlink to the competence area of this competence for convenience.",
+            "format": "int64",
+            "example": 10001
+          },
+          "subCompetences": {
+            "type": "array",
+            "description": "Subcompetences contained in this competence.",
+            "items": { "$ref": "#/components/schemas/SubCompetence" }
+          },
+          "testsAvailable": {
+            "type": "boolean",
+            "description": "Flag indicating if the competence can be currently tested."
+          }
+        },
+        "description": "A more specific competence to be assessed, certified or educated."
+      },
+      "CompetenceArea": {
+        "required": ["competences", "id", "name"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique ID of the competence area. IDs below 1.000 allocated to talent::digital use.",
+            "format": "int64",
+            "example": 10001
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the competence area as shown in the user interface.",
+            "example": "Computer Science"
+          },
+          "competences": {
+            "type": "array",
+            "description": "Competences contained in this competence area.",
+            "items": { "$ref": "#/components/schemas/Competence" }
+          },
+          "testsAvailable": {
+            "type": "boolean",
+            "description": "Flag indicating if the competence area can be currently tested."
+          }
+        },
+        "description": "A broad competence area such as professional competences, leadership competences, DigComp competences, ..."
+      },
+      "SubCompetence": {
+        "required": ["id", "name"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique ID of the subcompetence. IDs below 1.000 allocated to talent::digital use.",
+            "format": "int64",
+            "example": 10001
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the subcompetence as shown in the user interface.",
+            "example": "Complexity"
+          },
+          "competenceId": {
+            "type": "integer",
+            "description": "Backlink to the competence of this subcompetence for convenience.",
+            "format": "int64",
+            "example": 10001
+          },
+          "testsAvailable": {
+            "type": "boolean",
+            "description": "Flag indicating if the competence can be currently tested."
+          }
+        },
+        "description": "A detailed competence directly linked to tests."
+      },
+      "RealtimeDocumentEntityWeb": {
+        "required": ["body", "docId"],
+        "type": "object",
+        "properties": {
+          "id": { "minimum": 0, "type": "integer", "format": "int64" },
+          "docId": { "type": "string" },
+          "body": { "type": "string" }
+        }
+      },
+      "CreateOrUpdateCertificateRequest": {
+        "required": [
+          "certificate",
+          "description",
+          "grade",
+          "recipientName",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "certificate": { "type": "string" },
+          "recipientName": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "grade": { "type": "number", "format": "double" }
+        }
+      },
+      "Certificate": {
+        "type": "object",
+        "properties": {
+          "certificate": { "type": "string" },
+          "url": { "type": "string" },
+          "recipientName": { "type": "string" }
+        }
+      },
+      "ApplicationStateWeb": {
+        "required": ["applicationId", "state"],
+        "type": "object",
+        "properties": {
+          "applicationId": { "type": "string" },
+          "state": { "type": "string" }
+        }
+      },
+      "ArticleResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "categories": {
+            "type": "array",
+            "items": { "type": "integer", "format": "int32" }
+          },
+          "author": { "type": "string" },
+          "title": { "type": "string" },
+          "created": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "teaser": { "type": "string" },
+          "content": { "type": "string" },
+          "draft": { "type": "boolean" },
+          "videoFileName": { "type": "string" },
+          "abstract": { "type": "string" }
+        }
+      },
+      "EventCreationRequest": {
+        "required": ["events"],
+        "type": "object",
+        "properties": {
+          "applicationId": { "type": "string" },
+          "events": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/JsonNode" }
+          }
+        }
+      },
+      "JsonNode": { "type": "object" },
+      "TestItem": {
+        "required": ["eventType", "level", "subCompetenceId"],
+        "type": "object",
+        "properties": {
+          "eventType": {
+            "type": "string",
+            "description": "Textual ID of the test item, matches the type of event that is generated during the test.",
+            "example": "programmingQuestion"
+          },
+          "subCompetenceId": {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Link to the subcompetence that this test item assesses.",
+            "format": "int64",
+            "example": 10001
+          },
+          "level": {
+            "type": "string",
+            "description": "Defines at what level the subcompetence is assessed.",
+            "example": "FOUNDATION",
+            "enum": [
+              "FOUNDATION",
+              "INTERMEDIATE",
+              "ADVANCED",
+              "HIGHLY_SPECIALISED"
+            ]
+          },
+          "documentation": {
+            "type": "string",
+            "description": "A description of the test item shown to the user to determine criteria for passing the test.",
+            "example": "I successfully declared a variable."
+          }
+        },
+        "description": "A test item assesses a subcompetence at a certain level and provides one piece of evidence that the subcompetence is present at the given level."
+      },
+      "TagEntity": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "name": { "type": "string" },
+          "type": { "type": "string" }
+        }
+      },
+      "TalentGroupEntity": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "name": { "type": "string" },
+          "talentGroupParentId": { "type": "integer", "format": "int64" }
+        }
+      },
+      "TalentUserWeb": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "talentGroup": { "$ref": "#/components/schemas/TalentGroupEntity" },
+          "tagItems": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TagEntity" }
+          },
+          "supportUser": { "type": "boolean" }
+        }
+      },
+      "WebSignalWeb": {
+        "type": "object",
+        "properties": {
+          "signalType": { "type": "integer", "format": "int32" },
+          "strength": { "type": "number" },
+          "whoFunction": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TagEntity" }
+          },
+          "whoTeam": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TalentGroupEntity" }
+          },
+          "active": { "type": "boolean" },
+          "dataNeeded": { "type": "boolean" }
+        }
+      },
+      "TrainingRecommendationWeb": {
+        "type": "object",
+        "properties": {
+          "courseName": { "type": "string" },
+          "description": { "type": "string" },
+          "language": { "type": "string" },
+          "providerName": { "type": "string" },
+          "type": { "type": "string", "enum": ["FACE_TO_FACE", "ONLINE"] },
+          "cost": { "type": "number", "format": "float" },
+          "durationHours": { "type": "number", "format": "float" },
+          "url": { "type": "string" }
+        }
+      },
+      "PlayRecommendationWeb": {
+        "type": "object",
+        "properties": {
+          "season": { "type": "integer", "format": "int32" },
+          "episode": { "type": "integer", "format": "int32" },
+          "pendingTests": { "type": "integer", "format": "int32" }
+        }
+      },
+      "MissionProgressWeb": {
+        "type": "object",
+        "properties": {
+          "targetId": { "type": "string" },
+          "whoScope": {
+            "type": "string",
+            "enum": ["ALL", "DEPARTMENT", "TEAM", "FUNCTION"]
+          },
+          "who": { "type": "string" },
+          "whatScope": {
+            "type": "string",
+            "enum": ["ALL", "SUB_COMPETENCE", "COMPETENCE", "COMPETENCE_AREA"]
+          },
+          "what": { "type": "string" },
+          "level": { "type": "integer", "format": "int32" },
+          "initialResults": {
+            "type": "array",
+            "items": { "type": "integer", "format": "int32" }
+          },
+          "bestResults": {
+            "type": "array",
+            "items": { "type": "integer", "format": "int32" }
+          }
+        }
+      },
+      "MissionProgressIndividualWeb": {
+        "type": "object",
+        "properties": {
+          "targetId": { "type": "string" },
+          "whoScope": {
+            "type": "string",
+            "enum": ["ALL", "DEPARTMENT", "TEAM", "FUNCTION"]
+          },
+          "who": { "type": "string" },
+          "whatScope": {
+            "type": "string",
+            "enum": ["ALL", "SUB_COMPETENCE", "COMPETENCE", "COMPETENCE_AREA"]
+          },
+          "what": { "type": "string" },
+          "level": { "type": "integer", "format": "int32" },
+          "myProgress": { "type": "integer", "format": "int32" },
+          "organizationProgress": { "type": "integer", "format": "int32" }
+        }
+      },
+      "FeedbackAnswerWeb": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int32" },
+          "text": { "type": "string" },
+          "value": { "type": "integer", "format": "int32" }
+        }
+      },
+      "FeedbackStatisticsWeb": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "text": { "type": "string" },
+          "answers": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/FeedbackAnswerWeb" }
+          }
+        }
+      },
+      "CompetenceAreaTestsDetailsWeb": {
+        "type": "object",
+        "properties": {
+          "competenceAreaId": { "type": "integer", "format": "int64" },
+          "tests": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TestDetailWeb" }
+          }
+        }
+      },
+      "TestDetailWeb": {
+        "type": "object",
+        "properties": {
+          "subCompetenceId": { "type": "integer", "format": "int64" },
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "level": {
+            "type": "string",
+            "enum": [
+              "START",
+              "FOUNDATION",
+              "INTERMEDIATE",
+              "ADVANCED",
+              "HIGHLY_SPECIALISED"
+            ]
+          },
+          "episode": { "type": "integer", "format": "int32" },
+          "result": { "type": "integer", "format": "int32" }
+        }
+      },
+      "SubCompetenceTestResultWeb": {
+        "type": "object",
+        "properties": {
+          "subCompetenceId": { "type": "integer", "format": "int64" },
+          "level": {
+            "type": "string",
+            "enum": [
+              "START",
+              "FOUNDATION",
+              "INTERMEDIATE",
+              "ADVANCED",
+              "HIGHLY_SPECIALISED"
+            ]
+          },
+          "passedTests": { "type": "integer", "format": "int32" },
+          "availableTests": { "type": "integer", "format": "int32" }
+        }
+      },
+      "TalentDailyStatisticsWeb": {
+        "type": "object",
+        "properties": {
+          "engagementPoints": { "type": "integer", "format": "int32" },
+          "date": { "type": "string", "format": "date" }
+        }
+      },
+      "QualificationHintWeb": {
+        "type": "object",
+        "properties": {
+          "subCompetenceId": { "type": "integer", "format": "int64" },
+          "currentLevel": {
+            "type": "string",
+            "enum": [
+              "START",
+              "FOUNDATION",
+              "INTERMEDIATE",
+              "ADVANCED",
+              "HIGHLY_SPECIALISED"
+            ]
+          }
+        }
+      },
+      "PlayerTeamOrganisationComparison": {
+        "type": "object",
+        "properties": {
+          "available": { "type": "integer", "format": "int32" },
+          "playerTried": { "type": "integer", "format": "int32" },
+          "playerPassed": { "type": "integer", "format": "int32" },
+          "teamTried": { "type": "integer", "format": "int32" },
+          "teamPassed": { "type": "integer", "format": "int32" },
+          "organisationTried": { "type": "integer", "format": "int32" },
+          "organisationPassed": { "type": "integer", "format": "int32" }
+        }
+      },
+      "CompetenceAreaTestResultReportWeb": {
+        "type": "object",
+        "properties": {
+          "competenceAreaId": { "type": "integer", "format": "int64" },
+          "competenceAreaName": { "type": "string" },
+          "availableTests": { "type": "integer", "format": "int32" },
+          "totalTried": { "type": "integer", "format": "int32" },
+          "totalPassed": { "type": "integer", "format": "int32" }
+        }
+      },
+      "ApplicationConfigItemInfoResponse": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "multiValue": { "type": "boolean" }
+        }
+      },
+      "ProfileTwoCompanyCompetenceArea": {
+        "type": "object",
+        "properties": {
+          "competenceAreaId": { "type": "integer", "format": "int64" },
+          "competenceAreaName": { "type": "string" },
+          "testUserCount": { "type": "integer", "format": "int32" },
+          "availableTests": { "type": "integer", "format": "int32" },
+          "minTried": { "type": "integer", "format": "int32" },
+          "medianTried": { "type": "number", "format": "double" },
+          "maxTried": { "type": "integer", "format": "int32" },
+          "minPassed": { "type": "integer", "format": "int32" },
+          "medianPassed": { "type": "number", "format": "double" },
+          "maxPassed": { "type": "integer", "format": "int32" }
+        }
+      },
+      "WebTagAreaReportDTO": {
+        "type": "object",
+        "properties": {
+          "tagId": { "type": "integer", "format": "int64" },
+          "tagName": { "type": "string" },
+          "competenceAreaList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfileTwoCompanyCompetenceArea"
+            }
+          }
+        }
+      },
+      "CompanyNumberOfUsersStatisticsReportWeb": {
+        "type": "object",
+        "properties": {
+          "currentPeriodActiveUsers": { "type": "integer", "format": "int32" },
+          "previousPeriodActiveUsers": { "type": "integer", "format": "int32" },
+          "allRegisteredUsers": { "type": "integer", "format": "int32" },
+          "currentPeriodRegisteredUsers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousPeriodRegisteredUsers": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CompanyLastCompletedEpisodesStatisticsReportWeb": {
+        "type": "object",
+        "properties": {
+          "lastCompletedEpisodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompletedEpisodeStatisticsWeb"
+            }
+          }
+        }
+      },
+      "CompletedEpisodeStatisticsWeb": {
+        "type": "object",
+        "properties": {
+          "episode": { "type": "integer", "format": "int32" },
+          "numberOfUsers": { "type": "integer", "format": "int32" }
+        }
+      },
+      "WebGeneralReportDTO": {
+        "type": "object",
+        "properties": {
+          "minTried": {
+            "type": "integer",
+            "description": "Min number of tries in all competence areas",
+            "format": "int32"
+          },
+          "medianTried": {
+            "type": "number",
+            "description": "Median of tries in all competence areas",
+            "format": "double"
+          },
+          "maxTried": {
+            "type": "integer",
+            "description": "Max number of tries in all competence areas",
+            "format": "int32"
+          },
+          "minPassed": {
+            "type": "integer",
+            "description": "Min number of passed tests in all competence areas",
+            "format": "int32"
+          },
+          "medianPassed": {
+            "type": "number",
+            "description": "Median of passed tests in all competence areas",
+            "format": "double"
+          },
+          "maxPassed": {
+            "type": "integer",
+            "description": "Max number of passed tests in all competence areas",
+            "format": "int32"
+          },
+          "testUserCount": {
+            "type": "integer",
+            "description": "user count who took the test",
+            "format": "int32"
+          },
+          "availableTests": {
+            "type": "integer",
+            "description": "Sum of tests in all competence areas",
+            "format": "int32"
+          }
+        }
+      },
+      "WebDepartmentAreaReportDTO": {
+        "type": "object",
+        "properties": {
+          "departmentId": { "type": "integer", "format": "int64" },
+          "departmentName": { "type": "string" },
+          "competenceAreaList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfileTwoCompanyCompetenceArea"
+            }
+          },
+          "childDepartments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebDepartmentAreaReportDTO"
+            }
+          }
+        }
+      },
+      "WebAreaTestResultDTO": {
+        "type": "object",
+        "properties": {
+          "competenceAreaId": { "type": "integer", "format": "int64" },
+          "competenceAreaName": { "type": "string" },
+          "availableTests": { "type": "integer", "format": "int32" },
+          "testUserCount": { "type": "integer", "format": "int32" },
+          "minTried": { "type": "integer", "format": "int32" },
+          "medianTried": { "type": "number", "format": "double" },
+          "maxTried": { "type": "integer", "format": "int32" },
+          "minPassed": { "type": "integer", "format": "int32" },
+          "bestMedianPassed": { "type": "number", "format": "double" },
+          "initialMedianPassed": { "type": "number", "format": "double" },
+          "maxPassed": { "type": "integer", "format": "int32" }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "name": "bearerAuth",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

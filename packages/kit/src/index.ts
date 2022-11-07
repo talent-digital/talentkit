@@ -1,14 +1,18 @@
-import ApiService from "./api.service";
+import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
-import { Config, IApiService, State, Tests } from "./interfaces";
-import { MockAuthService } from "./mocks";
+import { Config, SecurityDataType, State, Tests } from "./interfaces";
 import Test from "./test";
+
+import { Api } from "@talentdigital/api-client";
 
 export const applicationId = "talentApplicationProfileTwo";
 
-const instantiateTests = (testIds: string[], api: IApiService): Tests => {
+const instantiateTests = (
+  testIds: string[],
+  api: ReturnType<typeof createApiClient>
+): Tests => {
   return Object.fromEntries(
-    testIds.map((testId) => [testId, new Test(testId, "prefix", api)])
+    testIds.map((testId) => [testId, new Test(testId, "season99episode1", api)])
   );
 };
 
@@ -28,7 +32,7 @@ class TalentKit {
   readonly state: State = {};
 
   private constructor(
-    private api: ApiService,
+    private api: Api<SecurityDataType>,
     public test: Tests,
     testMode: boolean = false
   ) {
@@ -38,20 +42,12 @@ class TalentKit {
   }
 
   static async create(config: Config) {
-    if (config.testMode) {
-      const auth = await MockAuthService.create();
+    // TODO: Implement test mode
 
-      const api = new ApiService(auth);
-
-      const tests = instantiateTests(["test1", "test2"], api);
-
-      return new TalentKit(api, tests);
-    }
-
-    const auth = await AuthService.create(config.tenant, "prod");
+    const auth = await AuthService.create(config.tenant, "dev");
     if (!auth) throw "Could not create Authentication Service";
 
-    const api = new ApiService(auth);
+    const api = createApiClient(auth);
 
     if (auth && api) {
       // Fetch the Tests
@@ -75,9 +71,7 @@ class TalentKit {
         },
       ];
 
-      await this.api.request("1/event/profile2", "post", {
-        json: { applicationId, events },
-      });
+      await this.api.domainModelEvents.saveEvent({ applicationId, events });
     },
   };
 }

@@ -52,3 +52,9 @@ export interface IAuthService {
 }
 
 export type Environment = "dev" | "prod";
+
+export interface SecurityDataType {
+  headers: {
+    Authorization: string;
+  };
+}

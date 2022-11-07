@@ -1,66 +1,14 @@
-// import { useTdSdk } from "@talentdigital/react";
-import TdSdk from "@talentdigital/sdk";
-import { Episode } from "@talentdigital/sdk/dist/episode";
-import { useEffect, useState } from "react";
+import TalentKit from "@talentdigital/kit";
 import "./App.css";
 
-const config = {
-  realm: "talentdigital-devtd2",
-  url: "https://devtd2.talentdigit.al/auth",
-  clientId: "td-profile2",
-};
-
-function App({ kit }: { kit: TdSdk }) {
-  // const kit = useTdSdk(config);
-  const [episode, setEpisode] = useState<Episode | null>(null);
-
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    if (kit) {
-      kit.createEpisode("id").then((episode) => {
-        if (episode) {
-          setEpisode(episode);
-        }
-      });
-    }
-  }, [kit]);
+function App({ kit }: { kit: TalentKit }) {
+  const onClick = () => {
+    kit.test.testId1.pass();
+  };
 
   return (
     <div className="App">
-      {episode ? (
-        !done ? (
-          <div>
-            <p>What is 2 + 2?</p>
-            <div>
-              <button
-                onClick={() => {
-                  episode.test("basic_math", 0).then(() => setDone(true));
-                }}
-              >
-                69
-              </button>
-              <button
-                onClick={() => {
-                  episode.test("basic_math", 1).then(() => setDone(true));
-                }}
-              >
-                4
-              </button>
-            </div>
-          </div>
-        ) : (
-          <button
-            onClick={() => {
-              episode.end();
-            }}
-          >
-            end episode
-          </button>
-        )
-      ) : (
-        <p>Loading...</p>
-      )}
+      <button onClick={onClick}>Pass</button>
     </div>
   );
 }

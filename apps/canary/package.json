@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@talentdigital/react": "workspace:*",
-    "@talentdigital/sdk": "workspace:*",
+    "@talentdigital/kit": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

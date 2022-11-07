@@ -1,7 +1,6 @@
+import type { Api } from "@talentdigital/api-client";
 import { applicationId } from ".";
-import { IApiService } from "./interfaces";
-
-const eventEndPoint = "1/event/profile2";
+import { SecurityDataType } from "./interfaces";
 
 enum TestResult {
   "fail" = 0,
@@ -12,40 +11,31 @@ class Test {
   constructor(
     readonly id: string,
     private prefix: string,
-    private api: IApiService
+    private api: Api<SecurityDataType>
   ) {}
 
   private generatePayload(result: TestResult) {
     const events = [
       {
         type: "test.complete",
-        result: { id: `${this.prefix}.${this.id}`, result },
+        result: { id: `${this.prefix}.${this.id}`, value: result },
       },
     ];
-    return {
-      json: { applicationId, events },
-      retry: {
-        limit: 3,
-      },
-    };
+    return { applicationId, events };
   }
 
   result: TestResult | undefined;
 
   pass() {
     this.result = TestResult.pass;
-    return this.api.request(
-      eventEndPoint,
-      "post",
+    return this.api.domainModelEvents.saveEvent(
       this.generatePayload(TestResult.pass)
     );
   }
 
   fail() {
     this.result = TestResult.fail;
-    return this.api.request(
-      eventEndPoint,
-      "post",
+    return this.api.domainModelEvents.saveEvent(
       this.generatePayload(TestResult.fail)
     );
   }

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { AppConfig } from "@talentdigital/sdk/src/interfaces";
-import TdSdk from "@talentdigital/sdk";
+import { Config } from "@talentdigital/kit/src/interfaces";
+import TalentKit from "@talentdigital/kit";
 
-export const useTdSdk = ({ auth }: AppConfig) => {
+export const useTdSdk = ({ tenant }: Config) => {
   let pending = false;
-  const [kit, setKit] = useState<TdSdk | undefined>();
+  const [kit, setKit] = useState<TalentKit | undefined>();
 
   useEffect(() => {
     if (!kit && !pending) {
       pending = true;
-      TdSdk.create({ auth }).then((newKit) => {
+      TalentKit.create({ tenant }).then((newKit) => {
         pending = false;
         if (newKit) setKit(newKit);
       });

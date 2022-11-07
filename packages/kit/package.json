@@ -6,11 +6,11 @@
   "files": [
     "dist"
   ],
-  "module": "./dist/sdk.js",
+  "module": "./dist/talent-kit.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/sdk.js"
+      "import": "./dist/talent-kit.js"
     }
   },
   "scripts": {
@@ -34,5 +34,8 @@
   "peerDependencies": {
     "keycloak-js": "^19.0.3",
     "ky": "^0.31.4"
+  },
+  "dependencies": {
+    "@talentdigital/api-client": "workspace:^0.1.0"
   }
 }
