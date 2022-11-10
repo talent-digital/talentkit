@@ -4,7 +4,8 @@ import "./App.css";
 function App({ kit }: { kit: TalentKit }) {
   return (
     <div className="App">
-      {Object.values(kit.test)
+      <h1>Hello {kit.settings.playerName}</h1>
+      {Object.values(kit.tests)
         .filter((test) => !test.result)
         .map((test) => (
           <button key={test.id} onClick={() => test.pass()}>

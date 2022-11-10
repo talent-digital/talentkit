@@ -52,8 +52,6 @@ export interface IAuthService {
   updateToken: () => void;
 }
 
-export type Environment = "dev" | "prod";
-
 export interface SecurityDataType {
   headers: {
     Authorization: string;
@@ -61,3 +59,14 @@ export interface SecurityDataType {
 }
 
 export type ApiClient = Api<SecurityDataType>;
+
+export interface Profile {
+  companyLogo: string;
+  companyName: string;
+  companyURL: string;
+  id: string;
+  leadingColor: string;
+  playerAvatar: string;
+  playerEmailAddress: string;
+  playerName: string;
+}

@@ -1,5 +1,5 @@
 import Keycloak from "keycloak-js";
-import { AuthClient, Environment, IAuthService } from "./interfaces";
+import { AuthClient, IAuthService } from "./interfaces";
 
 export type KeycloakRole =
   | "talent_admin"

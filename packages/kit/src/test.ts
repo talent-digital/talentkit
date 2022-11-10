@@ -1,6 +1,5 @@
-import type { Api } from "@talentdigital/api-client";
 import { applicationId } from ".";
-import { ApiClient, SecurityDataType, State, Tests } from "./interfaces";
+import { ApiClient, State, Tests } from "./interfaces";
 
 enum TestResult {
   "fail" = 0,
@@ -14,7 +13,7 @@ class Test {
     readonly id: string,
     private prefix: string,
     readonly bestResult: TestResult,
-    private api: Api<SecurityDataType>
+    private api: ApiClient
   ) {}
 
   private generatePayload(result: TestResult) {
