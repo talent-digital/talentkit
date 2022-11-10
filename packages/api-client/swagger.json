@@ -4,7 +4,7 @@
     "title": "talent::digital REST APIs",
     "description": "REST APIs for configuration and talent analytics."
   },
-  "servers": [{ "url": "https://internaldemo.talentdigit.al" }],
+  "servers": [{ "url": "https://devtd2.talentdigit.al" }],
   "security": [{ "bearerAuth": [] }],
   "tags": [
     {
