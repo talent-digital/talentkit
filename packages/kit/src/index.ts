@@ -1,6 +1,7 @@
 import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
 import { ApiClient, Config, Profile, State, Tests } from "./interfaces";
+import Storage from "./storage.service";
 import { instantiateTests } from "./test";
 
 export const applicationId = "talentApplicationProfileTwo";
@@ -8,9 +9,9 @@ export const applicationId = "talentApplicationProfileTwo";
 const createStateFromUrlParams = (): State => {
   const params = new URLSearchParams(window.location.search);
 
-  const state: State = Object.fromEntries(params.entries());
+  const state = Object.fromEntries(params.entries());
 
-  return state;
+  return state as unknown as State;
 };
 
 /**
@@ -20,9 +21,10 @@ const createStateFromUrlParams = (): State => {
 class TalentKit {
   private constructor(
     private api: ApiClient,
+    public storage: Storage,
     public tests: Tests,
     readonly profile: Profile,
-    readonly state: State = {}
+    readonly state: State
   ) {}
 
   static async create(config: Config) {
@@ -44,15 +46,11 @@ class TalentKit {
     if (apiClient) {
       const tests: Tests = await instantiateTests(state, apiClient);
 
-      const appState = await (
-        await apiClient.utilitiesSavegame.getResult(applicationId)
-      ).data;
+      const storage: Storage = await Storage.create(state, apiClient);
 
-      const savegame = JSON.parse(appState.state);
+      const profile: Profile = storage.profile;
 
-      const profile: Profile = savegame["SETTINGS"] || {};
-
-      return new TalentKit(apiClient, tests, profile, state);
+      return new TalentKit(apiClient, storage, tests, profile, state);
     }
 
     throw new Error(`Coudn't initialize the library`);

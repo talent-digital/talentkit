@@ -34,8 +34,8 @@ export type AuthClient = Pick<
 >;
 
 export interface State {
-  sid?: string;
-  eid?: string;
+  sid: string;
+  eid: string;
   redirectUrl?: string;
 }
 
