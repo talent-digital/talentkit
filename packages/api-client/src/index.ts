@@ -1,3 +1,4 @@
+// This file was generated, do not change
 export interface TalentUserRestRequestString {
   value: string;
 }
