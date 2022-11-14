@@ -62,6 +62,7 @@ importers:
       eslint: ^8.27.0
       eslint-config-prettier: ^8.5.0
       eslint-config-turbo: latest
+      tsconfig: workspace:*
       typescript: ^4.7.4
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.42.1_q65vifpjz32hcrp4pjlnvoe5qi
@@ -69,6 +70,7 @@ importers:
       eslint: 8.27.0
       eslint-config-prettier: 8.5.0_eslint@8.27.0
       eslint-config-turbo: 0.0.4_eslint@8.27.0
+      tsconfig: link:../tsconfig
       typescript: 4.8.3
 
   packages/kit:

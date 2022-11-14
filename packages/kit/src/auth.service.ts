@@ -10,9 +10,9 @@ const domains = {
 
 export class AuthService {
   private constructor(protected auth: AuthClient) {
-    this.auth.onTokenExpired = async () => {
+    this.auth.onTokenExpired = () => {
       if (this.auth.token) {
-        await this.auth.updateToken(5);
+        void this.auth.updateToken(5);
       }
     };
   }
@@ -37,7 +37,7 @@ export class AuthService {
       if (authenticated) {
         return new AuthService(auth);
       } else {
-        auth.login({ maxAge: 100000 });
+        await auth.login({ maxAge: 100000 });
       }
     } catch (e) {
       alert("Error authenticating");
@@ -46,6 +46,6 @@ export class AuthService {
   }
 
   updateToken() {
-    this.auth.updateToken(5);
+    return this.auth.updateToken(5);
   }
 }

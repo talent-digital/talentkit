@@ -11,19 +11,20 @@ export const createApiClient = (auth?: AuthService) => {
       console.log(input);
       console.log(init);
 
-      return new Response();
+      return Promise.resolve(new Response());
     };
 
     return new Api<SecurityDataType>({
       baseUrl: "",
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       customFetch,
     });
   }
 
-  const securityWorker = async (): Promise<SecurityDataType> => {
-    await auth.updateToken();
-    return { headers: { Authorization: `Bearer ${auth.token}` } };
-  };
+  const securityWorker = async (): Promise<SecurityDataType> =>
+    auth
+      .updateToken()
+      .then(() => ({ headers: { Authorization: `Bearer ${auth.token}` } }));
 
   return new Api<SecurityDataType>({
     baseUrl: "",
