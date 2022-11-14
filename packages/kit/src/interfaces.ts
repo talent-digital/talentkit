@@ -33,9 +33,9 @@ export type AuthClient = Pick<
   | "updateToken"
 >;
 
-export interface State {
-  sid: string;
-  eid: string;
+export interface ID {
+  season: string;
+  episode: string;
   redirectUrl?: string;
 }
 

@@ -1,17 +1,24 @@
 import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
-import { ApiClient, Config, Profile, State, Tests } from "./interfaces";
+import Badge from "./badge";
+import Engagement from "./engagement";
+import { ApiClient, Badges, Config, ID, Profile, Tests } from "./interfaces";
+import Savegame from "./savegame";
 import Storage from "./storage.service";
-import { instantiateTests } from "./test";
+import Test from "./test";
 
 export const applicationId = "talentApplicationProfileTwo";
 
-const createStateFromUrlParams = (): State => {
+const getIdFromUrlParams = (): ID => {
   const params = new URLSearchParams(window.location.search);
 
-  const state = Object.fromEntries(params.entries());
+  const season = params.get("sid");
+  const episode = params.get("eid");
 
-  return state as unknown as State;
+  if (!season || !episode)
+    throw "Could not retrieve season or episode id from URL";
+
+  return { season, episode };
 };
 
 /**
@@ -19,18 +26,69 @@ const createStateFromUrlParams = (): State => {
  * @example const sdk = await TdSdk.create(config);
  */
 class TalentKit {
+  /**
+   * @description The current user's player profile
+   */
+  readonly profile: Profile;
+
+  events = {
+    /**
+     * @description Mark the episode as completed and return to the dashboard
+     */
+    end: async () => {
+      const events = [
+        {
+          eventTypeId: "episode.end",
+          season: this.id.season,
+          episode: this.id.episode,
+        },
+      ];
+
+      await this.api.domainModelEvents.saveEvent({ applicationId, events });
+    },
+  };
+
   private constructor(
     private api: ApiClient,
-    public storage: Storage,
-    public tests: Tests,
-    readonly profile: Profile,
-    readonly state: State
-  ) {}
+    storage: Storage,
+    /**
+     * All badges available in the current episode
+     */
 
+    public badges: Badges,
+    /**
+     * All tests available in this episode
+     * @example kit.tests["test1"].pass();
+     */
+
+    public tests: Tests,
+    /**
+     * Savegame for the current episode
+     * @example const savegame = kit.savegame.load();
+     * @example kit.savegame.save(obj);
+     */
+    public savegame: Savegame,
+    /**
+     * Award and read engagement points
+     *
+     * @example kit.engagement.add(1)
+     * @example const points = kit.engagement.points
+     */
+    public engagement: Engagement,
+    readonly id: ID
+  ) {
+    this.profile = storage.getItem("SETTINGS");
+  }
+
+  /**
+   * Creates a new TalentKit
+   * @param config
+   * @returns TalentKit
+   */
   static async create(config: Config) {
     let apiClient: ApiClient;
-    const state = createStateFromUrlParams();
-    if (!state.sid || !state.eid) {
+    const id = getIdFromUrlParams();
+    if (!id.season || !id.episode) {
       throw new Error("sid or eid not found");
     }
 
@@ -43,32 +101,24 @@ class TalentKit {
       apiClient = createApiClient(auth);
     }
 
-    if (apiClient) {
-      const tests: Tests = await instantiateTests(state, apiClient);
+    if (!apiClient) throw new Error(`Coudn't initialize the library`);
 
-      const storage: Storage = await Storage.create(state, apiClient);
+    const tests: Tests = await Test.createForEpisode(id, apiClient);
+    const storage: Storage = await Storage.create(apiClient);
+    const savegame: Savegame = new Savegame(id, storage);
+    const engagement = new Engagement(storage);
+    const badges = Badge.createForEpisode(id, storage);
 
-      const profile: Profile = storage.profile;
-
-      return new TalentKit(apiClient, storage, tests, profile, state);
-    }
-
-    throw new Error(`Coudn't initialize the library`);
+    return new TalentKit(
+      apiClient,
+      storage,
+      badges,
+      tests,
+      savegame,
+      engagement,
+      id
+    );
   }
-
-  events = {
-    end: async () => {
-      const events = [
-        {
-          eventTypeId: "episode.end",
-          season: this.state.sid,
-          episode: this.state.eid,
-        },
-      ];
-
-      await this.api.domainModelEvents.saveEvent({ applicationId, events });
-    },
-  };
 }
 
 export default TalentKit;
