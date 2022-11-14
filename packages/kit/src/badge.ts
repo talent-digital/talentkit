@@ -1,5 +1,4 @@
 import { Badges, ID } from "./interfaces";
-import type Storage from "./storage.service";
 
 class Badge {
   private readonly storageKey = "BADGES_ENGINE_STORAGE";
@@ -9,15 +8,21 @@ class Badge {
    * Award this badge to the current user
    */
   award() {
-    const obtained = this.storage.getItem(this.storageKey) || [];
-    this.storage.setItem(this.storageKey, [...obtained, this.id]);
+    const storageItem = this.storage.getItem(this.storageKey);
+    const obtained = storageItem ? JSON.parse(storageItem) : [];
+    this.storage.setItem(
+      this.storageKey,
+      JSON.stringify([...obtained, this.id])
+    );
   }
 
   /**
    * Has this badge already been awarded
    */
   get awarded(): boolean {
-    const obtained: string[] = this.storage.getItem(this.storageKey) || [];
+    const storageItem = this.storage.getItem(this.storageKey);
+    const obtained = storageItem ? JSON.parse(storageItem) : [];
+
     return obtained.includes(this.id);
   }
 

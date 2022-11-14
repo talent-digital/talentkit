@@ -4,7 +4,7 @@ import Badge from "./badge";
 import Engagement from "./engagement";
 import { ApiClient, Badges, Config, ID, Profile, Tests } from "./interfaces";
 import Savegame from "./savegame";
-import Storage from "./storage.service";
+import RemoteStorage from "./storage.service";
 import Test from "./test";
 
 export const applicationId = "talentApplicationProfileTwo";
@@ -77,7 +77,8 @@ class TalentKit {
     public engagement: Engagement,
     readonly id: ID
   ) {
-    this.profile = storage.getItem("SETTINGS");
+    const profileStorage = storage.getItem("SETTINGS");
+    this.profile = profileStorage ? JSON.parse(profileStorage) : {};
   }
 
   /**
@@ -87,6 +88,7 @@ class TalentKit {
    */
   static async create(config: Config) {
     let apiClient: ApiClient;
+    let storage: Storage;
     const id = getIdFromUrlParams();
     if (!id.season || !id.episode) {
       throw new Error("sid or eid not found");
@@ -94,17 +96,18 @@ class TalentKit {
 
     if (config.testMode) {
       apiClient = createApiClient();
+      storage = window.localStorage;
     } else {
       const auth = await AuthService.create(config.tenant);
       if (!auth) throw "Could not create Authentication Service";
 
       apiClient = createApiClient(auth);
+      storage = await RemoteStorage.create(apiClient);
     }
 
     if (!apiClient) throw new Error(`Coudn't initialize the library`);
 
     const tests: Tests = await Test.createForEpisode(id, apiClient);
-    const storage: Storage = await Storage.create(apiClient);
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
     const badges = Badge.createForEpisode(id, storage);
