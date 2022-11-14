@@ -5,18 +5,6 @@ class Badge {
   private constructor(readonly id: string, private storage: Storage) {}
 
   /**
-   * Award this badge to the current user
-   */
-  award() {
-    const storageItem = this.storage.getItem(this.storageKey);
-    const obtained = storageItem ? JSON.parse(storageItem) : [];
-    this.storage.setItem(
-      this.storageKey,
-      JSON.stringify([...obtained, this.id])
-    );
-  }
-
-  /**
    * Has this badge already been awarded
    */
   get awarded(): boolean {
@@ -38,6 +26,18 @@ class Badge {
 
     return Object.fromEntries(
       ids.map((badgeId) => [badgeId, new Badge(badgeId, storage)])
+    );
+  }
+
+  /**
+   * Award this badge to the current user
+   */
+  award() {
+    const storageItem = this.storage.getItem(this.storageKey);
+    const obtained = storageItem ? JSON.parse(storageItem) : [];
+    this.storage.setItem(
+      this.storageKey,
+      JSON.stringify([...obtained, this.id])
     );
   }
 }

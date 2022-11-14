@@ -22,7 +22,7 @@ class Engagement {
 
   private sync() {
     let s = this.storage.getItem(this.storageKey);
-    let data = s ? JSON.parse(s) : {};
+    const data = s ? JSON.parse(s) : {};
     s = { ...data, points: this._points };
     this.storage.setItem(this.storageKey, JSON.stringify(data));
   }

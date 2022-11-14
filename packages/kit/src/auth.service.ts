@@ -1,10 +1,5 @@
 import Keycloak from "keycloak-js";
-import { AuthClient, IAuthService } from "./interfaces";
-
-export type KeycloakRole =
-  | "talent_admin"
-  | "talent_article_author"
-  | "talent_company_report";
+import { AuthClient } from "./interfaces";
 
 const devTenants = ["devtd2", "internaldemo"];
 
@@ -13,13 +8,17 @@ const domains = {
   prod: "talentdigital.eu",
 };
 
-export class AuthService implements IAuthService {
+export class AuthService {
   private constructor(protected auth: AuthClient) {
     this.auth.onTokenExpired = async () => {
       if (this.auth.token) {
         await this.auth.updateToken(5);
       }
     };
+  }
+
+  get token() {
+    return this.auth.token as string;
   }
 
   static async create(tenant: string) {
@@ -46,43 +45,7 @@ export class AuthService implements IAuthService {
     }
   }
 
-  get token() {
-    return this.auth.token as string;
-  }
-
   updateToken() {
     this.auth.updateToken(5);
   }
-
-  userHasRole = (role: KeycloakRole): boolean => {
-    if (this.auth.tokenParsed) {
-      return this.auth.tokenParsed.realm_access?.roles.includes(role) || false;
-    } else {
-      throw new Error("Keycloak token has not been parsed");
-    }
-  };
-
-  getUser = () => {
-    if (this.auth.tokenParsed) {
-      return this.auth.tokenParsed as any;
-    } else {
-      throw new Error("Keycloak token has not been parsed");
-    }
-  };
-
-  getUserFullname = (): string => {
-    if (this.auth.tokenParsed) {
-      return (this.auth.tokenParsed as any)?.name;
-    } else {
-      throw new Error("Keycloak token has not been parsed");
-    }
-  };
-
-  getUserEmail = (): string => {
-    if (this.auth.tokenParsed) {
-      return (this.auth.tokenParsed as any)?.email;
-    } else {
-      throw new Error("Keycloak token has not been parsed");
-    }
-  };
 }

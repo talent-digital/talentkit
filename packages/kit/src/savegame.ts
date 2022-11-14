@@ -16,7 +16,7 @@ class Savegame {
     }
   }
 
-  save(payload: any) {
+  save(payload: unknown) {
     const s = this.storage.getItem(seasonsKey);
 
     let data = s ? JSON.parse(s) : {};

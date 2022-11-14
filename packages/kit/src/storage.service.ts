@@ -4,10 +4,18 @@ import { ApiClient } from "./interfaces";
 class RemoteStorage implements Storage {
   private constructor(
     private api: ApiClient,
-    private state: Record<string, any> = {}
+    private state: Record<string, unknown> = {}
   ) {}
   get length(): number {
     return Object.keys(this.state).length;
+  }
+
+  static async create(api: ApiClient) {
+    const { data } = await api.utilitiesSavegame.getResult(applicationId);
+
+    const state = data ? JSON.parse(data.state) : {};
+
+    return new RemoteStorage(api, state);
   }
   clear(): void {
     this.state = {};
@@ -21,20 +29,12 @@ class RemoteStorage implements Storage {
     this.sync();
   }
 
-  static async create(api: ApiClient) {
-    const { data } = await api.utilitiesSavegame.getResult(applicationId);
-
-    const state = data ? JSON.parse(data.state) : {};
-
-    return new RemoteStorage(api, state);
-  }
-
   getItem(key: string): string | null {
     const value = this.state[key];
     return value ? JSON.stringify(value) : null;
   }
 
-  setItem(key: string, payload: any) {
+  setItem(key: string, payload: unknown) {
     this.state[key] = payload;
     this.sync();
   }

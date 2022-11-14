@@ -14,7 +14,7 @@
     }
   },
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint ./src",
     "test": "vitest",
     "build": "tsc && vite build"
   },
@@ -25,7 +25,6 @@
     "@types/node": "^18.7.18",
     "eslint-config-custom": "workspace:*",
     "keycloak-js": "^19.0.3",
-    "ky": "^0.31.4",
     "tsconfig": "workspace:*",
     "typescript": "^4.8.3",
     "vite": "^3.1.0",
@@ -33,8 +32,7 @@
     "vitest": "^0.23.2"
   },
   "peerDependencies": {
-    "keycloak-js": "^19.0.3",
-    "ky": "^0.31.4"
+    "keycloak-js": "^19.0.3"
   },
   "dependencies": {
     "@talentdigital/api-client": "workspace:^0.1.0"

@@ -1,7 +1,8 @@
 import { Api } from "@talentdigital/api-client";
-import { IAuthService, SecurityDataType } from "./interfaces";
+import { AuthService } from "./auth.service";
+import { SecurityDataType } from "./interfaces";
 
-export const createApiClient = (auth?: IAuthService) => {
+export const createApiClient = (auth?: AuthService) => {
   if (!auth) {
     const customFetch: Api<SecurityDataType>["customFetch"] = async (
       input: RequestInfo | URL,

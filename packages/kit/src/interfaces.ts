@@ -1,8 +1,7 @@
-import { KyInstance } from "ky/distribution/types/ky";
+import { Api } from "@talentdigital/api-client";
 import Keycloak, { KeycloakConfig } from "keycloak-js";
 import Badge from "./badge";
 import Test from "./test";
-import { Api } from "@talentdigital/api-client";
 
 export interface Config {
   tenant: string;
@@ -40,15 +39,6 @@ export interface ID {
 export type Badges = Record<Badge["id"], Badge>;
 
 export type Tests = Record<Test["id"], Test>;
-
-export interface IApiService {
-  request: (url: string, method: "get" | "post", options?: any) => Promise<any>;
-}
-
-export interface IAuthService {
-  token: string;
-  updateToken: () => void;
-}
 
 export interface SecurityDataType {
   headers: {

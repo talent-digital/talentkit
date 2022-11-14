@@ -16,30 +16,6 @@ class Test {
     private api: ApiClient
   ) {}
 
-  private generatePayload(result: TestResult) {
-    const events = [
-      {
-        type: "test.complete",
-        result: { id: `${this.prefix}.${this.id}`, value: result },
-      },
-    ];
-    return { applicationId, events };
-  }
-
-  pass() {
-    this.result = TestResult.pass;
-    return this.api.domainModelEvents.saveEvent(
-      this.generatePayload(TestResult.pass)
-    );
-  }
-
-  fail() {
-    this.result = TestResult.fail;
-    return this.api.domainModelEvents.saveEvent(
-      this.generatePayload(TestResult.fail)
-    );
-  }
-
   static async createForEpisode(id: ID, api: ApiClient): Promise<Tests> {
     const { data } =
       await api.userAnalyticsProgressReporting.getCompetenceAreaTestDetailsReports(
@@ -57,6 +33,30 @@ class Test {
           return [id, new Test(id, prefix, result, api)];
         })
     );
+  }
+
+  pass() {
+    this.result = TestResult.pass;
+    return this.api.domainModelEvents.saveEvent(
+      this.generatePayload(TestResult.pass)
+    );
+  }
+
+  fail() {
+    this.result = TestResult.fail;
+    return this.api.domainModelEvents.saveEvent(
+      this.generatePayload(TestResult.fail)
+    );
+  }
+
+  private generatePayload(result: TestResult) {
+    const events = [
+      {
+        type: "test.complete",
+        result: { id: `${this.prefix}.${this.id}`, value: result },
+      },
+    ];
+    return { applicationId, events };
   }
 }
 
