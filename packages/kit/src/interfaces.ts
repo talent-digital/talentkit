@@ -19,8 +19,6 @@ export interface UserInfo {
   locale?: string;
 }
 
-export type HttpClient = Pick<KyInstance, "create" | "get" | "post">;
-
 export type AuthClient = Pick<
   Keycloak,
   | "login"
