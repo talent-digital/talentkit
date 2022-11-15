@@ -1,17 +1,18 @@
-import { Badges, ID } from "./interfaces";
+import { Badges, BadgesStorage, ID } from "./interfaces";
+import StorageService from "./storage.service";
 
 class Badge {
   private readonly storageKey = "BADGES_ENGINE_STORAGE";
-  private constructor(readonly id: string, private storage: Storage) {}
+  private constructor(readonly id: string, private storage: StorageService) {}
 
   /**
    * Has this badge already been awarded
    */
   get awarded(): boolean {
-    const storageItem = this.storage.getItem(this.storageKey);
-    const obtained = storageItem ? (JSON.parse(storageItem) as string[]) : [];
+    const awardedBadges =
+      this.storage.getItem<BadgesStorage>(this.storageKey) || [];
 
-    return obtained.includes(this.id);
+    return awardedBadges.includes(this.id);
   }
 
   /**
@@ -20,7 +21,7 @@ class Badge {
    * @param storage
    * @returns Record<Badge["id"], Badge>
    */
-  static createForEpisode(id: ID, storage: Storage): Badges {
+  static createForEpisode(id: ID, storage: StorageService): Badges {
     // Get badges for this episode from the Season Endpoint;
     const ids = ["1", "2"];
 
@@ -33,12 +34,13 @@ class Badge {
    * Award this badge to the current user
    */
   award() {
-    const storageItem = this.storage.getItem(this.storageKey);
-    const obtained = storageItem ? (JSON.parse(storageItem) as string[]) : [];
-    this.storage.setItem(
-      this.storageKey,
-      JSON.stringify([...obtained, this.id])
-    );
+    const awardedBadges =
+      this.storage.getItem<BadgesStorage>(this.storageKey) || [];
+
+    this.storage.setItem<BadgesStorage>(this.storageKey, [
+      ...awardedBadges,
+      this.id,
+    ]);
   }
 }
 

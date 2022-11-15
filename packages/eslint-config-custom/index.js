@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 module.exports = {
   extends: [
     "turbo",
@@ -8,7 +9,11 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: ["./tsconfig.eslint.json", "../*/tsconfig.json"],
+    project: [
+      "./tsconfig.eslint.json",
+      "../*/tsconfig.json",
+      "../../apps/*/tsconfig.json",
+    ],
   },
   plugins: ["@typescript-eslint"],
   rules: {

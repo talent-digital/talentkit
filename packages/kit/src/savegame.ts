@@ -1,15 +1,14 @@
 import { ID, SeasonsStorage } from "./interfaces";
+import StorageService from "./storage.service";
 
 const seasonsKey = "SEASONS";
 
 class Savegame {
-  constructor(private id: ID, private storage: Storage) {}
+  constructor(private id: ID, private storage: StorageService) {}
 
   load() {
-    const s = this.storage.getItem(seasonsKey);
-    if (!s) return {};
-
-    const data = JSON.parse(s) as SeasonsStorage;
+    const data = this.storage.getItem<SeasonsStorage>(seasonsKey);
+    if (!data) return {};
 
     if (data[this.id.season]) {
       return data[this.id.season][this.id.episode];
@@ -17,9 +16,7 @@ class Savegame {
   }
 
   save(payload: unknown) {
-    const s = this.storage.getItem(seasonsKey);
-
-    let data = s ? (JSON.parse(s) as SeasonsStorage) : {};
+    let data = this.storage.getItem<SeasonsStorage>(seasonsKey) || {};
 
     data = {
       ...data,
@@ -28,7 +25,7 @@ class Savegame {
         [this.id.episode]: payload,
       },
     };
-    this.storage.setItem(seasonsKey, JSON.stringify(data));
+    this.storage.setItem(seasonsKey, data);
   }
 }
 

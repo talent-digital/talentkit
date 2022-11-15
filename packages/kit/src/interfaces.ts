@@ -67,3 +67,5 @@ export interface EngagementPointsStorage {
 }
 
 export type SeasonsStorage = Record<string, Record<string, unknown>>;
+
+export type BadgesStorage = string[];

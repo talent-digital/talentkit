@@ -10,8 +10,9 @@ import {
   ProfileStorage,
   Tests,
 } from "./interfaces";
+import RemoteStorage from "./remote-storage";
 import Savegame from "./savegame";
-import RemoteStorage from "./storage.service";
+import StorageService from "./storage.service";
 import Test from "./test";
 
 export const applicationId = "talentApplicationProfileTwo";
@@ -67,7 +68,7 @@ class TalentKit {
 
   private constructor(
     private api: ApiClient,
-    storage: Storage,
+    storage: StorageService,
     /**
      * All badges available in the current episode
      */
@@ -94,10 +95,8 @@ class TalentKit {
     public engagement: Engagement,
     readonly id: ID
   ) {
-    const profileStorage = storage.getItem("SETTINGS");
-    this.profile = profileStorage
-      ? (JSON.parse(profileStorage) as ProfileStorage)
-      : defaultProfile;
+    const profileStorage = storage.getItem<ProfileStorage>("SETTINGS");
+    this.profile = profileStorage || defaultProfile;
   }
 
   /**
@@ -107,7 +106,7 @@ class TalentKit {
    */
   static async create(config: Config) {
     let apiClient: ApiClient;
-    let storage: Storage;
+    let storage: StorageService;
     const id = getIdFromUrlParams();
     if (!id.season || !id.episode) {
       throw new Error("sid or eid not found");
@@ -115,13 +114,13 @@ class TalentKit {
 
     if (config.testMode) {
       apiClient = createApiClient();
-      storage = window.localStorage;
+      storage = new StorageService(window.localStorage);
     } else {
       const auth = await AuthService.create(config.tenant);
       if (!auth) throw "Could not create Authentication Service";
 
       apiClient = createApiClient(auth);
-      storage = await RemoteStorage.create(apiClient);
+      storage = new StorageService(await RemoteStorage.create(apiClient));
     }
 
     if (!apiClient) throw new Error(`Coudn't initialize the library`);
