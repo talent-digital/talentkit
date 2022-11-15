@@ -14,8 +14,7 @@
     }
   },
   "scripts": {
-    "generate::client": "swagger-typescript-api --module-name-first-tag -p ./swagger.json -o ./src -n index.ts",
-    "build": "pnpm run generate::client && tsc && vite build"
+    "build": "tsc && vite build"
   },
   "keywords": [],
   "author": "talent::digital",
