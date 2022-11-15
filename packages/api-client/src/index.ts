@@ -1,4 +1,5 @@
 // This file was generated, do not change
+// Changed
 export interface TalentUserRestRequestString {
   value: string;
 }
@@ -390,7 +391,12 @@ export interface TestDetailWeb {
   subCompetenceId?: number;
   id?: string;
   description?: string;
-  level?: "START" | "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
+  level?:
+    | "START"
+    | "FOUNDATION"
+    | "INTERMEDIATE"
+    | "ADVANCED"
+    | "HIGHLY_SPECIALISED";
   /** @format int32 */
   episode?: number;
   /** @format int32 */
@@ -400,7 +406,12 @@ export interface TestDetailWeb {
 export interface SubCompetenceTestResultWeb {
   /** @format int64 */
   subCompetenceId?: number;
-  level?: "START" | "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
+  level?:
+    | "START"
+    | "FOUNDATION"
+    | "INTERMEDIATE"
+    | "ADVANCED"
+    | "HIGHLY_SPECIALISED";
   /** @format int32 */
   passedTests?: number;
   /** @format int32 */
@@ -417,7 +428,12 @@ export interface TalentDailyStatisticsWeb {
 export interface QualificationHintWeb {
   /** @format int64 */
   subCompetenceId?: number;
-  currentLevel?: "START" | "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
+  currentLevel?:
+    | "START"
+    | "FOUNDATION"
+    | "INTERMEDIATE"
+    | "ADVANCED"
+    | "HIGHLY_SPECIALISED";
 }
 
 export interface PlayerTeamOrganisationComparison {
@@ -604,16 +620,22 @@ export interface FullRequestParams extends Omit<RequestInit, "body"> {
   cancelToken?: CancelToken;
 }
 
-export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
+export type RequestParams = Omit<
+  FullRequestParams,
+  "body" | "method" | "query" | "path"
+>;
 
 export interface ApiConfig<SecurityDataType = unknown> {
   baseUrl?: string;
   baseApiParams?: Omit<RequestParams, "baseUrl" | "cancelToken" | "signal">;
-  securityWorker?: (securityData: SecurityDataType | null) => Promise<RequestParams | void> | RequestParams | void;
+  securityWorker?: (
+    securityData: SecurityDataType | null
+  ) => Promise<RequestParams | void> | RequestParams | void;
   customFetch?: typeof fetch;
 }
 
-export interface HttpResponse<D extends unknown, E extends unknown = unknown> extends Response {
+export interface HttpResponse<D extends unknown, E extends unknown = unknown>
+  extends Response {
   data: D;
   error: E;
 }
@@ -632,7 +654,8 @@ export class HttpClient<SecurityDataType = unknown> {
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
-  private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
+  private customFetch = (...fetchParams: Parameters<typeof fetch>) =>
+    fetch(...fetchParams);
 
   private baseApiParams: RequestParams = {
     credentials: "same-origin",
@@ -651,7 +674,9 @@ export class HttpClient<SecurityDataType = unknown> {
 
   protected encodeQueryParam(key: string, value: any) {
     const encodedKey = encodeURIComponent(key);
-    return `${encodedKey}=${encodeURIComponent(typeof value === "number" ? value : `${value}`)}`;
+    return `${encodedKey}=${encodeURIComponent(
+      typeof value === "number" ? value : `${value}`
+    )}`;
   }
 
   protected addQueryParam(query: QueryParamsType, key: string) {
@@ -665,9 +690,15 @@ export class HttpClient<SecurityDataType = unknown> {
 
   protected toQueryString(rawQuery?: QueryParamsType): string {
     const query = rawQuery || {};
-    const keys = Object.keys(query).filter((key) => "undefined" !== typeof query[key]);
+    const keys = Object.keys(query).filter(
+      (key) => "undefined" !== typeof query[key]
+    );
     return keys
-      .map((key) => (Array.isArray(query[key]) ? this.addArrayQueryParam(query, key) : this.addQueryParam(query, key)))
+      .map((key) =>
+        Array.isArray(query[key])
+          ? this.addArrayQueryParam(query, key)
+          : this.addQueryParam(query, key)
+      )
       .join("&");
   }
 
@@ -678,8 +709,13 @@ export class HttpClient<SecurityDataType = unknown> {
 
   private contentFormatters: Record<ContentType, (input: any) => any> = {
     [ContentType.Json]: (input: any) =>
-      input !== null && (typeof input === "object" || typeof input === "string") ? JSON.stringify(input) : input,
-    [ContentType.Text]: (input: any) => (input !== null && typeof input !== "string" ? JSON.stringify(input) : input),
+      input !== null && (typeof input === "object" || typeof input === "string")
+        ? JSON.stringify(input)
+        : input,
+    [ContentType.Text]: (input: any) =>
+      input !== null && typeof input !== "string"
+        ? JSON.stringify(input)
+        : input,
     [ContentType.FormData]: (input: any) =>
       Object.keys(input || {}).reduce((formData, key) => {
         const property = input[key];
@@ -689,14 +725,17 @@ export class HttpClient<SecurityDataType = unknown> {
             ? property
             : typeof property === "object" && property !== null
             ? JSON.stringify(property)
-            : `${property}`,
+            : `${property}`
         );
         return formData;
       }, new FormData()),
     [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
   };
 
-  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
+  protected mergeRequestParams(
+    params1: RequestParams,
+    params2?: RequestParams
+  ): RequestParams {
     return {
       ...this.baseApiParams,
       ...params1,
@@ -709,7 +748,9 @@ export class HttpClient<SecurityDataType = unknown> {
     };
   }
 
-  protected createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
+  protected createAbortSignal = (
+    cancelToken: CancelToken
+  ): AbortSignal | undefined => {
     if (this.abortControllers.has(cancelToken)) {
       const abortController = this.abortControllers.get(cancelToken);
       if (abortController) {
@@ -753,15 +794,27 @@ export class HttpClient<SecurityDataType = unknown> {
     const payloadFormatter = this.contentFormatters[type || ContentType.Json];
     const responseFormat = format || requestParams.format;
 
-    return this.customFetch(`${baseUrl || this.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`, {
-      ...requestParams,
-      headers: {
-        ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
-      },
-      signal: cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal,
-      body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
-    }).then(async (response) => {
+    return this.customFetch(
+      `${baseUrl || this.baseUrl || ""}${path}${
+        queryString ? `?${queryString}` : ""
+      }`,
+      {
+        ...requestParams,
+        headers: {
+          ...(requestParams.headers || {}),
+          ...(type && type !== ContentType.FormData
+            ? { "Content-Type": type }
+            : {}),
+        },
+        signal: cancelToken
+          ? this.createAbortSignal(cancelToken)
+          : requestParams.signal,
+        body:
+          typeof body === "undefined" || body === null
+            ? null
+            : payloadFormatter(body),
+      }
+    ).then(async (response) => {
       const r = response as HttpResponse<T, E>;
       r.data = null as unknown as T;
       r.error = null as unknown as E;
@@ -794,11 +847,13 @@ export class HttpClient<SecurityDataType = unknown> {
 
 /**
  * @title talent::digital REST APIs
- * @baseUrl 
+ * @baseUrl
  *
  * REST APIs for configuration and talent analytics.
  */
-export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+export class Api<
+  SecurityDataType extends unknown
+> extends HttpClient<SecurityDataType> {
   domainModelTalent = {
     /**
      * No description
@@ -808,7 +863,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/{userId}/update-name
      * @secure
      */
-    updateTalentUserName: (userId: string, data: TalentUserRestRequestString, params: RequestParams = {}) =>
+    updateTalentUserName: (
+      userId: string,
+      data: TalentUserRestRequestString,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/talent/${userId}/update-name`,
         method: "PUT",
@@ -826,7 +885,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/{userId}/update-group
      * @secure
      */
-    updateTalentUserGroup: (userId: string, data: TalentUserRestRequestLong, params: RequestParams = {}) =>
+    updateTalentUserGroup: (
+      userId: string,
+      data: TalentUserRestRequestLong,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/talent/${userId}/update-group`,
         method: "PUT",
@@ -844,7 +907,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/{userId}/tags
      * @secure
      */
-    updateTalentUserTags: (userId: string, data: TalentUserRestRequestLong[], params: RequestParams = {}) =>
+    updateTalentUserTags: (
+      userId: string,
+      data: TalentUserRestRequestLong[],
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/talent/${userId}/tags`,
         method: "PUT",
@@ -863,7 +930,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/{userId}/support
      * @secure
      */
-    updateTalentSupportUserFlag: (userId: string, data: TalentUserRestRequestBoolean, params: RequestParams = {}) =>
+    updateTalentSupportUserFlag: (
+      userId: string,
+      data: TalentUserRestRequestBoolean,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/talent/${userId}/support`,
         method: "PUT",
@@ -881,7 +952,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/update-name
      * @secure
      */
-    updateTalentUserName1: (data: TalentUserRestRequestString, params: RequestParams = {}) =>
+    updateTalentUserName1: (
+      data: TalentUserRestRequestString,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/talent/update-name`,
         method: "PUT",
@@ -899,7 +973,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/update-group
      * @secure
      */
-    updateTalentUserGroup1: (data: TalentUserRestRequestLong, params: RequestParams = {}) =>
+    updateTalentUserGroup1: (
+      data: TalentUserRestRequestLong,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/talent/update-group`,
         method: "PUT",
@@ -917,7 +994,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/tags
      * @secure
      */
-    updateTalentUserTags1: (data: TalentUserRestRequestLong[], params: RequestParams = {}) =>
+    updateTalentUserTags1: (
+      data: TalentUserRestRequestLong[],
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/talent/tags`,
         method: "PUT",
@@ -1023,7 +1103,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/realtime/{docId}
      * @secure
      */
-    getRealtimeDocument: (docId: string, data: string, params: RequestParams = {}) =>
+    getRealtimeDocument: (
+      docId: string,
+      data: string,
+      params: RequestParams = {}
+    ) =>
       this.request<RealtimeDocumentWeb, any>({
         path: `/api/v1/realtime/${docId}`,
         method: "PUT",
@@ -1042,7 +1126,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/realtime/{docId}
      * @secure
      */
-    sendRealtimeDocument: (docId: string, data: string, params: RequestParams = {}) =>
+    sendRealtimeDocument: (
+      docId: string,
+      data: string,
+      params: RequestParams = {}
+    ) =>
       this.request<RealtimeDocumentEntityWeb, any>({
         path: `/api/v1/realtime/${docId}`,
         method: "POST",
@@ -1062,7 +1150,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/config/single-value
      * @secure
      */
-    updateSingleValueConfigItem: (data: SingleValueApplicationConfigItemWeb, params: RequestParams = {}) =>
+    updateSingleValueConfigItem: (
+      data: SingleValueApplicationConfigItemWeb,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/config/single-value`,
         method: "PUT",
@@ -1081,7 +1172,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/config/single-value
      * @secure
      */
-    saveSingleValueConfigItem: (data: SingleValueApplicationConfigItemWeb, params: RequestParams = {}) =>
+    saveSingleValueConfigItem: (
+      data: SingleValueApplicationConfigItemWeb,
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/api/v1/config/single-value`,
         method: "POST",
@@ -1100,7 +1194,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/config/multi-value
      * @secure
      */
-    updateMultiValueConfigItem: (data: MultiValueApplicationConfigItemWeb, params: RequestParams = {}) =>
+    updateMultiValueConfigItem: (
+      data: MultiValueApplicationConfigItemWeb,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/config/multi-value`,
         method: "PUT",
@@ -1119,7 +1216,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/config/multi-value
      * @secure
      */
-    saveMultiValueConfigItem: (data: MultiValueApplicationConfigItemWeb, params: RequestParams = {}) =>
+    saveMultiValueConfigItem: (
+      data: MultiValueApplicationConfigItemWeb,
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/api/v1/config/multi-value`,
         method: "POST",
@@ -1224,7 +1324,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/articles/{id}
      * @secure
      */
-    updateArticleById: (id: number, data: ArticleRequest, params: RequestParams = {}) =>
+    updateArticleById: (
+      id: number,
+      data: ArticleRequest,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/articles/${id}`,
         method: "PUT",
@@ -1311,7 +1415,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query?: {
         drafts?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<ArticleResponse[], any>({
         path: `/api/v1/articles`,
@@ -1330,7 +1434,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/articles
      * @secure
      */
-    saveOrUpdateArticles: (data: ArticleRequest[], params: RequestParams = {}) =>
+    saveOrUpdateArticles: (
+      data: ArticleRequest[],
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/articles`,
         method: "PUT",
@@ -1372,7 +1479,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query: {
         id: number[];
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/api/v1/articles`,
@@ -1411,7 +1518,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/campaign/{templateTag}
      * @secure
      */
-    createCampaignUsingTemplateWithTag: (templateTag: string, params: RequestParams = {}) =>
+    createCampaignUsingTemplateWithTag: (
+      templateTag: string,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/campaign/${templateTag}`,
         method: "POST",
@@ -1591,7 +1701,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query: {
         id: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<FeedbackQuestionWeb[], any>({
         path: `/api/v1/feedback-questions`,
@@ -1614,7 +1724,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query: {
         language: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<FeedbackStatisticsWeb[], any>({
         path: `/api/v1/feedback-questions/statistics`,
@@ -1651,7 +1761,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/competences
      * @secure
      */
-    addNewCompetence: (data: CompetenceAreaRequest[], params: RequestParams = {}) =>
+    addNewCompetence: (
+      data: CompetenceAreaRequest[],
+      params: RequestParams = {}
+    ) =>
       this.request<CompetenceArea[], any>({
         path: `/api/v1/competences`,
         method: "POST",
@@ -1707,7 +1820,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/certificate
      * @secure
      */
-    createOrUpdateTalentCertificates: (data: CreateOrUpdateCertificateRequest[], params: RequestParams = {}) =>
+    createOrUpdateTalentCertificates: (
+      data: CreateOrUpdateCertificateRequest[],
+      params: RequestParams = {}
+    ) =>
       this.request<Certificate[], any>({
         path: `/api/v1/certificate`,
         method: "POST",
@@ -1731,7 +1847,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       data: {
         files: File[];
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/api/v1/assets/${type}/upload`,
@@ -1787,7 +1903,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query?: {
         defaultBucket?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<string[], any>({
         path: `/api/v1/assets/objects`,
@@ -1838,7 +1954,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/api/v1/assets/delete/{type}/{fileName}
      * @secure
      */
-    deleteS3File: (type: string, fileName: string, params: RequestParams = {}) =>
+    deleteS3File: (
+      type: string,
+      fileName: string,
+      params: RequestParams = {}
+    ) =>
       this.request<void, any>({
         path: `/api/v1/assets/delete/${type}/${fileName}`,
         method: "DELETE",
@@ -1855,7 +1975,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/savegame
      * @secure
      */
-    saveOrUpdateState: (data: ApplicationStateWeb, params: RequestParams = {}) =>
+    saveOrUpdateState: (
+      data: ApplicationStateWeb,
+      params: RequestParams = {}
+    ) =>
       this.request<ApplicationStateWeb, any>({
         path: `/api/v1/savegame`,
         method: "POST",
@@ -2020,7 +2143,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @format int32 */
         episode?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<CompetenceAreaTestsDetailsWeb[], any>({
         path: `/api/v1/user-report/test-details`,
@@ -2045,7 +2168,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @format int32 */
         season: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<SubCompetenceTestResultWeb[], any>({
         path: `/api/v1/user-report/sub-competence`,
@@ -2072,7 +2195,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         days?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<TalentDailyStatisticsWeb[], any>({
         path: `/api/v1/user-report/statistics`,
@@ -2091,7 +2214,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/v1/user-report/qualifications/{type}
      * @secure
      */
-    getProfileTwoQualificationAdvices: (type: "ADVICE" | "RECOMMENDATION", params: RequestParams = {}) =>
+    getProfileTwoQualificationAdvices: (
+      type: "ADVICE" | "RECOMMENDATION",
+      params: RequestParams = {}
+    ) =>
       this.request<QualificationHintWeb[], any>({
         path: `/api/v1/user-report/qualifications/${type}`,
         method: "GET",
@@ -2146,7 +2272,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/v1/company-report/tag-area/{tagType}
      * @secure
      */
-    getProfileTwoTagCompetenceAreas: (tagType: string, params: RequestParams = {}) =>
+    getProfileTwoTagCompetenceAreas: (
+      tagType: string,
+      params: RequestParams = {}
+    ) =>
       this.request<WebTagAreaReportDTO[], any>({
         path: `/api/v1/company-report/tag-area/${tagType}`,
         method: "GET",
@@ -2186,7 +2315,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query: {
         season: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<CompanyLastCompletedEpisodesStatisticsReportWeb, any>({
         path: `/api/v1/company-report/last-completed-episodes`,
