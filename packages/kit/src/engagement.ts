@@ -1,3 +1,5 @@
+import { EngagementPointsStorage } from "./interfaces";
+
 class Engagement {
   private _points = 0;
 
@@ -6,7 +8,9 @@ class Engagement {
   constructor(private storage: Storage) {
     const pointsStorage = storage.getItem(this.storageKey);
     if (pointsStorage) {
-      this._points = JSON.parse(pointsStorage).points;
+      this._points = (
+        JSON.parse(pointsStorage) as EngagementPointsStorage
+      ).points;
     }
   }
 
@@ -21,9 +25,9 @@ class Engagement {
   }
 
   private sync() {
-    let s = this.storage.getItem(this.storageKey);
-    const data = s ? JSON.parse(s) : {};
-    s = { ...data, points: this._points };
+    const s = this.storage.getItem(this.storageKey);
+    let data = s ? (JSON.parse(s) as EngagementPointsStorage) : {};
+    data = { ...data, points: this._points };
     this.storage.setItem(this.storageKey, JSON.stringify(data));
   }
 }

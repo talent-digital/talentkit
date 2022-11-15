@@ -1,4 +1,4 @@
-import { ID } from "./interfaces";
+import { ID, SeasonsStorage } from "./interfaces";
 
 const seasonsKey = "SEASONS";
 
@@ -9,7 +9,7 @@ class Savegame {
     const s = this.storage.getItem(seasonsKey);
     if (!s) return {};
 
-    const data = JSON.parse(s);
+    const data = JSON.parse(s) as SeasonsStorage;
 
     if (data[this.id.season]) {
       return data[this.id.season][this.id.episode];
@@ -19,7 +19,7 @@ class Savegame {
   save(payload: unknown) {
     const s = this.storage.getItem(seasonsKey);
 
-    let data = s ? JSON.parse(s) : {};
+    let data = s ? (JSON.parse(s) as SeasonsStorage) : {};
 
     data = {
       ...data,

@@ -9,7 +9,7 @@ class Badge {
    */
   get awarded(): boolean {
     const storageItem = this.storage.getItem(this.storageKey);
-    const obtained = storageItem ? JSON.parse(storageItem) : [];
+    const obtained = storageItem ? (JSON.parse(storageItem) as string[]) : [];
 
     return obtained.includes(this.id);
   }
@@ -34,7 +34,7 @@ class Badge {
    */
   award() {
     const storageItem = this.storage.getItem(this.storageKey);
-    const obtained = storageItem ? JSON.parse(storageItem) : [];
+    const obtained = storageItem ? (JSON.parse(storageItem) as string[]) : [];
     this.storage.setItem(
       this.storageKey,
       JSON.stringify([...obtained, this.id])

@@ -2,12 +2,29 @@ import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
 import Badge from "./badge";
 import Engagement from "./engagement";
-import { ApiClient, Badges, Config, ID, Profile, Tests } from "./interfaces";
+import {
+  ApiClient,
+  Badges,
+  Config,
+  ID,
+  ProfileStorage,
+  Tests,
+} from "./interfaces";
 import Savegame from "./savegame";
 import RemoteStorage from "./storage.service";
 import Test from "./test";
 
 export const applicationId = "talentApplicationProfileTwo";
+
+const defaultProfile = {
+  id: "player",
+  companyName: "ACME Inc.",
+  companyLogo: "/logos/logo1.svg",
+  playerName: "Teammitglied",
+  playerAvatar: "/avatars/avatar5.svg",
+  leadingColor: "#d3e553",
+  playerEmailAddress: "teammitglied@acme.com",
+};
 
 const getIdFromUrlParams = (): ID => {
   const params = new URLSearchParams(window.location.search);
@@ -29,7 +46,7 @@ class TalentKit {
   /**
    * @description The current user's player profile
    */
-  readonly profile: Profile;
+  readonly profile: ProfileStorage;
 
   events = {
     /**
@@ -78,7 +95,9 @@ class TalentKit {
     readonly id: ID
   ) {
     const profileStorage = storage.getItem("SETTINGS");
-    this.profile = profileStorage ? JSON.parse(profileStorage) : {};
+    this.profile = profileStorage
+      ? (JSON.parse(profileStorage) as ProfileStorage)
+      : defaultProfile;
   }
 
   /**

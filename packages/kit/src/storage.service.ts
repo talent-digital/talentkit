@@ -13,7 +13,9 @@ class RemoteStorage implements Storage {
   static async create(api: ApiClient) {
     const { data } = await api.utilitiesSavegame.getResult(applicationId);
 
-    const state = data ? JSON.parse(data.state) : {};
+    const state = data
+      ? (JSON.parse(data.state) as Record<string, unknown>)
+      : {};
 
     return new RemoteStorage(api, state);
   }
@@ -40,7 +42,7 @@ class RemoteStorage implements Storage {
   }
 
   private sync() {
-    this.api.utilitiesSavegame.saveOrUpdateState({
+    void this.api.utilitiesSavegame.saveOrUpdateState({
       applicationId,
       state: JSON.stringify(this.state),
     });

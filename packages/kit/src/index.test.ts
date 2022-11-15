@@ -2,7 +2,7 @@ import TalentKit from ".";
 
 import { beforeAll, describe, expect, it } from "vitest";
 
-describe("Sdk Base Tests", async () => {
+describe("Sdk Base Tests", () => {
   let kit: TalentKit;
   beforeAll(async () => {
     kit = await TalentKit.create({
@@ -11,9 +11,7 @@ describe("Sdk Base Tests", async () => {
     });
   });
 
-  it("Returns a mocked client when running locally", async () => {
+  it("Returns a mocked client when running locally", () => {
     expect(kit).toBeInstanceOf(TalentKit);
-
-    await kit.events.end();
   });
 });
