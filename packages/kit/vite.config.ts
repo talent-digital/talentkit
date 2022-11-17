@@ -1,8 +1,8 @@
+/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   build: {
     lib: {
@@ -16,4 +16,7 @@ export default defineConfig({
     },
   },
   plugins: [dts()],
+  test: {
+    environment: "happy-dom",
+  },
 });

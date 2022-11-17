@@ -24,6 +24,8 @@
   "devDependencies": {
     "@types/node": "^18.7.18",
     "eslint-config-custom": "workspace:*",
+    "happy-dom": "^7.7.0",
+    "jsdom": "^20.0.2",
     "keycloak-js": "^19.0.3",
     "tsconfig": "workspace:*",
     "typescript": "^4.8.3",

@@ -27,8 +27,10 @@ const defaultProfile = {
   playerEmailAddress: "teammitglied@acme.com",
 };
 
-const getIdFromUrlParams = (): ID => {
-  const params = new URLSearchParams(window.location.search);
+const getIdFromUrlParams = (testMode = false): ID => {
+  const params = new URLSearchParams(
+    testMode ? "?sid=01&eid=01" : location.search
+  );
 
   const season = params.get("sid");
   const episode = params.get("eid");
@@ -107,7 +109,7 @@ class TalentKit {
   static async create(config: Config) {
     let apiClient: ApiClient;
     let storage: StorageService;
-    const id = getIdFromUrlParams();
+    const id = getIdFromUrlParams(config.testMode);
     if (!id.season || !id.episode) {
       throw new Error("sid or eid not found");
     }

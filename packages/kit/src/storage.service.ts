@@ -12,6 +12,10 @@ class StorageService {
   setItem<T = unknown>(key: string, payload: T): void {
     this.storage.setItem(key, JSON.stringify(payload));
   }
+
+  clear() {
+    this.storage.clear();
+  }
 }
 
 export default StorageService;
