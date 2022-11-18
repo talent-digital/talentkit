@@ -284,6 +284,96 @@ export interface TestItem {
   documentation?: string;
 }
 
+export interface BadgeWeb {
+  /** The data with text localization. Should be an correct ISO language. */
+  name: LocalizedString;
+  image: string;
+}
+
+export interface CompetenceAreaWeb {
+  /** The data with text localization. Should be an correct ISO language. */
+  name?: LocalizedString;
+  competences?: Record<string, CompetenceWeb>;
+}
+
+export interface CompetenceWeb {
+  /** The data with text localization. Should be an correct ISO language. */
+  name?: LocalizedString;
+  subCompetences?: Record<string, SubCompetenceWeb>;
+}
+
+export interface EpisodeWeb {
+  /** The data with text localization. Should be an correct ISO language. */
+  title: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  description: LocalizedString;
+  maturity: "PENDING" | "ALPHA" | "BETA" | "PUBLIC";
+  imageUrl: string;
+  format: string;
+  formatConfiguration: string;
+  badges?: Record<string, BadgeWeb>;
+}
+
+export interface FeedbackItemWeb {
+  id?: string;
+  /** The data with text localization. Should be an correct ISO language. */
+  question?: LocalizedString;
+  answers?: Record<string, Record<string, string>>;
+}
+
+/**
+ * The data with text localization. Should be an correct ISO language.
+ * @example {"en":"Save everything and leave","de":"Alles aufheben und gehen"}
+ */
+export interface LocalizedString {
+  data?: Record<string, string>;
+  asString?: string;
+}
+
+export interface SearchDefinitionWeb {
+  generic?: string[];
+  tool?: string[];
+  links?: string[];
+}
+
+export interface SeasonWeb {
+  id: string;
+  /** The data with text localization. Should be an correct ISO language. */
+  title: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  info: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  seasonEndMessage: LocalizedString;
+  competenceAreas?: Record<string, CompetenceAreaWeb>;
+  episodes?: Record<string, EpisodeWeb>;
+}
+
+export interface SubCompetenceWeb {
+  /** The data with text localization. Should be an correct ISO language. */
+  name?: LocalizedString;
+  testItems?: Record<string, TestItemWeb>;
+  feedbackItems?: Record<string, FeedbackItemWeb>;
+}
+
+export interface TestItemWeb {
+  eventTypeId?: string;
+  level?: "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
+  /** The data with text localization. Should be an correct ISO language. */
+  documentation?: LocalizedString;
+  search?: Record<string, SearchDefinitionWeb>;
+}
+
+export interface SeasonResponseWeb {
+  id?: string;
+  /** The data with text localization. Should be an correct ISO language. */
+  title?: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  info?: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  seasonEndMessage?: LocalizedString;
+  episodes?: Record<string, EpisodeWeb>;
+}
+
 export interface TagEntity {
   /** @format int64 */
   id?: number;
@@ -1899,6 +1989,128 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params,
+      }),
+  };
+  domainModelSeasons = {
+    /**
+     * @description This endpoint gets all seasons
+     *
+     * @tags Domain model: Seasons
+     * @name GetAllSeasons
+     * @summary Get all seasons
+     * @request GET:/api/v1/season
+     * @secure
+     */
+    getAllSeasons: (params: RequestParams = {}) =>
+      this.request<SeasonResponseWeb[], any>({
+        path: `/api/v1/season`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint adds a new season
+     *
+     * @tags Domain model: Seasons
+     * @name AddSeason
+     * @summary Add new season
+     * @request POST:/api/v1/season
+     * @secure
+     */
+    addSeason: (data: SeasonWeb, params: RequestParams = {}) =>
+      this.request<SeasonResponseWeb[], any>({
+        path: `/api/v1/season`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint gets a single episode by id inside a single season
+     *
+     * @tags Domain model: Seasons
+     * @name GetEpisode
+     * @summary Get episode
+     * @request GET:/api/v1/season/{seasonId}/episode/{episodeId}
+     * @secure
+     */
+    getEpisode: (seasonId: string, episodeId: string, params: RequestParams = {}) =>
+      this.request<EpisodeWeb, any>({
+        path: `/api/v1/season/${seasonId}/episode/${episodeId}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint delete episode with all badges by season id and episode id
+     *
+     * @tags Domain model: Seasons
+     * @name DeleteEpisode
+     * @summary Delete episode
+     * @request DELETE:/api/v1/season/{seasonId}/episode/{episodeId}
+     * @secure
+     */
+    deleteEpisode: (seasonId: string, episodeId: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/v1/season/${seasonId}/episode/${episodeId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint gets a single season by id
+     *
+     * @tags Domain model: Seasons
+     * @name GetSeason
+     * @summary Get season
+     * @request GET:/api/v1/season/{id}
+     * @secure
+     */
+    getSeason: (id: string, params: RequestParams = {}) =>
+      this.request<SeasonResponseWeb, any>({
+        path: `/api/v1/season/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint delete season with all episodes and badges by season id
+     *
+     * @tags Domain model: Seasons
+     * @name DeleteSeason
+     * @summary Delete season
+     * @request DELETE:/api/v1/season/{seasonId}
+     * @secure
+     */
+    deleteSeason: (seasonId: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/v1/season/${seasonId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint delete episode with all badges by season id and episode id
+     *
+     * @tags Domain model: Seasons
+     * @name DeleteBadge
+     * @summary Delete badge
+     * @request DELETE:/api/v1/season/{seasonId}/episode/{episodeId}/badge/{badgeId}
+     * @secure
+     */
+    deleteBadge: (seasonId: string, episodeId: string, badgeId: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/v1/season/${seasonId}/episode/${episodeId}/badge/${badgeId}`,
+        method: "DELETE",
+        secure: true,
         ...params,
       }),
   };
