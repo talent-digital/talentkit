@@ -130,7 +130,7 @@ class TalentKit {
     const tests: Tests = await Test.createForEpisode(id, apiClient);
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
-    const badges = Badge.createForEpisode(id, storage);
+    const badges = await Badge.createForEpisode(id, storage, apiClient);
 
     return new TalentKit(
       apiClient,

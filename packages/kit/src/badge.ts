@@ -1,9 +1,15 @@
-import { Badges, BadgesStorage, ID } from "./interfaces";
+import { LocalizedString } from "@talentdigital/api-client";
+import { ApiClient, Badges, BadgesStorage, ID } from "./interfaces";
 import StorageService from "./storage.service";
 
 class Badge {
   private readonly storageKey = "BADGES_ENGINE_STORAGE";
-  private constructor(readonly id: string, private storage: StorageService) {}
+  private constructor(
+    readonly id: string,
+    readonly name: LocalizedString,
+    readonly image: string,
+    private storage: StorageService
+  ) {}
 
   /**
    * Has this badge already been awarded
@@ -21,12 +27,25 @@ class Badge {
    * @param storage
    * @returns Record<Badge["id"], Badge>
    */
-  static createForEpisode(id: ID, storage: StorageService): Badges {
+  static async createForEpisode(
+    id: ID,
+    storage: StorageService,
+    api: ApiClient
+  ): Promise<Badges> {
     // Get badges for this episode from the Season Endpoint;
-    const ids = ["1", "2"];
+    const { data: episode } = await api.domainModelSeasons.getEpisode(
+      id.season,
+      id.episode,
+      { format: "json" }
+    );
+
+    if (!episode.badges) return {};
 
     return Object.fromEntries(
-      ids.map((badgeId) => [badgeId, new Badge(badgeId, storage)])
+      Object.entries(episode.badges).map(([id, { name, image }]) => [
+        id,
+        new Badge(id, name, image, storage),
+      ])
     );
   }
 
@@ -34,6 +53,7 @@ class Badge {
    * Award this badge to the current user
    */
   award() {
+    if (this.awarded) return;
     const awardedBadges =
       this.storage.getItem<BadgesStorage>(this.storageKey) || [];
 

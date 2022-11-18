@@ -36,8 +36,8 @@ class RemoteStorage implements Storage {
     return value ? JSON.stringify(value) : null;
   }
 
-  setItem(key: string, payload: unknown) {
-    this.state[key] = payload;
+  setItem(key: string, payload: string) {
+    this.state[key] = JSON.parse(payload);
     this.sync();
   }
 
