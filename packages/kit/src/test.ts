@@ -19,7 +19,7 @@ class Test {
   static async createForEpisode(id: ID, api: ApiClient): Promise<Tests> {
     const { data } =
       await api.userAnalyticsProgressReporting.getCompetenceAreaTestDetailsReports(
-        { season: Number(id.season), episode: Number(id.episode) }
+        { season: id.season, episode: id.episode }
       );
 
     if (!data || !data.length) return {};

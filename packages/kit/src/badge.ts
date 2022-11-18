@@ -1,4 +1,4 @@
-import { LocalizedString } from "@talentdigital/api-client";
+import { LocalizedStringImpl } from "@talentdigital/api-client";
 import { ApiClient, Badges, BadgesStorage, ID } from "./interfaces";
 import StorageService from "./storage.service";
 
@@ -6,7 +6,7 @@ class Badge {
   private readonly storageKey = "BADGES_ENGINE_STORAGE";
   private constructor(
     readonly id: string,
-    readonly name: LocalizedString,
+    readonly name: LocalizedStringImpl,
     readonly image: string,
     private storage: StorageService
   ) {}

@@ -285,28 +285,23 @@ export interface TestItem {
 }
 
 export interface BadgeWeb {
-  /** The data with text localization. Should be an correct ISO language. */
-  name: LocalizedString;
+  name: LocalizedStringImpl;
   image: string;
 }
 
 export interface CompetenceAreaWeb {
-  /** The data with text localization. Should be an correct ISO language. */
-  name?: LocalizedString;
+  name?: LocalizedStringImpl;
   competences?: Record<string, CompetenceWeb>;
 }
 
 export interface CompetenceWeb {
-  /** The data with text localization. Should be an correct ISO language. */
-  name?: LocalizedString;
+  name?: LocalizedStringImpl;
   subCompetences?: Record<string, SubCompetenceWeb>;
 }
 
 export interface EpisodeWeb {
-  /** The data with text localization. Should be an correct ISO language. */
-  title: LocalizedString;
-  /** The data with text localization. Should be an correct ISO language. */
-  description: LocalizedString;
+  title: LocalizedStringImpl;
+  description: LocalizedStringImpl;
   maturity: "PENDING" | "ALPHA" | "BETA" | "PUBLIC";
   imageUrl: string;
   format: string;
@@ -316,18 +311,13 @@ export interface EpisodeWeb {
 
 export interface FeedbackItemWeb {
   id?: string;
-  /** The data with text localization. Should be an correct ISO language. */
-  question?: LocalizedString;
+  question?: LocalizedStringImpl;
   answers?: Record<string, Record<string, string>>;
 }
 
-/**
- * The data with text localization. Should be an correct ISO language.
- * @example {"en":"Save everything and leave","de":"Alles aufheben und gehen"}
- */
-export interface LocalizedString {
-  data?: Record<string, string>;
-  asString?: string;
+export interface LocalizedStringImpl {
+  en?: string;
+  de?: string;
 }
 
 export interface SearchDefinitionWeb {
@@ -338,19 +328,15 @@ export interface SearchDefinitionWeb {
 
 export interface SeasonWeb {
   id: string;
-  /** The data with text localization. Should be an correct ISO language. */
-  title: LocalizedString;
-  /** The data with text localization. Should be an correct ISO language. */
-  info: LocalizedString;
-  /** The data with text localization. Should be an correct ISO language. */
-  seasonEndMessage: LocalizedString;
+  title: LocalizedStringImpl;
+  info: LocalizedStringImpl;
+  seasonEndMessage: LocalizedStringImpl;
   competenceAreas?: Record<string, CompetenceAreaWeb>;
   episodes?: Record<string, EpisodeWeb>;
 }
 
 export interface SubCompetenceWeb {
-  /** The data with text localization. Should be an correct ISO language. */
-  name?: LocalizedString;
+  name?: LocalizedStringImpl;
   testItems?: Record<string, TestItemWeb>;
   feedbackItems?: Record<string, FeedbackItemWeb>;
 }
@@ -358,19 +344,15 @@ export interface SubCompetenceWeb {
 export interface TestItemWeb {
   eventTypeId?: string;
   level?: "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
-  /** The data with text localization. Should be an correct ISO language. */
-  documentation?: LocalizedString;
+  documentation?: LocalizedStringImpl;
   search?: Record<string, SearchDefinitionWeb>;
 }
 
 export interface SeasonResponseWeb {
   id?: string;
-  /** The data with text localization. Should be an correct ISO language. */
-  title?: LocalizedString;
-  /** The data with text localization. Should be an correct ISO language. */
-  info?: LocalizedString;
-  /** The data with text localization. Should be an correct ISO language. */
-  seasonEndMessage?: LocalizedString;
+  title?: LocalizedStringImpl;
+  info?: LocalizedStringImpl;
+  seasonEndMessage?: LocalizedStringImpl;
   episodes?: Record<string, EpisodeWeb>;
 }
 
@@ -718,7 +700,7 @@ export enum ContentType {
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public baseUrl: string = "";
+  public baseUrl: string = "https://devtd2.talentdigit.al";
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
@@ -884,7 +866,7 @@ export class HttpClient<SecurityDataType = unknown> {
 
 /**
  * @title talent::digital REST APIs
- * @baseUrl 
+ * @baseUrl https://devtd2.talentdigit.al
  *
  * REST APIs for configuration and talent analytics.
  */
@@ -2227,10 +2209,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     getCompetenceAreaTestDetailsReports: (
       query: {
-        /** @format int32 */
-        season: number;
-        /** @format int32 */
-        episode?: number;
+        season: string;
+        episode?: string;
       },
       params: RequestParams = {},
     ) =>
@@ -2254,8 +2234,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     getSubCompetencesTestsReports: (
       query: {
-        /** @format int32 */
-        season: number;
+        season: string;
       },
       params: RequestParams = {},
     ) =>
