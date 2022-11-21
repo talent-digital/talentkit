@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import seasonConfig from "./season.yml";
+
+console.log(seasonConfig);
 
 import TalentKit from "@talentdigital/kit";
 

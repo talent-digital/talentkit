@@ -10,6 +10,7 @@ import {
   ProfileStorage,
   Tests,
 } from "./interfaces";
+import { createCustomFetch } from "./mock-api";
 import RemoteStorage from "./remote-storage";
 import Savegame from "./savegame";
 import StorageService from "./storage.service";
@@ -27,9 +28,9 @@ const defaultProfile = {
   playerEmailAddress: "teammitglied@acme.com",
 };
 
-const getIdFromUrlParams = (testMode = false): ID => {
+const getIdFromUrlParams = (episodeId?: string): ID => {
   const params = new URLSearchParams(
-    testMode ? "?sid=01&eid=01" : location.search
+    episodeId ? `?sid=SeasonID&eid=${episodeId}` : location.search
   );
 
   const season = params.get("sid");
@@ -109,19 +110,23 @@ class TalentKit {
   static async create(config: Config) {
     let apiClient: ApiClient;
     let storage: StorageService;
-    const id = getIdFromUrlParams(config.testMode);
+    const id = getIdFromUrlParams(config.episodeId);
     if (!id.season || !id.episode) {
       throw new Error("sid or eid not found");
     }
 
     if (config.testMode) {
-      apiClient = createApiClient();
+      if (!config.seasonDefinition)
+        throw "Season definition must be defined when running in test mode";
+
+      const customFetch = createCustomFetch(config.seasonDefinition);
+      apiClient = createApiClient({ customFetch });
       storage = new StorageService(window.localStorage);
     } else {
       const auth = await AuthService.create(config.tenant);
       if (!auth) throw "Could not create Authentication Service";
 
-      apiClient = createApiClient(auth);
+      apiClient = createApiClient({ auth });
       storage = new StorageService(await RemoteStorage.create(apiClient));
     }
 

@@ -16,6 +16,7 @@ importers:
 
   apps/canary:
     specifiers:
+      '@modyfi/vite-plugin-yaml': ^1.0.3
       '@talentdigital/kit': workspace:*
       '@talentdigital/react': workspace:*
       '@types/react': ^18.0.17
@@ -31,6 +32,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
+      '@modyfi/vite-plugin-yaml': 1.0.3_vite@3.1.1
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
       '@vitejs/plugin-react': 2.1.0_vite@3.1.1
@@ -75,6 +77,7 @@ importers:
 
   packages/kit:
     specifiers:
+      '@modyfi/vite-plugin-yaml': ^1.0.3
       '@talentdigital/api-client': workspace:^0.1.0
       '@types/node': ^18.7.18
       eslint-config-custom: workspace:*
@@ -89,6 +92,7 @@ importers:
     dependencies:
       '@talentdigital/api-client': link:../api-client
     devDependencies:
+      '@modyfi/vite-plugin-yaml': 1.0.3_vite@3.1.1
       '@types/node': 18.7.18
       eslint-config-custom: link:../eslint-config-custom
       happy-dom: 7.7.0
@@ -740,6 +744,18 @@ packages:
     resolution: {integrity: sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==}
     dev: true
 
+  /@modyfi/vite-plugin-yaml/1.0.3_vite@3.1.1:
+    resolution: {integrity: sha512-UB9A9b5h9v4fruyZPeLQh4k7ZF7KPrOuMnTfSIJD2WYXx9rHE0U19/RzLjFhDzWnTBPZWu6RoT4wxsaDkxXUzw==}
+    requiresBuild: true
+    peerDependencies:
+      vite: ^2.6.0 || ^3.0.0
+    dependencies:
+      '@rollup/pluginutils': 4.2.1
+      js-yaml: 4.1.0
+      tosource: 2.0.0-alpha.3
+      vite: 3.1.1
+    dev: true
+
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -757,6 +773,14 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+
+  /@rollup/pluginutils/4.2.1:
+    resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    dev: true
 
   /@rushstack/node-core-library/3.53.0:
     resolution: {integrity: sha512-FXk3eDtTHKnaUq+fLyNY867ioRhMa6CJDJO5hZ3wuGlxm184nckAFiU+hx027AodjpnqjX6pYF0zZGq7k7P/vg==}
@@ -2008,6 +2032,10 @@ packages:
   /estraverse/5.3.0:
     resolution: {integrity: sha512-MMdARuVEQziNTeJD8DgMqmhwR11BRQ/cBP+pLtYdSTnf3MIO8fFeiINEbX36ZdNlfU/7A9f3gUw49B3oQsvwBA==}
     engines: {node: '>=4.0'}
+
+  /estree-walker/2.0.2:
+    resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
+    dev: true
 
   /esutils/2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
@@ -3851,6 +3879,11 @@ packages:
     engines: {node: '>=8.0'}
     dependencies:
       is-number: 7.0.0
+
+  /tosource/2.0.0-alpha.3:
+    resolution: {integrity: sha512-KAB2lrSS48y91MzFPFuDg4hLbvDiyTjOVgaK7Erw+5AmZXNq4sFRVn8r6yxSLuNs15PaokrDRpS61ERY9uZOug==}
+    engines: {node: '>=10'}
+    dev: true
 
   /tough-cookie/4.1.2:
     resolution: {integrity: sha512-G9fqXWoYFZgTc2z8Q5zaHy/vJMjm+WV0AkAeHxVCQiEB1b+dGvWzFW6QV07cY5jQ5gRkeid2qIkzkxUnmoQZUQ==}

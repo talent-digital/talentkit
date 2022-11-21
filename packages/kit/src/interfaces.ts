@@ -1,11 +1,14 @@
 import { Api } from "@talentdigital/api-client";
 import Keycloak, { KeycloakConfig } from "keycloak-js";
 import Badge from "./badge";
+import { SeasonDefinition } from "./season";
 import Test from "./test";
 
 export interface Config {
   tenant: string;
   testMode?: boolean;
+  seasonDefinition?: SeasonDefinition;
+  episodeId?: string;
 }
 
 export type AuthConfig = KeycloakConfig;

@@ -2,24 +2,22 @@ import { Api } from "@talentdigital/api-client";
 import { AuthService } from "./auth.service";
 import { SecurityDataType } from "./interfaces";
 
-export const createApiClient = (auth?: AuthService) => {
-  if (!auth) {
-    const customFetch: Api<SecurityDataType>["customFetch"] = async (
-      input: RequestInfo | URL,
-      init?: RequestInit
-    ) => {
-      console.log(input);
-      console.log(init);
-
-      return Promise.resolve(new Response());
-    };
-
+export const createApiClient = ({
+  auth,
+  customFetch,
+}: {
+  auth?: AuthService;
+  customFetch?: Api<SecurityDataType>["customFetch"];
+}) => {
+  if (customFetch) {
     return new Api<SecurityDataType>({
       baseUrl: "",
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       customFetch,
     });
   }
+
+  if (!auth) throw "Either auth or custom fetch need to be defined";
 
   const securityWorker = async (): Promise<SecurityDataType> =>
     auth

@@ -2,6 +2,7 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
+import ViteYaml from "@modyfi/vite-plugin-yaml";
 
 export default defineConfig({
   build: {
@@ -15,7 +16,7 @@ export default defineConfig({
       external: ["keycloak-js", "ky"],
     },
   },
-  plugins: [dts()],
+  plugins: [dts(), ViteYaml()],
   test: {
     environment: "happy-dom",
   },
