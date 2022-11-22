@@ -6,6 +6,7 @@ import {
   ApiClient,
   Badges,
   Config,
+  FeedbackQuestions,
   ID,
   ProfileStorage,
   Tests,
@@ -16,6 +17,7 @@ import RemoteStorage from "./remote-storage";
 import Savegame from "./savegame";
 import StorageService from "./storage.service";
 import Test from "./test";
+import FeedbackQuestion from "./feedback-question";
 
 export const applicationId = "talentApplicationProfileTwo";
 
@@ -83,6 +85,10 @@ class TalentKit {
 
     public tests: Tests,
     /**
+     * Add feedback questions available in this episode
+     */
+    public feedbackQuestions: FeedbackQuestions,
+    /**
      * Savegame for the current episode
      * @example const savegame = kit.savegame.load();
      * @example kit.savegame.save(obj);
@@ -131,6 +137,8 @@ class TalentKit {
     if (!apiClient) throw new Error(`Coudn't initialize the library`);
 
     const tests: Tests = await Test.createForEpisode(id, apiClient);
+    const feedbackQuestions: FeedbackQuestions =
+      await FeedbackQuestion.createForEpisode(id, apiClient);
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
     const badges = await Badge.createForEpisode(id, storage, apiClient);
@@ -140,6 +148,7 @@ class TalentKit {
       storage,
       badges,
       tests,
+      feedbackQuestions,
       savegame,
       engagement,
       id
