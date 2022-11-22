@@ -1,4 +1,5 @@
-import { SeasonDefinition, TestItem } from "./season";
+import { ID } from "./interfaces";
+import { SeasonDefinition } from "./season";
 
 export const createCustomFetch =
   (seasonDefinition: SeasonDefinition) =>
@@ -19,52 +20,50 @@ export const createCustomFetch =
       }
 
       if (
-        (m = /user-report\/test-details\?season=.*&episode=(.*)/.exec(
+        (m = /user-report\/test-details\?season=(.*)&episode=(.*)/.exec(
           fullPath
         )) !== null
       ) {
-        const id = m[1];
+        const id: ID = { season: m[1], episode: m[2] };
 
-        const testItems = extractTestItems(seasonDefinition.competenceAreas);
-        console.log(testItems);
-
-        return Promise.resolve(new Response(JSON.stringify({})));
+        const testItems = extractTestItems(
+          seasonDefinition.competenceAreas,
+          id
+        );
+        return Promise.resolve(new Response(JSON.stringify(testItems)));
       }
     }
 
     if (method === "POST") {
-      return Promise.resolve();
+      return Promise.resolve(new Response());
     }
   };
 
-enum levels {
-  BEGINNER = "FOUNDATION",
-  INTERMEDIATE = "INTERMEDIATE",
-  ADVANCED = "ADVANCED",
-  HIGHLY_SKILLED = "HIGHLY_SPECIALISED",
-}
-
 const extractTestItems = (
-  competenceAreas: SeasonDefinition["competenceAreas"]
+  competenceAreas: SeasonDefinition["competenceAreas"],
+  { season, episode }: ID
 ) =>
-  Object.entries(competenceAreas).flatMap(
-    ([competenceAreaId, { competences }]) =>
-      Object.entries(competences).flatMap(
-        ([competenceId, { subCompetences }]) =>
-          Object.entries(subCompetences).flatMap(
-            ([subCompetenceId, { name, testItems }]) =>
+  Object.entries(competenceAreas).map(
+    ([competenceAreaId, { competences }]) => ({
+      competenceAreaId,
+      tests: Object.entries(competences).flatMap(
+        ([_competenceId, { subCompetences }]) =>
+          Object.entries(subCompetences)
+            .flatMap(([subCompetenceId, { name: _name, testItems }]) =>
               testItems
                 ? Object.entries(testItems).map(
-                    ([testItemId, { level, documentation }]) => ({
-                      competenceAreaId,
-                      competenceId,
+                    ([testItemId, { level, documentation, episode }]) => ({
+                      id: `season${season}episode${episode}.${testItemId}`,
                       subCompetenceId,
-                      name,
-                      testItemId,
-                      documentation,
+                      description: JSON.stringify(documentation),
+                      level,
+                      episode,
+                      result: 0,
                     })
                   )
                 : []
-          )
-      )
+            )
+            .filter((testItem) => testItem.episode === episode)
+      ),
+    })
   );

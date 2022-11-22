@@ -6,7 +6,7 @@ const seasonsKey = "SEASONS";
 class Savegame {
   constructor(private id: ID, private storage: StorageService) {}
 
-  load() {
+  load(): unknown {
     const data = this.storage.getItem<SeasonsStorage>(seasonsKey);
     if (!data) return {};
 

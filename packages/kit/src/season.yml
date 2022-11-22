@@ -15,6 +15,7 @@ competenceAreas:
               en: Solution-oriented sales
             testItems:
               "costToSolution":
+                episode: "1"
                 level: BEGINNER
                 documentation:
                   de: Ich habe eine Gelegenheit zu einer lösungsorientierten Diskussion erzeugt.

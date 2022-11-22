@@ -15,6 +15,7 @@
       "@modyfi/vite-plugin-yaml/modules"
     ],
     "lib": [
+      "ES2015",
       "ES2019.Object",
       "DOM"
     ]

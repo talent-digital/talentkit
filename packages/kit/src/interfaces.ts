@@ -5,10 +5,9 @@ import { SeasonDefinition } from "./season";
 import Test from "./test";
 
 export interface Config {
-  tenant: string;
-  testMode?: boolean;
+  tenant?: string;
   seasonDefinition?: SeasonDefinition;
-  episodeId?: string;
+  id?: ID;
 }
 
 export type AuthConfig = KeycloakConfig;

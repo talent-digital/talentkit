@@ -88,6 +88,10 @@ export interface SubCompetence {
  */
 export interface TestItem {
   /**
+   * The episode id this test item apprears in
+   */
+  episode: string;
+  /**
    * The difficulty level of the test item.
    */
   level: Level;
@@ -128,7 +132,7 @@ export enum ToolType {
   calendarServices = "calendar-services",
   projectCollaboration = "project-collaboration",
   crm = "crm",
-  documentCreation = "document-creation"
+  documentCreation = "document-creation",
 }
 
 /**
@@ -141,7 +145,7 @@ export type LocalizedSearchDefinition = {
 /**
  * A search specification for finding educational material for a topic in a particular language.
  */
- export interface SearchDefinition {
+export interface SearchDefinition {
   /**
    * A list of search queries to find education material.
    */
@@ -150,17 +154,17 @@ export type LocalizedSearchDefinition = {
   /**
    * A list of tool-specific search queries to find education material. These search queries get the user-configured tool added.
    */
-   tool?: string[];
+  tool?: string[];
 
-   /**
+  /**
    * A list of links with known education material.
-  */
+   */
   links?: string[];
 }
 
 /**
  * Attitude-related questions towards the subcompetence.
-*/
+ */
 export interface FeedbackItem {
   question: LocalizedString;
   answers: { [id in string]: LocalizedString };

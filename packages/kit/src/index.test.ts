@@ -4,17 +4,16 @@ import season from "./season.yml";
 
 const seasonDefinition = season as SeasonDefinition;
 
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import Badge from "./badge";
+import Test from "./test";
 
 describe("Sdk Base Tests", () => {
   let kit: TalentKit;
-  beforeAll(async () => {
+  beforeEach(async () => {
     kit = await TalentKit.create({
-      tenant: "devtd2",
-      testMode: true,
       seasonDefinition,
-      episodeId: "1",
+      id: { season: "SeasonID", episode: "1" },
     });
   });
 
@@ -44,5 +43,16 @@ describe("Sdk Base Tests", () => {
     expect(kit.badges["caffeine"].awarded).toBeFalsy();
     kit.badges["caffeine"].award();
     expect(kit.badges["caffeine"].awarded).toBeTruthy();
+  });
+
+  it("Loads the correct test items for the episode", () => {
+    expect(Object.keys(kit.tests)).toHaveLength(1);
+    expect(kit.tests["costToSolution"]).toBeInstanceOf(Test);
+  });
+
+  it("Can correctly pass a test", async () => {
+    expect(kit.tests["costToSolution"].result).toBeUndefined();
+    await kit.tests["costToSolution"].pass();
+    expect(kit.tests["costToSolution"].result).toBe(1);
   });
 });
