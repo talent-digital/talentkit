@@ -700,7 +700,7 @@ export enum ContentType {
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public baseUrl: string = "https://devtd2.talentdigit.al";
+  public baseUrl: string = "";
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
@@ -866,7 +866,7 @@ export class HttpClient<SecurityDataType = unknown> {
 
 /**
  * @title talent::digital REST APIs
- * @baseUrl https://devtd2.talentdigit.al
+ * @baseUrl 
  *
  * REST APIs for configuration and talent analytics.
  */
