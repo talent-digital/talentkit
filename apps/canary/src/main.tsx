@@ -2,18 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import seasonConfig from "./season.yml";
 
-import TdSdk from "@talentdigital/sdk";
+console.log(seasonConfig);
 
-const config = {
-  realm: "talentdigital-devtd2",
-  url: "https://devtd2.talentdigit.al/auth",
-  clientId: "td-profile2",
-};
+import TalentKit from "@talentdigital/kit";
 
-const kit = await TdSdk.create({
-  auth: config,
-  processUrl: false,
+const kit = await TalentKit.create({
+  tenant: "devtd2",
+  testMode: false,
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

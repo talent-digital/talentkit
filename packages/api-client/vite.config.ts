@@ -7,12 +7,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "@talentdigital/sdk",
-      fileName: "sdk",
+      name: "@talentdigital/apiClient",
+      fileName: "client",
       formats: ["es"],
-    },
-    rollupOptions: {
-      external: ["keycloak-js", "ky"],
     },
   },
   plugins: [dts()],

@@ -1,66 +1,43 @@
-// import { useTdSdk } from "@talentdigital/react";
-import TdSdk from "@talentdigital/sdk";
-import { Episode } from "@talentdigital/sdk/dist/episode";
+import TalentKit from "@talentdigital/kit";
 import { useEffect, useState } from "react";
 import "./App.css";
 
-const config = {
-  realm: "talentdigital-devtd2",
-  url: "https://devtd2.talentdigit.al/auth",
-  clientId: "td-profile2",
-};
-
-function App({ kit }: { kit: TdSdk }) {
-  // const kit = useTdSdk(config);
-  const [episode, setEpisode] = useState<Episode | null>(null);
-
-  const [done, setDone] = useState(false);
+function App({ kit }: { kit: TalentKit }) {
+  const [badges, setBadges] = useState(Object.values(kit.badges));
+  const [savegame, setSavegame] = useState(kit.savegame.load());
 
   useEffect(() => {
-    if (kit) {
-      kit.createEpisode("id").then((episode) => {
-        if (episode) {
-          setEpisode(episode);
-        }
-      });
-    }
-  }, [kit]);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    kit.savegame.save({ foo: "bar", bar: 100, baz: new Date() });
+  }, []);
 
   return (
     <div className="App">
-      {episode ? (
-        !done ? (
-          <div>
-            <p>What is 2 + 2?</p>
-            <div>
-              <button
-                onClick={() => {
-                  episode.test("basic_math", 0).then(() => setDone(true));
-                }}
-              >
-                69
-              </button>
-              <button
-                onClick={() => {
-                  episode.test("basic_math", 1).then(() => setDone(true));
-                }}
-              >
-                4
-              </button>
-            </div>
-          </div>
-        ) : (
+      <h1>Hello {kit.profile.playerName}</h1>
+      <pre>{JSON.stringify(savegame)}</pre>
+      <div>
+        {Object.values(kit.tests)
+          .filter((test) => !test.result)
+          .map((test) => (
+            <button key={test.id} onClick={() => void test.pass()}>
+              {test.id}
+            </button>
+          ))}
+      </div>
+      <div>
+        {badges.map((badge) => (
           <button
+            key={badge.id}
+            style={{ background: badge.awarded ? "red" : "blue" }}
             onClick={() => {
-              episode.end();
+              badge.award();
+              setBadges(Object.values(kit.badges));
             }}
           >
-            end episode
+            {badge.name.en}
           </button>
-        )
-      ) : (
-        <p>Loading...</p>
-      )}
+        ))}
+      </div>
     </div>
   );
 }

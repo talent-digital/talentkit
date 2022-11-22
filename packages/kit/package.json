@@ -1,19 +1,20 @@
 {
-  "name": "@talentdigital/sdk",
+  "name": "@talentdigital/kit",
   "version": "0.1.0",
   "description": "talent::digital Software Development Kit",
   "type": "module",
   "files": [
     "dist"
   ],
-  "module": "./dist/sdk.js",
+  "module": "./dist/talent-kit.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/sdk.js"
+      "import": "./dist/talent-kit.js"
     }
   },
   "scripts": {
+    "lint": "eslint ./src",
     "test": "vitest",
     "build": "tsc && vite build"
   },
@@ -21,10 +22,12 @@
   "author": "talent::digital",
   "license": "SEE LICENSE IN LICENCE.md",
   "devDependencies": {
+    "@modyfi/vite-plugin-yaml": "^1.0.3",
     "@types/node": "^18.7.18",
     "eslint-config-custom": "workspace:*",
+    "happy-dom": "^7.7.0",
+    "jsdom": "^20.0.2",
     "keycloak-js": "^19.0.3",
-    "ky": "^0.31.4",
     "tsconfig": "workspace:*",
     "typescript": "^4.8.3",
     "vite": "^3.1.0",
@@ -32,7 +35,9 @@
     "vitest": "^0.23.2"
   },
   "peerDependencies": {
-    "keycloak-js": "^19.0.3",
-    "ky": "^0.31.4"
+    "keycloak-js": "^19.0.3"
+  },
+  "dependencies": {
+    "@talentdigital/api-client": "workspace:^0.1.0"
   }
 }

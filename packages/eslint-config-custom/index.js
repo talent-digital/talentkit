@@ -1,7 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 module.exports = {
-  extends: ["next", "turbo", "prettier"],
+  extends: [
+    "turbo",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+  ],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    tsconfigRootDir: __dirname,
+    project: [
+      "./tsconfig.eslint.json",
+      "../*/tsconfig.json",
+      "../../apps/*/tsconfig.json",
+    ],
+  },
+  plugins: ["@typescript-eslint"],
   rules: {
-    "@next/next/no-html-link-for-pages": "off",
-    "react/jsx-key": "off",
+    "@typescript-eslint/member-ordering": "error",
   },
 };

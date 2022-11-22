@@ -9,12 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@talentdigital/kit": "workspace:*",
     "@talentdigital/react": "workspace:*",
-    "@talentdigital/sdk": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@modyfi/vite-plugin-yaml": "^1.0.3",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
