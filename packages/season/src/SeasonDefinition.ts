@@ -13,6 +13,11 @@ export interface SeasonDefinition {
   info: LocalizedString;
 
   /**
+   * The URL where the assets for this season can be accesed.
+   */
+  assetsURL: URL;
+
+  /**
    * The competences that this season addresses in the talent::digital competence model.
    * The ID identifies the competence and should be globally unique.
    */
@@ -93,6 +98,11 @@ export interface TestItem {
   level: Level;
 
   /**
+   * The id of the episode where this test-item is executed
+   */
+  episode: string;
+
+  /**
    * A text describing the action required for the test.
    */
   documentation: LocalizedString;
@@ -128,7 +138,7 @@ export enum ToolType {
   calendarServices = "calendar-services",
   projectCollaboration = "project-collaboration",
   crm = "crm",
-  documentCreation = "document-creation"
+  documentCreation = "document-creation",
 }
 
 /**
@@ -141,7 +151,7 @@ export type LocalizedSearchDefinition = {
 /**
  * A search specification for finding educational material for a topic in a particular language.
  */
- export interface SearchDefinition {
+export interface SearchDefinition {
   /**
    * A list of search queries to find education material.
    */
@@ -150,19 +160,29 @@ export type LocalizedSearchDefinition = {
   /**
    * A list of tool-specific search queries to find education material. These search queries get the user-configured tool added.
    */
-   tool?: string[];
+  tool?: string[];
 
-   /**
+  /**
    * A list of links with known education material.
-  */
+   */
   links?: string[];
 }
 
 /**
  * Attitude-related questions towards the subcompetence.
-*/
+ */
 export interface FeedbackItem {
+  /**
+   * The id of the episoed in which this feedback item is used
+   */
+  episode: string;
+  /**
+   * The question text
+   */
   question: LocalizedString;
+  /**
+   * The possible answers
+   */
   answers: { [id in string]: LocalizedString };
 }
 
