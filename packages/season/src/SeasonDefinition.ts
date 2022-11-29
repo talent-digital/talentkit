@@ -13,6 +13,11 @@ export interface SeasonDefinition {
   info: LocalizedString;
 
   /**
+   * The URL where the assets for this season can be accesed.
+   */
+  assetsURL: URL;
+
+  /**
    * The competences that this season addresses in the talent::digital competence model.
    * The ID identifies the competence and should be globally unique.
    */
@@ -97,6 +102,11 @@ export interface TestItem {
   level: Level;
 
   /**
+   * The id of the episode where this test-item is executed
+   */
+  episode: string;
+
+  /**
    * A text describing the action required for the test.
    */
   documentation: LocalizedString;
@@ -166,7 +176,17 @@ export interface SearchDefinition {
  * Attitude-related questions towards the subcompetence.
  */
 export interface FeedbackItem {
+  /**
+   * The id of the episoed in which this feedback item is used
+   */
+  episode: string;
+  /**
+   * The question text
+   */
   question: LocalizedString;
+  /**
+   * The possible answers
+   */
   answers: { [id in string]: LocalizedString };
 }
 

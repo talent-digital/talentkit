@@ -1,0 +1,19 @@
+{
+  "name": "@talentdigital/season",
+  "version": "0.1.1",
+  "description": "TypeScript type and JSON schema definition for talent::digital season definition",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/SeasonDefinition.d.ts",
+  "scripts": {
+    "generate": "tsc && ts-json-schema-generator -p src/SeasonDefinition.ts -t SeasonDefinition -o dist/SeasonDefinition.json"
+  },
+  "keywords": [],
+  "author": "talent::digital",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-json-schema-generator": "^1.1.2",
+    "tsconfig": "workspace:*"
+  }
+}
