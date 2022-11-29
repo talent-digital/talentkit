@@ -7,7 +7,7 @@ import season from "./season.yml";
 const seasonDefinition = season as SeasonDefinition;
 
 import TalentKit from "@talentdigital/kit";
-import { SeasonDefinition } from "@talentdigital/kit/dist/season";
+import { SeasonDefinition } from "@talentdigital/season";
 
 const kit = await TalentKit.create({
   tenant: "devtd2",
