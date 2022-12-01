@@ -2,6 +2,8 @@ import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
 import Badge from "./badge";
 import Engagement from "./engagement";
+import FeedbackQuestion from "./feedback-question";
+import "./interfaces";
 import {
   ApiClient,
   Badges,
@@ -11,13 +13,12 @@ import {
   ProfileStorage,
   Tests,
 } from "./interfaces";
-import "./interfaces";
 import { createCustomFetch } from "./mock-api";
 import RemoteStorage from "./remote-storage";
 import Savegame from "./savegame";
 import StorageService from "./storage.service";
 import Test from "./test";
-import FeedbackQuestion from "./feedback-question";
+import Tracker from "./tracker";
 
 export const applicationId = "talentApplicationProfileTwo";
 
@@ -48,11 +49,6 @@ const getIdFromUrlParams = (): ID => {
  * @example const sdk = await TdSdk.create(config);
  */
 class TalentKit {
-  /**
-   * @description The current user's player profile
-   */
-  readonly profile: ProfileStorage;
-
   events = {
     /**
      * @description Mark the episode as completed and return to the dashboard
@@ -72,7 +68,6 @@ class TalentKit {
 
   private constructor(
     private api: ApiClient,
-    storage: StorageService,
     /**
      * All badges available in the current episode
      */
@@ -101,11 +96,22 @@ class TalentKit {
      * @example const points = kit.engagement.points
      */
     public engagement: Engagement,
-    readonly id: ID
-  ) {
-    const profileStorage = storage.getItem<ProfileStorage>("SETTINGS");
-    this.profile = profileStorage || defaultProfile;
-  }
+
+    /**
+     * The season and episode IDs
+     */
+    readonly id: ID,
+
+    /**
+     * The currenr player's profile settings
+     */
+    readonly profile: ProfileStorage,
+
+    /**
+     * Track user events and captures session replays
+     */
+    readonly tracker?: Tracker
+  ) {}
 
   /**
    * Creates a new TalentKit
@@ -113,6 +119,7 @@ class TalentKit {
    * @returns TalentKit
    */
   static async create(config: Config) {
+    let auth: AuthService | undefined;
     let apiClient: ApiClient;
     let storage: StorageService;
     const id = config.id || getIdFromUrlParams();
@@ -127,7 +134,7 @@ class TalentKit {
     } else {
       if (!config.tenant) throw "config.tenant must be provided";
 
-      const auth = await AuthService.create(config.tenant);
+      auth = await AuthService.create(config.tenant);
       if (!auth) throw "Could not create Authentication Service";
 
       apiClient = createApiClient({ auth });
@@ -142,16 +149,28 @@ class TalentKit {
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
     const badges = await Badge.createForEpisode(id, storage, apiClient);
+    const profileStorage =
+      storage.getItem<ProfileStorage>("SETTINGS") || defaultProfile;
+
+    let tracker: Tracker | undefined;
+    if (config.logRocketId && auth?.user) {
+      tracker = new Tracker(
+        config.logRocketId,
+        auth.user,
+        profileStorage.playerName
+      );
+    }
 
     return new TalentKit(
       apiClient,
-      storage,
       badges,
       tests,
       feedbackQuestions,
       savegame,
       engagement,
-      id
+      id,
+      profileStorage,
+      tracker
     );
   }
 }

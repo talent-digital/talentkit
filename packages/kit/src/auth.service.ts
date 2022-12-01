@@ -21,6 +21,11 @@ export class AuthService {
     return this.auth.token as string;
   }
 
+  get user() {
+    if (!this.auth.tokenParsed) throw "Token has not been parsed";
+    return this.auth.tokenParsed;
+  }
+
   static async create(tenant: string) {
     const domain = devTenants.includes(tenant) ? domains.dev : domains.prod;
 

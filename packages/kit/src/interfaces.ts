@@ -9,6 +9,7 @@ export interface Config {
   tenant?: string;
   seasonDefinition?: SeasonDefinition;
   id?: ID;
+  logRocketId?: string;
 }
 
 export type AuthConfig = KeycloakConfig;
