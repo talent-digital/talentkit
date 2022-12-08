@@ -106,8 +106,6 @@ export interface MissionTargetEntityWeb {
 
 export interface FeedbackQuestionWeb {
   id: string;
-  seasonId: string;
-  episodeId: string;
   question?: string;
   answers?: string;
 }
@@ -255,8 +253,6 @@ export interface ArticleResponse {
 
 export interface EventCreationRequest {
   applicationId?: string;
-  seasonId?: string;
-  episodeId?: string;
   events: JsonNode[];
 }
 
@@ -264,16 +260,6 @@ export type JsonNode = object;
 
 /** A test item assesses a subcompetence at a certain level and provides one piece of evidence that the subcompetence is present at the given level. */
 export interface TestItem {
-  /**
-   * ID of season
-   * @example "season01"
-   */
-  seasonId: string;
-  /**
-   * ID of episode
-   * @example "01"
-   */
-  episodeId: string;
   /**
    * Textual ID of the test item, matches the type of event that is generated during the test.
    * @example "programmingQuestion"
@@ -324,7 +310,7 @@ export interface EpisodeWeb {
 }
 
 export interface FeedbackItemWeb {
-  episode?: string;
+  id?: string;
   question?: LocalizedStringImpl;
   answers?: Record<string, Record<string, string>>;
 }
@@ -345,7 +331,6 @@ export interface SeasonWeb {
   title: LocalizedStringImpl;
   info: LocalizedStringImpl;
   seasonEndMessage: LocalizedStringImpl;
-  assetsURL: string;
   competenceAreas?: Record<string, CompetenceAreaWeb>;
   episodes?: Record<string, EpisodeWeb>;
 }
@@ -357,28 +342,10 @@ export interface SubCompetenceWeb {
 }
 
 export interface TestItemWeb {
-  episode?: string;
+  eventTypeId?: string;
   level?: "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
   documentation?: LocalizedStringImpl;
   search?: Record<string, SearchDefinitionWeb>;
-}
-
-export interface EpisodeResponseWeb {
-  title?: LocalizedStringImpl;
-  description?: LocalizedStringImpl;
-  maturity?: "PENDING" | "ALPHA" | "BETA" | "PUBLIC";
-  imageUrl?: string;
-  format?: string;
-  formatConfiguration?: string;
-  badges?: Record<string, BadgeWeb>;
-  testItems?: TestItemResponse[];
-  feedbackQuestions?: FeedbackQuestionResponseWeb[];
-}
-
-export interface FeedbackQuestionResponseWeb {
-  id?: string;
-  question?: LocalizedStringImpl;
-  answers?: Record<string, Record<string, string>>;
 }
 
 export interface SeasonResponseWeb {
@@ -386,13 +353,7 @@ export interface SeasonResponseWeb {
   title?: LocalizedStringImpl;
   info?: LocalizedStringImpl;
   seasonEndMessage?: LocalizedStringImpl;
-  episodes?: Record<string, EpisodeResponseWeb>;
-}
-
-export interface TestItemResponse {
-  id?: string;
-  level?: "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
-  documentation?: LocalizedStringImpl;
+  episodes?: Record<string, EpisodeWeb>;
 }
 
 export interface TagEntity {
@@ -442,8 +403,10 @@ export interface TrainingRecommendationWeb {
 }
 
 export interface PlayRecommendationWeb {
-  season?: string;
-  episode?: string;
+  /** @format int32 */
+  season?: number;
+  /** @format int32 */
+  episode?: number;
   /** @format int32 */
   pendingTests?: number;
 }
@@ -500,7 +463,8 @@ export interface TestDetailWeb {
   id?: string;
   description?: string;
   level?: "START" | "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
-  episode?: string;
+  /** @format int32 */
+  episode?: number;
   /** @format int32 */
   result?: number;
 }
@@ -1698,8 +1662,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     deleteQuestion: (
       query: {
         id: string;
-        seasonId: string;
-        episodeId: string;
       },
       params: RequestParams = {},
     ) =>
