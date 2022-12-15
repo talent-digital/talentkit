@@ -163,7 +163,7 @@ class TalentKit {
       id,
       apiClient
     );
-    const tests: Tests = await Test.createForEpisode(id, episode, apiClient);
+    const tests: Tests = Test.createForEpisode(id, episode, apiClient);
     const feedbackQuestions: FeedbackQuestions =
       await FeedbackQuestion.createForEpisode(id, episode, apiClient);
     const savegame: Savegame = new Savegame(id, storage);

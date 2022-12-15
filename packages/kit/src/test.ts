@@ -4,7 +4,7 @@ import {
   TestItemResponse,
 } from "@talentdigital/api-client";
 import { applicationId } from ".";
-import { ApiClient, ID } from "./interfaces";
+import { ApiClient, ID, Tests } from "./interfaces";
 
 enum TestResult {
   "fail" = 0,
@@ -23,11 +23,11 @@ class Test {
     private episodeId: string
   ) {}
 
-  static async createForEpisode(
+  static createForEpisode(
     id: ID,
     info: EpisodeResponseWeb,
     api: ApiClient
-  ): Promise<any> {
+  ): Tests {
     if (!info?.testItems) {
       return {};
     }
@@ -46,7 +46,7 @@ class Test {
           ),
         ];
       })
-    );
+    ) as Tests;
   }
 
   pass() {
