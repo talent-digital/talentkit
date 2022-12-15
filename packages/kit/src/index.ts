@@ -1,3 +1,4 @@
+import { EpisodeResponseWeb } from "@talentdigital/api-client";
 import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
 import Badge from "./badge";
@@ -75,7 +76,7 @@ class TalentKit {
     /**
      * All info about episode
      */
-    private episode: Episode,
+    private episode: EpisodeResponseWeb,
 
     /**
      * All badges available in the current episode
@@ -130,7 +131,6 @@ class TalentKit {
    * @returns TalentKit
    */
   static async create(config: Config) {
-    console.log("config", config);
     let auth: AuthService | undefined;
     let apiClient: ApiClient;
     let storage: StorageService;
@@ -149,20 +149,26 @@ class TalentKit {
       auth = await AuthService.create(config.tenant);
       if (!auth) throw "Could not create Authentication Service";
 
-      apiClient = createApiClient({ auth, tenant: config.tenant });
+      apiClient = createApiClient({
+        auth,
+        tenant: config.tenant,
+        localBackendURL: config.localBackendURL,
+      });
       storage = new StorageService(await RemoteStorage.create(apiClient));
     }
 
     if (!apiClient) throw new Error(`Coudn't initialize the library`);
 
-    const episode: any = await Episode.getForEpisode(id, apiClient);
-    console.log("episode", episode);
-    const tests: Tests = await Test.createForEpisode(id, apiClient);
+    const episode: EpisodeResponseWeb = await Episode.getForEpisode(
+      id,
+      apiClient
+    );
+    const tests: Tests = await Test.createForEpisode(id, episode, apiClient);
     const feedbackQuestions: FeedbackQuestions =
-      await FeedbackQuestion.createForEpisode(id, apiClient);
+      await FeedbackQuestion.createForEpisode(id, episode, apiClient);
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
-    const badges = await Badge.createForEpisode(id, storage, apiClient);
+    const badges = await Badge.createForEpisode(episode, storage);
     const profileStorage =
       storage.getItem<ProfileStorage>("SETTINGS") || defaultProfile;
 

@@ -7,6 +7,7 @@ import Test from "./test";
 
 export interface Config {
   tenant?: string;
+  localBackendURL?: string;
   seasonDefinition?: SeasonDefinition;
   id?: ID;
   logRocketId?: string;

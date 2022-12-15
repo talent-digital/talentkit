@@ -1,4 +1,7 @@
-import { LocalizedStringImpl } from "@talentdigital/api-client";
+import {
+  EpisodeResponseWeb,
+  LocalizedStringImpl,
+} from "@talentdigital/api-client";
 import { ApiClient, Badges, BadgesStorage, ID } from "./interfaces";
 import StorageService from "./storage.service";
 
@@ -29,21 +32,13 @@ class Badge {
    * @returns Record<Badge["id"], Badge>
    */
   static async createForEpisode(
-    id: ID,
-    storage: StorageService,
-    api: ApiClient
+    info: EpisodeResponseWeb,
+    storage: StorageService
   ): Promise<Badges> {
-    // Get badges for this episode from the Season Endpoint;
-    const { data: episode } = await api.domainModelSeasons.getEpisode(
-      id.season,
-      id.episode,
-      { format: "json" }
-    );
-
-    if (!episode.badges) return {};
+    if (!info?.badges) return {};
 
     return Object.fromEntries(
-      Object.entries(episode.badges).map(([id, { name, image }]) => [
+      Object.entries(info.badges).map(([id, { name, image }]) => [
         id,
         new Badge(id, name, image, storage),
       ])

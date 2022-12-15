@@ -1,16 +1,16 @@
-import { EpisodeWeb } from "@talentdigital/api-client";
+import { EpisodeResponseWeb } from "@talentdigital/api-client";
 import { ApiClient, ID } from "./interfaces";
 
 class Episode {
-  private constructor(readonly id: string, private api: ApiClient) {}
+  private constructor() {}
 
-  static async getForEpisode(id: ID, api: ApiClient): Promise<EpisodeWeb> {
-    const { data } = await api.domainModelSeasons.getEpisode(
-      id.season,
-      id.episode
-    );
-
-    console.log("getForEpisode", data);
+  static async getForEpisode(
+    id: ID,
+    api: ApiClient
+  ): Promise<EpisodeResponseWeb> {
+    const data = await (
+      await api.domainModelSeasons.getEpisode(id.season, id.episode)
+    ).json();
 
     return data;
   }

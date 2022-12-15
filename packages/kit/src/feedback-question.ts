@@ -1,26 +1,42 @@
+import {
+  EpisodeResponseWeb,
+  LocalizedStringImpl,
+} from "@talentdigital/api-client";
 import { applicationId } from ".";
 import { ApiClient, FeedbackQuestions, ID } from "./interfaces";
 
 class FeedbackQuestion {
   private constructor(
     readonly id: string,
-    readonly question: string,
-    readonly answers: string,
-    private api: ApiClient
+    readonly question: LocalizedStringImpl,
+    readonly answers: Record<string, Record<string, string>>,
+    private api: ApiClient,
+    private seasonId: string,
+    private episodeId: string
   ) {}
 
   static async createForEpisode(
     id: ID,
+    info: EpisodeResponseWeb,
     api: ApiClient
   ): Promise<FeedbackQuestions> {
-    const { data } =
-      await api.organisationAnalyticsFeedback.getFeedbackQuestions();
-    if (!data || !data.length) return {};
+    if (!info?.feedbackQuestions) {
+      return {};
+    }
 
     return Object.fromEntries(
-      data.map(({ id, question, answers }) => {
-        if (!question || !answers) throw "Question or answers missing";
-        return [id, new FeedbackQuestion(id, question, answers, api)];
+      info.feedbackQuestions.map((question) => {
+        return [
+          question.id,
+          new FeedbackQuestion(
+            question.id as string,
+            question.question as LocalizedStringImpl,
+            question.answers as Record<string, Record<string, string>>,
+            api,
+            id.season,
+            id.episode
+          ),
+        ];
       })
     );
   }
@@ -33,10 +49,10 @@ class FeedbackQuestion {
   submit(selectedAnswer: string) {
     const events = [
       {
-        eventTypeId: "season2episode2.videochatQuestion",
+        eventTypeId: this.id,
         type: "decision.choose",
         payload: {
-          decision: "videochatQuestion",
+          decision: this.id,
           option: {
             id: selectedAnswer,
           },
@@ -47,6 +63,8 @@ class FeedbackQuestion {
     return this.api.domainModelEvents.saveEvent({
       applicationId,
       events,
+      seasonId: this.seasonId,
+      episodeId: this.episodeId,
     });
   }
 }

@@ -6,6 +6,7 @@ import TalentKit from "@talentdigital/kit";
 
 const kit = await TalentKit.create({
   tenant: "devtd2",
+  // localBackendURL: "http://localhost:8081",
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

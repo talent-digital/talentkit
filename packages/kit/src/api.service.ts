@@ -6,10 +6,12 @@ import { SecurityDataType } from "./interfaces";
 export const createApiClient = ({
   auth,
   tenant,
+  localBackendURL,
   customFetch,
 }: {
   auth?: AuthService;
   tenant?: string;
+  localBackendURL?: string;
   customFetch?: Api<SecurityDataType>["customFetch"];
 }) => {
   if (customFetch) {
@@ -31,7 +33,7 @@ export const createApiClient = ({
       .then(() => ({ headers: { Authorization: `Bearer ${auth.token}` } }));
 
   return new Api<SecurityDataType>({
-    baseUrl,
+    baseUrl: localBackendURL ?? baseUrl,
     securityWorker,
   });
 };
