@@ -13,4 +13,4 @@ jobs:
           episodes_provisioner_client_password: ${{ secrets.EPISODES_PROVISIONER_CLIENT_PASSWORD }}
           episodes_provisioner_client: "episodes-provisioner-client"
           target_domain: "talentdigit.al"
-          season_file_path: apps/canary/src
+          season_file_path: "./apps/canary/src"
