@@ -2,6 +2,7 @@ import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
 import Badge from "./badge";
 import Engagement from "./engagement";
+import Episode from "./episode";
 import FeedbackQuestion from "./feedback-question";
 import "./interfaces";
 import {
@@ -37,11 +38,14 @@ const getIdFromUrlParams = (): ID => {
 
   const season = params.get("sid");
   const episode = params.get("eid");
+  const redirectUrl = params.get("redirectUrl");
 
   if (!season || !episode)
     throw "Could not retrieve season or episode id from URL";
 
-  return { season, episode };
+  if (!redirectUrl) throw "Could not retrieve redirectUrl from URL";
+
+  return { season, episode, redirectUrl };
 };
 
 /**
@@ -69,26 +73,33 @@ class TalentKit {
   private constructor(
     private api: ApiClient,
     /**
+     * All info about episode
+     */
+    private episode: Episode,
+
+    /**
      * All badges available in the current episode
      */
-
     public badges: Badges,
+
     /**
      * All tests available in this episode
      * @example kit.tests["test1"].pass();
      */
-
     public tests: Tests,
+
     /**
      * Add feedback questions available in this episode
      */
     public feedbackQuestions: FeedbackQuestions,
+
     /**
      * Savegame for the current episode
      * @example const savegame = kit.savegame.load();
      * @example kit.savegame.save(obj);
      */
     public savegame: Savegame,
+
     /**
      * Award and read engagement points
      *
@@ -119,6 +130,7 @@ class TalentKit {
    * @returns TalentKit
    */
   static async create(config: Config) {
+    console.log("config", config);
     let auth: AuthService | undefined;
     let apiClient: ApiClient;
     let storage: StorageService;
@@ -137,12 +149,14 @@ class TalentKit {
       auth = await AuthService.create(config.tenant);
       if (!auth) throw "Could not create Authentication Service";
 
-      apiClient = createApiClient({ auth });
+      apiClient = createApiClient({ auth, tenant: config.tenant });
       storage = new StorageService(await RemoteStorage.create(apiClient));
     }
 
     if (!apiClient) throw new Error(`Coudn't initialize the library`);
 
+    const episode: any = await Episode.getForEpisode(id, apiClient);
+    console.log("episode", episode);
     const tests: Tests = await Test.createForEpisode(id, apiClient);
     const feedbackQuestions: FeedbackQuestions =
       await FeedbackQuestion.createForEpisode(id, apiClient);
@@ -163,6 +177,7 @@ class TalentKit {
 
     return new TalentKit(
       apiClient,
+      episode,
       badges,
       tests,
       feedbackQuestions,

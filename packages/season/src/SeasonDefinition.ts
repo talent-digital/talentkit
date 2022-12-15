@@ -93,10 +93,6 @@ export interface SubCompetence {
  */
 export interface TestItem {
   /**
-   * The episode id this test item apprears in
-   */
-  episode: string;
-  /**
    * The difficulty level of the test item.
    */
   level: Level;

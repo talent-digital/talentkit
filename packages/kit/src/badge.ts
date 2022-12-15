@@ -4,6 +4,7 @@ import StorageService from "./storage.service";
 
 class Badge {
   private readonly storageKey = "BADGES_ENGINE_STORAGE";
+
   private constructor(
     readonly id: string,
     readonly name: LocalizedStringImpl,
