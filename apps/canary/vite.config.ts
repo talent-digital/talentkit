@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:8081",
+        target: "https://devtd2.talentdigit.al",
         changeOrigin: true,
       },
     },

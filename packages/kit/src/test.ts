@@ -1,3 +1,8 @@
+import {
+  EpisodeResponseWeb,
+  LocalizedStringImpl,
+  TestItemResponse,
+} from "@talentdigital/api-client";
 import { applicationId } from ".";
 import { ApiClient, ID, Tests } from "./interfaces";
 
@@ -11,32 +16,42 @@ class Test {
 
   private constructor(
     readonly id: string,
-    private prefix: string,
-    readonly bestResult: TestResult,
-    private api: ApiClient
+    readonly documentation: LocalizedStringImpl,
+    readonly level: TestItemResponse["level"],
+    private api: ApiClient,
+    private seasonId: string,
+    private episodeId: string
   ) {}
 
-  static async createForEpisode(id: ID, api: ApiClient): Promise<Tests> {
-    const { data } =
-      await api.userAnalyticsProgressReporting.getCompetenceAreaTestDetailsReports(
-        { season: id.season, episode: id.episode }
-      );
-
-    if (!data || !data.length) return {};
+  static createForEpisode(
+    id: ID,
+    info: EpisodeResponseWeb,
+    api: ApiClient
+  ): Tests {
+    if (!info?.testItems) {
+      return {};
+    }
 
     return Object.fromEntries(
-      data
-        .flatMap((ca) => ca.tests)
-        .map((test) => {
-          const [prefix, id] = test?.id?.split(".") as string[];
-          const result = test?.result as TestResult;
-          return [id, new Test(id, prefix, result, api)];
-        })
-    );
+      info.testItems.map((test) => {
+        return [
+          test.id,
+          new Test(
+            test.id as string,
+            test.documentation as LocalizedStringImpl,
+            test.level,
+            api,
+            id.season,
+            id.episode
+          ),
+        ];
+      })
+    ) as Tests;
   }
 
   pass() {
     this.result = TestResult.pass;
+
     return this.api.domainModelEvents.saveEvent(
       this.generatePayload(TestResult.pass)
     );
@@ -44,6 +59,7 @@ class Test {
 
   fail() {
     this.result = TestResult.fail;
+
     return this.api.domainModelEvents.saveEvent(
       this.generatePayload(TestResult.fail)
     );
@@ -53,10 +69,16 @@ class Test {
     const events = [
       {
         type: "test.complete",
-        result: { id: `${this.prefix}.${this.id}`, value: result },
+        result: { id: this.id, value: result },
       },
     ];
-    return { applicationId, events };
+
+    return {
+      applicationId,
+      events,
+      seasonId: this.seasonId,
+      episodeId: this.episodeId,
+    };
   }
 }
 

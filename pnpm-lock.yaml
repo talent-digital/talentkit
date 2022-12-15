@@ -19,6 +19,7 @@ importers:
       '@modyfi/vite-plugin-yaml': ^1.0.3
       '@talentdigital/kit': workspace:*
       '@talentdigital/react': workspace:*
+      '@talentdigital/season': workspace:^0.1.1
       '@types/react': ^18.0.17
       '@types/react-dom': ^18.0.6
       '@vitejs/plugin-react': ^2.1.0
@@ -29,6 +30,7 @@ importers:
     dependencies:
       '@talentdigital/kit': link:../../packages/kit
       '@talentdigital/react': link:../../packages/react
+      '@talentdigital/season': link:../../packages/season
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
@@ -84,6 +86,7 @@ importers:
       happy-dom: ^7.7.0
       jsdom: ^20.0.2
       keycloak-js: ^19.0.3
+      logrocket: ^3.0.1
       tsconfig: workspace:*
       typescript: ^4.8.3
       vite: ^3.1.0
@@ -98,6 +101,7 @@ importers:
       happy-dom: 7.7.0
       jsdom: 20.0.2
       keycloak-js: 19.0.3
+      logrocket: 3.0.1
       tsconfig: link:../tsconfig
       typescript: 4.8.4
       vite: 3.1.1
@@ -2846,6 +2850,10 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: true
+
+  /logrocket/3.0.1:
+    resolution: {integrity: sha512-jOWG+jEzobKVxGytzZ+4KGm2kiMQMRTHab2uDWQyVZcHfEF38BlCH1yjQVY4LCmuQUwZitP9biMzJZnyUQ0dtQ==}
     dev: true
 
   /loose-envify/1.4.0:

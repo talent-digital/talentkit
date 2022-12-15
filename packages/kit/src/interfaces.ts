@@ -1,14 +1,16 @@
 import { Api } from "@talentdigital/api-client";
 import Keycloak, { KeycloakConfig } from "keycloak-js";
 import Badge from "./badge";
+import FeedbackQuestion from "./feedback-question";
 import { SeasonDefinition } from "./season";
 import Test from "./test";
 
 export interface Config {
-  tenant: string;
-  testMode?: boolean;
+  tenant?: string;
+  localBackendURL?: string;
   seasonDefinition?: SeasonDefinition;
-  episodeId?: string;
+  id?: ID;
+  logRocketId?: string;
 }
 
 export type AuthConfig = KeycloakConfig;
@@ -42,6 +44,11 @@ export interface ID {
 export type Badges = Record<Badge["id"], Badge>;
 
 export type Tests = Record<Test["id"], Test>;
+
+export type FeedbackQuestions = Record<
+  FeedbackQuestion["id"],
+  FeedbackQuestion
+>;
 
 export interface SecurityDataType {
   headers: {
