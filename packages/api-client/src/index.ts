@@ -2059,7 +2059,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getEpisode: (seasonId: string, episodeId: string, params: RequestParams = {}) =>
-      this.request<EpisodeWeb, any>({
+      this.request<EpisodeResponseWeb, any>({
         path: `/api/v1/season/${seasonId}/episode/${episodeId}`,
         method: "GET",
         secure: true,
