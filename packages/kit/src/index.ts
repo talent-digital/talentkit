@@ -166,10 +166,10 @@ class TalentKit {
 
     const tests: Tests = Test.createForEpisode(id, episode, apiClient);
     const feedbackQuestions: FeedbackQuestions =
-      await FeedbackQuestion.createForEpisode(id, episode, apiClient);
+      FeedbackQuestion.createForEpisode(id, episode, apiClient);
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
-    const badges = await Badge.createForEpisode(episode, storage);
+    const badges = Badge.createForEpisode(episode, storage);
     const profileStorage =
       storage.getItem<ProfileStorage>("SETTINGS") || defaultProfile;
 

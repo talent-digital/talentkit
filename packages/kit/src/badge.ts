@@ -2,7 +2,7 @@ import {
   EpisodeResponseWeb,
   LocalizedStringImpl,
 } from "@talentdigital/api-client";
-import { ApiClient, Badges, BadgesStorage, ID } from "./interfaces";
+import { Badges, BadgesStorage } from "./interfaces";
 import StorageService from "./storage.service";
 
 class Badge {
@@ -31,10 +31,10 @@ class Badge {
    * @param storage
    * @returns Record<Badge["id"], Badge>
    */
-  static async createForEpisode(
+  static createForEpisode(
     info: EpisodeResponseWeb,
     storage: StorageService
-  ): Promise<Badges> {
+  ): Badges {
     if (!info?.badges) return {};
 
     return Object.fromEntries(

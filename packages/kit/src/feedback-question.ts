@@ -15,30 +15,30 @@ class FeedbackQuestion {
     private episodeId: string
   ) {}
 
-  static async createForEpisode(
-    id: ID,
+  static createForEpisode(
+    { season, episode }: ID,
     info: EpisodeResponseWeb,
     api: ApiClient
-  ): Promise<FeedbackQuestions> {
+  ): FeedbackQuestions {
     if (!info?.feedbackQuestions) {
       return {};
     }
 
     return Object.fromEntries(
-      info.feedbackQuestions.map((question) => {
+      info.feedbackQuestions.map(({ id, question, answers }) => {
         return [
-          question.id,
+          id,
           new FeedbackQuestion(
-            question.id as string,
-            question.question as LocalizedStringImpl,
-            question.answers as Record<string, Record<string, string>>,
+            id as string,
+            question as LocalizedStringImpl,
+            answers as Record<string, Record<string, string>>,
             api,
-            id.season,
-            id.episode
+            season,
+            episode
           ),
         ];
       })
-    );
+    ) as FeedbackQuestions;
   }
 
   /**
