@@ -3,7 +3,6 @@ import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
 import Badge from "./badge";
 import Engagement from "./engagement";
-import Episode from "./episode";
 import FeedbackQuestion from "./feedback-question";
 import "./interfaces";
 import {
@@ -159,10 +158,12 @@ class TalentKit {
 
     if (!apiClient) throw new Error(`Coudn't initialize the library`);
 
-    const episode: EpisodeResponseWeb = await Episode.getForEpisode(
-      id,
-      apiClient
+    const { data: episode } = await apiClient.domainModelSeasons.getEpisode(
+      id.season,
+      id.episode,
+      { format: "json" }
     );
+
     const tests: Tests = Test.createForEpisode(id, episode, apiClient);
     const feedbackQuestions: FeedbackQuestions =
       await FeedbackQuestion.createForEpisode(id, episode, apiClient);
