@@ -1,6 +1,6 @@
 {
   "name": "@talentdigital/kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "talent::digital Software Development Kit",
   "type": "module",
   "files": [
@@ -40,6 +40,6 @@
     "keycloak-js": "^19.0.3"
   },
   "dependencies": {
-    "@talentdigital/api-client": "workspace:^0.1.0"
+    "@talentdigital/api-client": "workspace:^0.2.0"
   }
 }
