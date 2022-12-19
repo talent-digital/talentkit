@@ -23,6 +23,7 @@
   "license": "SEE LICENSE IN LICENCE.md",
   "devDependencies": {
     "@modyfi/vite-plugin-yaml": "^1.0.3",
+    "@talentdigital/season": "workspace:^0.2.0",
     "@types/node": "^18.7.18",
     "eslint-config-custom": "workspace:*",
     "happy-dom": "^7.7.0",
@@ -36,8 +37,8 @@
     "vitest": "^0.23.2"
   },
   "peerDependencies": {
-    "logrocket": "^3.0.1",
-    "keycloak-js": "^19.0.3"
+    "keycloak-js": "^19.0.3",
+    "logrocket": "^3.0.1"
   },
   "dependencies": {
     "@talentdigital/api-client": "workspace:^0.2.0"

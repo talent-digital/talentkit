@@ -17,7 +17,7 @@ competenceAreas:
             testItems:
               "costToSolution":
                 episode: "1"
-                level: FOUNDATION
+                level: BEGINNER
                 documentation:
                   de: Ich habe eine Gelegenheit zu einer lösungsorientierten Diskussion erzeugt.
                   en: I opened an opportunity for a solution-oriented discussion.

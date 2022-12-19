@@ -1,5 +1,5 @@
 import TalentKit from ".";
-import { SeasonDefinition } from "./season";
+import { SeasonDefinition } from "@talentdigital/season";
 import season from "./season.yml";
 
 const seasonDefinition = season as SeasonDefinition;
