@@ -378,7 +378,7 @@ export interface EpisodeResponseWeb {
 export interface FeedbackQuestionResponseWeb {
   id?: string;
   question?: LocalizedStringImpl;
-  answers?: Record<string, Record<string, string>>;
+  answers?: Record<string, LocalizedStringImpl>;
 }
 
 export interface SeasonResponseWeb {
