@@ -19,7 +19,7 @@ importers:
       '@modyfi/vite-plugin-yaml': ^1.0.3
       '@talentdigital/kit': workspace:*
       '@talentdigital/react': workspace:*
-      '@talentdigital/season': workspace:^0.3.0
+      '@talentdigital/season': workspace:*
       '@types/react': ^18.0.17
       '@types/react-dom': ^18.0.6
       '@vitejs/plugin-react': ^2.1.0
