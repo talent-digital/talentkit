@@ -383,6 +383,7 @@ export interface FeedbackQuestionResponseWeb {
 
 export interface SeasonResponseWeb {
   id?: string;
+  assetsURL?: string;
   title?: LocalizedStringImpl;
   info?: LocalizedStringImpl;
   seasonEndMessage?: LocalizedStringImpl;
