@@ -19,7 +19,7 @@ importers:
       '@modyfi/vite-plugin-yaml': ^1.0.3
       '@talentdigital/kit': workspace:*
       '@talentdigital/react': workspace:*
-      '@talentdigital/season': workspace:^0.2.0
+      '@talentdigital/season': workspace:^0.3.0
       '@types/react': ^18.0.17
       '@types/react-dom': ^18.0.6
       '@vitejs/plugin-react': ^2.1.0
@@ -81,7 +81,7 @@ importers:
     specifiers:
       '@modyfi/vite-plugin-yaml': ^1.0.3
       '@talentdigital/api-client': workspace:^0.2.0
-      '@talentdigital/season': workspace:^0.2.0
+      '@talentdigital/season': workspace:*
       '@types/node': ^18.7.18
       eslint-config-custom: workspace:*
       happy-dom: ^7.7.0

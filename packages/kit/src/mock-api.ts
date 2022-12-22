@@ -54,12 +54,6 @@ export const createCustomFetch =
     }
   };
 
-const levelMap: Record<Level, TestItem["level"]> = {
-  BEGINNER: "FOUNDATION",
-  INTERMEDIATE: "INTERMEDIATE",
-  ADVANCED: "ADVANCED",
-};
-
 const extractTestItems = (
   competenceAreas: SeasonDefinition["competenceAreas"],
   { episode }: ID
@@ -72,7 +66,7 @@ const extractTestItems = (
               .filter(([_, testItem]) => testItem.episode === episode)
               .map(([testItemId, { level, documentation }]) => ({
                 id: testItemId,
-                level: levelMap[level],
+                level,
                 documentation,
               }))
           : []
