@@ -123,7 +123,7 @@ export interface TestItem {
  * The available difficulty levels of tests.
  */
 export enum Level {
-  Foundation = "BEGINNER",
+  Foundation = "FOUNDATION",
   Intermediate = "INTERMEDIATE",
   Advanced = "ADVANCED",
 }
@@ -246,16 +246,16 @@ export interface Badge {
 
 /**
  * The maturity of the episode.
- * * "pending": Still under development.
- * * "alpha": Ready for alpha testing (e.g., first guided testing to determine usability issues).
- * * "beta": Ready for beta testing (e.g., unguided testing to determine test item differentiation).
- * * "public": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.
+ * * "PENDING": Still under development.
+ * * "ALPHA": Ready for alpha testing (e.g., first guided testing to determine usability issues).
+ * * "BETA": Ready for beta testing (e.g., unguided testing to determine test item differentiation).
+ * * "PUBLIC": Generally available for anyone to play it, if it has been unlocked by the administrator of the organisation.
  */
 export enum Maturity {
-  Pending = "pending",
-  Alpha = "alpha",
-  Beta = "beta",
-  Public = "public",
+  Pending = "PENDING",
+  Alpha = "ALPHA",
+  Beta = "BETA",
+  Public = "PUBLIC",
 }
 
 /**
