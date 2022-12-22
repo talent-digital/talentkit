@@ -2,7 +2,7 @@ import { Api } from "@talentdigital/api-client";
 import Keycloak, { KeycloakConfig } from "keycloak-js";
 import Badge from "./badge";
 import FeedbackQuestion from "./feedback-question";
-import { SeasonDefinition } from "./season";
+import { SeasonDefinition } from "@talentdigital/season";
 import Test from "./test";
 
 export interface Config {

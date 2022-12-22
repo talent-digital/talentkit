@@ -9,7 +9,7 @@ export const useTdSdk = ({ tenant }: Config) => {
   useEffect(() => {
     if (!kit && !pending) {
       pending = true;
-      TalentKit.create({ tenant }).then((newKit) => {
+      void TalentKit.create({ tenant }).then((newKit) => {
         pending = false;
         if (newKit) setKit(newKit);
       });

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { EpisodeResponseWeb, TestItem } from "@talentdigital/api-client";
+import { Level, SeasonDefinition } from "@talentdigital/season";
 import { ID } from "./interfaces";
-import { SeasonDefinition } from "./season";
 
 export const createCustomFetch =
   (seasonDefinition: SeasonDefinition) =>
@@ -12,10 +13,23 @@ export const createCustomFetch =
     let m;
 
     if (method === "GET") {
-      if ((m = /season\/.+\/episode\/(.+)/.exec(fullPath)) !== null) {
-        const id = m[1];
-        const episode = seasonDefinition.episodes[id];
-        if (!episode) throw `Episode ${id} not found`;
+      if ((m = /season\/(.+)\/episode\/(.+)/.exec(fullPath)) !== null) {
+        const id: ID = { season: m[1], episode: m[2] };
+        const episodeDefinition = seasonDefinition.episodes[id.episode];
+
+        if (!episodeDefinition) throw `Episode ${id.episode} not found`;
+
+        const episode: EpisodeResponseWeb = { ...episodeDefinition };
+
+        episode.testItems = extractTestItems(
+          seasonDefinition.competenceAreas,
+          id
+        );
+
+        episode.feedbackQuestions = extractFeedbackQuestions(
+          seasonDefinition.competenceAreas,
+          id
+        );
 
         return Promise.resolve(new Response(JSON.stringify(episode)));
       }
@@ -42,29 +56,40 @@ export const createCustomFetch =
 
 const extractTestItems = (
   competenceAreas: SeasonDefinition["competenceAreas"],
-  { season, episode }: ID
-) =>
-  Object.entries(competenceAreas).map(
-    ([competenceAreaId, { competences }]) => ({
-      competenceAreaId,
-      tests: Object.entries(competences).flatMap(
-        ([_competenceId, { subCompetences }]) =>
-          Object.entries(subCompetences)
-            .flatMap(([subCompetenceId, { name: _name, testItems }]) =>
-              testItems
-                ? Object.entries(testItems).map(
-                    ([testItemId, { level, documentation, episode }]) => ({
-                      id: `season${season}episode${episode}.${testItemId}`,
-                      subCompetenceId,
-                      description: JSON.stringify(documentation),
-                      level,
-                      episode,
-                      result: 0,
-                    })
-                  )
-                : []
-            )
-            .filter((testItem) => testItem.episode === episode)
-      ),
-    })
+  { episode }: ID
+): EpisodeResponseWeb["testItems"] =>
+  Object.entries(competenceAreas).flatMap(([_, { competences }]) =>
+    Object.entries(competences).flatMap(([_, { subCompetences }]) =>
+      Object.entries(subCompetences).flatMap(([_, { testItems }]) =>
+        testItems
+          ? Object.entries(testItems)
+              .filter(([_, testItem]) => testItem.episode === episode)
+              .map(([testItemId, { level, documentation }]) => ({
+                id: testItemId,
+                level,
+                documentation,
+              }))
+          : []
+      )
+    )
+  );
+
+const extractFeedbackQuestions = (
+  competenceAreas: SeasonDefinition["competenceAreas"],
+  { episode }: ID
+): EpisodeResponseWeb["feedbackQuestions"] =>
+  Object.entries(competenceAreas).flatMap(([_, { competences }]) =>
+    Object.entries(competences).flatMap(([_, { subCompetences }]) =>
+      Object.entries(subCompetences).flatMap(([_, { feedbackItems }]) =>
+        feedbackItems
+          ? Object.entries(feedbackItems)
+              .filter(([_, feedbackItem]) => feedbackItem.episode === episode)
+              .map(([feedbackItemId, { question, answers }]) => ({
+                id: feedbackItemId,
+                question,
+                answers,
+              }))
+          : []
+      )
+    )
   );

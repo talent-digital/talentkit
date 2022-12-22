@@ -11,7 +11,7 @@ importers:
     devDependencies:
       '@changesets/cli': 2.25.0
       eslint-config-custom: link:packages/eslint-config-custom
-      prettier: 2.8.0
+      prettier: 2.8.1
       turbo: 1.6.3
 
   apps/canary:
@@ -19,7 +19,7 @@ importers:
       '@modyfi/vite-plugin-yaml': ^1.0.3
       '@talentdigital/kit': workspace:*
       '@talentdigital/react': workspace:*
-      '@talentdigital/season': workspace:^0.1.1
+      '@talentdigital/season': workspace:*
       '@types/react': ^18.0.17
       '@types/react-dom': ^18.0.6
       '@vitejs/plugin-react': ^2.1.0
@@ -73,14 +73,15 @@ importers:
       '@typescript-eslint/parser': 5.42.1_ciqzk3345glprn4wdzy7y3tjny
       eslint: 8.27.0
       eslint-config-prettier: 8.5.0_eslint@8.27.0
-      eslint-config-turbo: 0.0.4_eslint@8.27.0
+      eslint-config-turbo: 0.0.7_eslint@8.27.0
       tsconfig: link:../tsconfig
       typescript: 4.8.3
 
   packages/kit:
     specifiers:
       '@modyfi/vite-plugin-yaml': ^1.0.3
-      '@talentdigital/api-client': workspace:^0.1.0
+      '@talentdigital/api-client': workspace:^0.2.0
+      '@talentdigital/season': workspace:*
       '@types/node': ^18.7.18
       eslint-config-custom: workspace:*
       happy-dom: ^7.7.0
@@ -96,6 +97,7 @@ importers:
       '@talentdigital/api-client': link:../api-client
     devDependencies:
       '@modyfi/vite-plugin-yaml': 1.0.3_vite@3.1.1
+      '@talentdigital/season': link:../season
       '@types/node': 18.7.18
       eslint-config-custom: link:../eslint-config-custom
       happy-dom: 7.7.0
@@ -435,7 +437,7 @@ packages:
       fs-extra: 7.0.1
       lodash.startcase: 4.4.0
       outdent: 0.5.0
-      prettier: 2.8.0
+      prettier: 2.8.1
       resolve-from: 5.0.0
       semver: 5.7.1
     dev: true
@@ -602,7 +604,7 @@ packages:
       '@changesets/types': 5.2.0
       fs-extra: 7.0.1
       human-id: 1.0.2
-      prettier: 2.8.0
+      prettier: 2.8.1
     dev: true
 
   /@esbuild/linux-loong64/0.15.7:
@@ -1910,19 +1912,19 @@ packages:
       eslint: 8.27.0
     dev: false
 
-  /eslint-config-turbo/0.0.4_eslint@8.27.0:
-    resolution: {integrity: sha512-HErPS/wfWkSdV9Yd2dDkhZt3W2B78Ih/aWPFfaHmCMjzPalh+5KxRRGTf8MOBQLCebcWJX0lP1Zvc1rZIHlXGg==}
+  /eslint-config-turbo/0.0.7_eslint@8.27.0:
+    resolution: {integrity: sha512-WbrGlyfs94rOXrhombi1wjIAYGdV2iosgJRndOZtmDQeq5GLTzYmBUCJQZWtLBEBUPCj96RxZ2OL7Cn+xv/Azg==}
     peerDependencies:
-      eslint: ^7.23.0 || ^8.0.0
+      eslint: '>6.6.0'
     dependencies:
       eslint: 8.27.0
-      eslint-plugin-turbo: 0.0.4_eslint@8.27.0
+      eslint-plugin-turbo: 0.0.7_eslint@8.27.0
     dev: false
 
-  /eslint-plugin-turbo/0.0.4_eslint@8.27.0:
-    resolution: {integrity: sha512-dfmYE/iPvoJInQq+5E/0mj140y/rYwKtzZkn3uVK8+nvwC5zmWKQ6ehMWrL4bYBkGzSgpOndZM+jOXhPQ2m8Cg==}
+  /eslint-plugin-turbo/0.0.7_eslint@8.27.0:
+    resolution: {integrity: sha512-iajOH8eD4jha3duztGVBD1BEmvNrQBaA/y3HFHf91vMDRYRwH7BpHSDFtxydDpk5ghlhRxG299SFxz7D6z4MBQ==}
     peerDependencies:
-      eslint: ^7.23.0 || ^8.0.0
+      eslint: '>6.6.0'
     dependencies:
       eslint: 8.27.0
     dev: false
@@ -3321,8 +3323,8 @@ packages:
     hasBin: true
     dev: true
 
-  /prettier/2.8.0:
-    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
+  /prettier/2.8.1:
+    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
