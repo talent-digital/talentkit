@@ -1,6 +1,6 @@
 {
   "name": "@talentdigital/season",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "TypeScript type and JSON schema definition for talent::digital season definition",
   "files": [
     "dist"

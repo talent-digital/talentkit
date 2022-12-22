@@ -1,5 +1,11 @@
 # @talentdigital/season
 
+## 0.3.0
+
+### Minor Changes
+
+- 570c32b: Fix season schema
+
 ## 0.2.0
 
 ### Minor Changes

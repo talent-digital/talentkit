@@ -123,7 +123,7 @@ export interface TestItem {
  * The available difficulty levels of tests.
  */
 export enum Level {
-  Foundation = "BEGINNER",
+  Foundation = "FOUNDATION",
   Intermediate = "INTERMEDIATE",
   Advanced = "ADVANCED",
 }
