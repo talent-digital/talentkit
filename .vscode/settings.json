@@ -1,6 +1,0 @@
-{
-    "yaml.schemas": {
-        "/home/avanderbergh/ghq/github.com/talent-digital/talentkit/packages/season/dist/SeasonDefinition.json": "file:///home/avanderbergh/ghq/github.com/talent-digital/talentkit/packages/season/season.yaml",
-        "https://json.schemastore.org/github-workflow.json": "file:///home/avanderbergh/ghq/github.com/talent-digital/talentkit/.github/workflows/deploy.yml"
-    }
-}
