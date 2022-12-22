@@ -1,5 +1,13 @@
 # @talentdigital/season
 
+## 0.4.0
+
+### Minor Changes
+
+- 120b6e6: Update the season definition.
+  Fix offline development and unit tests.
+  Fix linting errors
+
 ## 0.3.0
 
 ### Minor Changes
