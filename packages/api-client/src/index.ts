@@ -367,6 +367,7 @@ export interface EpisodeResponseWeb {
   title?: LocalizedStringImpl;
   description?: LocalizedStringImpl;
   maturity?: "PENDING" | "ALPHA" | "BETA" | "PUBLIC";
+  assetsURL?: string;
   imageUrl?: string;
   format?: string;
   formatConfiguration?: string;
