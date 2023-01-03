@@ -7,6 +7,7 @@
     "dist"
   ],
   "module": "./dist/react.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/react.js"
