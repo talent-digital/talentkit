@@ -3,6 +3,19 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App({ kit }: { kit: TalentKit }) {
+  useEffect(() => {
+    if (!kit) return;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+    kit.assets
+      .get("s01_e01.toml")
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
+
   const [badges, setBadges] = useState(Object.values(kit.badges));
   const [savegame, setSavegame] = useState(kit.savegame.load());
 

@@ -20,9 +20,9 @@ import StorageService from "./storage.service";
 import Test from "./test";
 import Tracker from "./tracker";
 
-import yaml from "yaml";
-import toml from "toml";
 import { marked } from "marked";
+import toml from "toml";
+import yaml from "yaml";
 
 export const applicationId = "talentApplicationProfileTwo";
 
@@ -73,14 +73,19 @@ class TalentKit {
       let textContent: string;
 
       try {
-        const res = await fetch(this.assets.getUrl(file));
+        const res = await fetch(this.assets.getUrl(file), { mode: "no-cors" });
+
+        if (!(res.status === 200)) {
+          throw new Error(`Could not fetch data. HTML status: ${res.status}`);
+        }
 
         textContent = await res.text();
+        if (!textContent) throw new Error("File is empty!");
       } catch (err) {
         throw err;
       }
 
-      if (!textContent) throw new Error("File is empty!");
+      console.log(textContent);
 
       switch (fileExtension) {
         case "json":

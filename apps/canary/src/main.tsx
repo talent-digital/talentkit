@@ -10,7 +10,7 @@ const seasonDefinition = season as SeasonDefinition;
 
 const kit = await TalentKit.create({
   tenant: "devtd2",
-  seasonDefinition,
+  // seasonDefinition,
   // localBackendURL: "http://localhost:8081",
 });
 
