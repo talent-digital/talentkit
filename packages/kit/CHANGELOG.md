@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.8.0
+
+### Minor Changes
+
+- 5fe815c: Add episodeConfiguration downloader
+
 ## 0.7.1
 
 ### Patch Changes
