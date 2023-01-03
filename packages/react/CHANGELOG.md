@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.3.0
+
+### Minor Changes
+
+- ac8e0c0: Fix type imports
+
+### Patch Changes
+
+- Updated dependencies [ac8e0c0]
+  - @talentdigital/kit@0.4.0
+
 ## 0.2.0
 
 ### Minor Changes

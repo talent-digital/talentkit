@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.4.0
+
+### Minor Changes
+
+- ac8e0c0: Fix type imports
+
 ## 0.3.0
 
 ### Minor Changes
