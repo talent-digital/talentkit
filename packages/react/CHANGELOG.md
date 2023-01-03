@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.6.0
+
+### Minor Changes
+
+- 459dcca: Make kit external on react package
+
+### Patch Changes
+
+- Updated dependencies [459dcca]
+  - @talentdigital/kit@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes

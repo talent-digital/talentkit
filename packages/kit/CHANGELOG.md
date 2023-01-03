@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.6.0
+
+### Minor Changes
+
+- 459dcca: Make kit external on react package
+
 ## 0.5.0
 
 ### Minor Changes
