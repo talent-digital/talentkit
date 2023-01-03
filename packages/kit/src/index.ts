@@ -77,6 +77,11 @@ class TalentKit {
     private episode: EpisodeResponseWeb,
 
     /**
+     * The episode's configuration as a string
+     */
+    public episodeConfiguration: string | undefined,
+
+    /**
      * All badges available in the current episode
      */
     public badges: Badges,
@@ -163,6 +168,19 @@ class TalentKit {
       { format: "json" }
     );
 
+    let episodeConfiguration: string | undefined;
+    if (episode.assetsURL && episode.formatConfiguration) {
+      try {
+        const res = await fetch(
+          `${episode.assetsURL}/${episode.formatConfiguration}`,
+          { mode: "no-cors" }
+        );
+        episodeConfiguration = await res.text();
+      } catch (err) {
+        console.error("No episode configuration found");
+      }
+    }
+
     const tests: Tests = Test.createForEpisode(id, episode, apiClient);
     const feedbackQuestions: FeedbackQuestions =
       FeedbackQuestion.createForEpisode(id, episode, apiClient);
@@ -184,6 +202,7 @@ class TalentKit {
     return new TalentKit(
       apiClient,
       episode,
+      episodeConfiguration,
       badges,
       tests,
       feedbackQuestions,
