@@ -4,7 +4,6 @@ import { AuthService } from "./auth.service";
 import Badge from "./badge";
 import Engagement from "./engagement";
 import FeedbackQuestion from "./feedback-question";
-import "./interfaces";
 import {
   ApiClient,
   Badges,
@@ -197,4 +196,5 @@ class TalentKit {
   }
 }
 
+export type { Config };
 export default TalentKit;
