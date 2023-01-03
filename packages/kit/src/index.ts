@@ -20,6 +20,10 @@ import StorageService from "./storage.service";
 import Test from "./test";
 import Tracker from "./tracker";
 
+import yaml from "yaml";
+import toml from "toml";
+import { marked } from "marked";
+
 export const applicationId = "talentApplicationProfileTwo";
 
 const defaultProfile = {
@@ -52,6 +56,52 @@ const getIdFromUrlParams = (): ID => {
  * @example const sdk = await TdSdk.create(config);
  */
 class TalentKit {
+  assets = {
+    getUrl: (filename: string): string => {
+      if (!this.episode?.assetsURL)
+        throw new Error("Assets URL is not defined");
+
+      return `${this.episode.assetsURL}/${filename}`;
+    },
+
+    get: async <T = unknown>(file: string): Promise<T> => {
+      const fileExtension = file.slice(file.lastIndexOf(".") + 1);
+
+      if (!fileExtension)
+        throw new Error("The filename must include the file extension");
+
+      let textContent: string;
+
+      try {
+        const res = await fetch(this.assets.getUrl(file));
+
+        textContent = await res.text();
+      } catch (err) {
+        throw err;
+      }
+
+      if (!textContent) throw new Error("File is empty!");
+
+      switch (fileExtension) {
+        case "json":
+          return JSON.parse(textContent) as T;
+
+        case "md":
+          return marked(textContent) as T;
+
+        case "toml":
+          return toml.parse(textContent) as T;
+
+        case "yaml":
+        case "yml":
+          return yaml.parse(textContent) as T;
+
+        default:
+          return textContent as T;
+      }
+    },
+  };
+
   events = {
     /**
      * @description Mark the episode as completed and return to the dashboard
