@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.7.0
+
+### Minor Changes
+
+- 188f8d0: React exports type
+
 ## 0.6.0
 
 ### Minor Changes
