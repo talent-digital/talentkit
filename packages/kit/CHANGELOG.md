@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.5.0
+
+### Minor Changes
+
+- 210207b: Fix react package.json, Link packages
+
 ## 0.4.0
 
 ### Minor Changes
