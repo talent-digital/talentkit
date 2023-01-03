@@ -1,13 +1,23 @@
 {
   "name": "@talentdigital/react",
   "version": "0.3.0",
+  "description": "React hooks and components for the talent::digital Software Development Kit",
   "type": "module",
-  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/react.js",
+  "exports": {
+    ".": {
+      "import": "./dist/react.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsc && vite build"
   },
+  "author": "talent::digital",
+  "license": "SEE LICENSE IN LICENCE.md",
   "dependencies": {
     "@talentdigital/kit": "workspace:*",
     "react": "^18.2.0",
