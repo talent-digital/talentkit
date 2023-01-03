@@ -1,5 +1,11 @@
 # @talentdigital/react
 
+## 0.2.0
+
+### Minor Changes
+
+- b3f057a: Publish React Package
+
 ## 0.1.0
 
 ### Minor Changes
