@@ -1,5 +1,11 @@
 # @talentdigital/react
 
+## 0.7.1
+
+### Patch Changes
+
+- @talentdigital/kit@0.7.1
+
 ## 0.7.0
 
 ### Minor Changes
