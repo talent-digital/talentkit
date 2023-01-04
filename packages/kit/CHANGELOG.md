@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.9.0
+
+### Minor Changes
+
+- 1cffd28: Add asset loading helper and parser. Download episode config when kit is created
+
 ## 0.8.0
 
 ### Minor Changes
