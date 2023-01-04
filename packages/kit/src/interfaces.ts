@@ -4,6 +4,7 @@ import Badge from "./badge";
 import FeedbackQuestion from "./feedback-question";
 import { SeasonDefinition } from "@talentdigital/season";
 import Test from "./test";
+import { supportedExtensions } from "./helpers";
 
 export interface Config {
   tenant?: string;
@@ -79,3 +80,5 @@ export interface EngagementPointsStorage {
 export type SeasonsStorage = Record<string, Record<string, unknown>>;
 
 export type BadgesStorage = string[];
+
+export type SupportedExtensions = typeof supportedExtensions[number];

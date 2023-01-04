@@ -8,9 +8,15 @@ import { SeasonDefinition } from "@talentdigital/season";
 
 const seasonDefinition = season as SeasonDefinition;
 
-const kit = await TalentKit.create({
+export interface EpisodeConfiguration {
+  backgroundImage: string;
+  introText: string;
+  questions: any[];
+}
+
+const kit = await TalentKit.create<EpisodeConfiguration>({
   tenant: "devtd2",
-  seasonDefinition,
+  // seasonDefinition,
   // localBackendURL: "http://localhost:8081",
 });
 
