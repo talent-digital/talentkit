@@ -1,8 +1,8 @@
 /// <reference types="vitest" />
-import { defineConfig } from "vite";
-import { resolve } from "path";
-import dts from "vite-plugin-dts";
 import ViteYaml from "@modyfi/vite-plugin-yaml";
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   build: {
@@ -13,7 +13,15 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["keycloak-js", "ky"],
+      external: [
+        "@talentdigital/api-client",
+        "keycloak-js",
+        "ky",
+        "marked",
+        "toml",
+        "yaml",
+        "logrocket",
+      ],
     },
   },
   plugins: [dts(), ViteYaml()],
