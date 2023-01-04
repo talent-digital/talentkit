@@ -4,6 +4,7 @@ import { AuthService } from "./auth.service";
 import Badge from "./badge";
 import Engagement from "./engagement";
 import FeedbackQuestion from "./feedback-question";
+import { parseContent } from "./helpers";
 import {
   ApiClient,
   Badges,
@@ -19,10 +20,6 @@ import Savegame from "./savegame";
 import StorageService from "./storage.service";
 import Test from "./test";
 import Tracker from "./tracker";
-
-import { marked } from "marked";
-import toml from "toml";
-import yaml from "yaml";
 
 export const applicationId = "talentApplicationProfileTwo";
 
@@ -55,9 +52,10 @@ const getIdFromUrlParams = (): ID => {
  * @description To create a new sdk, use the create method.
  * @example const sdk = await TdSdk.create(config);
  */
-class TalentKit {
+class TalentKit<T = unknown> {
   assets = {
     getUrl: (filename: string): string => {
+      console.log("episode", this.episode);
       if (!this.episode?.assetsURL)
         throw new Error("Assets URL is not defined");
 
@@ -65,15 +63,10 @@ class TalentKit {
     },
 
     get: async <T = unknown>(file: string): Promise<T> => {
-      const fileExtension = file.slice(file.lastIndexOf(".") + 1);
-
-      if (!fileExtension)
-        throw new Error("The filename must include the file extension");
-
       let textContent: string;
 
       try {
-        const res = await fetch(this.assets.getUrl(file), { mode: "no-cors" });
+        const res = await fetch(this.assets.getUrl(file));
 
         if (!(res.status === 200)) {
           throw new Error(`Could not fetch data. HTML status: ${res.status}`);
@@ -85,25 +78,7 @@ class TalentKit {
         throw err;
       }
 
-      console.log(textContent);
-
-      switch (fileExtension) {
-        case "json":
-          return JSON.parse(textContent) as T;
-
-        case "md":
-          return marked(textContent) as T;
-
-        case "toml":
-          return toml.parse(textContent) as T;
-
-        case "yaml":
-        case "yml":
-          return yaml.parse(textContent) as T;
-
-        default:
-          return textContent as T;
-      }
+      return parseContent<T>({ content: textContent, fileName: file });
     },
   };
 
@@ -130,11 +105,6 @@ class TalentKit {
      * All info about episode
      */
     private episode: EpisodeResponseWeb,
-
-    /**
-     * The episode's configuration as a string
-     */
-    public episodeConfiguration: string | undefined,
 
     /**
      * All badges available in the current episode
@@ -178,6 +148,11 @@ class TalentKit {
     readonly profile: ProfileStorage,
 
     /**
+     * The episode's configuration as a string
+     */
+    public episodeConfiguration?: T,
+
+    /**
      * Track user events and captures session replays
      */
     readonly tracker?: Tracker
@@ -188,7 +163,7 @@ class TalentKit {
    * @param config
    * @returns TalentKit
    */
-  static async create(config: Config) {
+  static async create<T = unknown>(config: Config) {
     let auth: AuthService | undefined;
     let apiClient: ApiClient;
     let storage: StorageService;
@@ -223,17 +198,24 @@ class TalentKit {
       { format: "json" }
     );
 
-    let episodeConfiguration: string | undefined;
+    let configString: string | undefined;
     if (episode.assetsURL && episode.formatConfiguration) {
       try {
         const res = await fetch(
-          `${episode.assetsURL}/${episode.formatConfiguration}`,
-          { mode: "no-cors" }
+          `${episode.assetsURL}/${episode.formatConfiguration}`
         );
-        episodeConfiguration = await res.text();
+        configString = await res.text();
       } catch (err) {
         console.error("No episode configuration found");
       }
+    }
+
+    let episodeConfiguration: T | undefined;
+    if (configString) {
+      episodeConfiguration = parseContent<T>({
+        content: configString,
+        fileName: episode.formatConfiguration,
+      });
     }
 
     const tests: Tests = Test.createForEpisode(id, episode, apiClient);
@@ -254,10 +236,9 @@ class TalentKit {
       );
     }
 
-    return new TalentKit(
+    return new TalentKit<T>(
       apiClient,
       episode,
-      episodeConfiguration,
       badges,
       tests,
       feedbackQuestions,
@@ -265,6 +246,7 @@ class TalentKit {
       engagement,
       id,
       profileStorage,
+      episodeConfiguration,
       tracker
     );
   }

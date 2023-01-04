@@ -1,19 +1,12 @@
 import TalentKit from "@talentdigital/kit";
 import { useEffect, useState } from "react";
 import "./App.css";
+import { EpisodeConfiguration } from "./main";
 
-function App({ kit }: { kit: TalentKit }) {
+function App({ kit }: { kit: TalentKit<EpisodeConfiguration> }) {
   useEffect(() => {
     if (!kit) return;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    kit.assets
-      .get("s01_e01.toml")
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        throw err;
-      });
+    console.log(kit.episodeConfiguration);
   }, []);
 
   const [badges, setBadges] = useState(Object.values(kit.badges));
@@ -27,6 +20,7 @@ function App({ kit }: { kit: TalentKit }) {
   return (
     <div className="App">
       <h1>Hello {kit.profile.playerName}</h1>
+      <p>{kit.episodeConfiguration?.introText}</p>
       <pre>{JSON.stringify(savegame)}</pre>
       <div>
         {Object.values(kit.tests)
