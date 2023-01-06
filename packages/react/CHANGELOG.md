@@ -1,5 +1,11 @@
 # @talentdigital/react
 
+## 0.10.0
+
+### Minor Changes
+
+- a56f968: Add type paramter to useKit hook
+
 ## 0.9.0
 
 ### Patch Changes
