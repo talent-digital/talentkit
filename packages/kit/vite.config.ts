@@ -13,7 +13,7 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: ["@talentdigital/api-client", "keycloak-js", "ky", "logrocket"],
+      external: ["keycloak-js", "ky", "logrocket"],
     },
     target: ["es2015"],
   },
