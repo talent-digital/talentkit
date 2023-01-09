@@ -10,19 +10,12 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "@talentdigital/kit",
       fileName: "talent-kit",
-      formats: ["es"],
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: [
-        "@talentdigital/api-client",
-        "keycloak-js",
-        "ky",
-        "marked",
-        "toml",
-        "yaml",
-        "logrocket",
-      ],
+      external: ["@talentdigital/api-client", "keycloak-js", "ky", "logrocket"],
     },
+    target: ["es2015"],
   },
   plugins: [dts(), ViteYaml()],
   test: {

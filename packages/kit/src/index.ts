@@ -212,7 +212,7 @@ class TalentKit<T = unknown> {
 
     let episodeConfiguration: T | undefined;
     if (configString) {
-      episodeConfiguration = parseContent<T>({
+      episodeConfiguration = await parseContent<T>({
         content: configString,
         fileName: episode.formatConfiguration,
       });

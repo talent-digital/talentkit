@@ -1,6 +1,3 @@
-import { marked } from "marked";
-import toml from "toml";
-import yaml from "yaml";
 import { SupportedExtensions } from "./interfaces";
 
 const domains = {
@@ -27,7 +24,7 @@ export const supportedExtensions = [
 export const getFileExtension = (fileName: string) =>
   fileName.slice(fileName.lastIndexOf(".") + 1);
 
-export const parseContent = <T = unknown>({
+export const parseContent = async <T = unknown>({
   content,
   fileName,
   fileExtension,
@@ -43,13 +40,16 @@ export const parseContent = <T = unknown>({
       return JSON.parse(content) as T;
 
     case "md":
+      const { marked } = await import("marked");
       return marked(content) as T;
 
     case "toml":
+      const toml = await import("toml");
       return toml.parse(content) as T;
 
     case "yaml":
     case "yml":
+      const yaml = await import("yaml");
       return yaml.parse(content) as T;
 
     default:
