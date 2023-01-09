@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.12.0
+
+### Minor Changes
+
+- f9f0d0d: Modify build settings
+
+### Patch Changes
+
+- Updated dependencies [f9f0d0d]
+  - @talentdigital/kit@0.12.0
+
 ## 0.11.0
 
 ### Patch Changes

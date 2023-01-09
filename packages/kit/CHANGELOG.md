@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.12.0
+
+### Minor Changes
+
+- f9f0d0d: Modify build settings
+
 ## 0.11.0
 
 ### Minor Changes
