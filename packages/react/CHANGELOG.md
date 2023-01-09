@@ -1,5 +1,12 @@
 # @talentdigital/react
 
+## 0.11.0
+
+### Patch Changes
+
+- Updated dependencies [46fb1e8]
+  - @talentdigital/kit@0.11.0
+
 ## 0.10.0
 
 ### Minor Changes

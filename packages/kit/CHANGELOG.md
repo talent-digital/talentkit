@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.11.0
+
+### Minor Changes
+
+- 46fb1e8: lazyload the content parsers
+
 ## 0.9.0
 
 ### Minor Changes
