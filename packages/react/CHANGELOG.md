@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.15.0
+
+### Minor Changes
+
+- 2c5655e: Fix react hook
+
+### Patch Changes
+
+- Updated dependencies [2c5655e]
+  - @talentdigital/kit@0.15.0
+
 ## 0.14.0
 
 ### Minor Changes

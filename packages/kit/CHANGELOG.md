@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.15.0
+
+### Minor Changes
+
+- 2c5655e: Fix react hook
+
 ## 0.12.0
 
 ### Minor Changes
