@@ -126,6 +126,7 @@ export enum Level {
   Foundation = "FOUNDATION",
   Intermediate = "INTERMEDIATE",
   Advanced = "ADVANCED",
+  HighlySpecialized = "HIGHLY_SPECIALISED",
 }
 
 /**
