@@ -1,5 +1,11 @@
 # @talentdigital/season
 
+## 0.5.0
+
+### Minor Changes
+
+- 9054d45: Fix react hook; Fix level enum in season
+
 ## 0.4.0
 
 ### Minor Changes
