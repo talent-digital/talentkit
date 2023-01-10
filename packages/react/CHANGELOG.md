@@ -1,5 +1,11 @@
 # @talentdigital/react
 
+## 0.14.0
+
+### Minor Changes
+
+- c6e526d: Fix kit creation
+
 ## 0.13.0
 
 ### Minor Changes
