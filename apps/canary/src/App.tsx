@@ -1,50 +1,31 @@
-import TalentKit from "@talentdigital/kit";
-import { useEffect, useState } from "react";
+import { useKit } from "@talentdigital/react";
 import "./App.css";
 import { EpisodeConfiguration } from "./main";
 
-function App({ kit }: { kit: TalentKit<EpisodeConfiguration> }) {
-  useEffect(() => {
-    if (!kit) return;
-    console.log(kit.episodeConfiguration);
-  }, []);
+const Child = () => {
+  const kit = useKit<EpisodeConfiguration>();
 
-  const [badges, setBadges] = useState(Object.values(kit.badges));
-  const [savegame, setSavegame] = useState(kit.savegame.load());
+  return <p>{kit?.episodeConfiguration?.introText}</p>;
+};
 
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    kit.savegame.save({ foo: "bar", bar: 100, baz: new Date() });
-  }, []);
+const Image = () => {
+  const kit = useKit<EpisodeConfiguration>();
+
+  const imageUrl = kit?.episodeConfiguration?.backgroundImage
+    ? kit.assets.getUrl(kit.episodeConfiguration.backgroundImage)
+    : "";
+
+  return <img src={imageUrl} />;
+};
+
+function App() {
+  const kit = useKit<EpisodeConfiguration>({ tenant: "devtd2" });
 
   return (
     <div className="App">
-      <h1>Hello {kit.profile.playerName}</h1>
-      <p>{kit.episodeConfiguration?.introText}</p>
-      <pre>{JSON.stringify(savegame)}</pre>
-      <div>
-        {Object.values(kit.tests)
-          .filter((test) => !test.result)
-          .map((test) => (
-            <button key={test.id} onClick={() => void test.pass()}>
-              {test.id}
-            </button>
-          ))}
-      </div>
-      <div>
-        {badges.map((badge) => (
-          <button
-            key={badge.id}
-            style={{ background: badge.awarded ? "red" : "blue" }}
-            onClick={() => {
-              badge.award();
-              setBadges(Object.values(kit.badges));
-            }}
-          >
-            {badge.name.en}
-          </button>
-        ))}
-      </div>
+      {kit ? <p>Hello {kit.profile.playerName}</p> : <p>Loading...</p>}
+      <Child />
+      <Image />
     </div>
   );
 }
