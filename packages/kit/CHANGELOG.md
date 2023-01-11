@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.16.0
+
+### Minor Changes
+
+- 2cecba3: Fix the useKit Hook
+
 ## 0.15.0
 
 ### Minor Changes
