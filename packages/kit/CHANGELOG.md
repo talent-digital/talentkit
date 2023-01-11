@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.17.0
+
+### Minor Changes
+
+- 313f3ce: Redirect back to dashboard after episode end
+
 ## 0.16.0
 
 ### Minor Changes

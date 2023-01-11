@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.17.0
+
+### Minor Changes
+
+- 313f3ce: Redirect back to dashboard after episode end
+
+### Patch Changes
+
+- Updated dependencies [313f3ce]
+  - @talentdigital/kit@0.17.0
+
 ## 0.16.0
 
 ### Minor Changes
