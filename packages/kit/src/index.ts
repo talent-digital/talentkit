@@ -96,6 +96,12 @@ class TalentKit<T = unknown> {
       ];
 
       await this.api.domainModelEvents.saveEvent({ applicationId, events });
+
+      if (this.id.redirectUrl) {
+        window.location.assign(this.id.redirectUrl);
+      } else {
+        window.close();
+      }
     },
   };
 
