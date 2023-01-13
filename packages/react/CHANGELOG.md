@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.18.0
+
+### Minor Changes
+
+- 9a75d2c: Fix feedbackQuestion submit
+
+### Patch Changes
+
+- Updated dependencies [9a75d2c]
+  - @talentdigital/kit@0.18.0
+
 ## 0.17.0
 
 ### Minor Changes

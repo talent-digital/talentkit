@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.18.0
+
+### Minor Changes
+
+- 9a75d2c: Fix feedbackQuestion submit
+
 ## 0.17.0
 
 ### Minor Changes
