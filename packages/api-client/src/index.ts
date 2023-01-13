@@ -305,12 +305,12 @@ export interface BadgeWeb {
 
 export interface CompetenceAreaWeb {
   name?: LocalizedStringImpl;
-  competences?: Record<string, CompetenceWeb>;
+  competences: Record<string, CompetenceWeb>;
 }
 
 export interface CompetenceWeb {
   name?: LocalizedStringImpl;
-  subCompetences?: Record<string, SubCompetenceWeb>;
+  subCompetences: Record<string, SubCompetenceWeb>;
 }
 
 export interface EpisodeWeb {
@@ -351,7 +351,7 @@ export interface SeasonWeb {
 }
 
 export interface SubCompetenceWeb {
-  name?: LocalizedStringImpl;
+  name: LocalizedStringImpl;
   testItems?: Record<string, TestItemWeb>;
   feedbackItems?: Record<string, FeedbackItemWeb>;
 }
