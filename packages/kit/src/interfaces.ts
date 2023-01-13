@@ -82,3 +82,8 @@ export type SeasonsStorage = Record<string, Record<string, unknown>>;
 export type BadgesStorage = string[];
 
 export type SupportedExtensions = typeof supportedExtensions[number];
+
+export interface FeedbackOption {
+  id: number;
+  text: string;
+}

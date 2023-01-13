@@ -3,7 +3,7 @@ import {
   LocalizedStringImpl,
 } from "@talentdigital/api-client";
 import { applicationId } from ".";
-import { ApiClient, FeedbackQuestions, ID } from "./interfaces";
+import { ApiClient, FeedbackOption, FeedbackQuestions, ID } from "./interfaces";
 
 class FeedbackQuestion {
   private constructor(
@@ -43,19 +43,17 @@ class FeedbackQuestion {
 
   /**
    * Submit the feedback question
-   * @param selectedAnswer string
+   * @param option {id: number, text: string}
    * @returns
    */
-  submit(selectedAnswer: string) {
+  submit(option: FeedbackOption) {
     const events = [
       {
         eventTypeId: this.id,
         type: "decision.choose",
         payload: {
           decision: this.id,
-          option: {
-            id: selectedAnswer,
-          },
+          option,
         },
       },
     ];
