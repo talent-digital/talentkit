@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.19.0
+
+### Minor Changes
+
+- af3bea2: Fix an issue when state is empty
+
 ## 0.18.0
 
 ### Minor Changes

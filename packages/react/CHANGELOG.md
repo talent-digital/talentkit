@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.19.0
+
+### Minor Changes
+
+- af3bea2: Fix an issue when state is empty
+
+### Patch Changes
+
+- Updated dependencies [af3bea2]
+  - @talentdigital/kit@0.19.0
+
 ## 0.18.0
 
 ### Minor Changes
