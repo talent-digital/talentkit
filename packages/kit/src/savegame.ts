@@ -15,10 +15,10 @@ class Savegame {
     const episodeStorage = seasonStorage[this.id.episode];
     if (!episodeStorage) return null;
 
-    return episodeStorage.storage;
+    return episodeStorage.savegame;
   }
 
-  save(storage: unknown) {
+  save(savegame: unknown) {
     let savegames = this.storage.getItem<SavegameStorage>(savegameKey) || {};
 
     savegames = {
@@ -27,7 +27,7 @@ class Savegame {
         ...(savegames[this.id.season] || {}),
         [this.id.episode]: {
           ...(savegames[this.id.season]?.[this.id.episode] || {}),
-          storage,
+          savegame,
         },
       },
     };

@@ -80,7 +80,7 @@ export interface EngagementPointsStorage {
 
 export type EpisodeStorage = {
   playcount: number;
-  storage: unknown;
+  savegame: unknown;
 };
 
 export type SeasonStorage = Record<string, EpisodeStorage>;
