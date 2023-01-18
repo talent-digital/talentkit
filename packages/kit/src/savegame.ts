@@ -1,31 +1,37 @@
-import { ID, SeasonsStorage } from "./interfaces";
+import { savegameKey } from ".";
+import { ID, SavegameStorage } from "./interfaces";
 import StorageService from "./storage.service";
-
-const seasonsKey = "SEASONS";
 
 class Savegame {
   constructor(private id: ID, private storage: StorageService) {}
 
   load(): unknown {
-    const data = this.storage.getItem<SeasonsStorage>(seasonsKey);
-    if (!data) return {};
+    const savegames = this.storage.getItem<SavegameStorage>(savegameKey);
+    if (!savegames) return null;
 
-    if (data[this.id.season]) {
-      return data[this.id.season][this.id.episode];
-    }
+    const seasonStorage = savegames[this.id.season];
+    if (!seasonStorage) return null;
+
+    const episodeStorage = seasonStorage[this.id.episode];
+    if (!episodeStorage) return null;
+
+    return episodeStorage.storage;
   }
 
-  save(payload: unknown) {
-    let data = this.storage.getItem<SeasonsStorage>(seasonsKey) || {};
+  save(storage: unknown) {
+    let savegames = this.storage.getItem<SavegameStorage>(savegameKey) || {};
 
-    data = {
-      ...data,
+    savegames = {
+      ...savegames,
       [this.id.season]: {
-        ...data[this.id.season],
-        [this.id.episode]: payload,
+        ...(savegames[this.id.season] || {}),
+        [this.id.episode]: {
+          ...(savegames[this.id.season]?.[this.id.episode] || {}),
+          storage,
+        },
       },
     };
-    this.storage.setItem(seasonsKey, data);
+    this.storage.setItem(savegameKey, savegames);
   }
 }
 

@@ -5,6 +5,7 @@ import FeedbackQuestion from "./feedback-question";
 import { SeasonDefinition } from "@talentdigital/season";
 import Test from "./test";
 import { supportedExtensions } from "./helpers";
+import { type } from "os";
 
 export interface Config {
   tenant?: string;
@@ -77,7 +78,14 @@ export interface EngagementPointsStorage {
   linksOpened: Record<string, string[]>;
 }
 
-export type SeasonsStorage = Record<string, Record<string, unknown>>;
+export type EpisodeStorage = {
+  playcount: number;
+  storage: unknown;
+};
+
+export type SeasonStorage = Record<string, EpisodeStorage>;
+
+export type SavegameStorage = Record<string, SeasonStorage>;
 
 export type BadgesStorage = string[];
 

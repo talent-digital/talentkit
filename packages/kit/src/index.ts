@@ -3,6 +3,7 @@ import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
 import Badge from "./badge";
 import Engagement from "./engagement";
+import Events from "./events";
 import FeedbackQuestion from "./feedback-question";
 import { parseContent } from "./helpers";
 import {
@@ -22,6 +23,7 @@ import Test from "./test";
 import Tracker from "./tracker";
 
 export const applicationId = "talentApplicationProfileTwo";
+export const savegameKey = "SEASONS";
 
 const defaultProfile = {
   id: "player",
@@ -82,29 +84,6 @@ class TalentKit<T = unknown> {
     },
   };
 
-  events = {
-    /**
-     * @description Mark the episode as completed and return to the dashboard
-     */
-    end: async () => {
-      const events = [
-        {
-          eventTypeId: "episode.end",
-          season: this.id.season,
-          episode: this.id.episode,
-        },
-      ];
-
-      await this.api.domainModelEvents.saveEvent({ applicationId, events });
-
-      if (this.id.redirectUrl) {
-        window.location.assign(this.id.redirectUrl);
-      } else {
-        window.close();
-      }
-    },
-  };
-
   private constructor(
     private api: ApiClient,
     /**
@@ -142,6 +121,11 @@ class TalentKit<T = unknown> {
      * @example const points = kit.engagement.points
      */
     public engagement: Engagement,
+
+    /**
+     * Handle episode events
+     */
+    public events: Events,
 
     /**
      * The season and episode IDs
@@ -232,7 +216,7 @@ class TalentKit<T = unknown> {
     const badges = Badge.createForEpisode(episode, storage);
     const profileStorage =
       storage.getItem<ProfileStorage>("SETTINGS") || defaultProfile;
-
+    const events = new Events(apiClient, storage, id);
     let tracker: Tracker | undefined;
     if (config.logRocketId && auth?.user) {
       tracker = new Tracker(
@@ -250,6 +234,7 @@ class TalentKit<T = unknown> {
       feedbackQuestions,
       savegame,
       engagement,
+      events,
       id,
       profileStorage,
       episodeConfiguration,
