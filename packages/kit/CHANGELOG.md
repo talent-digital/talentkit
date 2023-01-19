@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.20.0
+
+### Minor Changes
+
+- 10355b2: Allow for internal storage on SEASONS key in application state, add a pause methond to events to send the user to the dashboard
+
 ## 0.19.0
 
 ### Minor Changes
