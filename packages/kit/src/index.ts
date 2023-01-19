@@ -14,6 +14,9 @@ import {
   ID,
   ProfileStorage,
   Tests,
+  SavegameStorage,
+  SeasonStorage,
+  EpisodeStorage,
 } from "./interfaces";
 import { createCustomFetch } from "./mock-api";
 import RemoteStorage from "./remote-storage";
@@ -243,5 +246,5 @@ class TalentKit<T = unknown> {
   }
 }
 
-export type { Config };
+export type { Config, SavegameStorage, SeasonStorage, EpisodeStorage };
 export default TalentKit;
