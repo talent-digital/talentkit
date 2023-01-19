@@ -40,6 +40,13 @@ function App() {
       >
         End
       </button>
+      <button
+        onClick={() => {
+          kit?.events.pause();
+        }}
+      >
+        Pause
+      </button>
     </div>
   );
 }

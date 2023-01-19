@@ -44,9 +44,21 @@ class Events {
 
     this.storage.setItem<SavegameStorage>(savegameKey, savegames);
 
+    this.navigateToDashboard();
+  }
+
+  /**
+   * Navigate the user beck to the dashboard.
+   */
+  pause() {
+    this.navigateToDashboard();
+  }
+
+  private navigateToDashboard() {
     if (this.id.redirectUrl) {
       window.location.assign(this.id.redirectUrl);
     } else {
+      console.error("No redirect URL hasn't been set");
       window.close();
     }
   }
