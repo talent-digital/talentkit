@@ -5,7 +5,6 @@ import FeedbackQuestion from "./feedback-question";
 import { SeasonDefinition } from "@talentdigital/season";
 import Test from "./test";
 import { supportedExtensions } from "./helpers";
-import { type } from "os";
 
 export interface Config {
   tenant?: string;
