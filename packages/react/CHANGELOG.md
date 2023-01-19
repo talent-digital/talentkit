@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.21.0
+
+### Minor Changes
+
+- a13b1f1: Export Types used in Savegame
+
+### Patch Changes
+
+- Updated dependencies [a13b1f1]
+  - @talentdigital/kit@0.21.0
+
 ## 0.20.0
 
 ### Minor Changes

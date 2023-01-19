@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.21.0
+
+### Minor Changes
+
+- a13b1f1: Export Types used in Savegame
+
 ## 0.20.0
 
 ### Minor Changes
