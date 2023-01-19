@@ -24,8 +24,29 @@ function App() {
   return (
     <div className="App">
       {kit ? <p>Hello {kit.profile.playerName}</p> : <p>Loading...</p>}
-      <Child />
-      <Image />
+      <button
+        onClick={() => {
+          const savegame = kit?.savegame.load() as Record<string, unknown>;
+          console.log(savegame);
+          kit?.savegame.save({ ...savegame, a: "dadas" });
+        }}
+      >
+        Save
+      </button>
+      <button
+        onClick={() => {
+          void kit?.events.end();
+        }}
+      >
+        End
+      </button>
+      <button
+        onClick={() => {
+          kit?.events.pause();
+        }}
+      >
+        Pause
+      </button>
     </div>
   );
 }

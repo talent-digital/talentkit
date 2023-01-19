@@ -77,7 +77,14 @@ export interface EngagementPointsStorage {
   linksOpened: Record<string, string[]>;
 }
 
-export type SeasonsStorage = Record<string, Record<string, unknown>>;
+export type EpisodeStorage = {
+  playcount: number;
+  savegame: unknown;
+};
+
+export type SeasonStorage = Record<string, EpisodeStorage>;
+
+export type SavegameStorage = Record<string, SeasonStorage>;
 
 export type BadgesStorage = string[];
 
