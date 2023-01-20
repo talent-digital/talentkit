@@ -4,7 +4,7 @@
 
 ## Intstallation
 
-Install the `@talentdigital/kit` package and it's peer depencency `keycloak-js`.
+Install the `@talentdigital/kit` package and it's peer dependency `keycloak-js`.
 
 ### npm
 

@@ -27,7 +27,7 @@ competenceAreas:
                   en:
                     generic:
                       - solution selling
-            feedbackItems:
+            feedbackQuestions:
               "digitalpotential":
                 question:
                   de: Wie schätzt du selber das Potential von digitalen Lösungen im Building Management ein?
