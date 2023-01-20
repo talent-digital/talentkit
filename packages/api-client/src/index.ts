@@ -323,12 +323,6 @@ export interface EpisodeWeb {
   badges?: Record<string, BadgeWeb>;
 }
 
-export interface FeedbackItemWeb {
-  episode?: string;
-  question?: LocalizedStringImpl;
-  answers?: Record<string, Record<string, string>>;
-}
-
 export interface LocalizedStringImpl {
   en?: string;
   de?: string;
@@ -353,7 +347,7 @@ export interface SeasonWeb {
 export interface SubCompetenceWeb {
   name: LocalizedStringImpl;
   testItems?: Record<string, TestItemWeb>;
-  feedbackItems?: Record<string, FeedbackItemWeb>;
+  feedbackQuestions?: Record<string, FeedbackQuestionWeb>;
 }
 
 export interface TestItemWeb {
