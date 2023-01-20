@@ -28,7 +28,7 @@ competenceAreas:
                   en:
                     generic:
                       - solution selling
-            feedbackItems:
+            feedbackQuestions:
               "digitalpotential":
                 episode: "1"
                 question:

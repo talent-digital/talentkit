@@ -85,7 +85,7 @@ export interface SubCompetence {
   /**
    * Attitude-related questions towards the subcompetence.
    */
-  feedbackItems?: { [id in string]: FeedbackItem };
+  feedbackQuestions?: { [id in string]: FeedbackQuestion };
 }
 
 /**
@@ -172,9 +172,9 @@ export interface SearchDefinition {
 /**
  * Attitude-related questions towards the subcompetence.
  */
-export interface FeedbackItem {
+export interface FeedbackQuestion {
   /**
-   * The id of the episoed in which this feedback item is used
+   * The id of the episode in which this feedback item is used
    */
   episode: string;
   /**
