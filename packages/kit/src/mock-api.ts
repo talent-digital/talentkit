@@ -80,10 +80,12 @@ const extractFeedbackQuestions = (
 ): EpisodeResponseWeb["feedbackQuestions"] =>
   Object.entries(competenceAreas).flatMap(([_, { competences }]) =>
     Object.entries(competences).flatMap(([_, { subCompetences }]) =>
-      Object.entries(subCompetences).flatMap(([_, { feedbackItems }]) =>
-        feedbackItems
-          ? Object.entries(feedbackItems)
-              .filter(([_, feedbackItem]) => feedbackItem.episode === episode)
+      Object.entries(subCompetences).flatMap(([_, { feedbackQuestions }]) =>
+        feedbackQuestions
+          ? Object.entries(feedbackQuestions)
+              .filter(
+                ([_, feedbackQuestion]) => feedbackQuestion.episode === episode
+              )
               .map(([feedbackItemId, { question, answers }]) => ({
                 id: feedbackItemId,
                 question,
