@@ -1,5 +1,5 @@
 import { Api } from "@talentdigital/api-client";
-import Keycloak, { KeycloakConfig } from "keycloak-js";
+import { KeycloakConfig, KeycloakInstance } from "keycloak-js";
 import Badge from "./badge";
 import FeedbackQuestion from "./feedback-question";
 import { SeasonDefinition } from "@talentdigital/season";
@@ -25,7 +25,7 @@ export interface UserInfo {
 }
 
 export type AuthClient = Pick<
-  Keycloak,
+  KeycloakInstance,
   | "login"
   | "init"
   | "onTokenExpired"
