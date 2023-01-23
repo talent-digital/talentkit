@@ -1,5 +1,11 @@
 # @talentdigital/season
 
+## 0.6.0
+
+### Minor Changes
+
+- 37df47b: Update season definition; Change feedbackItems to feedbackQuestions
+
 ## 0.5.0
 
 ### Minor Changes
