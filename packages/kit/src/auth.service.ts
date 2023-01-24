@@ -26,7 +26,7 @@ export class AuthService {
     const url = `${getBaseUrl(tenant)}/auth`;
     const clientId = "td-profile2";
 
-    const auth = new Keycloak({ realm, url, clientId });
+    const auth = Keycloak({ realm, url, clientId });
 
     try {
       const authenticated = await auth.init({

@@ -1,6 +1,6 @@
 {
   "name": "@talentdigital/kit",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "description": "talent::digital Software Development Kit",
   "type": "module",
   "files": [
@@ -29,8 +29,8 @@
     "eslint-config-custom": "workspace:*",
     "happy-dom": "^7.7.0",
     "jsdom": "^20.0.2",
-    "keycloak-js": "^19.0.3",
-    "logrocket": "^3.0.1",
+    "keycloak-js": "^15.0.0",
+    "logrocket": "^2.0.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.8.3",
     "vite": "^3.1.0",
@@ -38,8 +38,8 @@
     "vitest": "^0.23.2"
   },
   "peerDependencies": {
-    "keycloak-js": "^19.0.3",
-    "logrocket": "^3.0.1"
+    "keycloak-js": "^15.0.0",
+    "logrocket": "^2.0.0"
   },
   "dependencies": {
     "@talentdigital/api-client": "workspace:^0.3.0",

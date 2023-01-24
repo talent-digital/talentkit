@@ -1,5 +1,12 @@
 # @talentdigital/kit
 
+## 0.22.0
+
+### Minor Changes
+
+- 6e8d206: Change feedbackItems to feedbackQuestions in mockApi
+- 2a3fb4b: Downgrade to Keycloak 15 and LogRocket 2
+
 ## 0.21.0
 
 ### Minor Changes
