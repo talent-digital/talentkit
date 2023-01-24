@@ -19,7 +19,9 @@ const Image = () => {
 };
 
 function App() {
-  const kit = useKit<EpisodeConfiguration>({ tenant: "devtd2" });
+  const kit = useKit<EpisodeConfiguration>({
+    tenant: "devtd2",
+  });
 
   return (
     <div className="App">
