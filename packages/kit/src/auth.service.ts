@@ -5,7 +5,6 @@ import { AuthClient } from "./interfaces";
 export class AuthService {
   private constructor(protected auth: AuthClient) {
     this.auth.onTokenExpired = () => {
-      console.log("onTokenExpired", this.auth);
       if (this.auth.token) {
         void this.auth.updateToken(5);
       }
