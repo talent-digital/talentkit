@@ -55,4 +55,31 @@ describe("Sdk Base Tests", () => {
     await kit.tests["costToSolution"].pass();
     expect(kit.tests["costToSolution"].result).toBe(1);
   });
+
+  it("Loads the feedback questions correctly for the episde", () => {
+    expect(Object.keys(kit.feedbackQuestions)).toHaveLength(1);
+
+    const q = kit.feedbackQuestions["digitalpotential"];
+
+    expect(q.question.de).toBe(
+      "Wie schätzt du selber das Potential von digitalen Lösungen im Building Management ein?"
+    );
+    expect(q.question.en).toBe(
+      "What is your impression of the impact of digital solutions in the building management area?"
+    );
+    expect(Object.keys(q.answers).length).toBe(3);
+    expect(Object.values(q.answers)[0].de).toBe(
+      "Untergeordnet im Vergleich zu Geräten."
+    );
+  });
+
+  it("Correctly submits a feedback question", async () => {
+    expect(
+      await kit.feedbackQuestions["digitalpotential"].submit("0")
+    ).toBeInstanceOf(Response);
+
+    expect(
+      await kit.feedbackQuestions["digitalpotential"].submit("3")
+    ).toBeUndefined();
+  });
 });

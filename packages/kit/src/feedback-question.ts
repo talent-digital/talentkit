@@ -2,6 +2,7 @@ import {
   EpisodeResponseWeb,
   LocalizedStringImpl,
 } from "@talentdigital/api-client";
+import { text } from "stream/consumers";
 import { applicationId } from ".";
 import { ApiClient, FeedbackOption, FeedbackQuestions, ID } from "./interfaces";
 
@@ -9,7 +10,7 @@ class FeedbackQuestion {
   private constructor(
     readonly id: string,
     readonly question: LocalizedStringImpl,
-    readonly answers: Record<string, Record<string, string>>,
+    readonly answers: Record<string, LocalizedStringImpl>,
     private api: ApiClient,
     private seasonId: string,
     private episodeId: string
@@ -31,7 +32,7 @@ class FeedbackQuestion {
           new FeedbackQuestion(
             id as string,
             question as LocalizedStringImpl,
-            answers as Record<string, Record<string, string>>,
+            answers as Record<string, LocalizedStringImpl>,
             api,
             season,
             episode
@@ -46,14 +47,20 @@ class FeedbackQuestion {
    * @param option {id: number, text: string}
    * @returns
    */
-  submit(option: FeedbackOption) {
+  submit(id: string) {
+    const localized = this.answers[id];
+    if (!localized) {
+      console.log("Invalid answer id");
+      return;
+    }
+    const text = JSON.stringify(localized);
     const events = [
       {
         eventTypeId: this.id,
         type: "decision.choose",
         payload: {
           decision: this.id,
-          option,
+          option: { id, text },
         },
       },
     ];

@@ -29,6 +29,7 @@ competenceAreas:
                       - solution selling
             feedbackQuestions:
               "digitalpotential":
+                episode: "1"
                 question:
                   de: Wie schätzt du selber das Potential von digitalen Lösungen im Building Management ein?
                   en: What is your impression of the impact of digital solutions in the building management area?
