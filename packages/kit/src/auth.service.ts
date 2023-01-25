@@ -30,6 +30,7 @@ export class AuthService {
     try {
       const authenticated = await auth.init({
         onLoad: "check-sso",
+        checkLoginIframe: false,
       });
       if (authenticated) {
         return new AuthService(auth);
