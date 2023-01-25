@@ -82,4 +82,11 @@ describe("Sdk Base Tests", () => {
       await kit.feedbackQuestions["digitalpotential"].submit("3")
     ).toBeUndefined();
   });
+
+  it("Correctly gets an asset's URL", () => {
+    const fileName = "file.txt";
+    expect(kit.assets.getUrl(fileName)).toBe(
+      `${seasonDefinition.assetsURL}/${fileName}`
+    );
+  });
 });

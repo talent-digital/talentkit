@@ -2,9 +2,8 @@ import {
   EpisodeResponseWeb,
   LocalizedStringImpl,
 } from "@talentdigital/api-client";
-import { text } from "stream/consumers";
 import { applicationId } from ".";
-import { ApiClient, FeedbackOption, FeedbackQuestions, ID } from "./interfaces";
+import { ApiClient, FeedbackQuestions, ID } from "./interfaces";
 
 class FeedbackQuestion {
   private constructor(

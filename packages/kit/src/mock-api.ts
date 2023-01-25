@@ -21,6 +21,8 @@ export const createCustomFetch =
 
         const episode: EpisodeResponseWeb = { ...episodeDefinition };
 
+        episode.assetsURL = seasonDefinition.assetsURL;
+
         episode.testItems = extractTestItems(
           seasonDefinition.competenceAreas,
           id
