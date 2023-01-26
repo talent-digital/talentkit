@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.23.0
+
+### Minor Changes
+
+- 422a51d: Add checkLoginIframe to auth initialization
+
 ## 0.22.0
 
 ### Minor Changes
