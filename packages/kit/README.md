@@ -68,13 +68,61 @@ For testing purposes, the `season` and `episode` ids can be provided as a parame
 ```typescript
 import TalentKit from "@talentdigital/kit";
 
-const kit = await TalentKit.create({
+interface EpisodeConfiguration {
+  background: string;
+  introText: string;
+}
+
+const kit = await TalentKit.create<EpisodeConfiguration>({
   tenant: "tenantId",
-  id: {
-    season: "seasonID",
-    episode: "epsisodeId",
-  }
 });
+```
+
+### Reading Episode Configuration
+
+When the kit is created, the season id `sid`, episode id `eid` and `redirectUrl` are taken from the respective URL parameters.
+
+The episode configuration (specified in season.yaml) is then downloaded and parsed. The configuration can be accessed via the `episodeConfiguration` property.
+
+The type for `episodeConfiguration` can be provided as a type parameter when the kit is created.
+
+The file configuration specified under `formatConfiguration` for that episode in `season.yaml` is downloaded and parsed. The following files types are supported: `md, json, toml, yaml, yml`
+
+The type for `episodeConfiguration` can be provided then the kit is created.
+
+e1_config.toml
+```toml
+intro = This is some intro text
+color = #FF0000
+```
+
+season.yaml
+```yaml
+episodes:
+  "1":
+    title: ...
+    description: ...
+    ...
+    formatConfiguration: e1_config.toml
+```
+
+index.tsx
+```tsx
+import TalentKit from "@talentdigital/kit";
+
+interface EpisodeConfiguration {
+  intro: string;
+  color: string;
+}
+
+const kit = await TalentKit.create<EpisodeConfiguration>({
+  tenant: "tenantId",
+});
+
+...
+
+
+const intro = kit.episodeConfiguration.intro;
 ```
 
 ## Features
@@ -84,18 +132,20 @@ const kit = await TalentKit.create({
 Tests for the given episode are instantiated when the `kit` is created. Tests have the following methods:
 
 #### Passing a test
+
 ```typescript
 await kit.tests["testId"].pass();
 ```
 
 #### Failing a test
+
 ```typescript
 await kit.tests["testId"].fail();
 ```
 
 ### Badges
 
-Badges available in the given episode are instantiated when the `kit` is created. 
+Badges available in the given episode are instantiated when the `kit` is created.
 
 #### Awarding a badge
 
@@ -107,7 +157,7 @@ await kit.badges["badgeId"].award();
 
 ```typescript
 if (kit.badges["badgeId"].awarded) {
-    // do something
+  // do something
 }
 ```
 
@@ -133,4 +183,61 @@ const obj = kit.savegame.load();
 
 ### Feedback questions
 
-__TBD__
+Feedback questions for the given episode are instantiated when the kit is created.
+
+#### Getting the text for a feedback question
+
+```typescript
+const { en, de } = kit.feedbackQuestions["questionId"].question;
+```
+
+#### Getting the answer options
+
+```typescript
+const { en, de } = kit.feedbackQuestions["questionId"].answers["answerId"];
+```
+
+#### Submitting a feedback question
+
+```typescript
+kit.feedbackQuestions["questionId"].submit("answerId");
+```
+
+### Assets
+
+#### Getting an asset URL
+
+```jsx
+/**
+ * Returns the full URL, using the base defined as
+ * assetsURL in season.yaml
+ */
+const src = kit.assets.getUrl("image.png");
+
+//...
+
+<img src={src} />;
+```
+
+#### Getting the parsed content of an asset
+
+The following file types are automatically parsed based on the file extension:
+
+| type     | extension   |
+| -------- | ----------- |
+| JSON     | .json       |
+| YAML     | .yaml, .yml |
+| TOML     | .toml, .tml |
+| Markdown | .md         |
+
+```typescript
+// season.yaml
+
+title: Season Title
+
+// index.ts
+const season = kit.assets.get("season.yaml");
+
+const title = season.title;
+
+```
