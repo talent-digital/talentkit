@@ -192,7 +192,11 @@ class TalentKit<T = unknown> {
     );
 
     let configString: string | undefined;
-    if (episode.assetsURL && episode.formatConfiguration) {
+    if (
+      episode.assetsURL &&
+      episode.formatConfiguration &&
+      !config.seasonDefinition
+    ) {
       try {
         const res = await fetch(
           `${episode.assetsURL}/${episode.formatConfiguration}`
