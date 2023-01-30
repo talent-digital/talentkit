@@ -226,11 +226,11 @@ class TalentKit<T = unknown> {
     const events = new Events(apiClient, storage, id);
     let tracker: Tracker | undefined;
     if (config.logRocketId && auth?.user) {
-      tracker = new Tracker(
-        config.logRocketId,
-        auth.user,
-        profileStorage.playerName
-      );
+      tracker = await Tracker.create({
+        logRocketId: config.logRocketId,
+        userInfo: auth.user,
+        playerName: profileStorage.playerName,
+      });
     }
 
     return new TalentKit<T>(
