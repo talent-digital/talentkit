@@ -68,35 +68,37 @@ For testing purposes, the `season` and `episode` ids can be provided as a parame
 ```typescript
 import TalentKit from "@talentdigital/kit";
 
-interface EpisodeConfiguration {
+interface FormatConfiguration {
   background: string;
   introText: string;
 }
 
-const kit = await TalentKit.create<EpisodeConfiguration>({
+const kit = await TalentKit.create<FormatConfiguration>({
   tenant: "tenantId",
 });
 ```
 
-### Reading Episode Configuration
+### Reading Format Configuration for Loaded Episode
 
 When the kit is created, the season id `sid`, episode id `eid` and `redirectUrl` are taken from the respective URL parameters.
 
-The episode configuration (specified in season.yaml) is then downloaded and parsed. The configuration can be accessed via the `episodeConfiguration` property.
+The episode's format configuration (specified in season.yaml) is then downloaded and parsed. The format configuration can be accessed via the `formatConfiguration` property.
 
-The type for `episodeConfiguration` can be provided as a type parameter when the kit is created.
+The type for `formatConfiguration` can be provided as a type parameter when the kit is created.
 
 The file configuration specified under `formatConfiguration` for that episode in `season.yaml` is downloaded and parsed. The following files types are supported: `md, json, toml, yaml, yml`
 
-The type for `episodeConfiguration` can be provided then the kit is created.
+The type for `formatConfiguration` can be provided then the kit is created.
 
 e1_config.toml
+
 ```toml
 intro = This is some intro text
 color = #FF0000
 ```
 
 season.yaml
+
 ```yaml
 episodes:
   "1":
@@ -107,22 +109,23 @@ episodes:
 ```
 
 index.tsx
+
 ```tsx
 import TalentKit from "@talentdigital/kit";
 
-interface EpisodeConfiguration {
+interface FormatConfiguration {
   intro: string;
   color: string;
 }
 
-const kit = await TalentKit.create<EpisodeConfiguration>({
+const kit = await TalentKit.create<FormatConfiguration>({
   tenant: "tenantId",
 });
 
 ...
 
 
-const intro = kit.episodeConfiguration.intro;
+const intro = kit.formatConfiguration.intro;
 ```
 
 ## Features

@@ -141,9 +141,9 @@ class TalentKit<T = unknown> {
     readonly profile: ProfileStorage,
 
     /**
-     * The episode's configuration as a string
+     * The parsed formatConfiguration for the loaded episode
      */
-    public episodeConfiguration?: T,
+    public formatConfiguration?: T,
 
     /**
      * Track user events and captures session replays
@@ -203,9 +203,9 @@ class TalentKit<T = unknown> {
       }
     }
 
-    let episodeConfiguration: T | undefined;
+    let formatConfiguration: T | undefined;
     if (configString) {
-      episodeConfiguration = await parseContent<T>({
+      formatConfiguration = await parseContent<T>({
         content: configString,
         fileName: episode.formatConfiguration,
       });
@@ -240,7 +240,7 @@ class TalentKit<T = unknown> {
       events,
       id,
       profileStorage,
-      episodeConfiguration,
+      formatConfiguration,
       tracker
     );
   }
