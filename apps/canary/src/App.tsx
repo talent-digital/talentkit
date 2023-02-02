@@ -21,6 +21,7 @@ const Image = () => {
 function App() {
   const kit = useKit<EpisodeConfiguration>({
     tenant: "devtd2",
+    // logRocketId: "hdghyj/canary-kgdjy",
   });
 
   return (
