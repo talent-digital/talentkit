@@ -1,79 +1,162 @@
-# Proposals for migration to new metadata model
+# Season
 
-This is a proposal for a metadata model. We may need to introduce some bridge solutions. Nevertheless I find it useful to discuss a final outcome and then steps to reach it.
+A season is a collection of runnable **Episodes** on the talent::digital platform.
 
-A sample "season.yaml" can be found in the root folder. We should use an extended "hello world" to demonstrate the model instead of an actual customer configuration.
+Tecnically, a **season** is a [github](https://github.com) repository that contains configuration and assets for **episodes**, used by one more more **formats**.
 
-## Internationalization
+## Configuration
 
-While working on metadata internationalization in the backend, we can already use the structure.
+Season configuration is specified as a `yaml` file called `season.yaml` in the root of the season github repository.
 
-Backend: If a data type is not internationalized, simply only one language is inserted. (The one that is present in the definition, or "de" if there are multiple.)
+- title:
+  - de: Season Title in German
+  - en: Season Title in German
+- info:
+  - de: Season Description in German
+  - en: Season Description in English
+- assetsURL: the netlify url of for the season https://{season id}.netlify.app
+- competenceAreas:
+  - "Competence Area 1": # Competence Area Id (string)
+    - competences:
+      - "Competence 1": # Competence Id (string)
+        - subCompetences:
+          - "Sub Competence 1": # Sub Competence Id (string)
+            - name:
+              - de: Name of Subcompetence in German
+              - en: Name of Subcompetence in English
+            - testItems: # Tests that belong to this sub competence
+              - "Test Item 1" # Test Id (string)
+                - level: FOUNDATION # Level of the test FOUNDATION, INTERMEDIATE, ADVANCED, HIGHLY_SPECIALISED
+                - episode: "Episode 1" # Id of the episode this test item is used in
+                - documentation:
+                  - de: Test description # German description of the skill this test measures
+                  - en: Test description # English description of the skill this test measures
+                - search:
+                  - de:
+                    - generic:
+                      - search term in German # German searches that are carried out by the scraper
+                  - en:
+                    - generic:
+                      - search term in English # English searches that are carried out by the
+            - feedbackQuestions: # Feedback that is collected for this sub competence
+              - "Feedback Question 1": # Feedback Question Id (string)
+                - episode: "Episode 1" # Id of the episode this feedback question is used in
+                - question: # The question to ask
+                  - de: German Question
+                  - en: English Question
+                - answers: # The answers, ordered from assumed good to bad.
+                  - "0":
+                    - de: Option in German
+                    - en: Option in English
+                  - "1":
+                    - de: Option in German
+                    - en: Option in English
+                  - "2":
+                    - de: Option in German
+                    - en: Option in English
+- episodes:
+  - "01":
+    - title:
+      - de: SAAT & GUT Co. KGaA, Frau Hennings
+      - en: SAAT & GUT Co. KGaA, Mrs. Hennings
+    - description:
+      - de: Du wirst überraschend zu einem Termin mit dem Thema "Wartungsvertrag Brandmeldetechnik" eingeladen, dabei ist der Vetrag längst unter Dach und Fach. Was ist das los?
+      - en: You are unexpectedly invited to an appointment with the topic "maintenance contract fire alarm technology", although the contract has long been signed and sealed. What's going on?
+    - maturity: public
+    - imageUrl: e01preview.svg
+    - format: /conversation
+    - formatConfiguration: dialog01.json
+    - badges:
+      - "caffeine":
+        - name:
+          - de: Perfekter Koffein-Level!
+          - en: Perfect caffeine level!
+            image: coffee-hand.svg
+  - "02":
+    - title:
+      - de: SAAT & GUT Co. KGaA, Dr. Alexander Varus
+      - en: SAAT & GUT Co. KGaA, Dr. Alexander Varus
+    - description:
+      - de: Dir ist es gelungen, die Situation zu drehen und das Interesse des Kunden zu wecken. Kannst du SAAT & GUT mit digitalen Mitteln aus der Klemme helfen?
+      - en: You have managed to turn the situation around and get the customer's interest. Can you help SAAT & GUT digitally out of a tight spot?
+    - maturity: public
+    - imageUrl: e02preview.svg
+    - format: /conversation
+    - formatConfiguration: dialog02.json
+- seasonEndMessage:
+  - de: Du hast es geschafft! Jetzt kannst du dich mit Fug und Recht "OpenBlue Solutioneer" nennen.
+  - en: You have done it! Now you can really call yourself an "OpenBlue Solutioneer".
 
-Frontend: If a text has a translation in the locale files, use the translation from there.
+YAML Schema:
 
-## ID handling
+```yaml
+title:
+  de: Season Title in German
+  en: Season Title in German
+info:
+  de: Season Description in German
+  en: Season Description in English
+assetsURL: the netlify url of for the season https://{season id}.netlify.app
+competenceAreas:
+  "Competence Area 1": # Competence Area Id (string)
+    competences:
+      "Competence 1": # Competence Id (string)
+        subCompetences:
+          "Sub Competence 1": # Sub Competence Id (string)
+            name:
+              de: Name of Subcompetence in German
+              en: Name of Subcompetence in English
+            testItems: # Tests that belong to this sub competence
+              "Test Item 1" # Test Id (string)
+                level: FOUNDATION # Level of the test FOUNDATION, INTERMEDIATE, ADVANCED, HIGHLY_SPECIALISED
+                episode: "Episode 1" # Id of the episode this test item is used in
+                documentation:
+                  de: Test description # German description of the skill this test measures
+                  en: Test description # English description of the skill this test measures
+                search:
+                  de:
+                    generic:
+                      - search term in German # German searches that are carried out by the scraper
+                  en:
+                    generic:
+                      - search term in English # English searches that are carried out by the
+            feedbackQuestions: # Feedback that is collected for this sub competence
+              "Feedback Question 1": # Feedback Question Id (string)
+                episode: "Episode 1" # Id of the episode this feedback question is used in
+                question: # The question to ask
+                  de: German Question
+                  en: English Question
+                answers: # The answers, ordered from assumed good to bad.
+                  "0":
+                    de: Option in German
+                    en: Option in English
+                  "1":
+                    de: Option in German
+                    en: Option in English
+                  "2":
+                    de: Option in German
+                    en: Option in English
 
-In future, we can generate a space for unique IDs using Github repository handles. Examples: talentdigital/collaboration (for Season 2), jci/solutioneer (for OpenBlue solutioneer).
+episodes:
+  "01":
+    title:
+      de: SAAT & GUT Co. KGaA, Frau Hennings
+      en: SAAT & GUT Co. KGaA, Mrs. Hennings
+    description:
+      de: Du wirst überraschend zu einem Termin mit dem Thema "Wartungsvertrag Brandmeldetechnik" eingeladen, dabei ist der Vetrag längst unter Dach und Fach. Was ist das los?
+      en: You are unexpectedly invited to an appointment with the topic "maintenance contract fire alarm technology", although the contract has long been signed and sealed. What's going on?
+    maturity: public
+    imageUrl: e01preview.svg
+    format: /conversation
+    formatConfiguration: dialog01.json
+    badges:
+      "caffeine":
+        name:
+          de: Perfekter Koffein-Level!
+          en: Perfect caffeine level!
+        image: coffee-hand.svg
 
-All further IDs are qualified using the handle. E.g. episodes can be jci/solutioneer/episodes/1, jci/solutioneer/testitem/bla, jci/solutioneer/badge/...
-
-Currently, season and episode IDs are expected to be numerical and appear in various forms. Some queries depend on a particular form, e.g., to find test items. This requires a fix.
-
-## SeasonDefinition properties
-
-- completed: This property determines if the season end animation should be played when the last defined episode is reached. Proposal: Drop, since we can now define much more easily dummy episodes.
-- index: This property defines the order in which the seasons are shown in the season overview. Proposal: Drop and order by mission targets.
-- certificates: These are currently attached to subcompetences. Proposal: Generate certificates dynamically for missions. This also avoids the need for two ways of handling recommendations (for reaching missions and for reaching certificates, as currently).
-- badges: Moved into episodes. This avoids the need for back references and episode developers can anyway only generate badges within episodes. Platform badges are "declared elsewhere".
-- topics: Topics are currently competence areas shown in the season. Proposal: Drop and generate from the competence model of the season.
-
-## EpisodeDefinition properties
-
-- ID is kept here to support moving around episodes that have existing data (e.g., feedback, savegames).
-- testsId: Proposal: Drop and use ID.
-- index: Proposal: Order like in the array ... why was that different?
-
-Note: "available" and "state" are not part of the episode metadata.
-
-## Competences
-
-The tree including test items is entirely represented in the season metadata to avoid the need for reference properties that can be mistyped. I added feedback items also here, because it might be a good criterion to report on what area feedback was actually provided for. 
-
-## Open questions
-
-Here are open questions found while defining the metadata model:
-
-* Test items currently have an implicit back reference to the episode they were placed in. The problem here is that this is redundant with the code that actually runs the tests. If you move a test elsewhere, you need to move the metadata consistently along. Also you need to introduce references in the configuration file, which might be dangling. Can we instead generate the tab after the episode based on what was actually passed and failed when playing the episode? (E.g. from save game or stored with events?)
-* Can we determine the URL from which the build is served programmatically or do we need to configure it somewhere?
-* Should we qualify competences and subcompetences with their parent ID to make them unique instead of requiring them to be globally unique? You anyway can't have a competence without subcompetence.
-* Do we have a convention for enums in Typescript? (All caps, camel case, ...)
-* Wouldn't language codes like "de" or "en" come from "elsewhere"? Is there a standard "LocalizedString" type somewhere?
-* Where should the "season.yaml" file be put finally? What is the reference structure for a season repository? Proposal: Put it in the root folder of a repository.
-
-## Technical notes
-
-To build the SeasonDefinitionTypes.json, use:
-
+seasonEndMessage:
+  de: Du hast es geschafft! Jetzt kannst du dich mit Fug und Recht "OpenBlue Solutioneer" nennen.
+  en: You have done it! Now you can really call yourself an "OpenBlue Solutioneer".
 ```
-npx ts-json-schema-generator -p SeasonDefinition.ts > SeasonDefinitionTypes.json
-```
-
-To use VS Code IntelliSense for the season.yaml file including documentation, edit the settings.json file and search for the "yaml.schemas" property. Add the line below. 
-
-```
-  "yaml.schemas": {
-    "./packages/season/SeasonDefinition.json": ["/season.yaml"]
-  },
-```
-
-Note: Once we have settled the schema, we can make a PR to https://github.com/schemastore/schemastore/ and get this automatically for VS Code.
-
-I tried introducing a type like below to make the maps more legible, but it's not digested by the ts-json-schema-generator.
-
-```
-export type IDMap<Type> = { [id in string]: Type };
-```
-
-I added "undefined" to LocalizedString. If I would not make it undefined, we would need to provide all languages keys whenever we develop an episode, even if the customer doesn't need french/spanish/...
-

@@ -17,7 +17,7 @@ talent::digital has a multi-tennant architecture. When a _Format_ is run, a **ta
 
 ## Creating new Formats
 
-A format is a web application running on [Netlify](https://netlify.com).The [talentdigital/kit](@talentdigital/kit) package facilitates communication with the talent::digital platform. It handles authentication on the tennant, provides a key-value store (savegame) and manages writing of test events and feedback questions.
+A format is a web application running on [Netlify](https://netlify.com).The [talentdigital/kit](@talentdigital/kit) package facilitates communication with the talent::digital platform. It handles authentication on the tennant, provides a key-value store (savegame), manages awarding badges and writing of test events and feedback questions.
 
 Once a new format has been deployed to Netlify, the netlify URL needs to be customized to **https://{format}.netlify.com**, and the application must be served under the path **/app/{format}**. i.e. The format must be accessible under **https://{format}.netlify.app/app/{format}**.
 
