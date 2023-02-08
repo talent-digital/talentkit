@@ -15,6 +15,8 @@ For example:
 
 talent::digital has a multi-tennant architecture. When a _Format_ is run, a **tannant id** must be provided. **Tennant ids** can be obtained from [talent::digital](mailto:info@talentdigital.eu).
 
+![Platform Diagram](/docs/assets/talent-digital.platform.drawio.svg)
+
 ## Creating new Formats
 
 A format is a web application running on [Netlify](https://netlify.com).The [talentdigital/kit](@talentdigital/kit) package facilitates communication with the talent::digital platform. It handles authentication on the tennant, provides a key-value store (savegame), manages awarding badges and writing of test events and feedback questions.
