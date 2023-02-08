@@ -4,6 +4,8 @@ The talent::digital platform allows developers to create and deploy customized l
 
 Learning materials are deployed in **seasons**, consising of multiple **episodes**. Each episode is run using a **format**.
 
+![architecture](/docs/assets/architecture.drawio.svg)
+
 _For example:_
 
 | Season     | Episode | Format                   |
