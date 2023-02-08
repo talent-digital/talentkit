@@ -1,10 +1,10 @@
 # talent::digital
 
-The talent::digital platform allows developers to create and deploy customized learning material on top of talent::digital's testing and recommendation engines.
+The talent::digital platform allows developers to create and deploy customized learning material using talent::digital's testing and recommendation engines.
 
-Learning materials are deployed in _Seasons_, consising of multiple _Episodes_. Episodes are created using _Formats_.
+Learning materials are deployed in **seasons**, consising of multiple **episodes**. Each episode is run using a **format**.
 
-For example:
+_For example:_
 
 | Season     | Episode | Format                   |
 | ---------- | ------- | ------------------------ |
@@ -13,21 +13,20 @@ For example:
 | season-one | three   | quiz                     |
 | season-two | one     | simulation               |
 
-talent::digital has a multi-tennant architecture. When a _Format_ is run, a **tennant id** must be provided. **Tennant ids** can be obtained from [talent::digital](mailto:info@talentdigital.eu).
-
 ![Platform Diagram](/docs/assets/talent-digital.platform.drawio.svg)
-
 _[Edit image](https://app.diagrams.net/)_
 
-## Creating new Formats
+talent::digital has a multi-tennant architecture. When a **format** is run, a **tennant id** must be provided. **Tennant ids** can be obtained from [talent::digital](mailto:info@talentdigital.eu).
+
+## Formats
 
 A format is a web application running on [Netlify](https://netlify.com).The [talentdigital/kit](@talentdigital/kit) package facilitates communication with the talent::digital platform. It handles authentication on the tennant, provides a key-value store (savegame), manages awarding badges and writing of test events and feedback questions.
 
 Once a new format has been deployed to Netlify, the netlify URL needs to be customized to **https://{format}.netlify.com**, and the application must be served under the path **/app/{format}**. i.e. The format must be accessible under **https://{format}.netlify.app/app/{format}**.
 
-See [@talentdigital/kit](/packages/kit/) or [@talentdigital/react](/packages/react/) for more information.
+See [@talentdigital/kit](/packages/kit/) or [@talentdigital/react](/packages/react/) for information on how to create new formats.
 
-## Creating Seasons and Episodes
+## Seasons and Episodes
 
 A **season** is is a [github](https://github.com) repository that contains configuration and assets for **episodes**, used by one more more **formats**.
 
@@ -41,7 +40,9 @@ Assets can be placed in an **assets** directory that is deployed to Netlify.
 
 Use the [season template repo]() to get started with creating a new season.
 
-See [@talentdigital/season](/packages/season/) for more information on seasons.
+See [@talentdigital/season](/packages/season/) for information on creating seasons and deploying.
+
+# Contributing
 
 This repository contains packages used for creating playable episodes on the talent::digital platform
 
