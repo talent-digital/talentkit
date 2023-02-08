@@ -6,16 +6,18 @@ Learning materials are deployed in _Seasons_, consising of multiple _Episodes_. 
 
 For example:
 
-| Season | Episode | Format                   |
-| ------ | ------- | ------------------------ |
-| One    | One     | Quiz                     |
-| One    | Two     | Interactive Conversation |
-| One    | Three   | Quiz                     |
-| One    | Four    | Simulation               |
+| Season     | Episode | Format                   |
+| ---------- | ------- | ------------------------ |
+| season-one | one     | quiz                     |
+| season-one | two     | interactive-conversation |
+| season-one | three   | quiz                     |
+| season-two | one     | simulation               |
 
-talent::digital has a multi-tennant architecture. When a _Format_ is run, a **tannant id** must be provided. **Tennant ids** can be obtained from [talent::digital](mailto:info@talentdigital.eu).
+talent::digital has a multi-tennant architecture. When a _Format_ is run, a **tennant id** must be provided. **Tennant ids** can be obtained from [talent::digital](mailto:info@talentdigital.eu).
 
 ![Platform Diagram](/docs/assets/talent-digital.platform.drawio.svg)
+
+_[Edit image](https://app.diagrams.net/)_
 
 ## Creating new Formats
 
