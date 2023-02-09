@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.24.0
+
+### Minor Changes
+
+- 9342653: Change episodeConfiguration to formatConfiguration
+
 ## 0.23.0
 
 ### Minor Changes

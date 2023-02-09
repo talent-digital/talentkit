@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.24.0
+
+### Minor Changes
+
+- 9342653: Change episodeConfiguration to formatConfiguration
+
+### Patch Changes
+
+- Updated dependencies [9342653]
+  - @talentdigital/kit@0.24.0
+
 ## 0.23.0
 
 ### Patch Changes
