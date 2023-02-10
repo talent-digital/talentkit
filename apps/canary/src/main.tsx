@@ -5,13 +5,13 @@ import "./index.css";
 
 // const seasonDefinition = season as SeasonDefinition;
 
-export interface EpisodeConfiguration {
+export interface FormatConfiguration {
   backgroundImage: string;
   introText: string;
   questions: any[];
 }
 
-// const kit = await TalentKit.create<EpisodeConfiguration>({
+// const kit = await TalentKit.create<FormatConfiguration>({
 //   tenant: "devtd2",
 //   // seasonDefinition,
 //   // localBackendURL: "http://localhost:8081",

@@ -1,25 +1,25 @@
 import { useKit } from "@talentdigital/react";
 import "./App.css";
-import { EpisodeConfiguration } from "./main";
+import { FormatConfiguration } from "./main";
 
 const Child = () => {
-  const kit = useKit<EpisodeConfiguration>();
+  const kit = useKit<FormatConfiguration>();
 
-  return <p>{kit?.episodeConfiguration?.introText}</p>;
+  return <p>{kit?.formatConfiguration?.introText}</p>;
 };
 
 const Image = () => {
-  const kit = useKit<EpisodeConfiguration>();
+  const kit = useKit<FormatConfiguration>();
 
-  const imageUrl = kit?.episodeConfiguration?.backgroundImage
-    ? kit.assets.getUrl(kit.episodeConfiguration.backgroundImage)
+  const imageUrl = kit?.formatConfiguration?.backgroundImage
+    ? kit.assets.getUrl(kit.formatConfiguration.backgroundImage)
     : "";
 
   return <img src={imageUrl} />;
 };
 
 function App() {
-  const kit = useKit<EpisodeConfiguration>({
+  const kit = useKit<FormatConfiguration>({
     tenant: "devtd2",
     // logRocketId: "hdghyj/canary-kgdjy",
   });
