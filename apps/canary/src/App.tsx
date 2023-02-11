@@ -26,7 +26,14 @@ function App() {
 
   return (
     <div className="App">
-      {kit ? <p>Hello {kit.profile.playerName}</p> : <p>Loading...</p>}
+      {kit ? (
+        <>
+          <p>Hello {kit.profile.playerName}</p>
+          <p>Episode intro text: {kit.formatConfiguration?.introText}</p>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
       <button
         onClick={() => {
           const savegame = kit?.savegame.load() as Record<string, unknown>;

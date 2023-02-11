@@ -1,4 +1,5 @@
 import { EpisodeResponseWeb } from "@talentdigital/api-client";
+import { SeasonDefinition } from "@talentdigital/season";
 import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
 import Badge from "./badge";
@@ -44,13 +45,14 @@ const getIdFromUrlParams = (): ID => {
   const season = params.get("sid");
   const episode = params.get("eid");
   const redirectUrl = params.get("redirectUrl");
+  const configUrl = params.get("configUrl");
 
   if (!season || !episode)
     throw "Could not retrieve season or episode id from URL";
 
   if (!redirectUrl) throw "Could not retrieve redirectUrl from URL";
 
-  return { season, episode, redirectUrl };
+  return { season, episode, redirectUrl, configUrl: configUrl || undefined };
 };
 
 /**
@@ -60,7 +62,6 @@ const getIdFromUrlParams = (): ID => {
 class TalentKit<T = unknown> {
   assets = {
     getUrl: (filename: string): string => {
-      console.log("episode", this.episode);
       if (!this.episode?.assetsURL)
         throw new Error("Assets URL is not defined");
 
@@ -160,13 +161,25 @@ class TalentKit<T = unknown> {
     let auth: AuthService | undefined;
     let apiClient: ApiClient;
     let storage: StorageService;
+
     const id = config.id || getIdFromUrlParams();
+
     if (!id.season || !id.episode) {
       throw new Error("sid or eid not found");
     }
 
     if (config.seasonDefinition) {
       const customFetch = createCustomFetch(config.seasonDefinition);
+      apiClient = createApiClient({ customFetch });
+      storage = new StorageService(window.localStorage);
+    } else if (id.configUrl) {
+      const data = await (await fetch(`${id.configUrl}/season.yaml`)).text();
+      const yaml = await import("yaml");
+      const parsedConfig = yaml.parse(data) as SeasonDefinition;
+      const customFetch = createCustomFetch({
+        ...parsedConfig,
+        assetsURL: id.configUrl,
+      });
       apiClient = createApiClient({ customFetch });
       storage = new StorageService(window.localStorage);
     } else {
