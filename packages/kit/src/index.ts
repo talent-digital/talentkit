@@ -45,14 +45,14 @@ const getIdFromUrlParams = (): ID => {
   const season = params.get("sid");
   const episode = params.get("eid");
   const redirectUrl = params.get("redirectUrl");
-  const configUrl = params.get("configUrl");
+  const configUrl = params.get("configUrl") || undefined;
 
   if (!season || !episode)
     throw "Could not retrieve season or episode id from URL";
 
   if (!redirectUrl) throw "Could not retrieve redirectUrl from URL";
 
-  return { season, episode, redirectUrl, configUrl: configUrl || undefined };
+  return { season, episode, redirectUrl, configUrl };
 };
 
 /**
