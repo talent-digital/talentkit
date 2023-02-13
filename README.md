@@ -77,15 +77,38 @@ Some of the events are also sent to external analytics tools:
 
 - LogRocket, to view recordings of the gameplays around the events.
 
+![Events](/docs/assets/events.drawio.svg)
+
 ---
 
-The talent::digital platform allows developers to create and deploy customized learning material using talent::digital's testing and recommendation engines.
+## Content Development and Deployment
 
 Learning materials are deployed in **seasons**, consising of multiple **episodes**. Each episode is run using a **format**.
 
 ![architecture](/docs/assets/architecture.drawio.svg)
 
-_For example:_
+### Formats
+
+A format is a web application running on [Netlify](https://netlify.com).The [talentdigital/kit](@talentdigital/kit) package facilitates communication with the talent::digital platform. It handles authentication on the tennant, provides a key-value store (savegame), manages awarding badges and writing of test events and feedback questions.
+
+Once a new format has been deployed to Netlify, the netlify URL needs to be customized to **https://{format}.netlify.com**, and the application must be served under the path **/app/{format}**. i.e. The format must be accessible under **https://{format}.netlify.app/app/{format}**.
+
+See [@talentdigital/kit](/packages/kit/) or [@talentdigital/react](/packages/react/) for information on how to create new formats.
+
+### Seasons and Episodes
+
+A **season** is is a [github](https://github.com) repository that contains configuration and assets for **episodes**, used by one more more **formats**.
+
+The **season** is deployed to the talent::digital platform via the [deploy-season](https://github.com/talent-digital/deploy-season) github action. Once a season has been deployed to the **tennant**, episodes from that season can be launched from the talent::digital **dashboard** application.
+
+Season configuration is provided in a `season.yaml` file in the repository's root. The [@talentdigital/season](/packages/season/) package can be installed into the repository, providing a schema file for the `season.yaml`.
+
+Assets can be placed in an **assets** directory that is deployed to Netlify.
+![SCM](/docs/assets/scm-view.drawio.svg)
+
+## Example
+
+Here's an example of multiple seasons deployed
 
 | Season     | Episode | Format                   |
 | ---------- | ------- | ------------------------ |
@@ -98,24 +121,6 @@ _For example:_
 _[Edit image](https://app.diagrams.net/)_
 
 talent::digital has a multi-tennant architecture. When a **format** is run, a **tennant id** must be provided. **Tennant ids** can be obtained from [talent::digital](mailto:info@talentdigital.eu).
-
-## Formats
-
-A format is a web application running on [Netlify](https://netlify.com).The [talentdigital/kit](@talentdigital/kit) package facilitates communication with the talent::digital platform. It handles authentication on the tennant, provides a key-value store (savegame), manages awarding badges and writing of test events and feedback questions.
-
-Once a new format has been deployed to Netlify, the netlify URL needs to be customized to **https://{format}.netlify.com**, and the application must be served under the path **/app/{format}**. i.e. The format must be accessible under **https://{format}.netlify.app/app/{format}**.
-
-See [@talentdigital/kit](/packages/kit/) or [@talentdigital/react](/packages/react/) for information on how to create new formats.
-
-## Seasons and Episodes
-
-A **season** is is a [github](https://github.com) repository that contains configuration and assets for **episodes**, used by one more more **formats**.
-
-The **season** is deployed to the talent::digital platform via the [deploy-season](https://github.com/talent-digital/deploy-season) github action. Once a season has been deployed to the **tennant**, episodes from that season can be launched from the talent::digital **dashboard** application.
-
-Season configuration is provided in a `season.yaml` file in the repository's root. The [@talentdigital/season](/packages/season/) package can be installed into the repository, providing a schema file for the `season.yaml`.
-
-Assets can be placed in an **assets** directory that is deployed to Netlify.
 
 <!-- ToDo -->
 
