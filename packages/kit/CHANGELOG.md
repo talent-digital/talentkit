@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.25.0
+
+### Minor Changes
+
+- e447e26: Added option to test not published season configuration
+
 ## 0.24.0
 
 ### Minor Changes
