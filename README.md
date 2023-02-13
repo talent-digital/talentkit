@@ -28,6 +28,8 @@ As later described, competence models are deployed as part of seasons and merged
 
 A digital certificate can be issued when a user has successfully demonstrated the competences required for a competence target. Digital certificates in talent::digital are currently issued through Accredible.
 
+![Competences](/docs/assets/competences.drawio.svg)
+
 The talent::digital platform allows developers to create and deploy customized learning material using talent::digital's testing and recommendation engines.
 
 Learning materials are deployed in **seasons**, consising of multiple **episodes**. Each episode is run using a **format**.
