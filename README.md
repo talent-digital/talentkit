@@ -30,6 +30,16 @@ A digital certificate can be issued when a user has successfully demonstrated th
 
 ![Competences](/docs/assets/competences.drawio.svg)
 
+### Talent
+
+The talent dimension is depicted below. Every registered user of an organization is represented as “talent”. Talents can be associated with a team and a department for organizational analysis.  
+They can also have an arbitrary number of “tags” to permit other analytical hierarchies. Tags are grouped into tag types. For example, a talent can be associated with a tag “26-35 years” of type “age group”.
+
+**Two tag types have special relevance:**
+
+- The “Function” tag type represents the job function (such as sales, development, …) independent of the organizational structure. Functions can be included into competences targets.
+- The “Management responsibility” tag type represents the line management level of the user (no management responsibility, team lead, department manager, …). Management responsibility is included into analysis rules related to the degree of management support of the educational measure.
+
 The talent::digital platform allows developers to create and deploy customized learning material using talent::digital's testing and recommendation engines.
 
 Learning materials are deployed in **seasons**, consising of multiple **episodes**. Each episode is run using a **format**.
