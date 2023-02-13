@@ -62,6 +62,21 @@ Signal definitions are advanced analytics rules that can be deployed with the co
 
 Finally, there can also be “trainings” made available to the user. Training is recommended to the user if there is a more systematic competence gap related to the competences in the season (i.e., many test items are failed on first try).
 
+![Content](/docs/assets/content.drawio.svg)
+
+### Events
+
+While using talent::digital, events are recorded. Events are associated with the user who created the event and with a timestamp. There are several types of events:
+
+- Test results indicate whether the user passed or failed a test of a particular competence.
+- Feedback results record the results of any attitude- or feedback-related questions in the game.
+- Content usage records the usage of episodes and learning materials (episode ended, learning material opened, …).
+- Content feedback records the user ratings for content (upvotes, NPS).
+
+Some of the events are also sent to external analytics tools:
+
+- LogRocket, to view recordings of the gameplays around the events.
+
 ---
 
 The talent::digital platform allows developers to create and deploy customized learning material using talent::digital's testing and recommendation engines.
