@@ -40,6 +40,7 @@ export interface ID {
   season: string;
   episode: string;
   redirectUrl?: string;
+  configUrl?: string;
 }
 
 export type Badges = Record<Badge["id"], Badge>;
