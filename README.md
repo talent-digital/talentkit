@@ -47,6 +47,21 @@ This structure is the foundation for data protection mechanics in talent::digita
 - Data of a category is only shown if there are at least five talents in the category (“five guys rule”).
 - If there is a category with less than five talents, further categories are hidden until at least five talents are aggregated (“inference rule”).
 
+### Content
+
+The learning content dimension is depicted in the image below. talent::digital learning content is deployed in the form of a “season”. A season trains a particular set of competences.
+
+A season consists of a set of episodes. Episodes are shorter learning units in a particular format (e.g., simulation, quiz, dialog; corresponds to an app) with a particular configuration (e.g., the questions in the quiz). Episodes contain test items that can be passed or failed when a task is correctly or incorrectly performed.
+Test items are associated with a subcompetence that they test. They are also associated with a content sourcing rule. The content sourcing rule defines how to find additional external (micro)learning material for the task in question.
+
+Feedback items are used to determine the attitude of the user towards certain topics.
+
+Seasons can award an arbitrary amount of badges for “special achievements”. (E.g. solving a task particularly well, trying certain alternative solutions). Assets are, for example, videos, images, translation files and text scripts deployed with the season.
+
+Signal definitions are advanced analytics rules that can be deployed with the content, for example, calculating the risk of a phishing attack in a season about IT security.
+
+Finally, there can also be “trainings” made available to the user. Training is recommended to the user if there is a more systematic competence gap related to the competences in the season (i.e., many test items are failed on first try).
+
 ---
 
 The talent::digital platform allows developers to create and deploy customized learning material using talent::digital's testing and recommendation engines.
