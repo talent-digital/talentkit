@@ -1,5 +1,33 @@
 # talent::digital
 
+## Domain Model
+
+### Overview
+
+The key to understanding talent::digital’s mechanics and its analytics capabilities is the talent::digital domain model. It is depicted on a high-level in the figure below.
+
+The structure is roughly as follows: “Competence targets” are goals derived from a competence development strategy. A competence target brings the competence of a certain team or function in my organization to a certain level.
+
+As example, assume that my sales strategy is to strengthen digital sales. So I could set competence targets for my sales team to become familiar with a modern CRM system and with customer chat tools.
+A member of a team or function in my organization is called a “talent”. Being part of a team or function makes that team’s or function’s goals visible to the team member as a “mission”. By actively working with talent::digital content, team members generate events to work towards fulfilling the mission. If they are not successful with parts of the mission, additional content is offered in a personalized manner.
+
+So a sales team member in the above example would see the competence targets for sales, the team’s contribution to the targets, and his or her personal contribution to the targets. The team member gets a recommendation to play an episode about digital CRM. As part of the episode, there are tasks to work with the sales funnel.
+
+While working on the task, events are generated, demonstrating that the sales team member has or has not understood the various sales funnel stages. If the sales team member has understood the stages, these are shown as success towards the competence targets. If the sales team member has not understood the stages, additional learning material is offered and the task can be retried.
+
+![Overview](/docs/assets/overview.drawio.svg)
+
+Using the terminology of data analytics, events and calculations on events are “facts”. Competences, talents and content are “dimensions” with further properties, such as teams, functions, demographic aspects, seasons etc. In the following sections, we delve deeper into these structures, beginning with competences and talents, proceeding to events and finally closing with the concepts of seasons, episodes and content.
+
+### Competences
+
+The competence dimension is depicted below. Competences are structured into competence areas, competences and subcompetences. A competence area is a broader concept, such as sustainability or information technology. A competence in the information technology area may be, for example, IT security. A subcompetence in the IT security area may be device security or password security.
+A test item describes a test that the user has to pass to show evidence of having a subcompetence at a particular level. For example, to demonstrate foundational password security knowledge, the user may be required to set sufficiently complex passwords and may be tested to not reuse passwords between different logins.
+
+As later described, competence models are deployed as part of seasons and merged into a single larger competence model that organizations can work with to set competence targets. These targets can be set to any granularity and level of competence, from broad areas (e.g., IT foundations) to very specific topics (e.g., passwords security), from foundational to advanced. This is indicated by the three arrows from “target” to the competences.
+
+A digital certificate can be issued when a user has successfully demonstrated the competences required for a competence target. Digital certificates in talent::digital are currently issued through Accredible.
+
 The talent::digital platform allows developers to create and deploy customized learning material using talent::digital's testing and recommendation engines.
 
 Learning materials are deployed in **seasons**, consising of multiple **episodes**. Each episode is run using a **format**.
