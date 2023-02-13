@@ -40,6 +40,15 @@ They can also have an arbitrary number of “tags” to permit other analytical 
 - The “Function” tag type represents the job function (such as sales, development, …) independent of the organizational structure. Functions can be included into competences targets.
 - The “Management responsibility” tag type represents the line management level of the user (no management responsibility, team lead, department manager, …). Management responsibility is included into analysis rules related to the degree of management support of the educational measure.
 
+![Talent](/docs/assets/talent.drawio.svg)
+
+This structure is the foundation for data protection mechanics in talent::digital: Individual data is never shown to others, not even line management or HR functions (unless the individuals show the data themselves). Any organization reporting is aggregated at least to team and tag level with at least five talents aggregated:
+
+- Data of a category is only shown if there are at least five talents in the category (“five guys rule”).
+- If there is a category with less than five talents, further categories are hidden until at least five talents are aggregated (“inference rule”).
+
+---
+
 The talent::digital platform allows developers to create and deploy customized learning material using talent::digital's testing and recommendation engines.
 
 Learning materials are deployed in **seasons**, consising of multiple **episodes**. Each episode is run using a **format**.
