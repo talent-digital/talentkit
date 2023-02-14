@@ -79,6 +79,10 @@ Belongs to a [Competence](#competence) and is a container for [test items](#test
 
 A subcompetence in the IT security area may be device security or password security.
 
+## talent::digital application
+
+The talent digital application is entry point for all users. It allows [talent](#talent) to launch [episodes](#episode) and see results.
+
 ## Talent
 
 Every registered user of an organization is represented as “talent”. Talents can be associated with a [team](#team) and a [department](#department) for organizational analysis.
@@ -94,3 +98,7 @@ Training is recommended to the [talent](#talent) if there is a more systematic c
 ## Team
 
 An organisational unit for [talent](#talent). Belongs to a [Department](#department)
+
+## Tenant
+
+talent::digital has a multi-tenant architechture. Each tanant runs on a separate Kubernetes namespace, and has its own database instance. A tenant is ideentified by a unique ID, known as the tanant ID.
