@@ -1,14 +1,14 @@
 # Season
 
-A season is a collection of runnable **Episodes** on the talent::digital platform.
+A [season](/docs/GLOSSARY.md#season) is a collection of runnable [episodes](/docs/GLOSSARY.md#episode) on the talent::digital [platform](/docs/GLOSSARY.md#platform).
 
-Technically, a **season** is a [github](https://github.com) repository that contains configuration and assets for **episodes**, used by one more more **formats**.
+Technically, a **season** is a [github](https://github.com) repository that contains configuration and [assets](/docs/GLOSSARY.md#asset) for **episodes**, used by one more more [formats](/docs/GLOSSARY.md#format).
 
 ## Configuration
 
 Season configuration is specified as a `yaml` file called `season.yaml` in the root of the season github repository.
 
-**It has the following structure**
+**Season.yaml Structure**
 
 - title
   - de (string)
@@ -17,19 +17,19 @@ Season configuration is specified as a `yaml` file called `season.yaml` in the r
   - de (string)
   - en (string)
 - assetsURL (string)
-- competenceAreas
+- [competenceAreas](/docs/GLOSSARY.md#competence-area)
   - (string)
-    - competences
+    - [competences](/docs/GLOSSARY.md#competence)
       - (string)
-        - subCompetences
+        - [subCompetences](/docs/GLOSSARY.md#subcompetence)
           - (string)
             - name
               - de (string)
               - en (string)
-            - testItems
+            - [testItems](/docs/GLOSSARY.md#test-item)
               - (string)
                 - level (FOUNDATION | INTERMEDIATE | ADVANCED HIGHLY_SPECIALISED)
-                - episode
+                - [episode](/docs/GLOSSARY.md#episode)
                 - documentation
                   - de (string)
                   - en (string)
@@ -40,7 +40,7 @@ Season configuration is specified as a `yaml` file called `season.yaml` in the r
                   - en
                     - generic
                       - (string)
-            - feedbackQuestions
+            - [feedbackQuestions](/docs/GLOSSARY.md#feedback-question)
               - (string)
                 - episode (string)
                 - question
@@ -56,7 +56,7 @@ Season configuration is specified as a `yaml` file called `season.yaml` in the r
                   - (string)
                     - de (string)
                     - en (string)
-- episodes:
+- [episodes](/docs/GLOSSARY.md#episode):
   - (string)
     - title:
       - de (string)
@@ -66,9 +66,9 @@ Season configuration is specified as a `yaml` file called `season.yaml` in the r
       - en (string)
     - maturity (PENDING | ALPHA | BETA | PUBLIC)
     - imageUrl (string)
-    - format: (string)
+    - [format](/docs/GLOSSARY.md#format): (string)
     - formatConfiguration (string)
-    - badges:
+    - [badges](/docs/GLOSSARY.md#bagde):
       - (string)
         - name
           - de (string)
@@ -78,11 +78,22 @@ Season configuration is specified as a `yaml` file called `season.yaml` in the r
   - de (string)
   - en (string)
 
-### Competences
+## Getting Started
 
-talent::digital's competence model consists of 3 three levels of hierarchy: Competence Area, Competence & Sub Competence.
+Here are the steps required to release a new [season](/docs/GLOSSARY.md#season).
 
-### Test Items
+<!-- ToDo: Create season-template repository -->
+
+1. Clone the [season-template](https://github.com/talent-digital/season-template) repository.
+2. Customize the [Netlify](https://netlify.com) app URL for the season.
+3. Complete the `season.yaml` file according to the configuration above. (see example below).
+4. Add any [assets](/docs/GLOSSARY.md#asset) into the `assets` directory.
+5. Add the `EPISODES_PROVISIONER_CLIENT_PASSWORD` (obtained from talent::digital) as an _Actions Secret_ Into the github repository. ([See here](https://docs.github.com/en/actions/security-guides/encrypted-secrets))
+<!-- ToDo use TENANT_ID in the deploy.yml in template repo-->
+6. Add the `TENANT_ID` as a repository variable. ([See here](https://docs.github.com/en/actions/learn-github-actions/variables)).
+7. Merge your changes to the main branch
+
+Once changes are merged to the main branch, the deploy-season github action will add deploy the contents of `season.yaml` to the [platform](/docs/GLOSSARY.md#platform) and the [assets](/docs/GLOSSARY.md#asset) will be deployed to [Netlify](https://netlify.com)
 
 YAML Example:
 
