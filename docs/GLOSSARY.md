@@ -67,7 +67,7 @@ talent::digital's APIs, Application Launcher, Analytics Engines, etc.
 
 ## Season
 
-talent::digital learning content is deployed in the form of a “season”. A season trains a particular [set of competences](#competence-model).
+talent::digital learning content is deployed in the form of a “season”, containing multiple [episodes](#episode). A season trains a particular [set of competences](#competence-model).
 
 ## Signal
 
