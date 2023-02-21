@@ -86,8 +86,8 @@ The type for `formatConfiguration` can be provided then the kit is created.
 e1_config.toml
 
 ```toml
-intro = This is some intro text
-color = #FF0000
+intro = "This is some intro text"
+color = "#FF0000"
 ```
 
 season.yaml
