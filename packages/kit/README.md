@@ -61,20 +61,13 @@ const kit = await TalentKit.create({
 
 ### Loading an Episode
 
-The `season` and `episode` ids are provided as _URL Parameters_ in the form `?sid=X&eid=Y` where `sid` is the season identifer and `eid` is the episode identifyer (specified in the `season.yml`).
-
-For testing purposes, the `season` and `episode` ids can be provided as a parameter to the `TalentKit.create` method.
+The `season` and `episode` ids are provided as _URL Parameters_ in the form `?sid=X&eid=Y` where `sid` is the season identifer and `eid` is the episode identifyer (specified in the `season.yml`). For testing purposes, the `season` and `episode` ids can be provided as a parameter to the `TalentKit.create` method.
 
 ```typescript
 import TalentKit from "@talentdigital/kit";
 
-interface FormatConfiguration {
-  background: string;
-  introText: string;
-}
-
-const kit = await TalentKit.create<FormatConfiguration>({
-  tenant: "tenantId",
+const kit = await TalentKit.create({
+  id: { season: "my-handle/my-repo", episode: "my-episode" }
 });
 ```
 
