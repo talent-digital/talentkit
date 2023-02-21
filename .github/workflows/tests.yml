@@ -25,6 +25,6 @@ jobs:
         with:
           version: latest
           run_install: true
-      - run: pnpm lint
       - run: pnpm build
+      - run: pnpm lint
       - run: pnpm test
