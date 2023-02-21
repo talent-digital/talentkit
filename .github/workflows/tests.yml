@@ -24,7 +24,7 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
-        id: pnpm-cache
+        id: pnpm-install
         with:
           version: latest
           run_install: false
