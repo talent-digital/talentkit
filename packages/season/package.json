@@ -7,7 +7,7 @@
   ],
   "types": "dist/SeasonDefinition.d.ts",
   "scripts": {
-    "generate": "tsc && ts-json-schema-generator -p src/SeasonDefinition.ts -t SeasonDefinition -o dist/SeasonDefinition.json"
+    "build": "tsc && ts-json-schema-generator -p src/SeasonDefinition.ts -t SeasonDefinition -o dist/SeasonDefinition.json"
   },
   "keywords": [],
   "author": "talent::digital",
