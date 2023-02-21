@@ -13,7 +13,7 @@ export const createApiClient = ({
   tenant?: string;
   localBackendURL?: string;
   customFetch?: Api<SecurityDataType>["customFetch"];
-}) => {
+}): Api<SecurityDataType> => {
   if (customFetch) {
     return new Api<SecurityDataType>({
       baseUrl: "",
