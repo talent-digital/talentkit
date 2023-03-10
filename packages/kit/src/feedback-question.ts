@@ -1,15 +1,12 @@
-import {
-  EpisodeResponseWeb,
-  LocalizedStringImpl,
-} from "@talentdigital/api-client";
+import { EpisodeWeb, LocalizedString } from "@talentdigital/api-client";
 import { applicationId } from ".";
 import { ApiClient, FeedbackQuestions, ID } from "./interfaces";
 
 class FeedbackQuestion {
   private constructor(
     readonly id: string,
-    readonly question: LocalizedStringImpl,
-    readonly answers: Record<string, LocalizedStringImpl>,
+    readonly question: LocalizedString,
+    readonly answers: Record<string, LocalizedString>,
     private api: ApiClient,
     private seasonId: string,
     private episodeId: string
@@ -17,7 +14,7 @@ class FeedbackQuestion {
 
   static createForEpisode(
     { season, episode }: ID,
-    info: EpisodeResponseWeb,
+    info: EpisodeWeb,
     api: ApiClient
   ): FeedbackQuestions {
     if (!info?.feedbackQuestions) {
@@ -30,8 +27,8 @@ class FeedbackQuestion {
           id,
           new FeedbackQuestion(
             id as string,
-            question as LocalizedStringImpl,
-            answers as Record<string, LocalizedStringImpl>,
+            question as LocalizedString,
+            answers as Record<string, LocalizedString>,
             api,
             season,
             episode

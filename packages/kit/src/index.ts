@@ -1,4 +1,4 @@
-import { EpisodeResponseWeb } from "@talentdigital/api-client";
+import { EpisodeWeb } from "@talentdigital/api-client";
 import { SeasonDefinition } from "@talentdigital/season";
 import { createApiClient } from "./api.service";
 import { AuthService } from "./auth.service";
@@ -93,7 +93,7 @@ class TalentKit<T = unknown> {
     /**
      * All info about episode
      */
-    private episode: EpisodeResponseWeb,
+    private episode: EpisodeWeb,
 
     /**
      * All badges available in the current episode

@@ -1,14 +1,14 @@
 // This file was generated, do not change
-export interface TalentUserRestRequestString {
+export interface TalentUserRequestWebString {
   value: string;
 }
 
-export interface TalentUserRestRequestLong {
+export interface TalentUserRequestWebLong {
   /** @format int64 */
   value: number;
 }
 
-export interface TalentUserRestRequestBoolean {
+export interface TalentUserRequestWebBoolean {
   value: boolean;
 }
 
@@ -46,7 +46,7 @@ export interface MultiValueApplicationConfigItemWeb {
   values: string[];
 }
 
-export interface ArticleRequest {
+export interface ArticleWeb {
   /** @format int64 */
   id?: number;
   categories?: number[];
@@ -61,32 +61,14 @@ export interface ArticleRequest {
   abstract?: string;
 }
 
-export interface CreateUserRequest {
+export interface CreateUserRequestWeb {
   email: string;
   password: string;
   /** @pattern ^[a-zA-Z]{2}$ */
   locale: string;
-  configureOtp?: boolean;
 }
 
 export interface MissionTargetWeb {
-  /** @format int32 */
-  department?: number;
-  /** @format int32 */
-  team?: number;
-  /** @format int32 */
-  function?: number;
-  /** @format int32 */
-  competenceArea?: number;
-  /** @format int32 */
-  competence?: number;
-  /** @format int32 */
-  subCompetence?: number;
-  /** @format int32 */
-  level?: number;
-}
-
-export interface MissionTargetEntityWeb {
   id?: string;
   /** @format int32 */
   department?: number;
@@ -112,40 +94,32 @@ export interface FeedbackQuestionWeb {
   answers?: string;
 }
 
-export interface CompetenceAreaRequest {
+/** A broad competence area such as professional competences, leadership competences, DigComp competences, ... */
+export interface CompetenceAreaWeb {
   /**
+   * Unique ID of the competence area. IDs below 1.000 allocated to talent::digital use.
    * @format int64
    * @min 0
+   * @example 10001
    */
   id: number;
-  name?: string;
-  competences?: CompetenceRequest[];
-}
-
-export interface CompetenceRequest {
   /**
-   * @format int64
-   * @min 0
+   * Name of the competence area as shown in the user interface.
+   * @example "Computer Science"
    */
-  id: number;
-  name?: string;
-  subCompetences?: SubCompetenceRequest[];
-}
-
-export interface SubCompetenceRequest {
-  /**
-   * @format int64
-   * @min 0
-   */
-  id: number;
   name: string;
+  /** Competences contained in this competence area. */
+  competences: CompetenceWeb[];
+  /** Flag indicating if the competence area can be currently tested. */
+  testsAvailable?: boolean;
 }
 
 /** A more specific competence to be assessed, certified or educated. */
-export interface Competence {
+export interface CompetenceWeb {
   /**
    * Unique ID of the competence. IDs below 1.000 allocated to talent::digital use.
    * @format int64
+   * @min 0
    * @example 10001
    */
   id: number;
@@ -160,46 +134,28 @@ export interface Competence {
    * @example 10001
    */
   competenceAreaId?: number;
-  /** Subcompetences contained in this competence. */
-  subCompetences: SubCompetence[];
+  /** SubCompetences contained in this competence. */
+  subCompetences: SubCompetenceWeb[];
   /** Flag indicating if the competence can be currently tested. */
   testsAvailable?: boolean;
 }
 
-/** A broad competence area such as professional competences, leadership competences, DigComp competences, ... */
-export interface CompetenceArea {
-  /**
-   * Unique ID of the competence area. IDs below 1.000 allocated to talent::digital use.
-   * @format int64
-   * @example 10001
-   */
-  id: number;
-  /**
-   * Name of the competence area as shown in the user interface.
-   * @example "Computer Science"
-   */
-  name: string;
-  /** Competences contained in this competence area. */
-  competences: Competence[];
-  /** Flag indicating if the competence area can be currently tested. */
-  testsAvailable?: boolean;
-}
-
 /** A detailed competence directly linked to tests. */
-export interface SubCompetence {
+export interface SubCompetenceWeb {
   /**
-   * Unique ID of the subcompetence. IDs below 1.000 allocated to talent::digital use.
+   * Unique ID of the subCompetence. IDs below 1.000 allocated to talent::digital use.
    * @format int64
+   * @min 0
    * @example 10001
    */
   id: number;
   /**
-   * Name of the subcompetence as shown in the user interface.
+   * Name of the subCompetence as shown in the user interface.
    * @example "Complexity"
    */
   name: string;
   /**
-   * Backlink to the competence of this subcompetence for convenience.
+   * Backlink to the competence of this subCompetence for convenience.
    * @format int64
    * @example 10001
    */
@@ -218,7 +174,7 @@ export interface RealtimeDocumentEntityWeb {
   body: string;
 }
 
-export interface CreateOrUpdateCertificateRequest {
+export interface CreateOrUpdateCertificateRequestWeb {
   certificate: string;
   recipientName: string;
   title: string;
@@ -227,7 +183,7 @@ export interface CreateOrUpdateCertificateRequest {
   grade: number;
 }
 
-export interface Certificate {
+export interface CertificateWeb {
   certificate?: string;
   url?: string;
   recipientName?: string;
@@ -238,22 +194,7 @@ export interface ApplicationStateWeb {
   state: string;
 }
 
-export interface ArticleResponse {
-  /** @format int64 */
-  id?: number;
-  categories?: number[];
-  author?: string;
-  title?: string;
-  created?: string;
-  tags?: string[];
-  teaser?: string;
-  content?: string;
-  draft?: boolean;
-  videoFileName?: string;
-  abstract?: string;
-}
-
-export interface EventCreationRequest {
+export interface EventCreationRequestWeb {
   applicationId?: string;
   seasonId?: string;
   episodeId?: string;
@@ -262,8 +203,8 @@ export interface EventCreationRequest {
 
 export type JsonNode = object;
 
-/** A test item assesses a subcompetence at a certain level and provides one piece of evidence that the subcompetence is present at the given level. */
-export interface TestItem {
+/** A test item assesses a subCompetence at a certain level and provides one piece of evidence that the subcompetence is present at the given level. */
+export interface TestItemWeb {
   /**
    * ID of season
    * @example "season01"
@@ -280,14 +221,14 @@ export interface TestItem {
    */
   eventType: string;
   /**
-   * Link to the subcompetence that this test item assesses.
+   * Link to the subCompetence that this test item assesses.
    * @format int64
    * @min 0
    * @example 10001
    */
   subCompetenceId: number;
   /**
-   * Defines at what level the subcompetence is assessed.
+   * Defines at what level the subCompetence is assessed.
    * @example "FOUNDATION"
    */
   level: "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
@@ -299,37 +240,31 @@ export interface TestItem {
 }
 
 export interface BadgeWeb {
-  name: LocalizedStringImpl;
+  /** The data with text localization. Should be an correct ISO language. */
+  name: LocalizedString;
   image: string;
 }
 
-export interface CompetenceAreaWeb {
-  name?: LocalizedStringImpl;
-  competences: Record<string, CompetenceWeb>;
-}
-
-export interface CompetenceWeb {
-  name?: LocalizedStringImpl;
-  subCompetences: Record<string, SubCompetenceWeb>;
-}
-
 export interface EpisodeWeb {
-  title: LocalizedStringImpl;
-  description: LocalizedStringImpl;
+  /** The data with text localization. Should be an correct ISO language. */
+  title: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  description: LocalizedString;
   maturity: "PENDING" | "ALPHA" | "BETA" | "PUBLIC";
   imageUrl: string;
   format: string;
   formatConfiguration: string;
   badges?: Record<string, BadgeWeb>;
+  assetsURL?: string;
+  testItems?: SeasonDefinitionTestItemWeb[];
+  feedbackQuestions?: SeasonDefinitionFeedbackQuestionWebLocalizedString[];
 }
 
-export interface FeedbackQuestionRequestWeb {
-  episode?: string;
-  question?: LocalizedStringImpl;
-  answers?: Record<string, Record<string, string>>;
-}
-
-export interface LocalizedStringImpl {
+/**
+ * The data with text localization. Should be an correct ISO language.
+ * @example {"en":"Save everything and leave","de":"Alles aufheben und gehen"}
+ */
+export interface LocalizedString {
   en?: string;
   de?: string;
 }
@@ -340,71 +275,74 @@ export interface SearchDefinitionWeb {
   links?: string[];
 }
 
-export interface SeasonWeb {
-  id: string;
-  title: LocalizedStringImpl;
-  info: LocalizedStringImpl;
-  seasonEndMessage: LocalizedStringImpl;
-  assetsURL: string;
-  competenceAreas?: Record<string, CompetenceAreaWeb>;
-  episodes?: Record<string, EpisodeWeb>;
+/** Competence Area model used only in Season Definition */
+export interface SeasonDefinitionCompetenceAreaWeb {
+  /** The data with text localization. Should be an correct ISO language. */
+  name?: LocalizedString;
+  competences: Record<string, SeasonDefinitionCompetenceWeb>;
 }
 
-export interface SubCompetenceWeb {
-  name: LocalizedStringImpl;
-  testItems?: Record<string, TestItemWeb>;
-  feedbackQuestions?: Record<string, FeedbackQuestionRequestWeb>;
+/** Competence model used only in Season Definition */
+export interface SeasonDefinitionCompetenceWeb {
+  /** The data with text localization. Should be an correct ISO language. */
+  name?: LocalizedString;
+  subCompetences: Record<string, SeasonDefinitionSubCompetenceWeb>;
 }
 
-export interface TestItemWeb {
+export interface SeasonDefinitionFeedbackQuestionWeb {
+  id?: string;
+  episode?: string;
+  /** The data with text localization. Should be an correct ISO language. */
+  question?: LocalizedString;
+  answers?: Record<string, object>;
+}
+
+export interface SeasonDefinitionFeedbackQuestionWebLocalizedString {
+  id?: string;
+  episode?: string;
+  /** The data with text localization. Should be an correct ISO language. */
+  question?: LocalizedString;
+  answers?: Record<string, LocalizedString>;
+}
+
+/** SubCompetence model used only in Season Definition */
+export interface SeasonDefinitionSubCompetenceWeb {
+  /** The data with text localization. Should be an correct ISO language. */
+  name: LocalizedString;
+  testItems?: Record<string, SeasonDefinitionTestItemWeb>;
+  feedbackQuestions?: Record<string, SeasonDefinitionFeedbackQuestionWeb>;
+}
+
+export interface SeasonDefinitionTestItemWeb {
+  id?: string;
   episode?: string;
   level?: "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
-  documentation?: LocalizedStringImpl;
+  /** The data with text localization. Should be an correct ISO language. */
+  documentation?: LocalizedString;
   search?: Record<string, SearchDefinitionWeb>;
 }
 
-export interface EpisodeResponseWeb {
-  title?: LocalizedStringImpl;
-  description?: LocalizedStringImpl;
-  maturity?: "PENDING" | "ALPHA" | "BETA" | "PUBLIC";
-  assetsURL?: string;
-  imageUrl?: string;
-  format?: string;
-  formatConfiguration?: string;
-  badges?: Record<string, BadgeWeb>;
-  testItems?: TestItemResponse[];
-  feedbackQuestions?: FeedbackQuestionResponseWeb[];
+export interface SeasonWeb {
+  id: string;
+  /** The data with text localization. Should be an correct ISO language. */
+  title: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  info: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  seasonEndMessage: LocalizedString;
+  assetsURL: string;
+  competenceAreas?: Record<string, SeasonDefinitionCompetenceAreaWeb>;
+  episodes?: Record<string, EpisodeWeb>;
 }
 
-export interface FeedbackQuestionResponseWeb {
-  id?: string;
-  question?: LocalizedStringImpl;
-  answers?: Record<string, LocalizedStringImpl>;
-}
-
-export interface SeasonResponseWeb {
-  id?: string;
-  assetsURL?: string;
-  title?: LocalizedStringImpl;
-  info?: LocalizedStringImpl;
-  seasonEndMessage?: LocalizedStringImpl;
-  episodes?: Record<string, EpisodeResponseWeb>;
-}
-
-export interface TestItemResponse {
-  id?: string;
-  level?: "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
-  documentation?: LocalizedStringImpl;
-}
-
-export interface TagEntity {
+export interface TagWeb {
   /** @format int64 */
   id?: number;
   name?: string;
   type?: string;
 }
 
-export interface TalentGroupEntity {
+export interface TalentGroupWeb {
   /** @format int64 */
   id?: number;
   name?: string;
@@ -415,8 +353,8 @@ export interface TalentGroupEntity {
 export interface TalentUserWeb {
   id?: string;
   name?: string;
-  talentGroup?: TalentGroupEntity;
-  tagItems?: TagEntity[];
+  talentGroup?: TalentGroupWeb;
+  tagItems?: TagWeb[];
   supportUser?: boolean;
 }
 
@@ -424,8 +362,8 @@ export interface WebSignalWeb {
   /** @format int32 */
   signalType?: number;
   strength?: number;
-  whoFunction?: TagEntity[];
-  whoTeam?: TalentGroupEntity[];
+  whoFunction?: TagWeb[];
+  whoTeam?: TalentGroupWeb[];
   active?: boolean;
   dataNeeded?: boolean;
 }
@@ -530,7 +468,7 @@ export interface QualificationHintWeb {
   currentLevel?: "START" | "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
 }
 
-export interface PlayerTeamOrganisationComparison {
+export interface PlayerTeamOrganisationComparisonWeb {
   /** @format int32 */
   available?: number;
   /** @format int32 */
@@ -559,12 +497,12 @@ export interface CompetenceAreaTestResultReportWeb {
   totalPassed?: number;
 }
 
-export interface ApplicationConfigItemInfoResponse {
+export interface ApplicationConfigItemInfoWeb {
   name?: string;
   multiValue?: boolean;
 }
 
-export interface ProfileTwoCompanyCompetenceArea {
+export interface ProfileTwoCompanyCompetenceAreaWeb {
   /** @format int64 */
   competenceAreaId?: number;
   competenceAreaName?: string;
@@ -586,11 +524,11 @@ export interface ProfileTwoCompanyCompetenceArea {
   maxPassed?: number;
 }
 
-export interface WebTagAreaReportDTO {
+export interface WebTagAreaReportWeb {
   /** @format int64 */
   tagId?: number;
   tagName?: string;
-  competenceAreaList?: ProfileTwoCompanyCompetenceArea[];
+  competenceAreaList?: ProfileTwoCompanyCompetenceAreaWeb[];
 }
 
 export interface CompanyNumberOfUsersStatisticsReportWeb {
@@ -617,7 +555,7 @@ export interface CompletedEpisodeStatisticsWeb {
   numberOfUsers?: number;
 }
 
-export interface WebGeneralReportDTO {
+export interface WebGeneralReportWeb {
   /**
    * Min number of tries in all competence areas
    * @format int32
@@ -660,15 +598,15 @@ export interface WebGeneralReportDTO {
   availableTests?: number;
 }
 
-export interface WebDepartmentAreaReportDTO {
+export interface WebDepartmentAreaReportWeb {
   /** @format int64 */
   departmentId?: number;
   departmentName?: string;
-  competenceAreaList?: ProfileTwoCompanyCompetenceArea[];
-  childDepartments?: WebDepartmentAreaReportDTO[];
+  competenceAreaList?: ProfileTwoCompanyCompetenceAreaWeb[];
+  childDepartments?: WebDepartmentAreaReportWeb[];
 }
 
-export interface WebAreaTestResultDTO {
+export interface WebAreaTestResultWeb {
   /** @format int64 */
   competenceAreaId?: number;
   competenceAreaName?: string;
@@ -918,7 +856,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/{userId}/update-name
      * @secure
      */
-    updateTalentUserName: (userId: string, data: TalentUserRestRequestString, params: RequestParams = {}) =>
+    updateTalentUserName: (userId: string, data: TalentUserRequestWebString, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/talent/${userId}/update-name`,
         method: "PUT",
@@ -936,7 +874,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/{userId}/update-group
      * @secure
      */
-    updateTalentUserGroup: (userId: string, data: TalentUserRestRequestLong, params: RequestParams = {}) =>
+    updateTalentUserGroup: (userId: string, data: TalentUserRequestWebLong, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/talent/${userId}/update-group`,
         method: "PUT",
@@ -954,7 +892,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/{userId}/tags
      * @secure
      */
-    updateTalentUserTags: (userId: string, data: TalentUserRestRequestLong[], params: RequestParams = {}) =>
+    updateTalentUserTags: (userId: string, data: TalentUserRequestWebLong[], params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/talent/${userId}/tags`,
         method: "PUT",
@@ -973,7 +911,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/{userId}/support
      * @secure
      */
-    updateTalentSupportUserFlag: (userId: string, data: TalentUserRestRequestBoolean, params: RequestParams = {}) =>
+    updateTalentSupportUserFlag: (userId: string, data: TalentUserRequestWebBoolean, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/talent/${userId}/support`,
         method: "PUT",
@@ -991,7 +929,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/update-name
      * @secure
      */
-    updateTalentUserName1: (data: TalentUserRestRequestString, params: RequestParams = {}) =>
+    updateTalentUserName1: (data: TalentUserRequestWebString, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/talent/update-name`,
         method: "PUT",
@@ -1009,7 +947,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/update-group
      * @secure
      */
-    updateTalentUserGroup1: (data: TalentUserRestRequestLong, params: RequestParams = {}) =>
+    updateTalentUserGroup1: (data: TalentUserRequestWebLong, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/talent/update-group`,
         method: "PUT",
@@ -1027,7 +965,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent/tags
      * @secure
      */
-    updateTalentUserTags1: (data: TalentUserRestRequestLong[], params: RequestParams = {}) =>
+    updateTalentUserTags1: (data: TalentUserRequestWebLong[], params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/talent/tags`,
         method: "PUT",
@@ -1283,7 +1221,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     findAllConfigItems: (params: RequestParams = {}) =>
-      this.request<ApplicationConfigItemInfoResponse[], any>({
+      this.request<ApplicationConfigItemInfoWeb[], any>({
         path: `/api/v1/config`,
         method: "GET",
         secure: true,
@@ -1318,7 +1256,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getArticle: (id: number, params: RequestParams = {}) =>
-      this.request<ArticleResponse, any>({
+      this.request<ArticleWeb, any>({
         path: `/api/v1/articles/${id}`,
         method: "GET",
         secure: true,
@@ -1334,7 +1272,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/articles/{id}
      * @secure
      */
-    updateArticleById: (id: number, data: ArticleRequest, params: RequestParams = {}) =>
+    updateArticleById: (id: number, data: ArticleWeb, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/articles/${id}`,
         method: "PUT",
@@ -1423,7 +1361,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       },
       params: RequestParams = {},
     ) =>
-      this.request<ArticleResponse[], any>({
+      this.request<ArticleWeb[], any>({
         path: `/api/v1/articles`,
         method: "GET",
         query: query,
@@ -1440,7 +1378,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/articles
      * @secure
      */
-    saveOrUpdateArticles: (data: ArticleRequest[], params: RequestParams = {}) =>
+    saveOrUpdateArticles: (data: ArticleWeb[], params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/articles`,
         method: "PUT",
@@ -1459,8 +1397,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/articles
      * @secure
      */
-    addArticle: (data: ArticleRequest, params: RequestParams = {}) =>
-      this.request<ArticleResponse, any>({
+    addArticle: (data: ArticleWeb, params: RequestParams = {}) =>
+      this.request<ArticleWeb, any>({
         path: `/api/v1/articles`,
         method: "POST",
         body: data,
@@ -1502,7 +1440,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/user
      * @secure
      */
-    createUser: (data: CreateUserRequest, params: RequestParams = {}) =>
+    createUser: (data: CreateUserRequestWeb, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/user`,
         method: "POST",
@@ -1557,7 +1495,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getAllTargets: (params: RequestParams = {}) =>
-      this.request<MissionTargetEntityWeb[], any>({
+      this.request<MissionTargetWeb[], any>({
         path: `/api/v1/missions/target`,
         method: "GET",
         secure: true,
@@ -1574,7 +1512,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     createTarget: (data: MissionTargetWeb, params: RequestParams = {}) =>
-      this.request<MissionTargetEntityWeb[], any>({
+      this.request<MissionTargetWeb[], any>({
         path: `/api/v1/missions/target`,
         method: "POST",
         body: data,
@@ -1644,7 +1582,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     deleteTarget: (id: string, params: RequestParams = {}) =>
-      this.request<MissionTargetEntityWeb[], any>({
+      this.request<MissionTargetWeb[], any>({
         path: `/api/v1/missions/target/${id}`,
         method: "DELETE",
         secure: true,
@@ -1747,7 +1685,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getCompetencesTree: (params: RequestParams = {}) =>
-      this.request<CompetenceArea[], any>({
+      this.request<CompetenceAreaWeb[], any>({
         path: `/api/v1/competences`,
         method: "GET",
         secure: true,
@@ -1763,8 +1701,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/competences
      * @secure
      */
-    addNewCompetence: (data: CompetenceAreaRequest[], params: RequestParams = {}) =>
-      this.request<CompetenceArea[], any>({
+    addNewCompetence: (data: CompetenceAreaWeb[], params: RequestParams = {}) =>
+      this.request<CompetenceAreaWeb[], any>({
         path: `/api/v1/competences`,
         method: "POST",
         body: data,
@@ -1782,7 +1720,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/test-item
      * @secure
      */
-    createTestItem: (data: TestItem, params: RequestParams = {}) =>
+    createTestItem: (data: TestItemWeb, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/test-item`,
         method: "POST",
@@ -1803,7 +1741,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     findTalentCertificates: (params: RequestParams = {}) =>
-      this.request<Certificate[], any>({
+      this.request<CertificateWeb[], any>({
         path: `/api/v1/certificate`,
         method: "GET",
         secure: true,
@@ -1819,8 +1757,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/certificate
      * @secure
      */
-    createOrUpdateTalentCertificates: (data: CreateOrUpdateCertificateRequest[], params: RequestParams = {}) =>
-      this.request<Certificate[], any>({
+    createOrUpdateTalentCertificates: (data: CreateOrUpdateCertificateRequestWeb[], params: RequestParams = {}) =>
+      this.request<CertificateWeb[], any>({
         path: `/api/v1/certificate`,
         method: "POST",
         body: data,
@@ -2004,7 +1942,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/event
      * @secure
      */
-    saveEvent: (data: EventCreationRequest, params: RequestParams = {}) =>
+    saveEvent: (data: EventCreationRequestWeb, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/event`,
         method: "POST",
@@ -2025,7 +1963,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getAllSeasons: (params: RequestParams = {}) =>
-      this.request<SeasonResponseWeb[], any>({
+      this.request<SeasonWeb[], any>({
         path: `/api/v1/season`,
         method: "GET",
         secure: true,
@@ -2042,7 +1980,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     addSeason: (data: SeasonWeb, params: RequestParams = {}) =>
-      this.request<SeasonResponseWeb[], any>({
+      this.request<SeasonWeb[], any>({
         path: `/api/v1/season`,
         method: "POST",
         body: data,
@@ -2061,7 +1999,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getEpisode: (seasonId: string, episodeId: string, params: RequestParams = {}) =>
-      this.request<EpisodeResponseWeb, any>({
+      this.request<EpisodeWeb, any>({
         path: `/api/v1/season/${seasonId}/episode/${episodeId}`,
         method: "GET",
         secure: true,
@@ -2095,7 +2033,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getSeason: (id: string, params: RequestParams = {}) =>
-      this.request<SeasonResponseWeb, any>({
+      this.request<SeasonWeb, any>({
         path: `/api/v1/season/${id}`,
         method: "GET",
         secure: true,
@@ -2146,7 +2084,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     loadTalentGroups: (parentGroupId: number, params: RequestParams = {}) =>
-      this.request<TalentGroupEntity[], any>({
+      this.request<TalentGroupWeb[], any>({
         path: `/api/v1/talent-groups/by-parent/${parentGroupId}`,
         method: "GET",
         secure: true,
@@ -2162,7 +2100,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     loadTalentGroups1: (parentGroupId: number, params: RequestParams = {}) =>
-      this.request<TalentGroupEntity[], any>({
+      this.request<TalentGroupWeb[], any>({
         path: `/api/v1/talent-groups/by-parent`,
         method: "GET",
         secure: true,
@@ -2195,7 +2133,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     findTagsByType: (tagType: string, params: RequestParams = {}) =>
-      this.request<TagEntity[], any>({
+      this.request<TagWeb[], any>({
         path: `/api/v1/tags/by-type/${tagType}`,
         method: "GET",
         secure: true,
@@ -2341,7 +2279,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getPlayerTeamOrganisationComparisonReport: (params: RequestParams = {}) =>
-      this.request<PlayerTeamOrganisationComparison, any>({
+      this.request<PlayerTeamOrganisationComparisonWeb, any>({
         path: `/api/v1/user-report/compare`,
         method: "GET",
         secure: true,
@@ -2378,7 +2316,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getProfileTwoTagCompetenceAreas: (tagType: string, params: RequestParams = {}) =>
-      this.request<WebTagAreaReportDTO[], any>({
+      this.request<WebTagAreaReportWeb[], any>({
         path: `/api/v1/company-report/tag-area/${tagType}`,
         method: "GET",
         secure: true,
@@ -2438,7 +2376,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getProfileTwoGeneralReport: (params: RequestParams = {}) =>
-      this.request<WebGeneralReportDTO, any>({
+      this.request<WebGeneralReportWeb, any>({
         path: `/api/v1/company-report/general`,
         method: "GET",
         secure: true,
@@ -2456,7 +2394,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getProfileTwoDepartmentAreas: (params: RequestParams = {}) =>
-      this.request<WebDepartmentAreaReportDTO[], any>({
+      this.request<WebDepartmentAreaReportWeb[], any>({
         path: `/api/v1/company-report/department-area`,
         method: "GET",
         secure: true,
@@ -2474,7 +2412,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getCompanyCompetenceAreaTestResults: (params: RequestParams = {}) =>
-      this.request<WebAreaTestResultDTO[], any>({
+      this.request<WebAreaTestResultWeb[], any>({
         path: `/api/v1/company-report`,
         method: "GET",
         secure: true,

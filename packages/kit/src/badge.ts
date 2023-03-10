@@ -1,7 +1,4 @@
-import {
-  EpisodeResponseWeb,
-  LocalizedStringImpl,
-} from "@talentdigital/api-client";
+import { EpisodeWeb, LocalizedString } from "@talentdigital/api-client";
 import { Badges, BadgesStorage } from "./interfaces";
 import StorageService from "./storage.service";
 
@@ -10,7 +7,7 @@ class Badge {
 
   private constructor(
     readonly id: string,
-    readonly name: LocalizedStringImpl,
+    readonly name: LocalizedString,
     readonly image: string,
     private storage: StorageService
   ) {}
@@ -31,10 +28,7 @@ class Badge {
    * @param storage
    * @returns Record<Badge["id"], Badge>
    */
-  static createForEpisode(
-    info: EpisodeResponseWeb,
-    storage: StorageService
-  ): Badges {
+  static createForEpisode(info: EpisodeWeb, storage: StorageService): Badges {
     if (!info?.badges) return {};
 
     return Object.fromEntries(

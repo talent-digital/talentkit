@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { EpisodeResponseWeb } from "@talentdigital/api-client";
+import { EpisodeWeb } from "@talentdigital/api-client";
 import { SeasonDefinition } from "@talentdigital/season";
 import { ID } from "./interfaces";
 
@@ -19,7 +19,7 @@ export const createCustomFetch =
 
         if (!episodeDefinition) throw `Episode ${id.episode} not found`;
 
-        const episode: EpisodeResponseWeb = { ...episodeDefinition };
+        const episode: EpisodeWeb = { ...episodeDefinition };
 
         episode.assetsURL = seasonDefinition.assetsURL;
 
@@ -59,7 +59,7 @@ export const createCustomFetch =
 const extractTestItems = (
   competenceAreas: SeasonDefinition["competenceAreas"],
   { episode }: ID
-): EpisodeResponseWeb["testItems"] =>
+): EpisodeWeb["testItems"] =>
   Object.values(competenceAreas).flatMap(({ competences }) =>
     Object.values(competences).flatMap(({ subCompetences }) =>
       Object.values(subCompetences).flatMap(({ testItems }) =>
@@ -79,7 +79,7 @@ const extractTestItems = (
 const extractFeedbackQuestions = (
   competenceAreas: SeasonDefinition["competenceAreas"],
   { episode }: ID
-): EpisodeResponseWeb["feedbackQuestions"] =>
+): EpisodeWeb["feedbackQuestions"] =>
   Object.values(competenceAreas).flatMap(({ competences }) =>
     Object.values(competences).flatMap(({ subCompetences }) =>
       Object.values(subCompetences).flatMap(({ feedbackQuestions }) =>

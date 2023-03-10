@@ -1,7 +1,8 @@
 import {
-  EpisodeResponseWeb,
-  LocalizedStringImpl,
-  TestItemResponse,
+  EpisodeWeb,
+  LocalizedString,
+  SeasonDefinitionTestItemWeb,
+  TestItemWeb,
 } from "@talentdigital/api-client";
 import { applicationId } from ".";
 import { ApiClient, ID, Tests } from "./interfaces";
@@ -16,18 +17,14 @@ class Test {
 
   private constructor(
     readonly id: string,
-    readonly documentation: LocalizedStringImpl,
-    readonly level: TestItemResponse["level"],
+    readonly documentation: LocalizedString,
+    readonly level: TestItemWeb["level"],
     private api: ApiClient,
     private seasonId: string,
     private episodeId: string
   ) {}
 
-  static createForEpisode(
-    id: ID,
-    info: EpisodeResponseWeb,
-    api: ApiClient
-  ): Tests {
+  static createForEpisode(id: ID, info: EpisodeWeb, api: ApiClient): Tests {
     if (!info?.testItems) {
       return {};
     }
@@ -38,8 +35,8 @@ class Test {
           test.id,
           new Test(
             test.id as string,
-            test.documentation as LocalizedStringImpl,
-            test.level,
+            test.documentation as LocalizedString,
+            test.level as TestItemWeb["level"],
             api,
             id.season,
             id.episode
