@@ -13,15 +13,17 @@ class Events {
    * @description Mark the episode as completed and return to the dashboard
    */
   async end() {
+    const seasonId = this.id.season;
+    const episodeId = this.id.episode;
     const events = [
       {
         eventTypeId: "episode.end",
-        season: this.id.season,
-        episode: this.id.episode,
+        season: seasonId,
+        episode: episodeId,
       },
     ];
 
-    await this.api.domainModelEvents.saveEvent({ applicationId, events });
+    await this.api.domainModelEvents.saveEvent({ applicationId, events, seasonId, episodeId });
 
     let savegames = this.storage.getItem<SavegameStorage>(savegameKey) || {};
 
