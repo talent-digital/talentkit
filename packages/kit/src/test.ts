@@ -46,26 +46,32 @@ class Test {
     ) as Tests;
   }
 
-  pass() {
+  pass(data?: Record<string, unknown>) {
     this.result = TestResult.pass;
 
     return this.api.domainModelEvents.saveEvent(
-      this.generatePayload(TestResult.pass)
+      this.generatePayload(TestResult.pass, data)
     );
   }
 
-  fail() {
+  fail(data?: Record<string, unknown>) {
     this.result = TestResult.fail;
 
     return this.api.domainModelEvents.saveEvent(
-      this.generatePayload(TestResult.fail)
+      this.generatePayload(TestResult.fail, data)
     );
   }
 
-  private generatePayload(result: TestResult) {
+  private generatePayload(result: TestResult, data?: Record<string, unknown>) {
     const events = [
       {
         type: "test.complete",
+        payload: {
+          test: this.id,
+          data: data || {},
+          failed: !result,
+          timestamp: Date.now()
+        },
         result: { id: this.id, value: result },
       },
     ];
