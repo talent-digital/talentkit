@@ -1,6 +1,7 @@
 import { EpisodeWeb, LocalizedString } from "@talentdigital/api-client";
 import { applicationId } from ".";
 import { ApiClient, FeedbackQuestions, ID } from "./interfaces";
+import LogRocket from "logrocket";
 
 class FeedbackQuestion {
   private constructor(
@@ -46,7 +47,8 @@ class FeedbackQuestion {
   submit(id: string) {
     const localized = this.answers[id];
     if (!localized) {
-      console.log("Invalid answer id");
+      console.error("Invalid answer id");
+      LogRocket.captureException(new Error(`Invalid answer id: ${id}`));
       return;
     }
     const text = JSON.stringify(localized);

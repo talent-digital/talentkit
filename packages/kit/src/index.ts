@@ -25,6 +25,7 @@ import Savegame from "./savegame";
 import StorageService from "./storage.service";
 import Test from "./test";
 import Tracker from "./tracker";
+import LogRocket from "logrocket";
 
 export const applicationId = "talentApplicationProfileTwo";
 export const savegameKey = "SEASONS";
@@ -217,6 +218,7 @@ class TalentKit<T = unknown> {
         configString = await res.text();
       } catch (err) {
         console.error("No episode configuration found");
+        LogRocket.captureException(new Error("No episode configuration found"));
       }
     }
 

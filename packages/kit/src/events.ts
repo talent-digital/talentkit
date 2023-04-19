@@ -1,3 +1,4 @@
+import LogRocket from "logrocket";
 import { applicationId, savegameKey } from ".";
 import { ApiClient, ID, SavegameStorage } from "./interfaces";
 import StorageService from "./storage.service";
@@ -61,6 +62,7 @@ class Events {
       window.location.assign(this.id.redirectUrl);
     } else {
       console.error("No redirect URL hasn't been set");
+      LogRocket.captureException(new Error("No redirect URL hasn't been set"));
       window.close();
     }
   }

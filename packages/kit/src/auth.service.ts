@@ -1,6 +1,7 @@
 import Keycloak from "keycloak-js";
 import { getBaseUrl } from "./helpers";
 import { AuthClient } from "./interfaces";
+import LogRocket from "logrocket";
 
 export class AuthService {
   private constructor(protected auth: AuthClient) {
@@ -40,6 +41,11 @@ export class AuthService {
     } catch (e) {
       alert("Error authenticating");
       console.error(e);
+      if (e instanceof Error) {
+        LogRocket.captureException(e);
+      } else if (typeof e === 'string') {
+        LogRocket.captureException(new Error(e));
+      }
     }
   }
 
