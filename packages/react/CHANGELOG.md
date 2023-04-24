@@ -1,5 +1,12 @@
 # @talentdigital/react
 
+## 0.27.0
+
+### Patch Changes
+
+- Updated dependencies [84be642]
+  - @talentdigital/kit@0.27.0
+
 ## 0.26.0
 
 ### Patch Changes
