@@ -1,7 +1,6 @@
 import {
   EpisodeWeb,
   LocalizedString,
-  SeasonDefinitionTestItemWeb,
   TestItemWeb,
 } from "@talentdigital/api-client";
 import { applicationId } from ".";
@@ -11,6 +10,8 @@ enum TestResult {
   "fail" = 0,
   "pass" = 1,
 }
+
+type TestData = Record<string, unknown> | Record<string, unknown>[]
 
 class Test {
   result: TestResult | undefined;
@@ -46,7 +47,7 @@ class Test {
     ) as Tests;
   }
 
-  pass(data?: Record<string, unknown>) {
+  pass(data?: TestData) {
     this.result = TestResult.pass;
 
     return this.api.domainModelEvents.saveEvent(
@@ -54,7 +55,7 @@ class Test {
     );
   }
 
-  fail(data?: Record<string, unknown>) {
+  fail(data?: TestData) {
     this.result = TestResult.fail;
 
     return this.api.domainModelEvents.saveEvent(
@@ -62,7 +63,7 @@ class Test {
     );
   }
 
-  private generatePayload(result: TestResult, data?: Record<string, unknown>) {
+  private generatePayload(result: TestResult, data?: TestData) {
     const events = [
       {
         type: "test.complete",

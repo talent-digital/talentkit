@@ -1,5 +1,12 @@
 # @talentdigital/kit
 
+## 0.26.0
+
+### Minor Changes
+
+- b19beba: Add custom logRocket logging to caught errors
+- 93d8856: add payload data
+
 ## 0.25.0
 
 ### Minor Changes
