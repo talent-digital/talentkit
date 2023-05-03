@@ -2159,7 +2159,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns a list of Season, Episodes with the number of pending tests per episode which fall within the player's mission targets
+     * @description Returns a list of test Season, Episodes with the number of pending tests per episode which fall within the player's mission targets
      *
      * @tags User analytics: Recommendations
      * @name GetPlayRecommendations
