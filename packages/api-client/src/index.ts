@@ -2099,7 +2099,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/v1/talent-groups/by-parent
      * @secure
      */
-    loadTalentGroups1: (parentGroupId: number, params: RequestParams = {}) =>
+    loadTalentGroups1: (params: RequestParams = {}) =>
       this.request<TalentGroupWeb[], any>({
         path: `/api/v1/talent-groups/by-parent`,
         method: "GET",
