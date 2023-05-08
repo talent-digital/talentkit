@@ -386,6 +386,7 @@ export interface PlayRecommendationWeb {
   episode?: string;
   /** @format int32 */
   pendingTests?: number;
+  played?: boolean;
 }
 
 export interface MissionProgressWeb {
