@@ -32,6 +32,11 @@ The [season](/docs/GLOSSARY.md#season) is deployed to the talent::digital [platf
 
 [Assets](/docs/GLOSSARY.md#asset) can be placed in an **assets** directory that is deployed to Netlify.
 
+Testing a `season.yaml` file locally:
+- Start a [format](/docs/GLOSSARY.md#format) locally (e.g. on `localhost:3000`)
+- Serve the `season.yaml` locally (e.g. on `localhost:8080`). You can use the [http-server](https://www.npmjs.com/package/http-server) package, to do so, run `npx http-server --cors` in the folder where `season.yaml` is located.
+- Use the `configUrl` url param to point to a local `season.yaml` file, e.g. `http://localhost:3000/?sid=acme-season-one&eid=one&redirectUrl=https://tenant.talentdigital.eu/season/acme-season-one&configUrl=http://localhost:8080`
+
 ## Example
 
 In the following example, a developer (ACME), deploys a [season](/docs/GLOSSARY.md#season) (season-one). The season contains three [episodes](/docs/GLOSSARY.md#episode).
