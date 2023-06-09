@@ -153,7 +153,7 @@ class TalentKit<T = unknown> {
     readonly tracker?: Tracker,
 
     /**
-     * Currently logged in user information
+     * Currently logged in user's authentication information
      */
     readonly authUser?: Keycloak.KeycloakTokenParsed
   ) {}
