@@ -1,5 +1,16 @@
 # @talentdigital/kit
 
+## 0.27.0
+
+### Minor Changes
+
+- 84be642: Expand test.pass() and test.fail() method to accept an array
+- 1829caa: Expose auth user throught talentkit
+
+### Patch Changes
+
+- f743d59: Readme update - add configUrl description
+
 ## 0.26.0
 
 ### Minor Changes
