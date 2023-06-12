@@ -89,7 +89,7 @@ export type SavegameStorage = Record<string, SeasonStorage>;
 
 export type BadgesStorage = string[];
 
-export type SupportedExtensions = typeof supportedExtensions[number];
+export type SupportedExtensions = (typeof supportedExtensions)[number];
 
 export interface FeedbackOption {
   id: number;

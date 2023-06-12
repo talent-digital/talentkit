@@ -20,5 +20,6 @@ export default defineConfig({
   plugins: [dts(), ViteYaml()],
   test: {
     environment: "happy-dom",
+    setupFiles: ["@vitest/web-worker"],
   },
 });

@@ -138,7 +138,7 @@ class TalentKit<T = unknown> {
     readonly id: ID,
 
     /**
-     * The currenr player's profile settings
+     * The current player's profile settings
      */
     readonly profile: ProfileStorage,
 
@@ -150,7 +150,12 @@ class TalentKit<T = unknown> {
     /**
      * Track user events and captures session replays
      */
-    readonly tracker?: Tracker
+    readonly tracker?: Tracker,
+
+    /**
+     * Currently logged in user's authentication information
+     */
+    readonly authUser?: Keycloak.KeycloakTokenParsed
   ) {}
 
   /**
@@ -260,7 +265,8 @@ class TalentKit<T = unknown> {
       id,
       profileStorage,
       formatConfiguration,
-      tracker
+      tracker,
+      auth?.user
     );
   }
 }
