@@ -1,5 +1,16 @@
 # @talentdigital/react
 
+## 0.28.0
+
+### Minor Changes
+
+- 49b1ed0: Version alignment
+
+### Patch Changes
+
+- Updated dependencies [49b1ed0]
+  - @talentdigital/kit@0.28.0
+
 ## 0.27.0
 
 ### Patch Changes
