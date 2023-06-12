@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.28.0
+
+### Minor Changes
+
+- 49b1ed0: Version alignment
+
 ## 0.27.0
 
 ### Minor Changes
