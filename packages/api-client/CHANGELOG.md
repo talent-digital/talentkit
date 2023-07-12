@@ -1,5 +1,11 @@
 # @talentdigital/api-client
 
+## 0.4.0
+
+### Minor Changes
+
+- 6924c57: Update api client typings
+
 ## 0.3.0
 
 ### Minor Changes

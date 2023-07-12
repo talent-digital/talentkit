@@ -1,6 +1,6 @@
 {
   "name": "@talentdigital/kit",
-  "version": "0.28.0",
+  "version": "0.28.1",
   "description": "talent::digital Software Development Kit",
   "type": "module",
   "files": [
@@ -40,7 +40,7 @@
     "logrocket": "^2.2.1"
   },
   "dependencies": {
-    "@talentdigital/api-client": "workspace:^0.3.0",
+    "@talentdigital/api-client": "workspace:^0.4.0",
     "@vitest/web-worker": "0.31.4",
     "keycloak-js": "^15",
     "marked": "^4.2.5",
