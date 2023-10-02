@@ -1,5 +1,11 @@
 # @talentdigital/api-client
 
+## 0.3.2
+
+### Patch Changes
+
+- e246ab0: Add timeline endpoint to api-client
+
 ## 0.3.1
 
 ### Patch Changes
