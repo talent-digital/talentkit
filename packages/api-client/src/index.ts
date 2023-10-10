@@ -203,37 +203,6 @@ export interface EventCreationRequestWeb {
 
 export type JsonNode = object;
 
-export type TimelineTraining = TimelineItem & {
-  /** @format double */
-  cost?: number;
-  /** @format double */
-  durationHours?: number;
-  courseName?: string;
-  description?: string;
-  language?: string;
-  providerName?: string;
-  type?: "FACE_TO_FACE" | "ONLINE";
-  url?: string;
-};
-
-export type TimelineMicrolearning = TimelineItem & {
-  embeddable?: boolean;
-  test?: string;
-  title?: string;
-  url?: string;
-};
-
-export type TimelineEpisode = TimelineItem & {
-  played?: boolean;
-  description?: string;
-  episodeId?: string;
-  format?: string;
-  imgUrl?: string;
-  seasonId?: string;
-  subtitle?: string;
-  title?: string;
-};
-
 /** A test item assesses a subCompetence at a certain level and provides one piece of evidence that the subcompetence is present at the given level. */
 export interface TestItemWeb {
   /**
@@ -660,12 +629,6 @@ export interface WebAreaTestResultWeb {
   initialMedianPassed?: number;
   /** @format int32 */
   maxPassed?: number;
-}
-
-export interface TimelineItem {
-  /** @format date-time */
-  eventTime?: string;
-  eventType?: "TIMELINE_EPISODE" | "TIMELINE_MICROLEARNING" | "TIMELINE_TRAINING";
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -1987,81 +1950,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
-        ...params,
-      }),
-  };
-  domainModelTimeline = {
-    /**
-     * @description Save a training taken into the timeline history.
-     *
-     * @tags Domain model: Timeline
-     * @name SaveTimelineTrainingEvent
-     * @summary Saving training timeline events
-     * @request POST:/api/v1/timeline/training
-     * @secure
-     */
-    saveTimelineTrainingEvent: (data: TimelineTraining, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/api/v1/timeline/training`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * @description Save a microlearnig done into the timeline history.
-     *
-     * @tags Domain model: Timeline
-     * @name SaveTimelineMicrolearningEvent
-     * @summary Saving microlearning timeline events
-     * @request POST:/api/v1/timeline/microlearning
-     * @secure
-     */
-    saveTimelineMicrolearningEvent: (data: TimelineMicrolearning, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/api/v1/timeline/microlearning`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * @description Save a played episode into the timeline history.
-     *
-     * @tags Domain model: Timeline
-     * @name SaveTimelineEpisodeEvent
-     * @summary Saving episode timeline events
-     * @request POST:/api/v1/timeline/episode
-     * @secure
-     */
-    saveTimelineEpisodeEvent: (data: TimelineEpisode, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/api/v1/timeline/episode`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * @description This endpoint gets all timeline events for the current user
-     *
-     * @tags Domain model: Timeline
-     * @name GetAllTimelineEvents
-     * @summary Get all timeline events for the current user
-     * @request GET:/api/v1/timeline
-     * @secure
-     */
-    getAllTimelineEvents: (params: RequestParams = {}) =>
-      this.request<(TimelineEpisode | TimelineMicrolearning | TimelineTraining)[], any>({
-        path: `/api/v1/timeline`,
-        method: "GET",
-        secure: true,
         ...params,
       }),
   };
