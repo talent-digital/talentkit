@@ -284,7 +284,7 @@ export interface EpisodeWeb {
   maturity: "PENDING" | "ALPHA" | "BETA" | "PUBLIC";
   imageUrl: string;
   format: string;
-  formatConfiguration: string;
+  formatConfiguration?: string;
   badges?: Record<string, BadgeWeb>;
   assetsURL?: string;
   testItems?: SeasonDefinitionTestItemWeb[];
@@ -361,7 +361,7 @@ export interface SeasonWeb {
   info: LocalizedString;
   /** The data with text localization. Should be an correct ISO language. */
   seasonEndMessage: LocalizedString;
-  assetsURL: string;
+  assetsURL?: string;
   competenceAreas?: Record<string, SeasonDefinitionCompetenceAreaWeb>;
   episodes?: Record<string, EpisodeWeb>;
 }
@@ -2272,7 +2272,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns a list of Season, Episodes with the number of pending tests per episode which fall within the player's mission targets
+     * @description Returns a list of Season, Episodes with the number of pending tests per episode which fall within the player's mission targets.
      *
      * @tags User analytics: Recommendations
      * @name GetPlayRecommendations
