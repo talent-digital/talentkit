@@ -3,6 +3,11 @@
  */
 export interface SeasonDefinition {
   /**
+   * A custom ID for the season. By default, the repository name is used and it's best to use the default unless you have a valid reason to change it.
+   */
+  id: string;
+
+  /**
    * The title of the season.
    */
   title: LocalizedString;
