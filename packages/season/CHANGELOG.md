@@ -1,5 +1,11 @@
 # @talentdigital/season
 
+## 0.6.1
+
+### Patch Changes
+
+- 31a4c2b: Add optional season id
+
 ## 0.6.0
 
 ### Minor Changes
