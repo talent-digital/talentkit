@@ -284,7 +284,7 @@ export interface EpisodeWeb {
   maturity: "PENDING" | "ALPHA" | "BETA" | "PUBLIC";
   imageUrl: string;
   format: string;
-  formatConfiguration: string;
+  formatConfiguration?: string;
   badges?: Record<string, BadgeWeb>;
   assetsURL?: string;
   testItems?: SeasonDefinitionTestItemWeb[];
@@ -361,7 +361,7 @@ export interface SeasonWeb {
   info: LocalizedString;
   /** The data with text localization. Should be an correct ISO language. */
   seasonEndMessage: LocalizedString;
-  assetsURL: string;
+  assetsURL?: string;
   competenceAreas?: Record<string, SeasonDefinitionCompetenceAreaWeb>;
   episodes?: Record<string, EpisodeWeb>;
 }
