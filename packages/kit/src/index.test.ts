@@ -86,7 +86,7 @@ describe("Sdk Base Tests", () => {
   it("Correctly gets an asset's URL", () => {
     const fileName = "file.txt";
     expect(kit.assets.getUrl(fileName)).toBe(
-      `${seasonDefinition.assetsURL}/${fileName}`
+      `${seasonDefinition.assetsURL ?? ""}/${fileName}`
     );
   });
 });

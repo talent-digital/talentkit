@@ -5,7 +5,7 @@ export interface SeasonDefinition {
   /**
    * A custom ID for the season. By default, the repository name is used and it's best to use the default unless you have a valid reason to change it.
    */
-  id: string;
+  id?: string;
 
   /**
    * The title of the season.
@@ -20,7 +20,7 @@ export interface SeasonDefinition {
   /**
    * The URL where the assets for this season can be accesed.
    */
-  assetsURL: URL;
+  assetsURL?: URL;
 
   /**
    * The competences that this season addresses in the talent::digital competence model.
@@ -226,7 +226,7 @@ export interface EpisodeDefinition {
   /**
    * The URL of a configuration file that is passed to the app when it is run, e.g., to set up quiz questions.
    */
-  formatConfiguration: URL;
+  formatConfiguration?: URL;
 
   /**
    * Badges that can be obtained by playing the episode.
