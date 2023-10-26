@@ -1,5 +1,11 @@
 # @talentdigital/season
 
+## 0.6.2
+
+### Patch Changes
+
+- 5d14f52: Reflect backend optional values in season definition
+
 ## 0.6.1
 
 ### Patch Changes
