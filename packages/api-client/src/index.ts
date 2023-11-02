@@ -284,7 +284,7 @@ export interface EpisodeWeb {
   maturity: "PENDING" | "ALPHA" | "BETA" | "PUBLIC";
   imageUrl: string;
   format: string;
-  formatConfiguration?: string;
+  formatConfiguration: string;
   badges?: Record<string, BadgeWeb>;
   assetsURL?: string;
   testItems?: SeasonDefinitionTestItemWeb[];
@@ -361,7 +361,7 @@ export interface SeasonWeb {
   info: LocalizedString;
   /** The data with text localization. Should be an correct ISO language. */
   seasonEndMessage: LocalizedString;
-  assetsURL?: string;
+  assetsURL: string;
   competenceAreas?: Record<string, SeasonDefinitionCompetenceAreaWeb>;
   episodes?: Record<string, EpisodeWeb>;
 }
@@ -2120,7 +2120,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description This endpoint deletes an episode with all badges by season id and episode id
+     * @description This endpoint delete episode with all badges by season id and episode id
      *
      * @tags Domain model: Seasons
      * @name DeleteEpisode
@@ -2154,7 +2154,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description This endpoint deletes a season with all episodes and badges by season id
+     * @description This endpoint delete season with all episodes and badges by season id
      *
      * @tags Domain model: Seasons
      * @name DeleteSeason
@@ -2171,7 +2171,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description This endpoint deletes a badge by season id and episode id
+     * @description This endpoint delete episode with all badges by season id and episode id
      *
      * @tags Domain model: Seasons
      * @name DeleteBadge
