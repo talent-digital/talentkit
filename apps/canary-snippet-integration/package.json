@@ -1,0 +1,15 @@
+{
+  "name": "@talentdigital/canary-snippet-integration",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "http-server"
+  },
+  "dependencies": {
+    "@talentdigital/kit-snippet-integration": "workspace:*"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@talentdigital/kit-snippet-integration",
+  "version": "0.28.0",
+  "description": "talent::digital Software Development Kit single file integration",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/talent-kit-snippet-integration.umd.cjs"
+    }
+  },
+  "scripts": {
+    "lint": "eslint ./src",
+    "build": "tsc && vite build"
+  },
+  "keywords": [],
+  "author": "talent::digital",
+  "license": "SEE LICENSE IN LICENCE.md",
+  "devDependencies": {
+    "@types/node": "^18.7.18",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.8.3",
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "@talentdigital/kit": "workspace:*"
+  }
+}
