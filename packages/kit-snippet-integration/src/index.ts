@@ -1,5 +1,6 @@
 import TalentKit from "@talentdigital/kit";
 
+const EPISODE_END = "td-episode-end";
 const TEST_PASS = "td-test-pass";
 const TEST_FAIL = "td-test-fail";
 const TEST_ID_PREFIX = "td-test-id-";
@@ -27,6 +28,7 @@ function onTalentKitCreation(kit: TalentKit) {
   clearLoadingScreen();
   attachTestListeners(kit, TEST_PASS);
   attachTestListeners(kit, TEST_FAIL);
+  attachEndEpisodeListeners(kit);
   handleSaveGame(kit);
 }
 
@@ -35,18 +37,14 @@ function attachTestListeners(
   selector: typeof TEST_PASS | typeof TEST_FAIL
 ) {
   document.querySelectorAll(`.${selector}`).forEach((element) => {
-    console.debug(
-      `Element found for ${selector} with classes: ${element.classList.toString()}`
-    );
+    console.debug(`Element found for ${selector} ${getElementInfo(element)}`);
     element.addEventListener("click", () => {
       const testId = Array.from(element.classList)
         .find((item) => item.includes(TEST_ID_PREFIX))
         ?.split(TEST_ID_PREFIX)[1];
 
       if (!testId) {
-        logErorr(
-          `Test ID not found for element with classes: ${element.classList.toString()}`
-        );
+        logErorr(`Test ID not found for element ${getElementInfo(element)}`);
         return;
       }
 
@@ -64,6 +62,17 @@ function attachTestListeners(
       } else {
         kit.tests[testId].fail().catch(logErorr);
       }
+    });
+  });
+}
+
+function attachEndEpisodeListeners(kit: TalentKit) {
+  document.querySelectorAll(`.${EPISODE_END}`).forEach((element) => {
+    console.debug(
+      `Element found for ${EPISODE_END} ${getElementInfo(element)}`
+    );
+    element.addEventListener("click", () => {
+      kit.events.end().catch(logErorr);
     });
   });
 }
@@ -159,6 +168,13 @@ function clearLoadingScreen() {
 
 function logErorr(message: string) {
   console.error(`Kit snippet integration: ${message}`);
+}
+
+function getElementInfo(element: Element) {
+  const classes = element.classList.toString();
+  const text = element.innerHTML;
+
+  return `with classes ${classes} and text ${text}`;
 }
 
 initialize();
