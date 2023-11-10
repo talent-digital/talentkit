@@ -19,7 +19,7 @@ function initialize() {
   const config = getConfig();
   console.debug("Config", config);
 
-  TalentKit.create(config).then(onTalentKitCreation).catch(logErorr);
+  TalentKit.create(config).then(onTalentKitCreation).catch(logError);
 }
 
 function onTalentKitCreation(kit: TalentKit) {
@@ -44,12 +44,12 @@ function attachTestListeners(
         ?.split(TEST_ID_PREFIX)[1];
 
       if (!testId) {
-        logErorr(`Test ID not found for element ${getElementInfo(element)}`);
+        logError(`Test ID not found for element ${getElementInfo(element)}`);
         return;
       }
 
       if (!kit.tests[testId]) {
-        logErorr(
+        logError(
           `Test id: ${testId} not found in kit.tests, available tests are: ${Object.keys(
             kit.tests
           ).toString()}`
@@ -58,9 +58,9 @@ function attachTestListeners(
       }
 
       if (selector === TEST_PASS) {
-        kit.tests[testId].pass().catch(logErorr);
+        kit.tests[testId].pass().catch(logError);
       } else {
-        kit.tests[testId].fail().catch(logErorr);
+        kit.tests[testId].fail().catch(logError);
       }
     });
   });
@@ -80,7 +80,7 @@ function attachEndEpisodeListeners(kit: TalentKit) {
         ...currentSavegameSafe,
         lastPlayedUrl: undefined,
       });
-      kit.events.end().catch(logErorr);
+      kit.events.end().catch(logError);
     });
   });
 }
@@ -105,10 +105,13 @@ function handleSaveGame(kit: TalentKit) {
     ? currentSavegame
     : {};
 
-  kit.savegame.save({
+  const newSavegame = {
     ...currentSavegameSafe,
     lastPlayedUrl: window.location.href,
-  });
+  };
+
+  kit.savegame.save(newSavegame);
+  console.debug("New savegame", newSavegame);
 }
 
 function isSavegame(savegame: unknown): savegame is Savegame {
@@ -180,7 +183,7 @@ function clearLoadingScreen() {
   document.getElementById(LOADING_SCREEN_ID)?.remove();
 }
 
-function logErorr(message: string) {
+function logError(message: string) {
   console.error(`Kit snippet integration: ${message}`);
 }
 

@@ -11,4 +11,4 @@ This package provides a single file snippet to integrate TalentKit. It works by 
 
 ## Development
 
-After making changes, build the package throught `pnpm build` and test it through `apps/canary-snippet-integration`.
+After making changes, build the package with `pnpm build` and test it through `apps/canary-snippet-integration`.
