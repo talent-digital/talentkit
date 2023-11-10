@@ -72,6 +72,14 @@ function attachEndEpisodeListeners(kit: TalentKit) {
       `Element found for ${EPISODE_END} ${getElementInfo(element)}`
     );
     element.addEventListener("click", () => {
+      const currentSavegame = kit.savegame.load();
+      const currentSavegameSafe = isSavegame(currentSavegame)
+        ? currentSavegame
+        : {};
+      kit.savegame.save({
+        ...currentSavegameSafe,
+        lastPlayedUrl: undefined,
+      });
       kit.events.end().catch(logErorr);
     });
   });
@@ -84,15 +92,21 @@ function handleSaveGame(kit: TalentKit) {
   const currentSavegame = kit.savegame.load();
   console.debug("Current savegame", currentSavegame);
 
-  if (isStartingScreen && isSavegame(currentSavegame)) {
+  if (
+    isStartingScreen &&
+    isSavegame(currentSavegame) &&
+    window.location.href !== currentSavegame.lastPlayedUrl
+  ) {
     window.location.href = currentSavegame.lastPlayedUrl;
     return;
   }
 
-  const oldSavegame = isSavegame(currentSavegame) ? currentSavegame : {};
+  const currentSavegameSafe = isSavegame(currentSavegame)
+    ? currentSavegame
+    : {};
 
   kit.savegame.save({
-    ...oldSavegame,
+    ...currentSavegameSafe,
     lastPlayedUrl: window.location.href,
   });
 }
@@ -107,7 +121,7 @@ function getConfig() {
   const host = window.location.hostname.split(".")?.[0];
   const tenant =
     host.startsWith("localhost") ||
-    window.location.hostname.endsWith("netlify.app")
+    window.location.hostname.endsWith("webflow.io")
       ? "devtd2"
       : host;
 
