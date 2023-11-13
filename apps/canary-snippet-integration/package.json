@@ -4,12 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "http-server"
+    "dev": "http-server",
+    "e2e:open": "cypress open",
+    "e2e:web": "cypress run"
   },
   "dependencies": {
     "@talentdigital/kit-snippet-integration": "workspace:*"
   },
   "devDependencies": {
+    "cypress": "^13.5.0",
     "http-server": "^14.1.1"
   }
 }

@@ -38,7 +38,10 @@ function attachTestListeners(
 ) {
   document.querySelectorAll(`.${selector}`).forEach((element) => {
     console.debug(`Element found for ${selector} ${getElementInfo(element)}`);
-    element.addEventListener("click", () => {
+    element.addEventListener("click", (event) => {
+      event.preventDefault();
+      createLoadingScreen();
+
       const testId = Array.from(element.classList)
         .find((item) => item.includes(TEST_ID_PREFIX))
         ?.split(TEST_ID_PREFIX)[1];
@@ -58,9 +61,17 @@ function attachTestListeners(
       }
 
       if (selector === TEST_PASS) {
-        kit.tests[testId].pass().catch(logError);
+        kit.tests[testId]
+          .pass()
+          .then(() => goToOriginalUrl(event))
+          .catch(logError)
+          .finally(clearLoadingScreen);
       } else {
-        kit.tests[testId].fail().catch(logError);
+        kit.tests[testId]
+          .fail()
+          .then(() => goToOriginalUrl(event))
+          .catch(logError)
+          .finally(clearLoadingScreen);
       }
     });
   });
@@ -118,6 +129,13 @@ function isSavegame(savegame: unknown): savegame is Savegame {
   return Boolean(
     typeof savegame === "object" && savegame?.hasOwnProperty("lastPlayedUrl")
   );
+}
+
+function goToOriginalUrl(event: Event) {
+  const eventTarget = event.target as HTMLAnchorElement | null;
+  if (eventTarget?.href) {
+    window.location.href = eventTarget.href;
+  }
 }
 
 function getConfig() {
