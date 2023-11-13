@@ -7,6 +7,7 @@
     "packages/*"
   ],
   "scripts": {
+    "e2e": "turbo run e2e",
     "test": "turbo run test",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
@@ -18,7 +19,8 @@
     "@changesets/cli": "^2.25.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
-    "turbo": "latest"
+    "turbo": "latest",
+    "cypress": "^13.5.0"
   },
   "engines": {
     "node": ">=14.0.0"

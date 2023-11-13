@@ -1,26 +1,14 @@
-name: Unit tests
+name: Lint, unit tests & e2e tests
 
 on:
   pull_request:
     branches: ["main"]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+  test:
+    runs-on: ubuntu-20.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v3
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -29,26 +17,119 @@ jobs:
           version: latest
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
+      # install dependencies using the root folder
+      - name: Install 📦
+        uses: cypress-io/github-action@v5
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-store-
+          runTests: false
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build project
-        run: pnpm build
+      # run tests in apps/app-b folder
+      # where its package.json file is located
+      # with "npm start" command
+      - name: Cypress tests 🧪
+        uses: cypress-io/github-action@v5
+        with:
+          install: false
+          working-directory: apps/canary-snippet-integration
+          start: npm run dev
+        env:
+          WEB_USERNAME: ${{ secrets.CYPRESS_WEB_USERNAME}}
+          WEB_PASSWORD: ${{secrets.CYPRESS_WEB_PASSWORD}}
 
-      - name: Run linter
-        run: pnpm lint
+      - name: Archive cypress video web
+        uses: actions/upload-artifact@v3
+        if: ${{ success() || failure() }}
+        with:
+          name: cypress-video
+          path: apps/canary-snippet-integration/cypress/videos/**/*.mp4
+          retention-days: 30
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-      - name: Run tests
-        run: pnpm test
+#     strategy:
+#       matrix:
+#         node-version: [16.x]
+#         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Install Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
+
+#       - name: Install pnpm
+#         uses: pnpm/action-setup@v2
+#         id: pnpm-install
+#         with:
+#           version: latest
+#           run_install: false
+
+#       - name: Get pnpm store directory
+#         id: pnpm-cache
+#         shell: bash
+#         run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+#       - name: Setup pnpm cache
+#         uses: actions/cache@v3
+#         with:
+#           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+#           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+#           restore-keys: ${{ runner.os }}-pnpm-store-
+
+#       - name: Install dependencies
+#         run: pnpm install
+
+#       - name: Build project
+#         run: pnpm build
+
+#       - name: Run linter
+#         run: pnpm lint
+
+#       - name: Run tests
+#         run: pnpm test
+
+#       # - name: Install cypress dependencies
+#       #   uses: cypress-io/github-action@v5
+#       #   with:
+#       #     runTests: false
+
+#       # - name: Cypress run
+#       #   uses: cypress-io/github-action@v5
+#       #   with:
+#       #     start: pnpm dev
+#       #     working-directory: apps/canary-snippet-integration
+#       #     install: false
+#       #   env:
+#       #     WEB_USERNAME: ${{ secrets.CYPRESS_WEB_USERNAME}}
+#       #     WEB_PASSWORD: ${{secrets.CYPRESS_WEB_PASSWORD}}
+
+#       - name: Cache dependencies
+#         uses: actions/cache@v2
+#         with:
+#           path: |
+#             **/node_modules
+#             **/.cache/Cypress
+#           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+#       # install dependencies using the root folder
+#       - name: Install Cypress dependencies
+#         uses: cypress-io/github-action@v5
+#         with:
+#           runTests: false
+
+#       # run tests in apps/app-b folder
+#       # where its package.json file is located
+#       # with "npm start" command
+#       - name: Run Cypress tests
+#         uses: cypress-io/github-action@v5
+#         with:
+#           install: false
+#           working-directory: apps/canary-snippet-integration
+#           start: npm run dev

@@ -4,5 +4,5 @@ Use this as a testing grounds for the kit-snippet-integration package.
 
 ## Starting
 
-- Run `pnpm dev`
+- Run `pnpm dev` (this copies the snippet from node_modules to libs folder for cypress to run properly)
 - Go to e.g. `http://localhost:8080/?sid=talent-digital-canary-season&eid=1&redirectUrl=https://devtd2.talentdigit.al`

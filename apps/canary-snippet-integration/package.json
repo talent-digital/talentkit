@@ -4,14 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "http-server",
+    "dev": "copyfiles --flat node_modules/@talentdigital/kit-snippet-integration/dist/talent-kit-snippet-integration.umd.js ./libs && http-server",
     "e2e:open": "cypress open",
-    "e2e:web": "cypress run"
+    "e2e:local": "cross-env RECORD=false cypress run",
+    "e2e": "cypress run"
   },
   "dependencies": {
     "@talentdigital/kit-snippet-integration": "workspace:*"
   },
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "cypress": "^13.5.0",
     "http-server": "^14.1.1"
   }
