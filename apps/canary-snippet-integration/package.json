@@ -1,7 +1,7 @@
 {
   "name": "@talentdigital/canary-snippet-integration",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "copyfiles --flat node_modules/@talentdigital/kit-snippet-integration/dist/talent-kit-snippet-integration.umd.js ./libs && http-server",
