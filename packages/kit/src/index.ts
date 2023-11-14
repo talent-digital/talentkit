@@ -40,18 +40,27 @@ const defaultProfile = {
   playerEmailAddress: "teammitglied@acme.com",
 };
 
-const getIdFromUrlParams = (): ID => {
+const getIdFromUrlParamsOrStorage = (): ID => {
+  const STORAGE_PREFIX = "td";
   const params = new URLSearchParams(location.search);
 
-  const season = params.get("sid");
-  const episode = params.get("eid");
-  const redirectUrl = params.get("redirectUrl");
-  const configUrl = params.get("configUrl") || undefined;
+  const season = params.get("sid") || localStorage.getItem(`${STORAGE_PREFIX}-sid`);
+  const episode = params.get("eid") || localStorage.getItem(`${STORAGE_PREFIX}-eid`);
+  const redirectUrl = params.get("redirectUrl") || localStorage.getItem(`${STORAGE_PREFIX}-redirectUrl`);
+  const configUrl = params.get("configUrl") || localStorage.getItem(`${STORAGE_PREFIX}-configUrl`) || undefined;
+
 
   if (!season || !episode)
     throw "Could not retrieve season or episode id from URL";
 
   if (!redirectUrl) throw "Could not retrieve redirectUrl from URL";
+
+  localStorage.setItem(`${STORAGE_PREFIX}-sid`, season);
+  localStorage.setItem(`${STORAGE_PREFIX}-eid`, episode);
+  localStorage.setItem(`${STORAGE_PREFIX}-redirectUrl`, redirectUrl);
+  if (configUrl) {
+    localStorage.setItem(`${STORAGE_PREFIX}-configUrl`, configUrl);
+  }
 
   return { season, episode, redirectUrl, configUrl };
 };
@@ -168,7 +177,7 @@ class TalentKit<T = unknown> {
     let apiClient: ApiClient;
     let storage: StorageService;
 
-    const id = config.id || getIdFromUrlParams();
+    const id = config.id || getIdFromUrlParamsOrStorage();
 
     if (!id.season || !id.episode) {
       throw new Error("sid or eid not found");

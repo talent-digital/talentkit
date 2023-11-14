@@ -18,7 +18,8 @@
     "@changesets/cli": "^2.25.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
-    "turbo": "latest"
+    "turbo": "latest",
+    "cypress": "^13.5.0"
   },
   "engines": {
     "node": ">=14.0.0"

@@ -1,11 +1,11 @@
-name: Unit tests
+name: Lint, unit tests & e2e tests
 
 on:
   pull_request:
     branches: ["main"]
 
 jobs:
-  build:
+  lint-build-run-unit-tests:
     runs-on: ubuntu-latest
 
     strategy:
@@ -52,3 +52,41 @@ jobs:
 
       - name: Run tests
         run: pnpm test
+
+  e2e:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: latest
+          run_install: false
+
+      - name: Install Dependencies in root folder
+        uses: cypress-io/github-action@v5
+        with:
+          runTests: false
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          install: false
+          working-directory: apps/canary-snippet-integration
+          start: npm run dev
+        env:
+          WEB_USERNAME: ${{ secrets.CYPRESS_WEB_USERNAME}}
+          WEB_PASSWORD: ${{secrets.CYPRESS_WEB_PASSWORD}}
+
+      - name: Archive cypress video web
+        uses: actions/upload-artifact@v3
+        if: ${{ success() || failure() }}
+        with:
+          name: cypress-video
+          path: apps/canary-snippet-integration/cypress/videos/**/*.mp4
+          retention-days: 30
