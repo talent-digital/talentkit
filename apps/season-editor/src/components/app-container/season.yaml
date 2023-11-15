@@ -1,0 +1,2695 @@
+title:
+  de: AWO DigitalCheck
+info:
+  de: Erfahre mehr über Deine digitalen Fähigkeiten!
+assetsURL: https://awo-digitalcheck-season.netlify.app
+seasonEndMessage:
+  de: Vielen Dank für deine Teilnahme!
+competenceAreas:
+  "1":
+    name:
+      de: Informations- und Datenkompetenz
+      en: Information and data literacy
+    competences:
+      "1":
+        name:
+          de: Durchsuchen, Suchen und Filtern von digitalen Inhalten.
+          en: Browse, search, and filter digital content.
+        subCompetences:
+          "50":
+            name:
+              de: Suche im Internet
+              en: Web search
+            testItems:
+              "e13frage1":
+                episode: "13"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I am able to find specific news on the Internet."
+                  de: "Ich bin in der Lage, spezifische Nachrichten im Internet zu finden."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e16frage3":
+                episode: "16"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know how to check my digital footprint."
+                  de: "Ich weiß, wie ich meinen digitalen Fußabdruck überprüfen kann."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions:
+              "feedback32":
+                episode: "16"
+                question:
+                  en: "How often do you check your digital footprint?"
+                  de: "Wie häufig überprüfst Du Deinen digitalen Fußabdruck?"
+                answers:
+                  "0":
+                    en: "Very often"
+                    de: "Sehr häufig"
+                  "1":
+                    en: "Rather often"
+                    de: "Eher häufig"
+                  "2":
+                    en: "Medium"
+                    de: "Mittel"
+                  "3":
+                    en: "Rather rarely"
+                    de: "Eher selten"
+                  "4":
+                    en: "Rarely"
+                    de: "Selten"
+          "51":
+            name:
+              de: Online-Mediensuche
+              en: Online media search
+            testItems:
+              "e15frage2":
+                episode: "15"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to find scientific articles."
+                  de: "Ich weiß, wie ich wissenschaftliche Artikel finde."
+                search:
+                  en:
+                    links:
+                      - "https://www.studysmarter.de/magazine/google-scholar-suche-tipps/"
+                  de:
+                    links:
+                      - "https://www.studysmarter.de/magazine/google-scholar-suche-tipps/"
+            feedbackQuestions:
+              "feedback29":
+                episode: "15"
+                question:
+                  en: "What's your opinion: How well does online research work for specialized topics?"
+                  de: "Was ist Deine Meinung: Wie gut funktioniert Online-Recherche bei Fachthemen?"
+                answers:
+                  "0":
+                    en: "The results of an online search can be overwhelming or confusing. It is difficult to find trustworthy and relevant professional information."
+                    de: "Die Ergebnisse einer Online-Recherche können überwältigend oder verwirrend sein. Es ist schwierig, vertrauenswürdige und relevante fachliche Informationen zu finden."
+                  "1":
+                    en: "Online research can provide useful professional information, but finding and classifying it requires knowledge and experience."
+                    de: "Online-Recherche kann nützliche fachliche Informationen liefern, diese zu finden und einzuordnen erfordert Wissen und Erfahrung."
+                  "2":
+                    en: "Online research provides quick and easy access to specialized information."
+                    de: "Online-Recherche ermöglicht einen schnellen und einfachen Zugang zu fachlichen Informationen."
+          "52":
+            name:
+              de: Unternehmens- und Desktop-Suche
+              en: Enterprise and desktop search
+            testItems:
+              "e15frage1":
+                episode: "15"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to efficiently find documents on my end device."
+                  de: "Ich weiß, wie ich effizient Dokumente auf meinem Endgerät finden kann."
+                search:
+                  en:
+                    links:
+                      - "https://support.microsoft.com/de-de/windows/suchen-ihrer-dokumente-in-windows-5c7c8cfe-c289-fae4-f5f8-6b3fdba418d2#:~:text=unter%20Beste%20%C3%9Cbereinstimmung.-,Suchen%20im%20Datei%2DExplorer%3A%20%C3%96ffnen%20Sie%20Explorer%20%C3%BCber%20die%20Taskleiste,zu%20suchen%20oder%20zu%20durchsuchen."
+                  de:
+                    links:
+                      - "https://support.microsoft.com/de-de/windows/suchen-ihrer-dokumente-in-windows-5c7c8cfe-c289-fae4-f5f8-6b3fdba418d2#:~:text=unter%20Beste%20%C3%9Cbereinstimmung.-,Suchen%20im%20Datei%2DExplorer%3A%20%C3%96ffnen%20Sie%20Explorer%20%C3%BCber%20die%20Taskleiste,zu%20suchen%20oder%20zu%20durchsuchen."
+            feedbackQuestions: {}
+          "53":
+            name:
+              de: Online-Datenquellen und Datensuche
+              en: Online data sources and data search
+            testItems:
+              "e13frage5":
+                episode: "13"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know fact finder sites."
+                  de: "Ich kenne Faktenfinderseiten."
+                search:
+                  en:
+                    links:
+                      - "https://der-newstest.de/"
+                  de:
+                    links:
+                      - "https://der-newstest.de/"
+            feedbackQuestions: {}
+          "54":
+            name:
+              de: Alternative Online-Inhaltsquellen und Suchmaschinen
+              en: Alternative online content sources and search engines
+            testItems:
+              "e15frage3":
+                episode: "15"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to find explainer videos on specific topics."
+                  de: "Ich weiß, wie ich Erklärvideos zu bestimmten Themen finden kann."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e16frage5":
+                episode: "16"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know ways to remove pictures of me from the Internet."
+                  de: "Ich kenne Möglichkeiten, Bilder von mir aus dem Internet zu entfernen."
+                search:
+                  en:
+                    links:
+                      - "https://www.saferinternet.at/faq/selbstdarstellung/wie-kann-ich-unangenehme-inhalte-ueber-mich-im-internet-loeschen-lassen/page#:~:text=Bei%20Suchmaschinen%20wie%20z.%20B.%20Google%20oder%20Bing,kostenlos%20bei%20der%20Entfernung%20unerw%C3%BCnschter%20Bilder%20im%20Internet."
+                  de:
+                    links:
+                      - "https://www.saferinternet.at/faq/selbstdarstellung/wie-kann-ich-unangenehme-inhalte-ueber-mich-im-internet-loeschen-lassen/page#:~:text=Bei%20Suchmaschinen%20wie%20z.%20B.%20Google%20oder%20Bing,kostenlos%20bei%20der%20Entfernung%20unerw%C3%BCnschter%20Bilder%20im%20Internet."
+            feedbackQuestions: {}
+          "55":
+            name:
+              de: Branchenspezifische Online-Suche
+              en: Industry-specific online search
+            testItems:
+              "e14frage1":
+                episode: "14"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know common online housing portals."
+                  de: "Ich kenne geläufige Online-Wohnungsportale."
+                search:
+                  en:
+                    links:
+                      - "https://careleaver-online.de/wohnen/"
+                  de:
+                    links:
+                      - "https://careleaver-online.de/wohnen/"
+            feedbackQuestions:
+              "feedback27":
+                episode: "14"
+                question:
+                  en: "Where would you put the focus when looking for an apartment? On traditional ways or on the Internet?"
+                  de: "Wo würdest Du bei der Wohnungssuche den Fokus setzen? Auf traditionelle Wege oder aufs Internet?"
+                answers:
+                  "0":
+                    en: "I believe traditional channels such as newspapers, ad papers and bulletin boards still hold the most promise."
+                    de: "Ich glaube, traditionelle Wege wie Zeitungen, Anzeigenblätter und schwarze Bretter versprechen immer noch am meisten Erfolg."
+                  "1":
+                    en: "It's the mix that makes the difference: In my opinion, the best thing is to use both traditional channels and online opportunities in equal measure."
+                    de: "Der Mix machts: Das Beste ist es meiner Meinung nach, sowohl traditionelle Wege als auch Online-Möglichkeiten gleichermaßen zu nutzen."
+                  "2":
+                    en: "I believe real estate portals, search engines and social media now offer the greatest chance of success."
+                    de: "Ich glaube, Immobilienportale, Suchmaschinen und Soziale Medien bieten inzwischen die größte Aussicht auf Erfolg."
+              "feedback28":
+                episode: "14"
+                question:
+                  en: "What's your experience like when you search for deals online, whether it's for apartments, your next vacation, or home furnishings, for example?"
+                  de: "Wie ist Deine Erfahrung, wenn Du online nach Angeboten suchst, egal, ob es zum Beispiel um Wohnungen, den nächsten Urlaub oder Ausstattung für die Wohnung geht?"
+                answers:
+                  "0":
+                    en: "Searching online takes a lot of time and it's hard to see through the multitude of offers. I prefer to go to a store or an agency and get advice in person."
+                    de: "Die Online-Suche kostet viel Zeit und es ist schwer, bei der Vielzahl an Angeboten durchzublicken. Ich ziehe es vor in ein Geschäft bzw. Ein Vermittlungsbüro zu gehen und mich persönlich beraten zu lassen."
+                  "1":
+                    en: "Sometimes I find good deals, but every now and then I come across fraudulent websites or low-quality offers. It takes caution and research to avoid disappointment."
+                    de: "Manchmal finde ich gute Angebote, aber hin und wieder stoße ich auch auf betrügerische Websites oder Angebote von minderer Qualität. Es erfordert Vorsicht und Recherche, um Enttäuschungen zu vermeiden."
+                  "2":
+                    en: "I find it practical: I can filter specifically according to certain criteria and get detailed information. This allows me to make informed decisions."
+                    de: "Ich finde es praktisch: Ich kann gezielt nach bestimmten Kriterien filtern und detaillierte Informationen erhalten. Dadurch kann ich informierte Entscheidungen treffen."
+                  "3":
+                    en: "I like the wide range of options. I enjoy comparing prices and reviews to find the best deals."
+                    de: "Ich mag die große Auswahl an Optionen. Mir macht es Spaß, Preise und Bewertungen zu vergleichen, um die besten Deals zu finden."
+      "2":
+        name:
+          de: Auswerten, Analysieren und Vergleichen von digitalen Inhalten
+          en: Evaluating data, information and digital content.
+        subCompetences:
+          "56":
+            name:
+              de: Verlässlichkeit und Vollständigkeit von Online-Informationen
+              en: Reliability and completeness of online information
+            testItems:
+              "e4frage3":
+                episode: "4"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I can recognise fakenews."
+                  de: "Ich kann Fakenews erkennen."
+                search:
+                  en:
+                    links:
+                      - "https://www.bundesregierung.de/breg-de/themen/umgang-mit-desinformation/falschmeldungen-erkennen-1750146"
+                      - "https://correctiv.org/faktencheck/"
+                  de:
+                    links:
+                      - "https://www.bundesregierung.de/breg-de/themen/umgang-mit-desinformation/falschmeldungen-erkennen-1750146"
+                      - "https://correctiv.org/faktencheck/"
+              "e13frage3":
+                episode: "13"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I am able to identify confidential sources."
+                  de: "Ich bin in der Lage, vertrauliche Quellen zu identifizieren."
+                search:
+                  en:
+                    links:
+                      - "https://www.bundesregierung.de/breg-de/themen/umgang-mit-desinformation/falschmeldungen-erkennen-1750146"
+                      - "https://www.planet-wissen.de/kultur/medien/fake_news/fake-news-erkennen-102.html"
+                  de:
+                    links:
+                      - "https://www.bundesregierung.de/breg-de/themen/umgang-mit-desinformation/falschmeldungen-erkennen-1750146"
+                      - "https://www.planet-wissen.de/kultur/medien/fake_news/fake-news-erkennen-102.html"
+              "e13frage4":
+                episode: "13"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to determine the trustworthiness of sources."
+                  de: "Ich weiß, wie ich die Vertrauenswürdigkeit von Quellen bestimmen kann."
+                search:
+                  en:
+                    links:
+                      - "https://blog.rwth-aachen.de/itc/2021/08/23/sichere-webseiten/"
+                      - "https://blog.hubspot.de/website/tipps-vertrauenswuerdige-webseite"
+                  de:
+                    links:
+                      - "https://blog.rwth-aachen.de/itc/2021/08/23/sichere-webseiten/"
+                      - "https://blog.hubspot.de/website/tipps-vertrauenswuerdige-webseite"
+              "e14frage5":
+                episode: "14"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can distinguish serious apartment offers from non-serious ones."
+                  de: "Ich kann seriöse Wohnungsangebote von nicht seriösen unterscheiden."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions:
+              "feedback26":
+                episode: "13"
+                question:
+                  en: "How critical are you when dealing with online news?"
+                  de: "Wie kritisch bist Du im Umgang mit Online-Nachrichten?"
+                answers:
+                  "0":
+                    en: "Not particularly critical: I usually accept online news unchecked and trust that the information published is correct."
+                    de: "Nicht besonders kritisch: Ich nehme Online-Nachrichten meist ungeprüft hin und vertraue darauf, dass die veröffentlichten Informationen korrekt sind."
+                  "1":
+                    en: "I try to be critical, but sometimes the amount of information on the Internet overwhelms me. It can be difficult to distinguish between reliable and questionable sources."
+                    de: "Ich versuche, kritisch zu sein, aber manchmal überwältigt mich die Menge an Informationen im Internet. Es kann schwierig sein, zwischen zuverlässigen und fragwürdigen Quellen zu unterscheiden."
+                  "2":
+                    en: "Quite critical: I check news especially if it is important, surprising or controversial."
+                    de: "Ziemlich kritisch: Ich überprüfe Nachrichten insbesondere dann, wenn sie wichtig, Überraschend oder kontrovers sind."
+                  "3":
+                    en: "Extremely critical: I carefully check sources, do further research, and watch for possible misinformation or fakes."
+                    de: "Äußerst kritisch: Ich überprüfe sorgfältig die Quellen, recherchiere weiter und achte auf mögliche Fehlinformationen oder Fakes."
+          "57":
+            name:
+              de: Verlässlichkeit und Vollständigkeit der Online-Daten
+              en: Reliability and completeness of online data
+            testItems:
+              "e15frage4":
+                episode: "15"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know different biases („biases“) and their meanings."
+                  de: "Ich kenne unterschiedliche Verzerrungen („biases“) und deren Bedeutungen."
+                search:
+                  en:
+                    links:
+                      - "https://www.anti-bias.eu/wissen/biases-von-a-z/"
+                  de:
+                    links:
+                      - "https://www.anti-bias.eu/wissen/biases-von-a-z/"
+            feedbackQuestions:
+              "feedback30":
+                episode: "15"
+                question:
+                  en: "How well do you think you are sensitized to typical „biases“ (unconscious biases) in online research?"
+                  de: "Was glaubst Du, wie gut bist du für typische „Biases“ (unbewusste Vorurteile) bei der Online-Recherche sensibilisiert?"
+                answers:
+                  "0":
+                    en: "So far, I don't know anything about this and / or don't believe that „biases“ can influence the results of an online research. "
+                    de: "Bisher weiß ich nichts dazu und / oder glaube nicht, dass „Biases“ die Ergebnisse einer Online-Recherchen beeinflussen können."
+                  "1":
+                    en: "I am aware of the existence of „biases“ in online research, but my handling of them could be improved."
+                    de: "Ich bin mir der Existenz von „Biases“ bei der Online-Recherche bewusst, aber mein Umgang mit ihnen könnten verbessert werden."
+                  "2":
+                    en: "I have a basic understanding of „biases“ in online research and strive to recognize and consider their impact."
+                    de: "Ich habe ein grundlegendes Verständnis für „Biases“ bei der Online-Recherche und bemühe mich, ihre Auswirkungen zu erkennen und zu berücksichtigen."
+                  "3":
+                    en: "I am aware of the role „biases“ play in online research and actively take steps to counteract them."
+                    de: "Ich bin mir bewusst, welche Rolle „Biases“ bei der Online-Recherche spielen und setze aktiv Maßnahmen ein, um ihnen entgegenzuwirken."
+          "58":
+            name:
+              de: Analyse von Tabellendaten
+              en: Analysis of tabular data
+            testItems:
+              "e20frage3":
+                episode: "20"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know different programs to display survey results."
+                  de: "Ich kenne unterschiedliche Programme, um Umfrageergebnisse darzustellen."
+                search:
+                  en:
+                    links:
+                      - "https://support.microsoft.com/de-de/office/%C3%BCberpr%C3%BCfen-und-teilen-ihrer-formularergebnisse-02859424-341d-406f-b32a-9a0fbaf357af#:~:text=Anzeigen%20von%20Formularergebnissen%20in%20Excel,in%20einer%20Arbeitsmappe%20zu%20erfassen."
+                  de:
+                    links:
+                      - "https://support.microsoft.com/de-de/office/%C3%BCberpr%C3%BCfen-und-teilen-ihrer-formularergebnisse-02859424-341d-406f-b32a-9a0fbaf357af#:~:text=Anzeigen%20von%20Formularergebnissen%20in%20Excel,in%20einer%20Arbeitsmappe%20zu%20erfassen."
+            feedbackQuestions: {}
+          "60":
+            name:
+              de: Echtzeit-Analytik
+              en: Real-time analytics
+            testItems:
+              "e13frage2":
+                episode: "13"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know what parameters Google results are sorted by."
+                  de: "Ich weiß, nach welchen Parametern Google Ergebnisse sortiert sind."
+                search:
+                  en:
+                    links:
+                      - "https://www.google.com/intl/de/search/howsearchworks/how-search-works/ranking-results/"
+                  de:
+                    links:
+                      - "https://www.google.com/intl/de/search/howsearchworks/how-search-works/ranking-results/"
+            feedbackQuestions:
+              "feedback25":
+                episode: "13"
+                question:
+                  en: "What is your primary news source?"
+                  de: "Was ist deine primäre Nachrichtenquelle?"
+                answers:
+                  "0":
+                    en: "Social Media"
+                    de: "Soziale Medien"
+                  "1":
+                    en: "Newspapers and magazines"
+                    de: "Zeitungen und Magazine"
+                  "2":
+                    en: "TV news"
+                    de: "Fernsehnachrichten"
+                  "3":
+                    en: "Radio news or podcasts"
+                    de: "Radio-Nachrichten oder Podcasts"
+                  "4":
+                    en: "News websites or apps"
+                    de: "Nachrichten-Websites oder -Apps"
+          "61":
+            name:
+              de: Visualisierung von Daten
+              en: Data visualization
+            testItems:
+              "e15frage5":
+                episode: "15"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know different ways to present content."
+                  de: "Ich kenne unterschiedliche Möglichkeiten, Inhalte darzustellen."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions: {}
+          "63":
+            name:
+              de: Branchenspezifische Analytik
+              en: Industry-specific analytics
+            testItems:
+              "e14frage2":
+                episode: "14"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to filter offers appropriately for me."
+                  de: "Ich weiß, wie ich Angebote für mich passend filtern kann."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions: {}
+      "3":
+        name:
+          de: Verwalten, Organisieren, Speichern und Abrufen von digitalen Inhalten.
+          en: Manage, organize, store, and retrieve digital content.
+        subCompetences:
+          "64":
+            name:
+              de: Dateien verwalten
+              en: Managing files
+            testItems:
+              "e14frage3":
+                episode: "14"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know different features of offer portals."
+                  de: "Ich kenne unterschiedliche Features von Angebotsportalen."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions: {}
+          "66":
+            name:
+              de: Veröffentlichung digitaler Inhalte
+              en: Digital content publishing
+            testItems:
+              "e14frage4":
+                episode: "14"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know that online networks are helpful in finding deals."
+                  de: "Ich weiß, dass Online-Netzwerke bei der Suche nach Angeboten hilfreich sind."
+                search:
+                  en:
+                    links:
+                      - "https://wohnglueck.de/artikel/wohnung-finden-tipps-55845"
+                  de:
+                    links:
+                      - "https://wohnglueck.de/artikel/wohnung-finden-tipps-55845"
+              "e16frage4":
+                episode: "16"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know how to limit visibility on my social media posts."
+                  de: "Ich weiß, wie ich die Sicht auf meine Social Media Beiträge einschränke."
+                search:
+                  en:
+                    links:
+                      - "https://www.netzwelt.de/tutorial/159827-facebook-so-schuetzt-privatsphaere-app.html"
+                      - "https://de.wikihow.com/Instagram-Beitr%C3%A4ge-vor-bestimmten-Abonnenten-verstecken"
+                  de:
+                    links:
+                      - "https://www.netzwelt.de/tutorial/159827-facebook-so-schuetzt-privatsphaere-app.html"
+                      - "https://de.wikihow.com/Instagram-Beitr%C3%A4ge-vor-bestimmten-Abonnenten-verstecken"
+            feedbackQuestions: {}
+  "2":
+    name:
+      de: Digitale Kommunikation und digitale Kollaboration
+      en: Communication and collaboration
+    competences:
+      "4":
+        name:
+          en: "Interacting through digital technologies"
+          de: "Interagieren durch digitale Technologien"
+        subCompetences:
+          "68":
+            name:
+              en: "Real-time interaction"
+              de: "Echtzeitinteraktion"
+            testItems:
+              "e2frage1":
+                episode: "2"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can keep my friends updated with digital means."
+                  de: "Ich kann meine Freunde auf digitale Weise informieren."
+                search:
+                  en:
+                    links:
+                      - "https://www.spiegel.de/panorama/broadcast-listen-bei-whatsapp-warum-sie-besser-sind-als-whatsapp-gruppen-a-00000000-0003-0001-0000-000000168617"
+                      - "https://support.microsoft.com/de-de/office/erstellen-eines-gruppenchats-556d9323-75f4-4cbe-ba49-e65d7d8d53a8"
+                      - "https://support.microsoft.com/de-de/office/erstellen-einer-kontaktgruppe-oder-verteilerliste-in-outlook-f%C3%BCr-pc-88ff6c60-0a1d-4b54-8c9d-9e1a71bc3023"
+                  de:
+                    links:
+                      - "https://www.spiegel.de/panorama/broadcast-listen-bei-whatsapp-warum-sie-besser-sind-als-whatsapp-gruppen-a-00000000-0003-0001-0000-000000168617"
+                      - "https://support.microsoft.com/de-de/office/erstellen-eines-gruppenchats-556d9323-75f4-4cbe-ba49-e65d7d8d53a8"
+                      - "https://support.microsoft.com/de-de/office/erstellen-einer-kontaktgruppe-oder-verteilerliste-in-outlook-f%C3%BCr-pc-88ff6c60-0a1d-4b54-8c9d-9e1a71bc3023"
+              "e2frage3":
+                episode: "2"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can choose a suitable web conferencing software."
+                  de: "Ich kann eine geeignete Videokonferenzsoftware auswählen."
+                search:
+                  en:
+                    links:
+                      - "https://www.chip.de/artikel/Die-beste-Videokonferenz-Software-kostenlos_182582155.html"
+                      - "https://www.connect.de/ratgeber/fake-apps-erkennen-play-store-3199553-8430.html#:~:text=Wer%20sich%20nicht%20sicher%20ist,d%C3%BCrfte%20die%20echte%20App%20sein"
+                  de:
+                    links:
+                      - "https://www.chip.de/artikel/Die-beste-Videokonferenz-Software-kostenlos_182582155.html"
+                      - "https://www.connect.de/ratgeber/fake-apps-erkennen-play-store-3199553-8430.html#:~:text=Wer%20sich%20nicht%20sicher%20ist,d%C3%BCrfte%20die%20echte%20App%20sein"
+              "e2frage4":
+                episode: "2"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I am used to web conferencing."
+                  de: "Ich kenne mich mit Videokonferenzen aus."
+                search:
+                  en:
+                    links:
+                      - "https://www.heise.de/tipps-tricks/Kein-Ton-im-Zoom-Meeting-was-tun-6001518.html"
+                      - "https://support.microsoft.com/de-de/office/meine-kamera-funktioniert-nicht-in-teams-9581983b-c6f9-40e3-b0d8-122857972ade#:~:text=T%C3%A4tigen%20eines%20Testanrufs&text=oben%20rechts%20in%20Teams%20und,Mikrofon%2C%20Lautsprecher%20und%20Kamera%20funktionieren"
+                  de:
+                    links:
+                      - "https://www.heise.de/tipps-tricks/Kein-Ton-im-Zoom-Meeting-was-tun-6001518.html"
+                      - "https://support.microsoft.com/de-de/office/meine-kamera-funktioniert-nicht-in-teams-9581983b-c6f9-40e3-b0d8-122857972ade#:~:text=T%C3%A4tigen%20eines%20Testanrufs&text=oben%20rechts%20in%20Teams%20und,Mikrofon%2C%20Lautsprecher%20und%20Kamera%20funktionieren"
+            feedbackQuestions: {}
+          "70":
+            name:
+              en: "Modern interaction technologies"
+              de: "Moderne Interaktionstechnologien"
+            testItems:
+              "Interaktion1.1":
+                episode: "1"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can choose the right application for a specific benefit in a specific situation."
+                  de: "Ich kann in einer bestimmten Situation die richtige Anwendung für einen bestimten Nutzen auswählen."
+                search:
+                  de:
+                    links:
+                      - "https://www.verbraucherzentrale-berlin.de/wissen/digitale-welt/soziale-netzwerke/sicherer-umgang-mit-apps-darauf-sollten-sie-achten-12274#:~:text=Bevor%20eine%20App%20heruntergeladen%20und,eine%20Bestenliste%20keine%20Vertrauensgarantie%20bedeutet"
+                      - "https://www.politische-bildung.nrw.de/wir-partner/themen/nachhaltig-digital/app-check"
+                  en:
+                    links:
+                      - "https://www.verbraucherzentrale-berlin.de/wissen/digitale-welt/soziale-netzwerke/sicherer-umgang-mit-apps-darauf-sollten-sie-achten-12274#:~:text=Bevor%20eine%20App%20heruntergeladen%20und,eine%20Bestenliste%20keine%20Vertrauensgarantie%20bedeutet"
+                      - "https://www.politische-bildung.nrw.de/wir-partner/themen/nachhaltig-digital/app-check"
+              "Interaktion1.2":
+                episode: "1"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I recognize opportunities for data recovery when interacting with digital tools."
+                  de: "Ich erkenne in der Interaktion mit digitalen Tools Möglichkeiten zur Wiederherstellung von Daten."
+                search:
+                  de:
+                    links:
+                      - "https://www.bildung-forschung.digital/digitalezukunft/de/besser-leben/gesundheit/spuerbar-besser-leben-durch-digitalisierung/besser-leben-durch-digitalisierung.html"
+                  en:
+                    links:
+                      - "https://www.bildung-forschung.digital/digitalezukunft/de/besser-leben/gesundheit/spuerbar-besser-leben-durch-digitalisierung/besser-leben-durch-digitalisierung.html"
+            feedbackQuestions: {}
+      "5":
+        name:
+          en: "Sharing through digital technologies"
+          de: "Teilen durch digitale Technologien"
+        subCompetences:
+          "71":
+            name:
+              en: "File and document sharing"
+              de: "Teilen von Dateien und Dokumenten"
+            testItems:
+              "Teilen1.1":
+                episode: "1"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can handle the terminology for sharing and accessing content."
+                  de: "Ich kann mit dem Begrifflichkeiten zum Teilen und Zugreifen auf Inhalte umgehen."
+                search:
+                  de:
+                    links:
+                      - "https://www.digitalbusiness-cloud.de/authentisierung-was-den-begriff-von-authentifizierung-und-autorisierung-unterscheidet/"
+                      - "https://de.wikipedia.org/wiki/Authentifizierung"
+                  en:
+                    links:
+                      - "https://www.digitalbusiness-cloud.de/authentisierung-was-den-begriff-von-authentifizierung-und-autorisierung-unterscheidet/"
+                      - "https://de.wikipedia.org/wiki/Authentifizierung"
+              "e2frage5":
+                episode: "2"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know some methods for sharing files."
+                  de: "Ich kenne einige Methoden, Dateien zu teilen."
+                search:
+                  en:
+                    links:
+                      - "https://www.computerbild.de/artikel/cb-Tipps-Cloud-Wie-funktioniert-Dropbox-Alle-31399237.html"
+                      - "https://www.heise.de/download/specials/Die-10-besten-Cloud-Speicher-3149052"
+                  de:
+                    links:
+                      - "https://www.computerbild.de/artikel/cb-Tipps-Cloud-Wie-funktioniert-Dropbox-Alle-31399237.html"
+                      - "https://www.heise.de/download/specials/Die-10-besten-Cloud-Speicher-3149052"
+              "e2frage6":
+                episode: "2"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I have heard about cloud storage."
+                  de: "Ich kenne den Begriff „Cloud-Speicher“."
+                search:
+                  en:
+                    links:
+                      - "https://praxistipps.chip.de/was-ist-eine-cloud-einfach-erklaert_41255"
+                  de:
+                    links:
+                      - "https://praxistipps.chip.de/was-ist-eine-cloud-einfach-erklaert_41255"
+            feedbackQuestions:
+              "feedback3":
+                episode: "2"
+                question:
+                  en: "Would you use cloud storage also in a professional context?"
+                  de: "Würdest Du Cloud-Speicher auch im beruflichen Kontext nutzen?"
+                answers:
+                  "0":
+                    en: "In any case, one should definitely make use of the benefits in a professional context as well."
+                    de: "Auf jeden Fall, man sollte unbedingt auch im beruflichen Kontext von den Vorteilen Gebrauch machen."
+                  "1":
+                    en: "Probably not, because the cloud storage operators read everything and thus get hold of company secrets."
+                    de: "Eher nicht, weil die Betreiber der Cloud-Speicher alles mitlesen und so an Firmengeheimnisse kommen."
+          "72":
+            name:
+              en: "Public sharing"
+              de: "Öffentliches Teilen"
+            testItems:
+              "e3frage1":
+                episode: "3"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the conditions for the use of social media services."
+                  de: "Ich kenne die Bedingungen für die Nutzung von Social Media Diensten."
+                search:
+                  en:
+                    links:
+                      - "https://www.sozial-pr.net/mehrere-social-media-kanaele/"
+                  de:
+                    links:
+                      - "https://www.sozial-pr.net/mehrere-social-media-kanaele/"
+              "e3frage2":
+                episode: "3"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the uses of social media."
+                  de: "Ich kenne die Nutzungsmöglichkeiten von Social Media."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e3frage4":
+                episode: "3"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can design a social media post."
+                  de: "Ich kann einen Social Media Post gestalten."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e4frage1":
+                episode: "4"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the possibilities of social media platforms, part 1."
+                  de: "Ich kenne die Möglichkeiten von Social Media Plattformen, Teil 1."
+                search:
+                  en:
+                    links:
+                      - "https://arbeits-abc.de/xing-und-linkedin-karriere-netzwerke-richtig-nutzen/"
+                  de:
+                    links:
+                      - "https://arbeits-abc.de/xing-und-linkedin-karriere-netzwerke-richtig-nutzen/"
+              "e4frage2":
+                episode: "4"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the possibilities of social media platforms, part 2."
+                  de: "Ich kenne die Möglichkeiten von Social Media Plattformen, Teil 2."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e4frage5":
+                episode: "4"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can assess social media communication."
+                  de: "Ich kann Social Media Kommunikation einschätzen."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e19frage1":
+                episode: "19"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know different Instagram formats."
+                  de: "Ich kenne unterschiedliche Instagram Formate."
+                search:
+                  en:
+                    links:
+                      - "https://www.der-paritaetische.de/themen/bereichsuebergreifende-themen/gleichimnetz/webzeugkoffer/faq/videos-und-reels-auf-instagram/"
+                  de:
+                    links:
+                      - "https://www.der-paritaetische.de/themen/bereichsuebergreifende-themen/gleichimnetz/webzeugkoffer/faq/videos-und-reels-auf-instagram/"
+              "e19frage2":
+                episode: "19"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know ways on Instagram to share videos live."
+                  de: "Ich kenne Möglichkeiten auf Instagram, Videos live zu teilen."
+                search:
+                  en:
+                    links:
+                      - "https://about.instagram.com/de-de/blog/announcements/doubling-up-on-instagram-live-with-live-rooms"
+                  de:
+                    links:
+                      - "https://about.instagram.com/de-de/blog/announcements/doubling-up-on-instagram-live-with-live-rooms"
+            feedbackQuestions:
+              "feedback5":
+                episode: "3"
+                question:
+                  en: "How important do you think it is for social institutions to be present on social media?"
+                  de: "Wie wichtig ist es deiner Meinung nach für soziale Einrichtungen, auf Social Media präsent zu sein?"
+                answers:
+                  "0":
+                    en: "It is important: If the target group is on social media a lot, it makes sense to address them exactly there."
+                    de: "Es ist wichtig: Wenn die Zielgruppe viel in den Sozialen Medien unterwegs ist, macht es Sinn, sie genau dort anzusprechen."
+                  "1":
+                    en: "There are more important things: communication on social media costs time. We should rather invest it in direct contact with our customers."
+                    de: "Es gibt wichtigeres: Kommunikation auf Social Media kostet Zeit. Die sollten wir lieber in den direkten Kontakt zu unseren Kund*innen investieren."
+              "feedback6":
+                episode: "3"
+                question:
+                  en: "How do you think the constant availability of social media platforms affects interpersonal communication?"
+                  de: "Wie wirkt sich deiner Meinung nach die ständige Verfügbarkeit von Social-Media-Plattformen auf die zwischenmenschliche Kommunikation aus?"
+                answers:
+                  "0":
+                    en: "It promotes communication and can create community."
+                    de: "Es fördert die Kommunikation und kann Gemeinschaft stiften."
+                  "1":
+                    en: "It hinders communication and leads to a decrease in meaningful personal interactions."
+                    de: "Es behindert die Kommunikation und führt zu einer Abnahme von sinnstiftenden persönlichen Interaktionen."
+                  "2":
+                    en: "It has no influence on interpersonal communication."
+                    de: "Es hat keinen Einfluss auf die zwischenmenschliche Kommunikation."
+              "feedback7":
+                episode: "4"
+                question:
+                  en: "Does AWO need social media guidelines for employees?"
+                  de: "Braucht die AWO Social-Media-Guidelines, die Mitarbeitenden Tipps und Orientierung für die Kommunikation auf Social-Media bieten?"
+                answers:
+                  "0":
+                    en: "It would give me a higher confidence."
+                    de: "Ja, das würde mir Sicherheit geben, wenn ich mich online zu AWO-Themen positioniere."
+                  "1":
+                    en: "It could improve the public image of AWO."
+                    de: "Ja, das könnte unser Bild in der Öffentlichkeit verbessern. Mitarbeitende sind die besten Botschafter*innen."
+                  "2":
+                    en: "No, I strictly separate professional and private communication."
+                    de: "Nein Danke, berufliches und privates trenne ich in den sozialen Medien ganz strikt."
+              "feedback8":
+                episode: "4"
+                question:
+                  en: "What social media platform do you primarily use?"
+                  de: "Wie sieht es bei Dir aus? Was ist Deine primäre Social-Media-Plattform?"
+                answers:
+                  "0":
+                    en: Xing
+                    de: Xing
+                  "1":
+                    en: LinkedIn
+                    de: LinkedIn
+                  "2":
+                    en: Facebook
+                    de: Facebook
+                  "3":
+                    en: Instagram
+                    de: Instagram
+                  "4":
+                    en: Twitter
+                    de: Twitter
+                  "5":
+                    en: TikTok
+                    de: TikTok
+                  "6":
+                    en: SnapChat
+                    de: SnapChat
+                  "7":
+                    en: Other
+                    de: Sonstige
+                  "8":
+                    en: None
+                    de: Keine
+              "feedback37":
+                episode: "19"
+                question:
+                  en: "What about you? How often do you share videos or pictures on social media platforms such as Instagram or LinkedIn?"
+                  de: "Wie ist es bei Dir? Wie oft teilst Du Videos oder Bilder auf Social Media Plattformen wie zum Beispiel Instagram oder LinkedIn? "
+                answers:
+                  "0":
+                    en: Never
+                    de: Nie
+                  "1":
+                    en: Several times a year
+                    de: Mehrmals im Jahr
+                  "2":
+                    en: Several times a month
+                    de: Mehrmals im Monat
+                  "3":
+                    en: Several times a week
+                    de: Mehrmals in der Woche
+                  "4":
+                    en: Daily
+                    de: Täglich
+              "feedback38":
+                episode: "19"
+                question:
+                  en: "What do you think: Do you think AWO should use social media to report on current events?"
+                  de: "Was denkst Du: Sollte die AWO Deiner Meinung nach Social Media nutzen, um von aktuellen Veranstaltungen zu berichten?"
+                answers:
+                  "0":
+                    en: Social media can be beneficial, but AWO should focus its limited resources on other areas that have more direct impact.
+                    de: Social Media kann von Nutzen sein, aber die AWO sollte ihre begrenzten Ressourcen auf andere Bereiche konzentrieren, die direkteren Einfluss haben.
+                  "1":
+                    en: AWO should use social media to document events and keep the online community informed. It supports follower* retention and attracts potential supporters.
+                    de: Die AWO sollte Social Media nutzen, um Veranstaltungen zu dokumentieren und die Online-Community auf dem Laufenden zu halten. Es unterstützt die Bindung von Follower*innen und zieht potenzielle Unterstützende an.
+                  "2":
+                    en: Social media is an effective tool to share current events and generate interest. It allows AWO to spread its messages to a diverse audience.
+                    de: Social Media ist ein effektives Instrument, um aktuelle Veranstaltungen zu teilen und Interesse zu wecken. Die AWO kann dadurch ihre Botschaften an ein vielfältiges Publikum verbreiten.
+                  "3":
+                    en: Social media allows for broad reach and networking. Event coverage strengthens AWO's online engagement and visibility.
+                    de: Social Media ermöglicht eine breite Reichweite und Vernetzung. Die Berichterstattung von Veranstaltungen stärkt das Online-Engagement und die Sichtbarkeit der AWO.
+      "7":
+        name:
+          en: "Collaboration through digital services"
+          de: "Zusammenarbeit durch digitale Dienste"
+        subCompetences:
+          "75":
+            name:
+              en: "Team collaboration"
+              de: "Teamzusammenarbeit"
+            testItems:
+              "e2frage2":
+                episode: "2"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can coordinate appointments with digital tools."
+                  de: "Ich kann Termine digital koordinieren."
+                search:
+                  en:
+                    links:
+                      - "https://www.heise.de/tipps-tricks/Doodle-Alternativen-Die-besten-Tools-zur-Terminfindung-4964023.html"
+                  de:
+                    links:
+                      - "https://www.heise.de/tipps-tricks/Doodle-Alternativen-Die-besten-Tools-zur-Terminfindung-4964023.html"
+            feedbackQuestions:
+              "feedback1":
+                episode: "1"
+                question:
+                  de: "Welche Aussage entspricht am ehesten deiner Meinung zum Einsatz von digitalen Technologien im Rahmen der Kommunikation?"
+                  en: "Which statement most closely matches your opinion about the use of digital technologies in communications?"
+                answers:
+                  "0":
+                    en: "It has great advantages: Much faster and easier."
+                    de: "Sie hat große Vorteile: Viel schneller und einfacher."
+                  "1":
+                    en: "I lack the personal connection to my counterpart."
+                    de: "Mir fehlt der persönliche Bezug zu meinem Gegenüber."
+                  "2":
+                    en: "I save time and it gives me flexibility."
+                    de: "Ich spare Zeit und es gibt mir Flexibilität."
+              "feedback4":
+                episode: "2"
+                question:
+                  en: "What would you use Microsoft Teams for?"
+                  de: "Wofür würdest du Microsoft Teams nutzen?"
+                answers:
+                  "0":
+                    en: "As a platform for communication and collaboration."
+                    de: "Als eine Plattform für Kommunikation und Zusammenarbeit."
+                  "1":
+                    en: "As a social network."
+                    de: "Als soziales Netzwerk."
+                  "2":
+                    en: "I wouldn't use it."
+                    de: "Gar nicht."
+          "76":
+            name:
+              en: "Co-creation tools"
+              de: "Mitgestaltungswerkzeuge"
+            testItems:
+              "Zusammenarbeit1.1":
+                episode: "1"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I recognize the advantages in digital collaboration."
+                  de: "Ich erkenne die Vorteile in der digitalen Zusammenarbeit."
+                search:
+                  de:
+                    links:
+                      - "https://support.microsoft.com/de-de/office/nachverfolgen-von-%C3%A4nderungen-in-word-197ba630-0f5f-4a8e-9a77-3712475e806a"
+                      - "https://de.wikipedia.org/wiki/%C3%84nderungsprotokoll"
+                  en:
+                    links:
+                      - "https://support.microsoft.com/de-de/office/nachverfolgen-von-%C3%A4nderungen-in-word-197ba630-0f5f-4a8e-9a77-3712475e806a"
+                      - "https://de.wikipedia.org/wiki/%C3%84nderungsprotokoll"
+            feedbackQuestions: {}
+          "77":
+            name:
+              en: "Customer experience management"
+              de: "Kundenerlebnismanagement"
+            testItems: {}
+            feedbackQuestions:
+              "feedback2":
+                episode: "1"
+                question:
+                  en: "Which statement most closely matches your opinion about the use of digital technologies in collaboration?"
+                  de: "Welche Aussage entspricht am ehesten deiner Meinung zum Einsatz von digitalen Technologien im Rahmen der Zusammenarbeit?"
+                answers:
+                  "0":
+                    en: "This is only something for young people."
+                    de: "Das ist nur etwas für junge Menschen."
+                  "1":
+                    en: "The technology must be available nationwide, otherwise it makes no sense."
+                    de: "Die Technik muss flächendeckend verfügbar sein, sonst macht es keinen Sinn."
+                  "2":
+                    en: "Knowledge of digital technologies must be present in all team members."
+                    de: "Die Kenntnisse im Umgang mit digitalen Technologien müssen bei allen Teammitgliedern vorhanden sein."
+      "8":
+        name:
+          en: "Netiquette"
+          de: "Netiquette"
+        subCompetences:
+          "79":
+            name:
+              en: "Netiquette"
+              de: "Netiquette"
+            testItems:
+              "Netiquette1.1":
+                episode: "1"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know fundamental ways of behaving in a digital meeting."
+                  de: "Ich kenne grundlegende Verhaltensweisen in einem digitalen Termin."
+                search:
+                  de:
+                    links:
+                      - "https://praxistipps.chip.de/dos-und-donts-bei-videokonferenzen-so-verhalten-sie-sich-richtig_118464"
+                      - "https://www.focus.de/finanzen/karriere/arbeit-videomeeting-wir-konferieren-jetzt-virtuell_id_11802075.html"
+                  en:
+                    links:
+                      - "https://praxistipps.chip.de/dos-und-donts-bei-videokonferenzen-so-verhalten-sie-sich-richtig_118464"
+                      - "https://www.focus.de/finanzen/karriere/arbeit-videomeeting-wir-konferieren-jetzt-virtuell_id_11802075.html"
+              "e3frage3":
+                episode: "3"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I recognise sensitive content."
+                  de: "Ich erkenne sensible Inhalte."
+                search:
+                  en:
+                    links:
+                      - "https://www.wir-sind-paritaet.de/unsere-plattform/social-media-tipps"
+                  de:
+                    links:
+                      - "https://www.wir-sind-paritaet.de/unsere-plattform/social-media-tipps"
+              "e3frage5":
+                episode: "3"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can control comments in social media platforms."
+                  de: "Ich kann Kommentare in Social Media Plattformen steuern."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e19frage5":
+                episode: "19"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to create accessible Instagram posts."
+                  de: "Ich weiß, wie ich barrierefreie Instagram-Beiträge erstellen kann."
+                search:
+                  en:
+                    links:
+                      - "https://about.instagram.com/de-de/blog/tips-and-tricks/advancing-accessibility-on-instagram"
+                  de:
+                    links:
+                      - "https://about.instagram.com/de-de/blog/tips-and-tricks/advancing-accessibility-on-instagram"
+            feedbackQuestions: {}
+  "3":
+    name:
+      de: Erstellung digitaler Inhalte
+      en: Creation of digital content
+    competences:
+      "10":
+        name:
+          en: "Create and edit digital content"
+          de: "Kreieren und Bearbeiten von digitalen Inhalten"
+        subCompetences:
+          "82":
+            name:
+              en: "Basic content technology"
+              de: "Grundlegende Technologie für Inhalte"
+            testItems:
+              "e17frage2":
+                episode: "17"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to make a document accessible."
+                  de: "Ich weiß, wie ich ein Dokument barrierefrei mache."
+                search:
+                  en:
+                    links:
+                      - "https://www.th-koeln.de/mam/downloads/deutsch/hochschule/profil/lehre/leitfaden_barrierefreie_dokumente.pdf"
+                      - "https://support.microsoft.com/de-de/office/gestalten-barrierefreier-word-dokumente-f%C3%BCr-personen-mit-behinderungen-d9bf3683-87ac-47ea-b91a-78dcacb3c66d"
+                  de:
+                    links:
+                      - "https://www.th-koeln.de/mam/downloads/deutsch/hochschule/profil/lehre/leitfaden_barrierefreie_dokumente.pdf"
+                      - "https://support.microsoft.com/de-de/office/gestalten-barrierefreier-word-dokumente-f%C3%BCr-personen-mit-behinderungen-d9bf3683-87ac-47ea-b91a-78dcacb3c66d"
+              "e17frage4":
+                episode: "17"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know different ways to create PDFs."
+                  de: "Ich kenne unterschiedliche Möglichkeiten, PDFs zu erstellen."
+                search:
+                  en:
+                    links:
+                      - "https://support.microsoft.com/de-de/office/speichern-oder-konvertieren-in-pdf-oder-xps-in-office-desktop-apps-d85416c5-7d77-4fd6-a216-6f4bf7c7c110"
+                  de:
+                    links:
+                      - "https://support.microsoft.com/de-de/office/speichern-oder-konvertieren-in-pdf-oder-xps-in-office-desktop-apps-d85416c5-7d77-4fd6-a216-6f4bf7c7c110"
+              "e17frage5":
+                episode: "17"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the functions of different image formats."
+                  de: "Ich kenne die Funktionen unterschiedlicher Bildformate."
+                search:
+                  en:
+                    links:
+                      - "https://blog.hubspot.de/website/bildformate"
+                      - "https://www.adobe.com/de/creativecloud/file-types/image/comparison.html"
+                  de:
+                    links:
+                      - "https://blog.hubspot.de/website/bildformate"
+                      - "https://www.adobe.com/de/creativecloud/file-types/image/comparison.html"
+              "e18frage3":
+                episode: "18"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know ways to lighten up presentations."
+                  de: "Ich kenne Möglichkeiten, um Präsentationen aufzulockern."
+                search:
+                  en:
+                    links:
+                      - "https://visme.co/blog/de/interaktive-praesentation/"
+                  de:
+                    links:
+                      - "https://visme.co/blog/de/interaktive-praesentation/"
+              "e18frage4":
+                episode: "18"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to generate QR codes."
+                  de: "Ich weiß, wie man QR-Codes generiert."
+                search:
+                  en:
+                    links:
+                      - "https://www.taskcards.de/#/board/a344e0a4-64f8-4461-b861-c09e7139c29b?token=94007d0b-37d8-48c8-98e8-25c469031aa6"
+                  de:
+                    links:
+                      - "https://www.taskcards.de/#/board/a344e0a4-64f8-4461-b861-c09e7139c29b?token=94007d0b-37d8-48c8-98e8-25c469031aa6"
+              "e19frage3":
+                episode: "19"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to shoot a stable live video."
+                  de: "Ich weiß, wie ich ein stabiles Live-Video drehe."
+                search:
+                  en:
+                    links:
+                      - "https://www.familienvideosmachen.de/blog/handy-videos-drehen#grundlegende-tipps"
+                  de:
+                    links:
+                      - "https://www.familienvideosmachen.de/blog/handy-videos-drehen#grundlegende-tipps"
+            feedbackQuestions:
+              "feedback33":
+                episode: "17"
+                question:
+                  en: "What about you? Have you looked into how you can create accessible documents?"
+                  de: "Wie ist es bei Dir? Hast Du Dich schon mal damit befasst, wie Du barrierefreie Dokumente erstellen kannst?"
+                answers:
+                  "0":
+                    en: "No, I have not yet dealt with this and therefore do not actively design my documents to be accessible. There is currently no reason for me to do so."
+                    de: "Nein, ich habe mich bisher nicht damit befasst und gestalte meine Dokumente daher nicht aktiv barrierefrei. Aktuell gibt es für mich auch keinen Anlass dafür."
+                  "1":
+                    en: "No, I have not yet dealt with this issue, but I am willing to learn more about it and adapt my documents accordingly."
+                    de: "Nein, ich habe mich bisher nicht damit befasst, bin jedoch bereit, mehr darüber zu lernen und meine Dokumente entsprechend anzupassen."
+                  "2":
+                    en: "Yes, I have familiarized myself with the basics of creating accessible documents and try to make my documents as accessible as possible."
+                    de: "Ja, ich habe mich mit den Grundlagen der Erstellung barrierefreier Dokumente vertraut gemacht und versuche, meine Dokumente so barrierefrei wie möglich zu gestalten."
+                  "3":
+                    en: "Yes, I have studied the creation of accessible documents in depth and am making an effort to make my own documents accessible."
+                    de: "Ja, ich habe mich intensiv mit der Erstellung barrierefreier Dokumente auseinandergesetzt und bemühe mich, meine eigenen Dokumente barrierefrei zu gestalten."
+              "feedback34":
+                episode: "17"
+                question:
+                  en: "How confident do you feel in working with different file formats for images and documents?"
+                  de: "Wie sicher fühlst Du Dich im Umgang mit unterschiedlichen Dateiformaten für Bilder und Dokumente?"
+                answers:
+                  "0":
+                    en: "Unsure - I'm often unsure which file format to use and find the variety of options confusing."
+                    de: "Unsicher - Ich bin mir oft nicht sicher, welches Dateiformat ich verwenden soll, und finde die Vielzahl der Optionen verwirrend."
+                  "1":
+                    en: "Neutral - I'm fine when it comes to the basic file formats, but I'm not sure I'm using the full potential of the different formats."
+                    de: "Neutral - Ich komme zurecht, wenn es um die grundlegenden Dateiformate geht, aber ich bin nicht sicher, ob ich das volle Potenzial der verschiedenen Formate nutze."
+                  "2":
+                    en: "Fairly confident - I am familiar with the most common file formats and can use them without problems, but I might need help with less common formats."
+                    de: "Ziemlich sicher - Ich kenne mich mit den gängigsten Dateiformaten aus und kann sie ohne Probleme verwenden, bei weniger verbreiteten Formaten könnte ich jedoch Hilfe benötigen."
+                  "3":
+                    en: "Very confident - I have a clear idea of how to use and convert different file formats and know which format is best for which task."
+                    de: "Sehr sicher - Ich habe eine klare Vorstellung davon, wie ich verschiedene Dateiformate nutzen und konvertieren kann, und weiß, welches Format für welche Aufgabe am besten geeignet ist."
+          "83":
+            name:
+              en: "Web"
+              de: "Web"
+            testItems:
+              "e20frage2":
+                episode: "20"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know what to look for when creating a Microsoft Form."
+                  de: "Ich weiß, worauf ich bei der Erstellung einer Microsoft Form achten sollte."
+                search:
+                  en:
+                    links:
+                      - "https://www.surveymonkey.de/curiosity/10-online-survey-tips/"
+                  de:
+                    links:
+                      - "https://www.surveymonkey.de/curiosity/10-online-survey-tips/"
+            feedbackQuestions:
+              "feedback39":
+                episode: "20"
+                question:
+                  en: "What is your opinion on online survey tools like Microsoft Forms?"
+                  de: "Wie lautet Deine Meinung zu Online-Umfrage-Tools wie Microsoft Forms?"
+                answers:
+                  "0":
+                    en: "I don't have an opinion on them, as I've never used them or know enough about them to have an informed opinion."
+                    de: "Ich habe keine Meinung zu ihnen, da ich sie noch nie benutzt habe oder nicht genug darüber weiß, um eine fundierte Meinung zu haben."
+                  "1":
+                    en: "I am not particularly impressed with them. They don't always seem to provide the most accurate or useful data."
+                    de: "Ich bin nicht besonders beeindruckt von ihnen. Sie scheinen nicht immer die genauesten oder nützlichsten Daten zu liefern."
+                  "2":
+                    en: "I'm neutral. I see their usefulness, but I am also alert to their limitations and shortcomings."
+                    de: "Ich bin neutral. Ich sehe ihren Nutzen, bin aber auch auf ihre Grenzen und Mängel gestoßen."
+                  "3":
+                    en: "They are practical, but I find that they are sometimes too technical and complicated. I prefer traditional methods of data collection."
+                    de: "Sie sind praktisch, aber ich finde, dass sie manchmal zu technisch und kompliziert sind. Ich bevorzuge traditionelle Methoden zur Datenerhebung."
+                  "4":
+                    en: "I find them extremely useful and easy to use. They make data collection and analysis much easier."
+                    de: "Ich finde sie äußerst nützlich und einfach zu bedienen. Sie erleichtern die Erhebung und Analyse von Daten erheblich."
+          "84":
+            name:
+              en: "Documents"
+              de: "Dokumente"
+            testItems:
+              "e17frage1":
+                episode: "17"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can share Word documents with editing lock."
+                  de: "Ich kann Word-Dokumente mit Bearbeitungssperre teilen."
+                search:
+                  en:
+                    links:
+                      - "https://www.avira.com/de/blog/frage-der-woche-wie-kann-ich-word-dokumente-effektiv-schuetzen"
+                  de:
+                    links:
+                      - "https://www.avira.com/de/blog/frage-der-woche-wie-kann-ich-word-dokumente-effektiv-schuetzen"
+              "e17frage3":
+                episode: "17"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know differences between Word documents and PDFs."
+                  de: "Ich kenne Unterschiede zwischen Word-Dokumenten und PDFs."
+                search:
+                  en:
+                    links:
+                      - "https://www.techboys.de/pdf-vs-word-unterschiede-vergleich#:~:text=Unterschiede%20zwischen%20PDF%20und%20Word&text=Word%20wird%20haupts%C3%A4chlich%20zum%20Erstellen,und%20plattformunabh%C3%A4ngigen%20Weise%20zu%20pr%C3%A4sentieren."
+                  de:
+                    links:
+                      - "https://www.techboys.de/pdf-vs-word-unterschiede-vergleich#:~:text=Unterschiede%20zwischen%20PDF%20und%20Word&text=Word%20wird%20haupts%C3%A4chlich%20zum%20Erstellen,und%20plattformunabh%C3%A4ngigen%20Weise%20zu%20pr%C3%A4sentieren."
+            feedbackQuestions: {}
+          "85":
+            name:
+              en: "Presentations"
+              de: "Präsentationen"
+            testItems:
+              "e18frage1":
+                episode: "18"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know different presentation tools."
+                  de: "Ich kenne unterschiedliche Präsentationstools."
+                search:
+                  en:
+                    links:
+                      - "https://youtube.com/@slidecampus"
+                  de:
+                    links:
+                      - "https://youtube.com/@slidecampus"
+              "e18frage2":
+                episode: "18"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know what a corporate design is."
+                  de: "Ich weiß, was ein Corporate Design ist."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e18frage5":
+                episode: "18"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know what master slides are."
+                  de: "Ich weiß, was Masterfolien sind."
+                search:
+                  en:
+                    links:
+                      - "https://support.microsoft.com/de-de/office/was-ist-ein-folienmaster-b9abb2a0-7aef-4257-a14e-4329c904da54"
+                  de:
+                    links:
+                      - "https://support.microsoft.com/de-de/office/was-ist-ein-folienmaster-b9abb2a0-7aef-4257-a14e-4329c904da54"
+            feedbackQuestions:
+              "feedback35":
+                episode: "18"
+                question:
+                  en: "How confident do you think you are in using PowerPoint?"
+                  de: "Wie sicher bist Du Deiner Einschätzung nach im Umgang mit PowerPoint?"
+                answers:
+                  "0":
+                    en: "I have little to no experience and am therefore unsure how to use it."
+                    de: "Ich habe wenig bis keine Erfahrung und bin daher unsicher bei der Nutzung."
+                  "1":
+                    en: "I have basic knowledge and can create a simple presentation."
+                    de: "Ich habe grundlegende Kenntnisse und kann eine einfache Präsentation erstellen."
+                  "2":
+                    en: "I can create professional presentations, and know many PowerPoint functions."
+                    de: "Ich kann professionelle Präsentationen erstellen, und kenne viele PowerPoint Funktionen"
+                  "3":
+                    en: "YI have a near perfect command of all the features that PowerPoint offers."
+                    de: "Ich beherrsche alle Funktionen, die PowerPoint bietet, nahezu perfekt."
+              "feedback36":
+                episode: "18"
+                question:
+                  en: "How often do you create presentations in your (work and) everyday life?"
+                  de: "Wie häufig erstellst Du Präsentationen in Deinem (Arbeits-)Alltag?"
+                answers:
+                  "0":
+                    en: "Rarely"
+                    de: "Selten"
+                  "1":
+                    en: "Rather rarely"
+                    de: "Eher selten"
+                  "2":
+                    en: "Medium"
+                    de: "Mittel"
+                  "3":
+                    en: "Rather often"
+                    de: "Eher häufig"
+                  "4":
+                    en: "Often"
+                    de: "Häufig"
+          "86":
+            name:
+              en: "Graphics and design"
+              de: "Graphics and design"
+            testItems:
+              "e19frage4":
+                episode: "19"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know different apps for image editing."
+                  de: "Ich kenne unterschiedliche Apps zur Bildbearbeitung."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e20frage4":
+                episode: "20"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know different ways of presenting survey results."
+                  de: "Ich kenne unterschiedliche Darstellungsmöglichkeiten von Umfrageergebnissen."
+                search:
+                  en:
+                    links:
+                      - "https://www.youtube.com/watch?v=sFHMFFEhd8E"
+                      - "https://www.wortwolken.com/"
+                  de:
+                    links:
+                      - "https://www.youtube.com/watch?v=sFHMFFEhd8E"
+                      - "https://www.wortwolken.com/"
+              "e20frage5":
+                episode: "20"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know what to look for when presenting survey results."
+                  de: "Ich weiß, worauf ich bei der Darstellung von Umfrageergebnissen achten sollte."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions:
+              "feedback40":
+                episode: "20"
+                question:
+                  en: "How confident do you feel in using Excel?"
+                  de: "Wie sicher fühlst Du Dich im Umgang mit Excel?"
+                answers:
+                  "0":
+                    en: "Not at all sure. I rarely if ever use Excel and don't feel I could use it effectively if I had to."
+                    de: "Gar nicht sicher. Ich benutze Excel selten oder gar nicht und habe nicht das Gefühl, dass ich es effektiv nutzen könnte, wenn ich es müsste."
+                  "1":
+                    en: "Not very confident. I can only do very simple tasks in Excel and often feel overwhelmed when I try to use more complex functions."
+                    de: "Nicht sehr sicher. Ich kann nur sehr einfache Aufgaben in Excel erledigen und fühle mich oft überfordert, wenn ich versuche, komplexere Funktionen zu nutzen."
+                  "2":
+                    en: "Neutral. I can use the basic functions of Excel, but feel unsure about more complex tasks."
+                    de: "Neutral. Ich kann die Grundfunktionen von Excel nutzen, fühle mich aber bei komplexeren Aufgaben unsicher."
+                  "3":
+                    en: "Fairly confident. I use Excel regularly and feel comfortable doing so, but there are still functions I don't know or could understand better."
+                    de: "Ziemlich sicher. Ich benutze Excel regelmäßig und fühle mich wohl dabei, aber es gibt immer noch Funktionen, die ich nicht kenne oder die ich besser verstehen könnte."
+                  "4":
+                    en: "Very confident. I have a lot of experience with Excel and am comfortable with most functions."
+                    de: "Sehr sicher. Ich habe viel Erfahrung mit Excel und kenne mich mit den meisten Funktionen gut aus."
+  "4":
+    name:
+      de: Schutz und Sicherheit
+      en: Safety
+    competences:
+      "14":
+        name:
+          de: Schützen von Geräten
+          en: Protecting devices
+        subCompetences:
+          "94":
+            name:
+              en: Device security
+              de: Sicherheit der Geräte
+            testItems:
+              "e9frage1":
+                episode: "9"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to create and maintain security-compliant passwords."
+                  de: "Ich weiß, wie ich sicherheitskonforme Passwörter erstelle und beibehalte."
+                search:
+                  en:
+                    links:
+                      - "https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Checklisten/sichere_passwoerter_faktenblatt.html"
+                  de:
+                    links:
+                      - "https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Checklisten/sichere_passwoerter_faktenblatt.html"
+              "e9frage2":
+                episode: "9"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to protect my hardware and software."
+                  de: "Ich weiß, wie ich meine Hard- und Software schütze."
+                search:
+                  en:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Basisschutz-fuer-Computer-Mobilgeraete/basisschutz-fuer-computer-mobilgeraete_node.html"
+                  de:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Basisschutz-fuer-Computer-Mobilgeraete/basisschutz-fuer-computer-mobilgeraete_node.html"
+            feedbackQuestions:
+              "feedback17":
+                episode: "9"
+                question:
+                  en: "How is it with you? Are your mobile devices like smartphone and laptop well protected?"
+                  de: "Wie ist das bei Dir? Sind Deine mobilen Geräte wie Smartphone und Laptop gut geschützt?"
+                answers:
+                  "0":
+                    en: "No, I haven't dealt with it yet and use devices as they are preset."
+                    de: "Nein, ich habe mich noch nicht damit auseinandergesetzt und nutze Geräte so, wie sie voreingestellt sind. "
+                  "1":
+                    en: "Yes, when I bought/got my device, I dealt with the protection. Whether everything is still up to date, I don't know."
+                    de: "Ja, als ich mein Gerät gekauft/bekommen habe, habe ich mich mit dem Schutz auseinandergesetzt. Ob alles noch auf dem aktuellen Stand ist, weiß ich nicht."
+                  "2":
+                    en: "Yes, but it always takes me some time to do security updates, just like - better late than never -."
+                    de: "Ja, aber ich brauche immer etwas Zeit, bis ich Sicherheits-Updates durchführe - ganz nach dem Motto “Besser spät als nie”."
+                  "3":
+                    en: "Yes, when I am informed about new updates available, I install them promptly."
+                    de: "Ja, wenn ich über bereitstehende neue Updates informiert werde, installiere ich diese zeitnah."
+                  "4":
+                    en: "Yes, when it comes to security measures, everything is always up to date for me. I regularly check whether there are any new features or updates."
+                    de: "Ja, bei den Sicherheitsmaßnahmen ist bei mir immer alles auf dem aktuellen Stand. Ich prüfe regelmäßig, ob es Neuerungen oder Updates gibt."
+          "95":
+            name:
+              en: IT security
+              de: IT-Sicherheit
+            testItems:
+              "e9frage4":
+                episode: "9"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I am aware of potential risks of Internet use."
+                  de: "Ich bin mir über potenzielle Risiken der Internetnutzung bewusst."
+                search:
+                  en:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Spam-Phishing-Co/Passwortdiebstahl-durch-Phishing/Schutz-gegen-Phishing/schutz-gegen-phishing_node.html"
+                  de:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Spam-Phishing-Co/Passwortdiebstahl-durch-Phishing/Schutz-gegen-Phishing/schutz-gegen-phishing_node.html"
+              "e9frage5":
+                episode: "9"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know measures that allow me to safely surf the Internet."
+                  de: "Ich kenne Maßnahmen, die mir ein sicheres Surfen im Internet erlauben."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e21frage5":
+                episode: "21"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I am aware of the risks of phishing."
+                  de: "Mir sind die Risiken von Phishing bekannt."
+                search:
+                  en:
+                    links:
+                      - "https://www.mittwald.de/blog/hosting/phishing-welche-arten-gibt-es-und-welcher-schaden-entsteht-dadurch"
+                  de:
+                    links:
+                      - "https://www.mittwald.de/blog/hosting/phishing-welche-arten-gibt-es-und-welcher-schaden-entsteht-dadurch"
+            feedbackQuestions:
+              "feedback18":
+                episode: "9"
+                question:
+                  en: "How do you feel about potential dangers of the Internet?"
+                  de: "Wie stehst Du zu potenziellen Gefahren des Internets?"
+                answers:
+                  "0":
+                    en: "I am or was previously unaware of the dangers of the Internet and use it quite cluelessly."
+                    de: "Ich bin oder war mir der Gefahren des Internets bisher nicht bewusst und nutze es recht unbedarft."
+                  "1":
+                    en: "I am aware of the dangers and not sure how to protect myself sufficiently. I therefore prefer to stay analog wherever possible - for example, when banking."
+                    de: "Ich bin mir der Gefahren bewusst und nicht sicher, wie ich mich ausreichend schützen kann. Ich bleibe daher wo möglich – zum Beispiel beim Banking – lieber analog."
+                  "2":
+                    en: "I am aware of the dangers, but consider the risk of being affected to be low. Besides, I have nothing to hide."
+                    de: "Ich bin mir der Gefahren bewusst, aber halte das Risiko, dass es mich trifft für gering. Außerdem habe ich nichts zu verbergen."
+                  "3":
+                    en: "I am aware of the dangers, but I trust my ISP and device manufacturers to take appropriate security measures to protect me."
+                    de: "Ich bin mir der Gefahren bewusst, aber ich vertraue darauf, dass mein Internetanbieter und meine Gerätehersteller angemessene Sicherheitsmaßnahmen ergreifen, um mich zu schützen."
+                  "4":
+                    en: "I am aware of the dangers and make every effort to protect my personal information and devices as much as possible."
+                    de: "Ich bin mir der Gefahren bewusst und bemühe mich, meine persönlichen Daten und Geräte so gut wie möglich zu schützen."
+          "96":
+            name:
+              en: Security processes, standards and certifications
+              de: Sicherheitsprozesse, Standards und Zertifizierungen
+            testItems:
+              "e12frage2":
+                episode: "12"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know the meaning of end-to-end encryption."
+                  de: "Ich kenne die Bedeutung von Ende-zu-Ende-Verschlüsselung."
+                search:
+                  en:
+                    links:
+                      - "https://www.youtube.com/watch?v=4mbryW8fZrA&t=110s"
+                  de:
+                    links:
+                      - "https://www.youtube.com/watch?v=4mbryW8fZrA&t=110s"
+            feedbackQuestions: {}
+      "15":
+        name:
+          de: Schützen von persönlichen Daten
+          en: Protecting personal data and privacy
+        subCompetences:
+          "97":
+            name:
+              en: Personal IT security
+              de: Persönliche IT-Sicherheit
+            testItems:
+              "e9frage3":
+                episode: "9"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know what two-factor authentication is."
+                  de: "Ich weiß, was eine Zwei-Faktor-Authentifizierung ist."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e12frage1":
+                episode: "12"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know what information I share with messengers when I use them."
+                  de: "Ich weiß, welche Informationen ich Messengern bei Nutzung freigebe."
+                search:
+                  en:
+                    links:
+                      - "https://www.verbraucherzentrale.de/wissen/digitale-welt/datenschutz/whatsappalternativen-messenger-im-ueberblick-13055"
+                  de:
+                    links:
+                      - "https://www.verbraucherzentrale.de/wissen/digitale-welt/datenschutz/whatsappalternativen-messenger-im-ueberblick-13055"
+              "e12frage3":
+                episode: "12"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know how the encryption of sensitive data works."
+                  de: "Ich weiß, wie die Verschlüsselung sensibler Daten funktioniert."
+                search:
+                  en:
+                    links:
+                      - "https://www.youtube.com/watch?v=IhoG37uis3k"
+                  de:
+                    links:
+                      - "https://www.youtube.com/watch?v=IhoG37uis3k"
+              "e12frage5":
+                episode: "12"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know methods for anonymizing personal data."
+                  de: "Ich kenne Methoden zur Anonymisierung personenbezogener Daten."
+                search:
+                  en:
+                    links:
+                      - "https://www.dr-datenschutz.de/ein-ueberblick-zur-anonymisierung/"
+                  de:
+                    links:
+                      - "https://www.dr-datenschutz.de/ein-ueberblick-zur-anonymisierung/"
+              "e16frage1":
+                episode: "16"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know which data traces count towards the digital footprint."
+                  de: "Ich weiß, welche Datenspuren zum digitalen Fußabdruck zählen."
+                search:
+                  en:
+                    links:
+                      - "https://www.avg.com/de/signal/what-is-a-digital-footprint"
+                  de:
+                    links:
+                      - "https://www.avg.com/de/signal/what-is-a-digital-footprint"
+              "e16frage2":
+                episode: "16"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know opportunities of a consciously controlled digital footprint."
+                  de: "Ich kenne Chancen eines bewusst gesteuerten digitalen Fußabdrucks."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e21frage1":
+                episode: "21"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know common methods that phishing scammers use."
+                  de: "Ich kenne gängige Methoden, die Phishing-Betrügende verwenden."
+                search:
+                  en:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Spam-Phishing-Co/Passwortdiebstahl-durch-Phishing/passwortdiebstahl-durch-phishing_node.html"
+                  de:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Spam-Phishing-Co/Passwortdiebstahl-durch-Phishing/passwortdiebstahl-durch-phishing_node.html"
+              "e21frage2":
+                episode: "21"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know signs of phishing emails."
+                  de: "Ich kenne Anzeichen von Phishing-E-Mails."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e21frage3":
+                episode: "21"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know signs of phishing websites."
+                  de: "Ich kenne Anzeichen von Phishing-Webseiten."
+                search:
+                  en:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Spam-Phishing-Co/Passwortdiebstahl-durch-Phishing/Wie-erkenne-ich-Phishing-in-E-Mails-und-auf-Webseiten/wie-erkenne-ich-phishing-in-e-mails-und-auf-webseiten_node.html"
+                  de:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Spam-Phishing-Co/Passwortdiebstahl-durch-Phishing/Wie-erkenne-ich-Phishing-in-E-Mails-und-auf-Webseiten/wie-erkenne-ich-phishing-in-e-mails-und-auf-webseiten_node.html"
+            feedbackQuestions:
+              "feedback24":
+                episode: "12"
+                question:
+                  en: "How well informed do you think you are about personal data protection in your field of work?"
+                  de: "Wie gut bist Du Deiner Meinung nach zum Schutz personenbezogener Daten in Deinem Arbeitsfeld informiert?"
+                answers:
+                  "0":
+                    en: "Little informed: My knowledge of personal data protection in my field of work is limited."
+                    de: "Wenig informiert: Mein Wissen über den Schutz personenbezogener Daten in meinem Arbeitsfeld ist begrenzt."
+                  "1":
+                    en: "Partially informed: I have some knowledge, but there is room for deepening and further training."
+                    de: "Teilweise informiert: Ich habe gewisse Kenntnisse, aber es gibt noch Raum für Vertiefung und Weiterbildung."
+                  "2":
+                    en: "Well informed: I have solid knowledge about personal data protection in my field of work."
+                    de: "Gut informiert: Ich besitze solides Wissen über den Schutz personenbezogener Daten in meinem Arbeitsfeld."
+                  "3":
+                    en: "Very well informed: I have extensive knowledge and understanding of personal data protection in my field of work."
+                    de: "Sehr gut informiert: Ich habe umfangreiches Wissen und Verständnis über den Schutz personenbezogener Daten in meinem Arbeitsfeld."
+              "feedback31":
+                episode: "16"
+                question:
+                  en: "What is your opinion on the digital footprint?"
+                  de: "Welche Meinung hast Du zum digitalen Fußabdruck?"
+                answers:
+                  "0":
+                    en: "I'm not worried about my digital footprint. I have nothing to hide and don't think it has a negative impact on my life."
+                    de: "Ich mache mir keine Sorgen um meinen digitalen Fußabdruck. Ich habe nichts zu verbergen und glaube nicht, dass er negative Auswirkungen auf mein Leben hat."
+                  "1":
+                    en: "I am undecided and have mixed feelings about the subject. I understand that there are risks, but I also believe that there are many benefits to the digital services we use."
+                    de: "Ich bin unentschlossen und habe gemischte Gefühle über das Thema. Ich verstehe dass es Risiken gibt, glaube aber auch, dass die digitalen Dienste, die wir nutzen, viele Vorteile bieten."
+                  "2":
+                    en: "I am concerned about my digital footprint, but I don't know how to effectively manage or reduce it."
+                    de: "Ich bin besorgt über meinen digitalen Fußabdruck, aber ich weiß nicht, wie ich ihn effektiv verwalten oder reduzieren kann."
+                  "3":
+                    en: "I find the risks of the digital footprint very troubling. I believe more needs to be done to protect personal data."
+                    de: "Ich finde die Risiken des digitalen Fußabdrucks sehr beunruhigend. Ich glaube, dass mehr getan werden muss, um persönliche Daten zu schützen."
+                  "4":
+                    en: "I am concerned about my digital footprint and am actively taking steps to reduce it, such as using privacy-oriented search engines and disabling cookies."
+                    de: "Ich bin besorgt über meinen digitalen Fußabdruck und ergreife aktiv Schritte, um ihn zu reduzieren, wie z.B. das Nutzen von Privatsphäre-orientierten Suchmaschinen und das Deaktivieren von Cookies."
+              "feedback41":
+                episode: "21"
+                question:
+                  en: "How safe do you feel when dealing with your emails and how great is your fear of falling for a phishing attempt?"
+                  de: "Wie sicher fühlst du dich im Umgang mit deinen E-Mails und wie groß ist dabei deine Angst, auf einen Phishing-Versuch hereinzufallen?"
+                answers:
+                  "0":
+                    en: "I feel very insecure and am very afraid of falling for phishing. I try to minimize my email use."
+                    de: "Ich fühle mich sehr unsicher und habe große Angst, auf Phishing hereinzufallen. Ich versuche, meine E-Mail-Nutzung zu minimieren."
+                  "1":
+                    en: "I feel insecure about using my email and often worry about falling for phishing."
+                    de: "Ich bin unsicher im Umgang mit meinen E-Mails und mache mir oft Sorgen, auf Phishing hereinzufallen."
+                  "2":
+                    en: "I don't have an opinion about it / I don't use email often enough to worry about it."
+                    de: "Ich habe keine Meinung dazu / Ich benutze E-Mail nicht häufig genug, um mir Sorgen darüber zu machen."
+                  "3":
+                    en: "I am confident in using my email, but the fear of phishing is always in the back of my mind. "
+                    de: "Ich bin sicher im Umgang mit meinen E-Mails, aber die Angst vor Phishing ist immer im Hinterkopf. "
+                  "4":
+                    en: "I feel very confident using my email and am not afraid of falling for phishing. I know what to look out for."
+                    de: "Ich fühle mich sehr sicher im Umgang mit meinen E-Mails und habe keine Angst, auf Phishing hereinzufallen. Ich weiß, worauf ich achten muss."
+              "feedback42":
+                episode: "21"
+                question:
+                  en: "How often do you receive phishing emails?"
+                  de: "Wie häufig erhältst du Phishing-E-Mails?"
+                answers:
+                  "0":
+                    en: "I don't know. I can't tell phishing emails from real emails."
+                    de: "Ich weiß es nicht. Ich kann Phishing-E-Mails nicht von echten E-Mails unterscheiden."
+                  "1":
+                    en: "I receive phishing emails every day. It's a constant problem."
+                    de: "Ich erhalte täglich Phishing-E-Mails. Es ist ein ständiges Problem."
+                  "2":
+                    en: "I receive one or two phishing emails weekly. It's annoying, but manageable."
+                    de: "Ich erhalte wöchentlich ein oder zwei Phishing-E-Mails. Es ist nervig, aber handhabbar. "
+                  "3":
+                    en: "I receive phishing emails occasionally, about once a month."
+                    de: "Ich erhalte gelegentlich Phishing-E-Mails, etwa einmal im Monat."
+                  "4":
+                    en: "I rarely receive phishing emails. Maybe a couple of times a year."
+                    de: "Ich erhalte selten Phishing-E-Mails. Vielleicht ein paar Mal pro Jahr."
+                  "5":
+                    en: "I don't recall ever receiving a phishing email."
+                    de: "Ich kann mich nicht daran erinnern, jemals eine Phishing-E-Mail erhalten zu haben."
+          "98":
+            name:
+              en: Data protection
+              de: Datenschutz
+            testItems:
+              "e4frage4":
+                episode: "4"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I understand important criteria for privacy."
+                  de: "Ich verstehe wichtige Kriterien für Privatsphäre."
+                search:
+                  en:
+                    links:
+                      - "https://www.verbraucherzentrale.nrw/wissen/digitale-welt/datenschutz/facebook-hat-automatische-gesichtserkennung-2021-beendet-23818"
+                  de:
+                    links:
+                      - "https://www.verbraucherzentrale.nrw/wissen/digitale-welt/datenschutz/facebook-hat-automatische-gesichtserkennung-2021-beendet-23818"
+              "e10frage4":
+                episode: "10"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I am competent in the secure handling of personal data."
+                  de: "Ich beherrsche den sicheren Umgang mit persönlichen Daten."
+                search:
+                  en:
+                    links:
+                      - "https://www.sicher-im-netz.de/privatsph%C3%A4re-und-daten-sch%C3%BCtzen"
+                  de:
+                    links:
+                      - "https://www.sicher-im-netz.de/privatsph%C3%A4re-und-daten-sch%C3%BCtzen"
+              "e10frage5":
+                episode: "10"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know what sensitive data is."
+                  de: "Ich weiß, was sensible Daten sind."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e12frage4":
+                episode: "12"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know what personal data is."
+                  de: "Ich weiß, was personenbezogene Daten sind."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e21frage4":
+                episode: "21"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know what to do if I have received a phishing email."
+                  de: "Ich weiß, was ich tun kann, wenn ich eine Phishing-E-Mail erhalten habe."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions:
+              "feedback20":
+                episode: "10"
+                question:
+                  en: "How well do you protect your personal data?"
+                  de: "Wie gut schützt Du Deiner Meinung nach Deine persönlichen Daten?"
+                answers:
+                  "0":
+                    en: "Not good - I frequently share my personal information online or with others without much thought about the consequences."
+                    de: "Nicht gut - Ich teile meine persönlichen Daten häufig und ohne größere Bedenken online oder mit anderen Personen, ohne über die Konsequenzen nachzudenken."
+                  "1":
+                    en: "Fairly not good - I am aware that I should protect my personal information, but I am not always consistent about it and share it more often than I should."
+                    de: "Eher nicht gut - Ich bin mir bewusst, dass ich meine persönlichen Daten schützen sollte, aber ich bin nicht immer konsequent dabei und teile sie öfter als ich eigentlich sollte."
+                  "2":
+                    en: "Moderately good - I have basic knowledge of how to protect my personal information and try to take appropriate action, but I think there is room for improvement."
+                    de: "Mittelmäßig gut - Ich habe grundlegende Kenntnisse darüber, wie ich meine persönlichen Daten schützen kann, und versuche, entsprechende Maßnahmen zu ergreifen, aber ich denke, dass es noch Raum für Verbesserungen gibt."
+                  "3":
+                    en: "Good - I have a good understanding of how to protect my personal information and am actively taking protective measures to secure my information."
+                    de: "Gut - Ich habe ein gutes Verständnis davon, wie ich meine persönlichen Daten schützen kann, und bin aktiv dabei, Schutzmaßnahmen zu ergreifen, um meine Daten zu sichern."
+                  "4":
+                    en: "Very Good - I have a comprehensive understanding of how to protect my personal information and have advanced knowledge of technologies and safeguards to keep my information secure."
+                    de: "Sehr gut - Ich habe ein umfassendes Verständnis davon, wie ich meine persönlichen Daten schützen kann, und habe fortgeschrittene Kenntnisse über Technologien und Schutzmaßnahmen, um meine Daten sicher zu halten."
+              "feedback23":
+                episode: "12"
+                question:
+                  en: "In your opinion, is encryption of personal data necessary?"
+                  de: "Sind Verschlüsselungen von personenbezogenen Daten Deiner Meinung nach notwendig?"
+                answers:
+                  "0":
+                    en: "No, not at all - encryption is unnecessary and only makes it more difficult to access and use data."
+                    de: "Nein, überhaupt nicht – Verschlüsselung ist unnötig und erschwert nur den Zugang zu und die Verwendung von Daten."
+                  "1":
+                    en: "No, not at all - Encryption is useful, but there are other security measures that are more important."
+                    de: "Nein, eher nicht – Verschlüsselung ist zwar nützlich, aber es gibt andere Sicherheitsmaßnahmen, die wichtiger sind."
+                  "2":
+                    en: "Undecided - It depends on the specific circumstances and the privacy risk involved."
+                    de: "Unentschieden – Es hängt von den spezifischen Umständen und dem jeweiligen Datenschutzrisiko ab."
+                  "3":
+                    en: "Yes, mostly - Encryption is important in many cases, but there are also situations where it is less relevant."
+                    de: "Ja, meistens – Verschlüsselung ist in vielen Fällen wichtig, aber es gibt auch Situationen, in denen sie weniger relevant ist."
+                  "4":
+                    en: "Yes, definitely - Encryption is critical for privacy and data security."
+                    de: "Ja, auf jeden Fall – Verschlüsselung ist entscheidend für den Schutz der Privatsphäre und Datensicherheit."
+      "16":
+        name:
+          de: Gesundheitsschutz
+          en: Healthprotection
+        subCompetences:
+          "99":
+            name:
+              en: Health and well-being
+              de: Gesundheit und Wohlbefinden
+            testItems:
+              "e10frage1":
+                episode: "10"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know about special risks regarding digital violence"
+                  de: "Ich weiß, was die besonderen Risiken digitaler Gewalt sind."
+                search:
+                  en:
+                    links:
+                      - "https://www.hilfetelefon.de/gewalt-gegen-frauen/digitale-gewalt.html#:~:text=Digitale%20Gewalt%20umfasst%20eine%20Vielzahl,schwerer%20Straftaten%20gegen%C3%BCber%20den%20Betroffenen."
+                  de:
+                    links:
+                      - "https://www.hilfetelefon.de/gewalt-gegen-frauen/digitale-gewalt.html#:~:text=Digitale%20Gewalt%20umfasst%20eine%20Vielzahl,schwerer%20Straftaten%20gegen%C3%BCber%20den%20Betroffenen."
+              "e10frage2":
+                episode: "10"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to deal with cyberbullying."
+                  de: "Ich weiß, wie ich mit Cybermobbing umgehen kann."
+                search:
+                  en:
+                    links:
+                      - "https://www.aktiv-gegen-digitale-gewalt.de/de/digitale-gewalt.html"
+                  de:
+                    links:
+                      - "https://www.aktiv-gegen-digitale-gewalt.de/de/digitale-gewalt.html"
+              "e10frage3":
+                episode: "10"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to protect my smartphone."
+                  de: "Ich weiß, wie ich mein Smartphone schütze."
+                search:
+                  en:
+                    links:
+                      - "https://www.aktiv-gegen-digitale-gewalt.de/de/technik-sicherheit/smartphone-sicherheit.html"
+                  de:
+                    links:
+                      - "https://www.aktiv-gegen-digitale-gewalt.de/de/technik-sicherheit/smartphone-sicherheit.html"
+              "e11frage1":
+                episode: "11"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the benefits of offline time."
+                  de: "Ich kenne die Vorteile von Offline-Zeiten."
+                search:
+                  en:
+                    links:
+                      - "https://gesund.pulsnetz.de/index.php?id=819"
+                  de:
+                    links:
+                      - "https://gesund.pulsnetz.de/index.php?id=819"
+              "e11frage2":
+                episode: "11"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the health risks of digital."
+                  de: "Ich kenne gesundheitliche Risiken der Digitalität."
+                search:
+                  en:
+                    links:
+                      - "https://www.mdr.de/medien360g/medienwissen/digital-detox-tipps-tricks-digitale-selbstkontrolle-100.html"
+                  de:
+                    links:
+                      - "https://www.mdr.de/medien360g/medienwissen/digital-detox-tipps-tricks-digitale-selbstkontrolle-100.html"
+              "e11frage3":
+                episode: "11"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know psychological risks of social media."
+                  de: "Ich kenne psychische Risiken von sozialen Medien."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e11frage4":
+                episode: "11"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I recognize signs of unhealthy media use."
+                  de: "Ich erkenne Anzeichen ungesunder Mediennutzung."
+                search:
+                  en:
+                    links:
+                      - "https://erstehilfe-internetsucht.de/hilfsangebote-finden/"
+                      - "https://www.fv-medienabhaengigkeit.de/hilfe-finden/"
+                  de:
+                    links:
+                      - "https://erstehilfe-internetsucht.de/hilfsangebote-finden/"
+                      - "https://www.fv-medienabhaengigkeit.de/hilfe-finden/"
+              "e11frage5":
+                episode: "11"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know methods to manage my media use in a healthy way."
+                  de: "Ich kenne Methoden zur gesunden Gestaltung meiner Mediennutzung."
+                search:
+                  en:
+                    links:
+                      - "https://www.aok.de/pk/magazin/koerper-psyche/psychologie/der-einfluss-sozialer-medien-auf-die-psyche/#:~:text=Eine%20aktuelle%20Studie%20der%20Universit%C3%A4t,und%20einem%20reduzierten%20Wohlbefinden%20assoziiert."
+                  de:
+                    links:
+                      - "https://www.aok.de/pk/magazin/koerper-psyche/psychologie/der-einfluss-sozialer-medien-auf-die-psyche/#:~:text=Eine%20aktuelle%20Studie%20der%20Universit%C3%A4t,und%20einem%20reduzierten%20Wohlbefinden%20assoziiert."
+            feedbackQuestions:
+              "feedback19":
+                episode: "10"
+                question:
+                  en: "How important do you think it is to know safeguards against digital violence?"
+                  de: "Wie wichtig ist es Deiner Meinung nach, Schutzmaßnahmen gegen digitale Gewalt zu kennen?"
+                answers:
+                  "0":
+                    en: "Not at all important - I don't think digital violence is a big problem and I don't see the need to know or take protective measures."
+                    de: "Gar nicht wichtig - Ich denke, digitale Gewalt ist kein großes Problem und ich sehe keinen Bedarf, Schutzmaßnahmen zu kennen oder zu ergreifen."
+                  "1":
+                    en: "Not at all important - I think digital violence is a problem, but I don't think it's relevant to me personally."
+                    de: "Wenig wichtig - Ich denke, digitale Gewalt ist ein Problem, aber ich denke nicht, dass es für mich persönlich relevant ist."
+                  "2":
+                    en: "Moderately important - I think digital violence is a serious problem, but I'm not sure how relevant it is to me personally."
+                    de: "Mittelmäßig wichtig - Ich denke, digitale Gewalt ist ein ernsthaftes Problem, aber ich bin mir nicht sicher, wie relevant es für mich persönlich ist."
+                  "3":
+                    en: "Rather important - I think digital violence is a serious problem and everyone is affected somewhere. I sometimes make more and sometimes less of an effort to actively take protective measures."
+                    de: "Eher wichtig - Ich denke, digitale Gewalt ist ein ernsthaftes Problem und jeder ist irgendwo betroffen. Ich bemühe mich mal mehr und mal weniger darum, aktiv Schutzmaßnahmen zu ergreifen."
+                  "4":
+                    en: "Important - I think digital violence is a serious problem and I should make an active effort to take protective measures to protect myself and others."
+                    de: "Wichtig - Ich denke, digitale Gewalt ist ein ernsthaftes Problem und ich sollte mich aktiv darum bemühen, Schutzmaßnahmen zu ergreifen, um mich selbst und andere zu schützen."
+              "feedback21":
+                episode: "11"
+                question:
+                  en: "What about you: Does digitalization stress you out in your work environment?"
+                  de: "Wie ist das bei Dir: Stresst die Digitalisierung Dich in Deinem Arbeitsumfeld?"
+                answers:
+                  "0":
+                    en: "Yes, very much: The constant accessibility, high work pressure and information overload put a lot of strain on me."
+                    de: "Ja, sehr: Die ständige Erreichbarkeit, der hohe Arbeitsdruck und die Informationsflut belasten mich stark."
+                  "1":
+                    en: "Yes: I often feel overwhelmed by the technological demands and the rapid changes in the work environment."
+                    de: "Ja: Ich fühle mich oft überfordert mit den technologischen Anforderungen und der schnellen Veränderung im Arbeitsumfeld."
+                  "2":
+                    en: "Partly: Although I try my best to keep up with technological changes, there are moments when stress gets the better of me."
+                    de: "Teilweise: Obwohl ich mich bemühe, mit den technologischen Veränderungen Schritt zu halten, gibt es Momente, in denen der Stress überhandnimmt."
+                  "3":
+                    en: "No: I feel well equipped to deal with the digital demands and, in terms of my stress level, see them more as an opportunity than a burden."
+                    de: "Nein: Ich fühle mich gut gerüstet, um mit den digitalen Anforderungen umzugehen und sehe sie mit Blick auf mein Stresslevel eher als Chance als Belastung."
+              "feedback22":
+                episode: "11"
+                question:
+                  en: "In your view, are there enough measures in your work environment to help you prevent the health risks associated with digitization?"
+                  de: "Gibt es in Deinem Arbeitsumfeld aus Deiner Sicht genügend Maßnahmen, die Dir helfen, den mit der Digitalisierung verbundenen Gesundheitsrisiken vorzubeugen?"
+                answers:
+                  "0":
+                    en: "No, there are hardly any or no measures for prevention. There is an urgent need for measures to promote health in connection with digitization."
+                    de: "Nein, es gibt kaum oder keine Maßnahmen zur Prävention. Es besteht dringender Bedarf an Maßnahmen zur Förderung der Gesundheit im Zusammenhang mit der Digitalisierung."
+                  "1":
+                    en: "Partly, there are measures for prevention, but need for more support services."
+                    de: "Teilweise, es gibt Maßnahmen zur Prävention, aber Bedarf für mehr Unterstützungsangebote."
+                  "2":
+                    en: "Yes, there are sufficient measures to strengthen the healthy handling of digitization."
+                    de: "Ja, es gibt ausreichend Maßnahmen, die den gesunden Umgang mit der Digitalisierung stärken."
+  "5":
+    name:
+      de: Problemlösung
+      en: Problem solving
+    competences:
+      "18":
+        name:
+          en: Solving technical problems
+          de: Technische Probleme lösen
+        subCompetences:
+          "101":
+            name:
+              en: IT basics
+              de: IT-Grundlagen
+            testItems:
+              "e5frage2":
+                episode: "5"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can identify and solve simple technical problems."
+                  de: "Ich kann einfache technische Probleme identifizieren und lösen."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e5frage3":
+                episode: "5"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know how to find solutions to problems with digital technologies on the internet."
+                  de: "Ich weiß, wie ich im Internet Lösungen für Probleme mit digitalen Technologien finden kann."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions:
+              "feedback12":
+                episode: "6"
+                question:
+                  en: "How good do you think you are at solving problems with digital devices yourself?"
+                  de: "Wie gut schaffst du es deiner Meinung nach, die auftretenden Probleme mit digitalen Geräten selber zu lösen?"
+                answers:
+                  "0":
+                    en: "Bad."
+                    de: "Schlecht."
+                  "1":
+                    en: "Rather bad."
+                    de: "Eher schlecht."
+                  "2":
+                    en: "Average."
+                    de: "Durchschnittlich."
+                  "3":
+                    en: "Good."
+                    de: "Gut."
+                  "4":
+                    en: "Very good."
+                    de: "Sehr gut."
+          "102":
+            name:
+              en: Communication technologies
+              de: Kommunikationstechnologien
+            testItems:
+              "e8frage3":
+                episode: "8"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know what factors to look for when selecting communication tools for organizations."
+                  de: "Ich weiß, auf welche Faktoren ich bei der Auswahl von Kommunikationstools für Organisationen achten sollte."
+                search:
+                  en:
+                    links:
+                      - "https://stiftungdatenschutz.org/ehrenamt/praxisratgeber/praxisratgeber-detailseite/vereinsinterne-kommunikation-264"
+                  de:
+                    links:
+                      - "https://stiftungdatenschutz.org/ehrenamt/praxisratgeber/praxisratgeber-detailseite/vereinsinterne-kommunikation-264"
+              "e8frage4":
+                episode: "8"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know common collaboration tools and can make a distinction for personal and professional use."
+                  de: "Ich kenne gängige Kollaborations-Tools und kann eine UnterscheiDung für den privaten und professionellen Gebrauch treffen."
+                search:
+                  en:
+                    links:
+                      - "https://www.youtube.com/watch?v=cnQdOuZV8e4"
+                  de:
+                    links:
+                      - "https://www.youtube.com/watch?v=cnQdOuZV8e4"
+            feedbackQuestions: {}
+          "103":
+            name:
+              en: Data center technologies
+              de: Technologien für Datenzentren
+            testItems:
+              "e7frage4":
+                episode: "7"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I can distinguish cloud services from desktop applications."
+                  de: "Ich kann Cloud Services von Desktop-Anwendungen unterscheiden."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions: {}
+      "19":
+        name:
+          en: Identifying needs and technological responses
+          de: Identifizierung von Bedarfen und technischen Lösungen
+        subCompetences:
+          "104":
+            name:
+              en: Digitization
+              de: Digitalisierung
+            testItems:
+              "e5frage5":
+                episode: "5"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the most popular translation app."
+                  de: "Ich kenne die bekannteste Übersetzungsapp."
+                search:
+                  en:
+                    links:
+                      - "https://translate.google.com/?hl=de"
+                      - "https://www.deepl.com/translator"
+                  de:
+                    links:
+                      - "https://translate.google.com/?hl=de"
+                      - "https://www.deepl.com/translator"
+              "e6frage4":
+                episode: "6"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know many current digital solutions."
+                  de: "Ich kenne viele aktuelle digitale Lösungen."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions:
+              "feedback10":
+                episode: "5"
+                question:
+                  en: "How important is it to also offer clients digital services?"
+                  de: "Wie wichtig ist es aus deiner Sicht, Klient*innen auch digitale Angebote, zum Beispiel im Bereich Beratung, zu machen?"
+                answers:
+                  "0":
+                    en: "The AWO should focus on presence offerings."
+                    de: "Die AWO sollte sich auf Präsenz-Angebote fokussieren. Digitale Angebote werden nach Corona wieder an Relevanz verlieren."
+                  "1":
+                    en: "Digital offerings can complement existing face-to-face offerings well, but should not replace them."
+                    de: "Digitale Angebote können bestehende Präsenzangebote gut ergänzen, sollten diese aber nicht ersetzen."
+                  "2":
+                    en: "Digital services are crucial because more and more people are seeking support predominantly online."
+                    de: "Digitale Angebote sind von entscheidender Bedeutung, weil immer mehr Menschen überwiegend online Unterstützung suchen."
+              "feedback11":
+                episode: "6"
+                question:
+                  en: "How often do you use digital solutions like those mentioned in the questions in your everyday life?"
+                  de: "Wie oft nutzt du digitale Lösungen, wie sie in den Fragen erwähnt wurden, in deinem Alltag?"
+                answers:
+                  "0":
+                    en: "Never."
+                    de: "Nie."
+                  "1":
+                    en: "Less than once a month."
+                    de: "Weniger als ein Mal im Monat."
+                  "2":
+                    en: "Once a month at most."
+                    de: "Maximal einmal im Monat."
+                  "3":
+                    en: "Several times a week."
+                    de: "Mehrmals die Woche."
+                  "4":
+                    en: "Daily."
+                    de: "Täglich."
+          "105":
+            name:
+              en: Operational efficiency
+              de: Betriebliche Effizienz
+            testItems:
+              "e8frage1":
+                episode: "8"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I have an understanding of technology for operational efficiency."
+                  de: "Ich habe ein Verständnis von Technologie für die betriebliche Effizienz."
+                search:
+                  en:
+                    links:
+                      - "https://www.youtube.com/watch?v=GSbqLAH2_2A"
+                  de:
+                    links:
+                      - "https://www.youtube.com/watch?v=GSbqLAH2_2A"
+              "e8frage2":
+                episode: "8"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I have an idea of what automation can do."
+                  de: "Ich habe eine Idee, was Automatisierung leisten kann."
+                search:
+                  en:
+                    links:
+                      - "https://www.youtube.com/playlist?list=PLpihLgCmB8PTnko9e-GG83HE7sjdw5sxY"
+                  de:
+                    links:
+                      - "https://www.youtube.com/playlist?list=PLpihLgCmB8PTnko9e-GG83HE7sjdw5sxY"
+              "e20frage1":
+                episode: "20"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know different survey tools."
+                  de: "Ich kenne unterschiedliche Umfragetools."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions:
+              "feedback16":
+                episode: "8"
+                question:
+                  en: "What potential do you see in automation tools for your everyday work?"
+                  de: "Welches Potential siehst Du in Automatisierungs-Tools für Deinen Arbeitsalltag?"
+                answers:
+                  "0":
+                    en: "I don't trust automation and prefer to do important tasks myself, even if it takes time."
+                    de: "Ich vertraue der Automatisierung nicht und erledige gerade wichtige Aufgaben lieber selbst, auch wenn das Zeit kostet."
+                  "1":
+                    en: "In my work, there are no or very few tasks that could be automated."
+                    de: "In meiner Arbeit gibt es keine oder nur sehr wenige Aufgaben, die automatisiert werden könnten."
+                  "2":
+                    en: "There are recurring tasks in my work. Automating them would allow me to spend my time on more important things."
+                    de: "In meiner Arbeit gibt es wiederkehrende Aufgaben. Deren Automatisierung würde es mir erlauben, meine Zeit für wichtiger Dinge einzusetzen."
+          "106":
+            name:
+              en: Digital controlling
+              de: Digitale Steuerung
+            testItems:
+              "e8frage5":
+                episode: "8"
+                level: "INTERMEDIATE"
+                documentation:
+                  en: "I know methods for digital project planning & controlling."
+                  de: "Ich kenne Methoden zur digitalen Projektplanung & -steuerung."
+                search:
+                  en:
+                    links:
+                      - "https://www.ideequadrat.org/agiles-management-als-grundlage-fuer-buergerschaftliches-engagement/"
+                  de:
+                    links:
+                      - "https://www.ideequadrat.org/agiles-management-als-grundlage-fuer-buergerschaftliches-engagement/"
+            feedbackQuestions:
+              "feedback15":
+                episode: "8"
+                question:
+                  en: "What is your opinion on „agile methods“?"
+                  de: "Wie stehst Du zu „Agilen Methoden“?"
+                answers:
+                  "0":
+                    en: "Agile methods are a fad that will not catch on."
+                    de: "Agile Methoden sind eine Modeerscheinung, die sich nicht durchsetzen wird."
+                  "1":
+                    en: "I have already tried agile methods and do not find that they bring benefits."
+                    de: "Ich habe bereits agile Methoden ausprobiert und finde nicht, dass sie Vorteile bringen."
+                  "2":
+                    en: "I am unsure what it is and if it could bring anything."
+                    de: "Ich bin mir unsicher, was das ist und ob das was bringen könnte."
+                  "3":
+                    en: "I am curious and would like to try agile methods."
+                    de: "Ich bin neugierig und würde gerne agile Methoden ausprobieren."
+                  "4":
+                    en: "I have already tried agile methods and find they enrich the work."
+                    de: "Ich habe bereits agile Methoden ausprobiert und finde, sie bereichern die Arbeit."
+      "20":
+        name:
+          en: Creatively using digital technologies
+          de: Kreative Nutzung digitaler Möglichkeiten
+        subCompetences:
+          "109":
+            name:
+              en: Data science and artificial intelligence
+              de: Data Science und künstliche Intelligenz
+            testItems:
+              "e5frage4":
+                episode: "5"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I use digital data collection tools to solve a current problem."
+                  de: "Ich nutze digitale Datenerfassungstools, um ein aktuelles Problem zu lösen."
+                search:
+                  en:
+                    links:
+                      - "https://drk-wohlfahrt.de/unsere-themen/soziale-innovation-digitalisierung/werkzeuge/#c27601"
+                  de:
+                    links:
+                      - "https://drk-wohlfahrt.de/unsere-themen/soziale-innovation-digitalisierung/werkzeuge/#c27601"
+              "e6frage5":
+                episode: "6"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I am aware of ChatGPT's capabilities."
+                  de: "Ich weiß, was ChatGPT kann."
+                search:
+                  en:
+                    links:
+                      - "https://chat.openai.com/auth/login"
+                  de:
+                    links:
+                      - "https://chat.openai.com/auth/login"
+            feedbackQuestions:
+              "feedback9":
+                episode: "5"
+                question:
+                  en: "What do you think about the use of AI in the workplace?"
+                  de: "Was denkst du über die Verwendung von Künstlicher Intelligenz (KI) in der Arbeitswelt?"
+                answers:
+                  "0":
+                    en: "AI is a dangerous technology that can destroy jobs and lead to technology dependency."
+                    de: "KI ist eine gefährliche Technologie, die Arbeitsplätze vernichten und zu einer Abhängigkeit von Technologie führen kann."
+                  "1":
+                    en: "I'm not sure if AI is a good or bad thing."
+                    de: "Ich bin mir nicht sicher, ob KI eine gute oder schlechte Sache ist."
+                  "2":
+                    en: "AI is a very useful technology that can help optimise processes."
+                    de: "KI ist eine sehr nützliche Technologie, die dabei helfen kann, Prozesse zu optimieren."
+          "110":
+            name:
+              en: Blockchain
+              de: Blockchain
+            testItems:
+              "e6frage3":
+                episode: "6"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the purpose of Blockchains."
+                  de: "Ich weiss, wofür Blockchain verwendet wird."
+                search:
+                  en:
+                    links:
+                      - "https://www.youtube.com/watch?v=ptD-JjcWNt4"
+                  de:
+                    links:
+                      - "https://www.youtube.com/watch?v=ptD-JjcWNt4"
+            feedbackQuestions: {}
+          "111":
+            name:
+              en: Internet of Things
+              de: Internet der Dinge
+            testItems:
+              "e6frage1":
+                episode: "6"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the concept of the Internet of Things."
+                  de: "Ich kenne das Konzept des Internets der Dinge."
+                search:
+                  en:
+                    links:
+                      - "https://www.bpb.de/themen/medien-journalismus/medienpolitik/236524/smarte-schoene-neue-welt-das-internet-der-dinge/"
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Internet-der-Dinge-Smart-leben/internet-der-dinge-smart-leben_node.html"
+                  de:
+                    links:
+                      - "https://www.bpb.de/themen/medien-journalismus/medienpolitik/236524/smarte-schoene-neue-welt-das-internet-der-dinge/"
+                      - "https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Internet-der-Dinge-Smart-leben/internet-der-dinge-smart-leben_node.html"
+              "e6frage2":
+                episode: "6"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know details about the Internet of Things."
+                  de: "Ich kenne Details zum Internet der Dinge."
+                search:
+                  en:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Kampagne-einfach-absichern/Smart-Home/smart-home_node.html"
+                  de:
+                    links:
+                      - "https://www.bsi.bund.de/DE/Themen/Kampagne-einfach-absichern/Smart-Home/smart-home_node.html"
+            feedbackQuestions: {}
+      "21":
+        name:
+          en: Identifying digital competence gaps
+          de: Kompetenzlücken identifizieren
+        subCompetences:
+          "113":
+            name:
+              en: Innovation management
+              de: Innovationsmanagement
+            testItems:
+              "e5frage1":
+                episode: "5"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know important causes of difficulties in the use of digital technologies."
+                  de: "Ich kenne wichtige Ursachen für Schwierigkeiten bei der Nutzung digitaler Technologien."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions: {}
+          "112":
+            name:
+              en: Learning management systems and eLearning
+              de: Lernmanagementsysteme und eLearning
+            testItems:
+              "e7frage1":
+                episode: "7"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know the concept of eLearning platforms."
+                  de: "Ich kenne das Konzept der E-Learning Plattformen."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e7frage2":
+                episode: "7"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know relevant functions of learning management systems (LMS)."
+                  de: "Ich kenne relevante Funktionen von Lernmanagement-Systemen (LMS)."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e7frage3":
+                episode: "7"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I understand the purpose of multimedia content on e-learning platforms."
+                  de: "Der Sinn von Multimedia-Inhalten auf E-Learning Plattformen ist mir bekannt."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+              "e7frage5":
+                episode: "7"
+                level: "FOUNDATION"
+                documentation:
+                  en: "I know benefits of e-learning platforms for employees and for the organisation."
+                  de: "Ich kenne Vorteile von E-Learning Plattformen für Mitarbeitende und für die Organisation."
+                search:
+                  en:
+                    links: []
+                  de:
+                    links: []
+            feedbackQuestions:
+              "feedback13":
+                episode: "7"
+                question:
+                  en: "What is your opinion on e-learning?"
+                  de: "Was ist deine Meinung zu E-Learning?"
+                answers:
+                  "0":
+                    en: "I prefer face-to-face courses and find e-learning less effective."
+                    de: "Ich bevorzuge Präsenzkurse und finde E-Learning weniger effektiv."
+                  "1":
+                    en: "I am unsure if e-learning is appropriate for all learners."
+                    de: "Ich bin mir unsicher, ob E-Learning für alle Lernenden geeignet ist."
+                  "2":
+                    en: "I find the combination of e-learning and classroom options ideal."
+                    de: "Ich finde die Kombination aus E-Learning und Präsenzoptionen ideal."
+                  "3":
+                    en: "I prefer e-learning offerings where possible"
+                    de: "Ich bevorzuge wo möglich E-Learning-Angebote."
+              "feedback14":
+                episode: "7"
+                question:
+                  en: "How do you feel about the use of gamification (game-like elements like quizzes) in e-learning platforms?"
+                  de: "Wie denkst du über die Verwendung von Gamification (spielerischen Elementen wie Quizzes) in E-Learning-Plattformen?"
+                answers:
+                  "0":
+                    en: "I find playful elements unnecessary. They distract from the actual learning content."
+                    de: "Ich finde spielerische Elemente überflüssig. Sie lenken von den eigentlichen Lerninhalten ab."
+                  "1":
+                    en: "I think gamification is only suitable for certain types of learning content and not for everyone."
+                    de: "Ich denke, Gamification ist nur für bestimmte Arten von Lerninhalten geeignet und nicht für jede*n was."
+                  "2":
+                    en: "I am unsure if gamification in e-learning platforms really has an impact on learning motivation and performance."
+                    de: "Ich bin mir unsicher, ob Gamification in E-Learning-Plattformen wirklich einen Einfluss auf die Lernmotivation und -leistung hat."
+                  "3":
+                    en: "I think, in moderation, playful elements can loosen up and motivate learning."
+                    de: "Ich denke, in Maßen können spielerische Elemente das Lernen auflockern und motivieren."
+                  "4":
+                    en: "I think playful elements are an absolute must. They make learning content more interesting and motivating."
+                    de: "Ich finde, spielerische Elemente gehören unbedingt dazu. Sie machen Lerninhalte interessanter und motivierender."
+episodes:
+  "1":
+    title:
+      de: Chaotische Rückreise
+    description:
+      de: "Nach seinem Bewerbungsgespräch macht sich Stefan wieder auf die Rückreise. Am Flughafen muss er sich einigen Herausfoderungen stellen und dann ruft auch noch sein zukünftiger Vorgesetzter an. Kannst du ihm helfen?"
+    maturity: "PUBLIC"
+    imageUrl: "airport.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e01.yaml
+  "2":
+    title:
+      de: Runder Geburtstag
+    description:
+      de: "Du planst eine kleine Online-Geburtstagsfeier für Stefan. Wie steht es um dein Organisationstalent?"
+    maturity: "PUBLIC"
+    imageUrl: "runder_geburtstag.jpeg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e02.yaml
+  "3":
+    title:
+      de: Social-Media für die Kita
+    description:
+      de: "Als Kita und Familienzentrum habt ihr entschieden, einen Social-Media-Account zu erstellen, um für die Menschen im Stadtteil präsenter zu werden. Du bist die projektverantwortliche Person und sollst die Einführung des Accounts vorantreiben."
+    maturity: "PUBLIC"
+    imageUrl: "socialmedia.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e03.yaml
+  "4":
+    title:
+      de: Social-Media für mein Netzwerk
+    description:
+      de: "Social-Media spielt nicht nur dann eine Rolle, wenn wir unsere Angebote für Klient*innen sichtbar machen wollen, wie in der letzten Episode. Sie helfen auch dabei, Kontakte zu Fachkolleg*innen zu pflegen und ein berufliches Netzwerk aufzubauen. Das willst du nutzen und ein eigenes, professionelles Profil erstellen."
+    maturity: "PUBLIC"
+    imageUrl: "socialmedia.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e04.yaml
+  "5":
+    title:
+      de: Digitale Werkzeuge nutzen
+    description:
+      de: "Die Digitalisierung ist auf dem Vormarsch. Dies geht auch mit Herausforderungen einher und einige im Team sind frustriert. Ihr wollt herausfinden, wie ihr die Herausforderungen konstruktiv angehen könnt und nehmt euch dafür im Teammeeting regelmäßig etwas Zeit."
+    maturity: "PUBLIC"
+    imageUrl: "solvingdigital.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e05.yaml
+  "6":
+    title:
+      de: Zu Besuch in Stefans Smart Home
+    description:
+      de: "Du bist nach langer Zeit mal wieder zu Besuch bei deinem Freund Stefan. Als Fan von Smart-Home Technologien hat er seit dem letzten Mal aufgerüstet und zeigt dir stolz, was sein zu Hause alles kann."
+    maturity: "PUBLIC"
+    imageUrl: "smarthome.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e06.yaml
+  "7":
+    title:
+      de: E-Learning in der Beratungsstelle
+    description:
+      de: "Interne Fortbildungen werden immer häufiger digital zur Verfügung gestellt. Ihr tauscht euch mit Kolleg*innen über das Thema E-Learning-Plattformen aus."
+    maturity: "PUBLIC"
+    imageUrl: "elearningneu.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e07.yaml
+  "8":
+    title:
+      de: Digitalisierung in Eurem Verein
+    description:
+      de: "In Deiner Nachbarschaft tut sich gerade viel. Ein Nachbarschaftsverein ist seit ein paar Monaten aktiv. Bei einem Straßenfest erzählt Dir einer der Organisierenden, dass vor allem die Verwaltung des Vereins eine große Herausforderung ist. Du möchtest den Verein daraufhin unterstützen."
+    maturity: "PUBLIC"
+    imageUrl: "Zusammenarbeit2.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e08.yaml
+  "9":
+    title:
+      de: Den Laptop sicher einrichten
+    description:
+      de: "Dein Freund Stefan hat sich einen neuen Laptop gekauft. Er möchte ihn einrichten, hat jedoch keinen blassen Schimmer, was hierbei alles zu beachten ist und fragt Dich deshalb um Hilfe."
+    maturity: "PUBLIC"
+    imageUrl: "laptop.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e09.yaml
+  "10":
+    title:
+      de: Digitale Selbstverteidigung
+    description:
+      de: "In Diskussionen auf Social Media hast Du einige unschöne Situationen mitbekommen, in denen Personen massiv beleidigt wurden. Daraufhin bist Du sprachlos, fühlst Dich hilflos und auch etwas wütend. Weil Du diese Emotionen einfach nicht loslassen kannst, entscheidest Du Dich, Dich  zum Thema „digitale Gewalt“ schlau zu machen und besuchst einen Workshop mit dem Titel „Digitale Selbstverteidigung“."
+    maturity: "PUBLIC"
+    imageUrl: "Selbstverteidigung.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e10.yaml
+  "11":
+    title:
+      de: Auf ins Grüne - Digital Detox
+    description:
+      de: "Stefan ist zu Besuch: Ihr wollt raus ins Grüne, denn er fühlt sich in letzter Zeit oft gestresst. Er arbeitet viel am Bildschirm und auch im Privaten ist das Handy immer präsent."
+    maturity: "PUBLIC"
+    imageUrl: "Gruen.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e11.yaml
+  "12":
+    title:
+      de: Schutz personenbezogener Daten
+    description:
+      de: "Stefan erzählt Dir, dass er gestern Abend eine Sendung zum Thema „Schutz personenbezogener Daten“ angeschaut hat. Du bist neugierig, was dort berichtet wurde und Ihr kommt zum Thema ins Gespräch."
+    maturity: "PUBLIC"
+    imageUrl: "sendung.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e12.yaml
+  "13":
+    title:
+      de: Fake News
+    description:
+      de: "Dein Freund Stefan war gestern zu Besuch. Er hat Dir von einer bizarren Nachricht erzählt, die er im Internet gelesen hat. Du kannst die Nachricht kaum glauben und beschließt zu checken, ob es stimmt, was Stefan da erzählt hat."
+    maturity: "PUBLIC"
+    imageUrl: "fakenews.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e13.yaml
+  "14":
+    title:
+      de: Auf Wohnungssuche
+    description:
+      de: "Einige Deiner Klient*innen in der Jugendhilfe sind bereit, auf die Suche nach einer eigenen Wohnung zu gehen, benötigen hierzu aber Deine Unterstützung. Du beschließt, Dich im Vorfeld etwas schlau zu machen."
+    maturity: "PUBLIC"
+    imageUrl: "wohnungssuche.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e14.yaml
+  "15":
+    title:
+      de: Online-Recherche meistern
+    description:
+      de: "„Teilhabe“ ist bei der AWO ein zentraler Begriff. In letzter Zeit hast Du oft von „Digitale Teilhabe“ gehört. Du willst wissen, was genau das bedeutet."
+    maturity: "PUBLIC"
+    imageUrl: "online-recherche.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e15.yaml
+  "16":
+    title:
+      de: Spuren im Netz
+    description:
+      de: "Stefan erzählt Dir von einem Beitrag zum Thema “Digitaler Fußabdruck”, den er vor ein paar Tagen gelesen hat. Der „Digitale Fußabdruck“ bezieht sich auf die Spuren, die eine Person im Internet hinterlässt. Du bist neugierig und entscheidest Dich, Dich mit Deinem eigenen Fußabdruck zu beschäftigen."
+    maturity: "PUBLIC"
+    imageUrl: "Spuren.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e16.yaml
+  "17":
+    title:
+      de: Das Fachtagsprogramm
+    description:
+      de: "Dein Team organisiert einen Fachtag. Das Programm steht. Du bist dafür zuständig, die Einladung zu verschicken."
+    maturity: "PUBLIC"
+    imageUrl: "einladung.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e17.yaml
+  "18":
+    title:
+      de: Deine Fachtagspräsentation
+    description:
+      de: "Nachdem die Einladung für den Fachtag raus ist, besprecht Ihr im Team, wer welchen Teil inhaltlich vorbereitet. Du sollst eine Präsentation zu Eurem letzten Projekt vorbereiten."
+    maturity: "PUBLIC"
+    imageUrl: "praesi.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e18.yaml
+  "19":
+    title:
+      de: Live-Berichten vom Fachtag
+    description:
+      de: "Der Fachtag ist bereits in vollem Gange. Du hast die Aufgabe, ein paar Impressionen über Instagram zu teilen und bist mit deinem Diensthandy auf dem Fachtag unterwegs."
+    maturity: "PUBLIC"
+    imageUrl: "live.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e19.yaml
+  "20":
+    title:
+      de: Evaluation des Fachtags
+    description:
+      de: "Der Fachtag ist vorbei. Nun interessiert Euch, wie die Teilnehmenden den Fachtag empfunden haben. Du meldest Dich freiwillig, um eine Umfrage zu erstellen."
+    maturity: "PUBLIC"
+    imageUrl: "umfrage.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e20.yaml
+  "21":
+    title:
+      de: Angriff auf die AWO
+    description:
+      de: "Bei der AWO kommt es in letzter Zeit häufiger zu sogenannten Phishing-Angriffen. Phishing ist eine Methode von Internetbetrügenden, die versuchen an persönliche Informationen wie Passwörter, Kreditkartendaten oder andere sensible Daten von Nutzenden oder Organisationen zu gelangen. Das Hauptziel von Phishing ist in der Regel Identitätsdiebstahl oder finanzieller Betrug. Da sich die Phishing-Angriffe häufen, möchtest du dich intensiver zu diesem Thema informieren."
+    maturity: "PUBLIC"
+    imageUrl: "angriff.jpg"
+    format: awo-digitalcheck
+    formatConfiguration: s01_e21.yaml

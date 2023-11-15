@@ -16,7 +16,9 @@
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
+    "yaml": "^2.3.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
