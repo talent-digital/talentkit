@@ -1,5 +1,19 @@
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
+import { CssBaseline, ThemeProvider } from "@mui/material";
+
+import theme from "./theme";
+
 function App() {
-  return <div>Hello Editor</div>;
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>Hello Editor</div>
+    </ThemeProvider>
+  );
 }
 
 export default App;
