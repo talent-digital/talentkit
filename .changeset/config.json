@@ -9,6 +9,7 @@
   "updateInternalDependencies": "patch",
   "ignore": [
     "@talentdigital/canary",
-    "@talentdigital/canary-snippet-integration"
+    "@talentdigital/canary-snippet-integration",
+    "@talentdigital/season-editor"
   ]
 }
