@@ -1,8 +1,10 @@
 import { Box, styled } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { parse } from "yaml";
+import { parse, stringify } from "yaml";
 import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { useForm } from "react-hook-form";
+import IconButton from "@mui/material/IconButton";
 
 type Node =
   | {
@@ -24,31 +26,51 @@ export const AppContainer = () => {
     if (!event.target.files || !event.target.files[0]) {
       return;
     }
+
     const file = event.target.files[0];
-
     const readFile = await file.text();
-
-    const parsedYaml = parse(readFile);
-
-    setNodeList(parsedYaml);
-    setListKey(getRandomString());
-    reset();
-    console.log("parsedYaml", parsedYaml);
+    changeNodeList(parse(readFile));
   };
 
-  const onSubmit = (data: Record<string, string>) => {
+  const onSubmit = (data: Record<string, string>, exportFile = false) => {
     const newNodeList = Object.entries(data).reduce(
       (accumulator, [key, value]) => {
         const [needle, type] = key.split("-");
 
-        return findAndReplaceInTree(accumulator, needle, type, value);
+        return changeTreeNode(accumulator, needle, type, value);
       },
       nodeList
     );
 
+    changeNodeList(newNodeList);
+
+    if (exportFile) {
+      saveFile(newNodeList);
+    }
+  };
+
+  const changeNodeList = (newNodeList: Node) => {
     setNodeList(newNodeList);
     setListKey(getRandomString());
     reset();
+  };
+
+  const saveFile = (newNodeList: Node) => {
+    const element = document.createElement("a");
+    const file = new Blob([stringify(newNodeList)], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = "season.yaml";
+    element.click();
+  };
+
+  const handleAddNode = (position: string) => {
+    const newNodeList = addTreeNode(nodeList, position);
+    changeNodeList(newNodeList);
+  };
+
+  const handleRemoveNode = (position: string) => () => {
+    const newNodeList = removeTreeNode(nodeList, position);
+    changeNodeList(newNodeList);
   };
 
   const renderNodeList = (nodes: Node, treePosition: string = "") => {
@@ -65,6 +87,14 @@ export const AppContainer = () => {
           }}
         >
           {renderNode(key, value, newTreePosition)}
+          {Object.entries(nodes).length === index + 1 && (
+            <IconButton
+              color="success"
+              onClick={() => handleAddNode(newTreePosition)}
+            >
+              <AddIcon />
+            </IconButton>
+          )}
         </div>
       );
     });
@@ -85,6 +115,13 @@ export const AppContainer = () => {
             defaultValue={value}
             {...register(`${treePosition}-value`)}
           />
+          <IconButton
+            color="error"
+            sx={{ marginTop: -8, marginBottom: -8 }}
+            onClick={handleRemoveNode(treePosition)}
+          >
+            <RemoveIcon />
+          </IconButton>
         </div>
       );
     }
@@ -92,10 +129,7 @@ export const AppContainer = () => {
     return (
       <div>
         <span>{key}:</span>
-        <Box>
-          {renderNodeList(value, treePosition)}
-          <AddIcon color="success" sx={{ marginLeft: 2 }} />
-        </Box>
+        <Box>{renderNodeList(value, treePosition)}</Box>
       </div>
     );
   };
@@ -105,7 +139,12 @@ export const AppContainer = () => {
       <StyledNavigation>
         <input type="file" accept=".yml,.yaml" onChange={handleFileChange} />
         <button onClick={() => console.log(nodeList)}>Log nodeList</button>
-        <button onClick={handleSubmit(onSubmit)}>Submit</button>
+        <button onClick={handleSubmit((data) => onSubmit(data))}>
+          Save changes
+        </button>
+        <button onClick={handleSubmit((data) => onSubmit(data, true))}>
+          Save and Export season.yaml
+        </button>
       </StyledNavigation>
       <Box sx={{ padding: 2 }} key={listKey}>
         <b>KEY: {listKey}</b>
@@ -115,7 +154,33 @@ export const AppContainer = () => {
   );
 };
 
-const findAndReplaceInTree = (
+const addTreeNode = (nodes: Node, needle: string, treePosition = ""): Node => {
+  return Object.entries(nodes).reduce((accumulator, [key, value], index) => {
+    const nextTreePosition = treePosition + index;
+
+    if (nextTreePosition === needle && typeof nodes !== "string") {
+      return {
+        ...accumulator,
+        [key]: value,
+        [""]: "",
+      };
+    }
+
+    if (typeof value !== "string") {
+      return {
+        ...accumulator,
+        [key]: addTreeNode(value, needle, nextTreePosition),
+      };
+    }
+
+    return {
+      ...accumulator,
+      [key]: value,
+    };
+  }, {});
+};
+
+const changeTreeNode = (
   nodes: Node,
   needle: string,
   type: "key" | "value" | string,
@@ -123,9 +188,9 @@ const findAndReplaceInTree = (
   treePosition = ""
 ): Node => {
   return Object.entries(nodes).reduce((accumulator, [key, value], index) => {
-    const newTreePosition = treePosition + index;
+    const nextTreePosition = treePosition + index;
 
-    if (newTreePosition === needle && typeof nodes !== "string") {
+    if (nextTreePosition === needle && typeof nodes !== "string") {
       if (type === "key") {
         return {
           ...accumulator,
@@ -142,13 +207,35 @@ const findAndReplaceInTree = (
     if (typeof value !== "string") {
       return {
         ...accumulator,
-        [key]: findAndReplaceInTree(
-          value,
-          needle,
-          type,
-          newValue,
-          newTreePosition
-        ),
+        [key]: changeTreeNode(value, needle, type, newValue, nextTreePosition),
+      };
+    }
+
+    return {
+      ...accumulator,
+      [key]: value,
+    };
+  }, {});
+};
+
+const removeTreeNode = (
+  nodes: Node,
+  needle: string,
+  treePosition = ""
+): Node => {
+  return Object.entries(nodes).reduce((accumulator, [key, value], index) => {
+    const nextTreePosition = treePosition + index;
+
+    if (nextTreePosition === needle && typeof nodes !== "string") {
+      return {
+        ...accumulator,
+      };
+    }
+
+    if (typeof value !== "string") {
+      return {
+        ...accumulator,
+        [key]: removeTreeNode(value, needle, nextTreePosition),
       };
     }
 
