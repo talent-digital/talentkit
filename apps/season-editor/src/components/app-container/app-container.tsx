@@ -3,9 +3,15 @@ import { ChangeEvent, useState } from "react";
 import { parse, stringify } from "yaml";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useForm } from "react-hook-form";
 import IconButton from "@mui/material/IconButton";
 
+/*
+  TODO:
+  - Some bug with episodes showing incorrectly
+*/
 type Node =
   | {
       [key: string]: string | Node;
@@ -18,6 +24,7 @@ const exampleYamlObjNode: Node = {
 };
 
 export const AppContainer = () => {
+  const [nodesHidden, setNodesHidden] = useState<string[]>([]);
   const [nodeList, setNodeList] = useState<Node>(exampleYamlObjNode);
   const [listKey, setListKey] = useState(getRandomString());
   const { register, handleSubmit, reset } = useForm();
@@ -73,6 +80,14 @@ export const AppContainer = () => {
     changeNodeList(newNodeList);
   };
 
+  const handleToggleNodeVisibility = (position: string) => () => {
+    if (nodesHidden.includes(position)) {
+      setNodesHidden((positions) => positions.filter((p) => p !== position));
+    } else {
+      setNodesHidden((positions) => [...positions, position]);
+    }
+  };
+
   const renderNodeList = (nodes: Node, treePosition: string = "") => {
     return Object.entries(nodes).map(([key, value], index) => {
       const newTreePosition = treePosition + index;
@@ -101,16 +116,20 @@ export const AppContainer = () => {
   };
 
   const renderNode = (key: string, value: Node, treePosition: string) => {
+    const nodeHidden = nodesHidden.includes(treePosition);
+
     if (typeof value === "string") {
       return (
         <div>
           <input
+            title={`${treePosition}-key`}
             type="text"
             defaultValue={key}
             {...register(`${treePosition}-key`)}
           />
           <span>: </span>
           <input
+            title={`${treePosition}-value`}
             type="text"
             defaultValue={value}
             {...register(`${treePosition}-value`)}
@@ -141,8 +160,14 @@ export const AppContainer = () => {
           >
             <RemoveIcon />
           </IconButton>
+          <IconButton
+            sx={{ marginTop: -8, marginBottom: -8 }}
+            onClick={handleToggleNodeVisibility(treePosition)}
+          >
+            {nodeHidden ? <VisibilityOffIcon /> : <VisibilityIcon />}
+          </IconButton>
         </div>
-        <Box>{renderNodeList(value, treePosition)}</Box>
+        {!nodeHidden && <Box>{renderNodeList(value, treePosition)}</Box>}
       </div>
     );
   };
