@@ -128,7 +128,16 @@ export const AppContainer = () => {
 
     return (
       <div>
-        <span>{key}:</span>
+        <div>
+          <span>{key}:</span>
+          <IconButton
+            color="error"
+            sx={{ marginTop: -8, marginBottom: -8 }}
+            onClick={handleRemoveNode(treePosition)}
+          >
+            <RemoveIcon />
+          </IconButton>
+        </div>
         <Box>{renderNodeList(value, treePosition)}</Box>
       </div>
     );
