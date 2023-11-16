@@ -129,7 +129,11 @@ export const AppContainer = () => {
     return (
       <div>
         <div>
-          <span>{key}:</span>
+          <input
+            type="text"
+            defaultValue={key}
+            {...register(`${treePosition}-key`)}
+          />
           <IconButton
             color="error"
             sx={{ marginTop: -8, marginBottom: -8 }}
