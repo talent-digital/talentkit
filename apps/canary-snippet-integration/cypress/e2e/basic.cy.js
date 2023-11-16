@@ -52,12 +52,12 @@ describe("Basic", () => {
           {
             type: "test.complete",
             payload: {
-              test: "canary-test-1",
+              test: "secure-password",
               data: {},
               failed: false,
               timestamp,
             },
-            result: { id: "canary-test-1", value: 1 },
+            result: { id: "secure-password", value: 1 },
           },
         ],
         seasonId: "talent-digital-canary-season",
@@ -88,12 +88,12 @@ describe("Basic", () => {
           {
             type: "test.complete",
             payload: {
-              test: "canary-test-1",
+              test: "secure-password",
               data: {},
               failed: true,
               timestamp,
             },
-            result: { id: "canary-test-1", value: 0 },
+            result: { id: "secure-password", value: 0 },
           },
         ],
         seasonId: "talent-digital-canary-season",
