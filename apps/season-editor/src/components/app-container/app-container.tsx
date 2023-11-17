@@ -8,10 +8,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useForm } from "react-hook-form";
 import IconButton from "@mui/material/IconButton";
 
-/*
-  TODO:
-  - Some bug with episodes showing incorrectly
-*/
+const TYPE_SEPARATOR = "=";
+
 type Node =
   | {
       [key: string]: string | Node;
@@ -27,7 +25,12 @@ export const AppContainer = () => {
   const [nodesHidden, setNodesHidden] = useState<string[]>([]);
   const [nodeList, setNodeList] = useState<Node>(exampleYamlObjNode);
   const [listKey, setListKey] = useState(getRandomString());
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { dirtyFields },
+  } = useForm();
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]) {
@@ -40,14 +43,14 @@ export const AppContainer = () => {
   };
 
   const onSubmit = (data: Record<string, string>, exportFile = false) => {
-    const newNodeList = Object.entries(data).reduce(
-      (accumulator, [key, value]) => {
-        const [needle, type] = key.split("-");
+    const dirtyKeys = Object.keys(dirtyFields);
+    const newNodeList = Object.entries(data)
+      .filter(([key]) => dirtyKeys.includes(key))
+      .reduce((accumulator, [key, value]) => {
+        const [needle, type] = key.split(TYPE_SEPARATOR);
 
         return changeTreeNode(accumulator, needle, type, value);
-      },
-      nodeList
-    );
+      }, nodeList);
 
     changeNodeList(newNodeList);
 
@@ -90,7 +93,7 @@ export const AppContainer = () => {
 
   const renderNodeList = (nodes: Node, treePosition: string = "") => {
     return Object.entries(nodes).map(([key, value], index) => {
-      const newTreePosition = treePosition + index;
+      const newTreePosition = getTreePosition(treePosition, index);
 
       return (
         <div
@@ -122,17 +125,17 @@ export const AppContainer = () => {
       return (
         <div>
           <input
-            title={`${treePosition}-key`}
+            title={`${treePosition}${TYPE_SEPARATOR}key`}
             type="text"
             defaultValue={key}
-            {...register(`${treePosition}-key`)}
+            {...register(`${treePosition}${TYPE_SEPARATOR}key`)}
           />
           <span>: </span>
           <input
-            title={`${treePosition}-value`}
+            title={`${treePosition}${TYPE_SEPARATOR}value`}
             type="text"
             defaultValue={value}
-            {...register(`${treePosition}-value`)}
+            {...register(`${treePosition}${TYPE_SEPARATOR}value`)}
           />
           <IconButton
             color="error"
@@ -151,7 +154,7 @@ export const AppContainer = () => {
           <input
             type="text"
             defaultValue={key}
-            {...register(`${treePosition}-key`)}
+            {...register(`${treePosition}${TYPE_SEPARATOR}key`)}
           />
           <IconButton
             color="error"
@@ -173,7 +176,7 @@ export const AppContainer = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <form>
       <StyledNavigation>
         <input type="file" accept=".yml,.yaml" onChange={handleFileChange} />
         <button onClick={() => console.log(nodeList)}>Log nodeList</button>
@@ -188,13 +191,13 @@ export const AppContainer = () => {
         <b>KEY: {listKey}</b>
         {renderNodeList(nodeList)}
       </Box>
-    </Box>
+    </form>
   );
 };
 
 const addTreeNode = (nodes: Node, needle: string, treePosition = ""): Node => {
   return Object.entries(nodes).reduce((accumulator, [key, value], index) => {
-    const nextTreePosition = treePosition + index;
+    const nextTreePosition = getTreePosition(treePosition, index);
 
     if (nextTreePosition === needle && typeof nodes !== "string") {
       return {
@@ -226,7 +229,7 @@ const changeTreeNode = (
   treePosition = ""
 ): Node => {
   return Object.entries(nodes).reduce((accumulator, [key, value], index) => {
-    const nextTreePosition = treePosition + index;
+    const nextTreePosition = getTreePosition(treePosition, index);
 
     if (nextTreePosition === needle && typeof nodes !== "string") {
       if (type === "key") {
@@ -262,7 +265,7 @@ const removeTreeNode = (
   treePosition = ""
 ): Node => {
   return Object.entries(nodes).reduce((accumulator, [key, value], index) => {
-    const nextTreePosition = treePosition + index;
+    const nextTreePosition = getTreePosition(treePosition, index);
 
     if (nextTreePosition === needle && typeof nodes !== "string") {
       return {
@@ -286,6 +289,10 @@ const removeTreeNode = (
 
 const getRandomString = () => {
   return (Math.random() + 1).toString(36).substring(7);
+};
+
+const getTreePosition = (treePosition: string, index: number): string => {
+  return `${treePosition}-${index}`;
 };
 
 const StyledNavigation = styled("div")(({ theme }) => ({
