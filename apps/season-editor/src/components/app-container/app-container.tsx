@@ -21,6 +21,12 @@ const exampleYamlObjNode: Node = {
   title: { de: "AWO DigitalCheck" },
 };
 
+type TreeNode = {
+  children: TreeNode[];
+  id: number;
+  name: string;
+};
+
 export const AppContainer = () => {
   const [nodesHidden, setNodesHidden] = useState<string[]>([]);
   const [nodeList, setNodeList] = useState<Node>(exampleYamlObjNode);
@@ -41,6 +47,7 @@ export const AppContainer = () => {
     const readFile = await file.text();
     changeNodeList(parse(readFile));
   };
+  console.log("nodeList", nodeList);
 
   const onSubmit = (data: Record<string, string>, exportFile = false) => {
     const dirtyKeys = Object.keys(dirtyFields);

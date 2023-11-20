@@ -18,6 +18,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
+    "react-virtualized-auto-sizer": "^1.0.20",
+    "react-vtree": "3.0.0-beta.3",
+    "react-window": "^1.8.9",
     "yaml": "^2.3.4"
   },
   "devDependencies": {
