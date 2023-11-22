@@ -102,9 +102,9 @@ function handleSaveGame(kit: TalentKit) {
   const isStartingScreen =
     window.location.href.includes("sid") &&
     window.location.href.includes("eid");
-  const currentSavegameUnkown = kit.savegame.load();
+  const currentSavegameUnknown = kit.savegame.load();
   const currentSavegame =
-    isSavegame(currentSavegameUnkown) && currentSavegameUnkown;
+    isSavegame(currentSavegameUnknown) && currentSavegameUnknown;
   console.debug("Current savegame", currentSavegame);
 
   if (
