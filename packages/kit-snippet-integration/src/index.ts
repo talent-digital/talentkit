@@ -138,7 +138,7 @@ function domainMatches(savegame: Savegame): boolean {
     const savegameDomain =
       savegame.lastPlayedUrl.match(firstDomainPartRegex)?.[0].split("//")[1] ??
       "";
-    const match = window.location.href.includes(savegameDomain);
+    const match = window.location.host.includes(savegameDomain);
     console.debug("Domain matches", match);
 
     return match;
