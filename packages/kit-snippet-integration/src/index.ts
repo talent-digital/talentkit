@@ -97,15 +97,22 @@ function attachEndEpisodeListeners(kit: TalentKit) {
 }
 
 function handleSaveGame(kit: TalentKit) {
+  const ignoreSavegame =
+    new URLSearchParams(window.location.search).get("no-savegame") !== null;
   const isStartingScreen =
     window.location.href.includes("sid") &&
     window.location.href.includes("eid");
-  const currentSavegame = kit.savegame.load();
+  const currentSavegameUnknown = kit.savegame.load();
+  const currentSavegame =
+    isSavegame(currentSavegameUnknown) && currentSavegameUnknown;
   console.debug("Current savegame", currentSavegame);
 
   if (
     isStartingScreen &&
+    !ignoreSavegame &&
     isSavegame(currentSavegame) &&
+    domainMatches(currentSavegame) &&
+    appNameMatches(currentSavegame) &&
     window.location.href !== currentSavegame.lastPlayedUrl
   ) {
     window.location.href = currentSavegame.lastPlayedUrl;
@@ -123,6 +130,42 @@ function handleSaveGame(kit: TalentKit) {
 
   kit.savegame.save(newSavegame);
   console.debug("New savegame", newSavegame);
+}
+
+function domainMatches(savegame: Savegame): boolean {
+  try {
+    const firstDomainPartRegex = /\/\/([a-z])+/g;
+    const savegameDomain =
+      savegame.lastPlayedUrl.match(firstDomainPartRegex)?.[0].split("//")[1] ??
+      "";
+    const match = window.location.host.includes(savegameDomain);
+    console.debug("Domain matches", match);
+
+    return match;
+  } catch {
+    console.debug("domainMatches - savegameDomain not found");
+
+    return true;
+  }
+}
+
+function appNameMatches(savegame: Savegame): boolean {
+  try {
+    const savegameAppName = savegame.lastPlayedUrl
+      .split("/app/webflow/")[1]
+      .split("/")[0];
+    const currentAppName = window.location.href
+      .split("/app/webflow/")[1]
+      .split("/")[0];
+    const match = savegameAppName === currentAppName;
+    console.debug("appNameMatches", match);
+
+    return match;
+  } catch {
+    console.debug("appNameMatches - app name not found");
+
+    return true;
+  }
 }
 
 function isSavegame(savegame: unknown): savegame is Savegame {
