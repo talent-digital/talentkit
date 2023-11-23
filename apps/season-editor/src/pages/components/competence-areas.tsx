@@ -6,7 +6,6 @@ import { Competences } from "./competences";
 
 export const CompetenceAreas = () => {
   const { register, control } = useFormContext<FormInputs>();
-
   const { fields: competenceAreaFields, append: appendCompetenceArea } =
     useFieldArray({
       control,
@@ -39,7 +38,9 @@ export const CompetenceAreas = () => {
             </StyledInput>
           </Box>
 
-          <Competences competenceAreaField={competenceAreaField} />
+          <Competences
+            competenceAreaId={competenceAreaField.competenceAreaId}
+          />
         </Box>
       ))}
       <div>
