@@ -103,6 +103,9 @@ importers:
         specifier: ^2.3.4
         version: 2.3.4
     devDependencies:
+      '@talentdigital/season':
+        specifier: workspace:*
+        version: link:../../packages/season
       '@types/react':
         specifier: ^18.2.15
         version: 18.2.37

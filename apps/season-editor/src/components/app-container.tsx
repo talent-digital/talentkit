@@ -1,10 +1,23 @@
-import { Alert, Box, Button, Snackbar, styled } from "@mui/material";
+import {
+  Alert,
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Snackbar,
+  styled,
+} from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useForm } from "react-hook-form";
 import { parse, stringify } from "yaml";
+import { SeasonDefinition } from "@talentdigital/season";
 
-import AddIcon from "@mui/icons-material/Add";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+
+type AvailableLanguages = "de" | "en";
+const DEFAULT_LANGUAGE: AvailableLanguages = "en"; // TODO: change to "de"
+const availableLanguages: AvailableLanguages[] = ["de", "en"];
 
 type Inputs = {
   title: string;
@@ -13,11 +26,12 @@ type Inputs = {
   seasonEndMessage: string;
 };
 
-const selectedLanguage = "de";
-
 export const AppContainer = () => {
   const { register, reset, getValues } = useForm<Inputs>();
   const [readFileErrorMsg, setReadFileError] = useState<string | null>(null);
+  const [season, setSeason] = useState<SeasonDefinition>();
+  const [language, setLanguage] =
+    useState<AvailableLanguages>(DEFAULT_LANGUAGE);
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]) {
@@ -27,13 +41,10 @@ export const AppContainer = () => {
     const file = event.target.files[0];
     const readFile = await file.text();
     try {
-      const parsedFiled = parse(readFile);
-      reset({
-        title: parsedFiled.title[selectedLanguage],
-        info: parsedFiled.info[selectedLanguage],
-        assetsURL: parsedFiled.assetsURL,
-        seasonEndMessage: parsedFiled.seasonEndMessage[selectedLanguage],
-      });
+      const parsedFiled: SeasonDefinition = parse(readFile);
+      const detectedLanguage = detectLanguage(parsedFiled);
+      setLanguage(detectedLanguage);
+      setSeason(parsedFiled);
     } catch (error) {
       if (error instanceof Error) {
         setReadFileError(error.message);
@@ -42,7 +53,9 @@ export const AppContainer = () => {
   };
 
   const handleExport = () => {
-    const values = mapToSeasonObject(getValues());
+    if (!season) return;
+
+    const values = mapToSeasonObject(season, getValues(), language);
     const element = document.createElement("a");
     const file = new Blob([stringify(values)], { type: "text/plain" });
     element.href = URL.createObjectURL(file);
@@ -50,11 +63,37 @@ export const AppContainer = () => {
     element.click();
   };
 
+  useEffect(() => {
+    if (!season) return;
+
+    reset({
+      title: season.title[language] ?? "",
+      info: season.info[language] ?? "",
+      assetsURL: season.assetsURL ?? "",
+      seasonEndMessage: season.seasonEndMessage[language] ?? "",
+    });
+  }, [season, language, reset]);
+
   return (
     <Box>
       <StyledNavigation>
         <input type="file" accept=".yml,.yaml" onChange={handleFileChange} />
         <button onClick={handleExport}>Save and Export season.yaml</button>
+        <FormControl>
+          <InputLabel>Language</InputLabel>
+          <Select
+            value={language}
+            onChange={(event) =>
+              setLanguage(event.target.value as AvailableLanguages)
+            }
+          >
+            {availableLanguages.map((language) => (
+              <MenuItem value={language} key={language}>
+                {language}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </StyledNavigation>
 
       <Box
@@ -107,19 +146,38 @@ export const AppContainer = () => {
   );
 };
 
-function mapToSeasonObject(values: Inputs) {
-  return {
-    title: {
-      [selectedLanguage]: values.title,
-    },
-    info: {
-      [selectedLanguage]: values.info,
-    },
-    assetsURL: values.assetsURL,
-    seasonEndMessage: {
-      [selectedLanguage]: values.seasonEndMessage,
-    },
-  };
+function detectLanguage(season?: SeasonDefinition): AvailableLanguages {
+  if (typeof season?.title === "object") {
+    const maybeLanguageKey = Object.keys(season.title)[0];
+
+    if (isLanguageKey(maybeLanguageKey)) {
+      return maybeLanguageKey;
+    }
+  }
+
+  return DEFAULT_LANGUAGE;
+}
+
+function isLanguageKey(key: string): key is AvailableLanguages {
+  return availableLanguages.includes(key as AvailableLanguages);
+}
+
+function mapToSeasonObject(
+  originalFileLoaded: SeasonDefinition,
+  valuesWithEmpty: Inputs,
+  language: AvailableLanguages
+) {
+  const newFile = JSON.parse(JSON.stringify(originalFileLoaded));
+  const values: Partial<Inputs> = Object.fromEntries(
+    Object.entries(valuesWithEmpty).filter((entries) => Boolean(entries[1]))
+  );
+
+  newFile.title[language] = values.title;
+  newFile.info[language] = values.info;
+  newFile.assetsURL = values.assetsURL;
+  newFile.seasonEndMessage[language] = values.seasonEndMessage;
+
+  return newFile;
 }
 
 const StyledSectionWrapper = styled("div")(({ theme }) => ({
@@ -149,4 +207,5 @@ const StyledNavigation = styled("div")(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   display: "flex",
   justifyContent: "center",
+  gap: theme.spacing(2),
 }));
