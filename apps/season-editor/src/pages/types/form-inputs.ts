@@ -18,4 +18,13 @@ export type FormInputs = {
     subCompetenceId: string;
     name: string;
   }[];
+  episodes: {
+    episodeId: string;
+    title: string;
+    description: string;
+    maturity: string;
+    imageUrl: string;
+    format: string;
+    formatConfiguration: string;
+  }[];
 };
