@@ -197,7 +197,9 @@ function mapToSeasonObject(
   valuesWithEmpty: FormInputs,
   language: LanguageCode
 ) {
-  const newFile = JSON.parse(JSON.stringify(originalFileLoaded));
+  const newFile: SeasonDefinition = JSON.parse(
+    JSON.stringify(originalFileLoaded)
+  );
   const values: Partial<FormInputs> = Object.fromEntries(
     Object.entries(valuesWithEmpty).filter((entries) => Boolean(entries[1]))
   );
@@ -206,8 +208,37 @@ function mapToSeasonObject(
   newFile.info[language] = values.info;
   newFile.assetsURL = values.assetsURL;
   newFile.seasonEndMessage[language] = values.seasonEndMessage;
+  newFile.episodes = mapEpisodesToSeason(values, newFile, language);
 
   return newFile;
+}
+
+function mapEpisodesToSeason(
+  values: Partial<FormInputs>,
+  oldValues: SeasonDefinition,
+  language: LanguageCode
+): SeasonDefinition["episodes"] {
+  return (
+    values.episodes?.reduce((accumulator, episode) => {
+      return {
+        ...accumulator,
+        [episode.episodeId]: {
+          title: {
+            ...oldValues.episodes[episode.episodeId]?.title,
+            [language]: episode.title,
+          },
+          description: {
+            ...oldValues.episodes[episode.episodeId]?.description,
+            [language]: episode.description,
+          },
+          maturity: episode.maturity,
+          imageUrl: episode.imageUrl,
+          format: episode.format,
+          formatConfiguration: episode.formatConfiguration,
+        },
+      };
+    }, {}) ?? {}
+  );
 }
 
 function extractEpisodes(
