@@ -1,7 +1,2 @@
 [build]
   publish = "apps/season-editor/dist"
-[[redirects]]
-  from = "/"
-  to = "/"
-  status = 301
-  force = true
