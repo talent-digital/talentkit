@@ -14,9 +14,15 @@ import { FormProvider, useForm } from "react-hook-form";
 import { parse, stringify } from "yaml";
 import { LocalizedString, SeasonDefinition } from "@talentdigital/season";
 import { ChangeEvent, useEffect, useState } from "react";
-import { StyledInput } from "./components/styled-input";
-import { CompetenceAreas, Episodes, StyledSectionWrapper } from "./components";
-import { FormInputs } from "./types";
+
+import {
+  CompetenceAreas,
+  Episodes,
+  StyledSectionWrapper,
+  StyledInput,
+  SectionVisibilityButton,
+} from "./components";
+import { FormInputs, SectionName } from "./types";
 
 type LanguageCode = `${keyof LocalizedString}`;
 
@@ -28,7 +34,6 @@ const availableLanguages: LanguageCode[] = ["de", "en"];
   - Add id generator
   - Add remove options
   - Add popup for delete confirmation
-  - Add Toggle section
   - Add sticky header
 */
 export const SeasonEditor = () => {
@@ -37,6 +42,7 @@ export const SeasonEditor = () => {
   const [readFileErrorMsg, setReadFileError] = useState<string | null>(null);
   const [season, setSeason] = useState<SeasonDefinition>();
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
+  const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]) {
@@ -70,6 +76,16 @@ export const SeasonEditor = () => {
 
   const handleLogForm = () => {
     console.log(getValues());
+  };
+
+  const handleToggleSectionVisibility = (sectionName: SectionName) => {
+    if (hiddenSections.includes(sectionName)) {
+      setHiddenSections(
+        hiddenSections.filter((section) => section !== sectionName)
+      );
+    } else {
+      setHiddenSections([...hiddenSections, sectionName]);
+    }
   };
 
   useEffect(() => {
@@ -126,37 +142,75 @@ export const SeasonEditor = () => {
           flexDirection: "column",
           gap: 4,
           padding: 4,
+          width: 800,
+          margin: "auto",
         }}
       >
         <StyledSectionWrapper>
-          <Typography variant="h5">Basic information</Typography>
-          <StyledInput>
-            <label>Title</label>
-            <input type="text" {...register("title")} />
-          </StyledInput>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h5">Basic information</Typography>
 
-          <StyledInput>
-            <label>Info</label>
-            <input type="text" {...register("info")} />
-          </StyledInput>
+            <SectionVisibilityButton
+              hiddenSections={hiddenSections}
+              onToggle={handleToggleSectionVisibility}
+              sectionName="basicInformation"
+            />
+          </Box>
+          {hiddenSections.includes("basicInformation") ? null : (
+            <>
+              <StyledInput>
+                <label>Title</label>
+                <input type="text" {...register("title")} />
+              </StyledInput>
 
-          <StyledInput>
-            <label>assetsURL</label>
-            <input type="text" {...register("assetsURL")} />
-          </StyledInput>
+              <StyledInput>
+                <label>Info</label>
+                <input type="text" {...register("info")} />
+              </StyledInput>
+
+              <StyledInput>
+                <label>assetsURL</label>
+                <input type="text" {...register("assetsURL")} />
+              </StyledInput>
+            </>
+          )}
         </StyledSectionWrapper>
 
         <StyledSectionWrapper>
-          <Typography variant="h5">Competence Areas</Typography>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h5">Competence Areas</Typography>
 
-          <FormProvider {...methods}>
-            <CompetenceAreas />
-          </FormProvider>
+            <SectionVisibilityButton
+              hiddenSections={hiddenSections}
+              onToggle={handleToggleSectionVisibility}
+              sectionName="competenceAreas"
+            />
+          </Box>
+
+          {hiddenSections.includes("competenceAreas") ? null : (
+            <FormProvider {...methods}>
+              <CompetenceAreas />
+            </FormProvider>
+          )}
         </StyledSectionWrapper>
 
-        <FormProvider {...methods}>
-          <Episodes />
-        </FormProvider>
+        <StyledSectionWrapper>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h5">Episodes</Typography>
+
+            <SectionVisibilityButton
+              hiddenSections={hiddenSections}
+              onToggle={handleToggleSectionVisibility}
+              sectionName="episodes"
+            />
+          </Box>
+        </StyledSectionWrapper>
+
+        {hiddenSections.includes("episodes") ? null : (
+          <FormProvider {...methods}>
+            <Episodes />
+          </FormProvider>
+        )}
       </Box>
 
       <Snackbar

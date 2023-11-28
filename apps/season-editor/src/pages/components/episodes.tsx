@@ -29,7 +29,7 @@ export const Episodes = () => {
   return (
     <>
       {episodeFields.map((episode, index) => (
-        <StyledSectionWrapper key={episode.id}>
+        <StyledSectionWrapper key={episode.id} indented>
           <Typography variant="h5">Episode {episode.episodeId}</Typography>
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
             <StyledInput>
