@@ -6,7 +6,6 @@ import {
   useFormContext,
   FieldArrayWithId,
 } from "react-hook-form";
-import { grey } from "@mui/material/colors";
 import { Maturity } from "@talentdigital/season";
 
 import { FormInputs } from "../types";
@@ -62,7 +61,7 @@ export const Episodes = () => {
                 />
               </StyledInput>
 
-              <StyledSelect>
+              <StyledInput>
                 <label>maturity</label>
                 <select
                   {...register(
@@ -75,7 +74,7 @@ export const Episodes = () => {
                     </option>
                   ))}
                 </select>
-              </StyledSelect>
+              </StyledInput>
               <StyledInput>
                 <label>imageUrl</label>
                 <input
@@ -168,21 +167,5 @@ const StyledWrapper = styled("div")(({ theme }) => ({
 
   "> div": {
     flex: `0 0 calc(33.333% - ${theme.spacing(2)})`,
-  },
-}));
-
-const StyledSelect = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  width: "100%",
-  "& select": {
-    borderRadius: theme.shape.borderRadius,
-    border: `1px solid ${grey[500]}`,
-    padding: theme.spacing(1),
-
-    "&:focus": {
-      outline: `1px solid ${theme.palette.primary.main}`,
-      border: `1px solid ${theme.palette.primary.main}`,
-    },
   },
 }));
