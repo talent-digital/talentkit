@@ -6,9 +6,13 @@ import {
   useFormContext,
   FieldArrayWithId,
 } from "react-hook-form";
+import { grey } from "@mui/material/colors";
+import { Maturity } from "@talentdigital/season";
 
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
+
+type MaturityCode = `${Maturity}`;
 
 export const Episodes = () => {
   const { register, control } = useFormContext<FormInputs>();
@@ -20,6 +24,8 @@ export const Episodes = () => {
     control,
     name: "episodes",
   });
+
+  const selectOptions: MaturityCode[] = ["ALPHA", "BETA", "PENDING", "PUBLIC"];
 
   return (
     <>
@@ -56,15 +62,20 @@ export const Episodes = () => {
                 />
               </StyledInput>
 
-              <StyledInput>
+              <StyledSelect>
                 <label>maturity</label>
-                <input
-                  type="text"
+                <select
                   {...register(
                     `episodes.${index}.maturity` as "episodes.0.maturity"
                   )}
-                />
-              </StyledInput>
+                >
+                  {selectOptions.map((option) => (
+                    <option value={option} key={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </StyledSelect>
               <StyledInput>
                 <label>imageUrl</label>
                 <input
@@ -157,5 +168,21 @@ const StyledWrapper = styled("div")(({ theme }) => ({
 
   "> div": {
     flex: `0 0 calc(33.333% - ${theme.spacing(2)})`,
+  },
+}));
+
+const StyledSelect = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  "& select": {
+    borderRadius: theme.shape.borderRadius,
+    border: `1px solid ${grey[500]}`,
+    padding: theme.spacing(1),
+
+    "&:focus": {
+      outline: `1px solid ${theme.palette.primary.main}`,
+      border: `1px solid ${theme.palette.primary.main}`,
+    },
   },
 }));
