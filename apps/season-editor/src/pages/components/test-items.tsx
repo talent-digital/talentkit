@@ -1,7 +1,7 @@
-import { Button, Box, Typography } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useFieldArray, useFormContext, FieldArray } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { Level } from "@talentdigital/season";
 
 import { FormInputs } from "../types";
@@ -32,22 +32,37 @@ export const TestItems = () => {
     <>
       {testItemFields.map((testItem, index) => (
         <StyledSectionWrapper key={testItem.id} indented>
-          <Typography variant="h5">TestItem {testItem.testItemId}</Typography>
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
-            <StyledInput>
-              <label>documentation</label>
-              <input
-                type="text"
-                {...register(`testItems.${index}.documentation` as const)}
-              />
-            </StyledInput>
-
             <StyledMultilineInputWrapper>
               <StyledInput>
-                <label>id</label>
+                <label>testItemId</label>
                 <input
                   type="text"
                   {...register(`testItems.${index}.testItemId` as const)}
+                />
+              </StyledInput>
+
+              <StyledInput>
+                <label>competenceAreaId</label>
+                <input
+                  type="text"
+                  {...register(`testItems.${index}.competenceAreaId` as const)}
+                />
+              </StyledInput>
+
+              <StyledInput>
+                <label>competenceId</label>
+                <input
+                  type="text"
+                  {...register(`testItems.${index}.competenceId` as const)}
+                />
+              </StyledInput>
+
+              <StyledInput>
+                <label>subCompetenceId</label>
+                <input
+                  type="text"
+                  {...register(`testItems.${index}.subCompetenceId` as const)}
                 />
               </StyledInput>
 
@@ -69,6 +84,14 @@ export const TestItems = () => {
                 />
               </StyledInput>
             </StyledMultilineInputWrapper>
+
+            <StyledInput>
+              <label>documentation</label>
+              <input
+                type="text"
+                {...register(`testItems.${index}.documentation` as const)}
+              />
+            </StyledInput>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
@@ -90,7 +113,10 @@ export const TestItems = () => {
             type="button"
             onClick={() =>
               appendTestItem({
-                testItemId: getNewTestItemId(testItemFields),
+                competenceAreaId: "",
+                competenceId: "",
+                subCompetenceId: "",
+                testItemId: "",
                 episode: "",
                 level: "FOUNDATION",
                 documentation: "",
@@ -104,17 +130,3 @@ export const TestItems = () => {
     </>
   );
 };
-
-function getNewTestItemId(
-  testItemFields: FieldArray<FormInputs, "testItems">[]
-): string {
-  if (testItemFields.length === 0) {
-    return "1";
-  }
-  const highesTestItemId = testItemFields
-    .map((testItem) => Number(testItem.testItemId))
-    .sort((a, b) => b - a)[0];
-  const maybeTestItemNumber = String(highesTestItemId + 1);
-
-  return maybeTestItemNumber === "NaN" ? "0" : maybeTestItemNumber;
-}

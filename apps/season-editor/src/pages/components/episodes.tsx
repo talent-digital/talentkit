@@ -1,4 +1,4 @@
-import { Button, Box, Typography } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext, FieldArray } from "react-hook-form";
@@ -32,24 +32,7 @@ export const Episodes = () => {
     <>
       {episodeFields.map((episode, index) => (
         <StyledSectionWrapper key={episode.id} indented>
-          <Typography variant="h5">Episode {episode.episodeId}</Typography>
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
-            <StyledInput>
-              <label>title</label>
-              <input
-                type="text"
-                {...register(`episodes.${index}.title` as const)}
-              />
-            </StyledInput>
-
-            <StyledInput>
-              <label>description</label>
-              <input
-                type="text"
-                {...register(`episodes.${index}.description` as const)}
-              />
-            </StyledInput>
-
             <StyledMultilineInputWrapper>
               <StyledInput>
                 <label>id</label>
@@ -93,6 +76,22 @@ export const Episodes = () => {
                 />
               </StyledInput>
             </StyledMultilineInputWrapper>
+
+            <StyledInput>
+              <label>title</label>
+              <input
+                type="text"
+                {...register(`episodes.${index}.title` as const)}
+              />
+            </StyledInput>
+
+            <StyledInput>
+              <label>description</label>
+              <input
+                type="text"
+                {...register(`episodes.${index}.description` as const)}
+              />
+            </StyledInput>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button

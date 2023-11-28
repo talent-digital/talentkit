@@ -17,17 +17,17 @@ export function mapToSeasonObject(
   newFile.info[language] = values.info;
   newFile.assetsURL = values.assetsURL;
   newFile.seasonEndMessage[language] = values.seasonEndMessage;
-  newFile.competenceAreas = mapFormCompetenceAreasToSeasonCompetenceAreas(
+  newFile.competenceAreas = mapToSeasonCompetenceAreas(
     values,
     newFile,
     language
   );
-  newFile.episodes = mapFormEpisodesToSeasonEpisodes(values, newFile, language);
+  newFile.episodes = mapToSeasonEpisodes(values, newFile, language);
 
   return newFile;
 }
 
-function mapFormCompetenceAreasToSeasonCompetenceAreas(
+function mapToSeasonCompetenceAreas(
   values: Partial<FormInputs>,
   oldValues: SeasonDefinition,
   language: LanguageCode
@@ -41,7 +41,7 @@ function mapFormCompetenceAreasToSeasonCompetenceAreas(
             ...oldValues.competenceAreas[competenceArea.competenceAreaId]?.name,
             [language]: competenceArea.name,
           },
-          competences: mapFormCompetencesToSeasonCompetences(
+          competences: mapToSeasonCompetences(
             values,
             oldValues,
             language,
@@ -53,7 +53,7 @@ function mapFormCompetenceAreasToSeasonCompetenceAreas(
   );
 }
 
-function mapFormCompetencesToSeasonCompetences(
+function mapToSeasonCompetences(
   values: Partial<FormInputs>,
   oldValues: SeasonDefinition,
   language: LanguageCode,
@@ -70,7 +70,7 @@ function mapFormCompetencesToSeasonCompetences(
             ...oldValues.competenceAreas[competence.competenceId]?.name,
             [language]: competence.name,
           },
-          subCompetences: mapFormSubCompetencesToSeasonSubCompetences(
+          subCompetences: mapToSeasonSubCompetences(
             values,
             oldValues,
             language,
@@ -83,7 +83,7 @@ function mapFormCompetencesToSeasonCompetences(
   );
 }
 
-function mapFormSubCompetencesToSeasonSubCompetences(
+function mapToSeasonSubCompetences(
   values: Partial<FormInputs>,
   oldValues: SeasonDefinition,
   language: LanguageCode,
@@ -95,22 +95,71 @@ function mapFormSubCompetencesToSeasonSubCompetences(
 
   return (
     subCompetences?.reduce((accumulator, subCompetence) => {
+      const oldNames =
+        oldValues.competenceAreas[competenceAreaId]?.competences[competenceId]
+          ?.subCompetences[subCompetence.subCompetenceId]?.name;
+
       return {
         ...accumulator,
         [subCompetence.subCompetenceId]: {
           name: {
-            ...oldValues.competenceAreas[competenceAreaId]?.competences[
-              competenceId
-            ]?.subCompetences[subCompetence.subCompetenceId]?.name,
+            ...oldNames,
             [language]: subCompetence.name,
           },
+          testItems: mapToSeasonTestItems(
+            values,
+            oldValues,
+            language,
+            competenceAreaId,
+            competenceId,
+            subCompetence.subCompetenceId
+          ),
         },
       };
     }, {}) ?? {}
   );
 }
 
-function mapFormEpisodesToSeasonEpisodes(
+function mapToSeasonTestItems(
+  values: Partial<FormInputs>,
+  oldValues: SeasonDefinition,
+  language: LanguageCode,
+  competenceAreaId: string,
+  competenceId: string,
+  subCompetenceId: string
+) {
+  const testItems = values.testItems?.filter(
+    (testItem) =>
+      testItem.competenceAreaId === competenceAreaId &&
+      testItem.competenceId === competenceId &&
+      testItem.subCompetenceId === subCompetenceId
+  );
+
+  return (
+    testItems?.reduce((accumulator, testItem) => {
+      const oldTestItem =
+        oldValues.competenceAreas[competenceAreaId].competences[competenceId]
+          .subCompetences[subCompetenceId].testItems?.[testItem.testItemId];
+      const oldDocumentation = oldTestItem?.documentation ?? {};
+
+      return {
+        ...accumulator,
+        [testItem.testItemId]: {
+          level: testItem.level,
+          episode: testItem.episode,
+          documentation: {
+            ...oldDocumentation,
+            [language]: testItem.documentation,
+          },
+          // search - TODO
+          // toolType - TODO
+        },
+      };
+    }, {}) ?? {}
+  );
+}
+
+function mapToSeasonEpisodes(
   values: Partial<FormInputs>,
   oldValues: SeasonDefinition,
   language: LanguageCode

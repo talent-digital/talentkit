@@ -38,6 +38,8 @@ import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
   - Add remove options
   - Add popup for delete confirmation
   - Add sticky header
+  - Episode description as textarea
+  - Select for competences in testItems (possibly with text instead of ID)
 */
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();

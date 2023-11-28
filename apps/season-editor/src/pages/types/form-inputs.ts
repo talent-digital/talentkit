@@ -5,6 +5,9 @@ export type FormInputs = {
   seasonEndMessage: string;
   testItems: {
     testItemId: string;
+    competenceAreaId: string;
+    competenceId: string;
+    subCompetenceId: string;
     episode: string;
     level: string;
     documentation: string;

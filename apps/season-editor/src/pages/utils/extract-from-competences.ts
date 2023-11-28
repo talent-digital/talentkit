@@ -61,16 +61,20 @@ export function extractFromCompetences(
 
               if (!subCompetenceValue.testItems) return;
 
-              // Object.entries(subCompetenceValue.testItems).forEach(
-              //   ([testItemId, testItemValue]) => {
-              //     testItems.push({
-              //       competenceAreaId,
-              //       competenceId,
-              //       subCompetenceId,
-              //       testItemId,
-              //     });
-              //   }
-              // );
+              Object.entries(subCompetenceValue.testItems).forEach(
+                ([testItemId, testItemValue]) => {
+                  testItems.push({
+                    competenceAreaId,
+                    competenceId,
+                    subCompetenceId,
+                    testItemId,
+                    episode: testItemValue.episode,
+                    level: testItemValue.level,
+                    documentation:
+                      testItemValue.documentation?.[language] ?? "",
+                  });
+                }
+              );
             }
           );
         }
