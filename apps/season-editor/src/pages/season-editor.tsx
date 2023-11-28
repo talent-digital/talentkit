@@ -28,6 +28,8 @@ const availableLanguages: LanguageCode[] = ["de", "en"];
   - Add id generator
   - Add remove options
   - Add popup for delete confirmation
+  - Add Toggle section
+  - Add sticky header
 */
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
@@ -86,8 +88,8 @@ export const SeasonEditor = () => {
       assetsURL: season.assetsURL ?? "",
       seasonEndMessage: season.seasonEndMessage[language] ?? "",
       competenceAreas,
-      competences,
-      subCompetences,
+      ...competences,
+      ...subCompetences,
       episodes,
     });
   }, [season, language, reset]);
@@ -97,10 +99,7 @@ export const SeasonEditor = () => {
       <StyledNavigation>
         <input type="file" accept=".yml,.yaml" onChange={handleFileChange} />
         <Button variant="contained" onClick={handleExport}>
-          Save and Export season.yaml
-        </Button>
-        <Button variant="contained" onClick={handleLogForm}>
-          Log form
+          Export
         </Button>
         <FormControl>
           <InputLabel>Language</InputLabel>
@@ -117,6 +116,7 @@ export const SeasonEditor = () => {
             ))}
           </Select>
         </FormControl>
+        <Button onClick={handleLogForm}>Log form</Button>
       </StyledNavigation>
 
       <Box
@@ -128,10 +128,6 @@ export const SeasonEditor = () => {
           padding: 4,
         }}
       >
-        <FormProvider {...methods}>
-          <Episodes />
-        </FormProvider>
-
         <StyledSectionWrapper>
           <Typography variant="h5">Basic information</Typography>
           <StyledInput>
@@ -157,6 +153,10 @@ export const SeasonEditor = () => {
             <CompetenceAreas />
           </FormProvider>
         </StyledSectionWrapper>
+
+        <FormProvider {...methods}>
+          <Episodes />
+        </FormProvider>
       </Box>
 
       <Snackbar
@@ -202,18 +202,106 @@ function mapToSeasonObject(
   );
   const values: Partial<FormInputs> = Object.fromEntries(
     Object.entries(valuesWithEmpty).filter((entries) => Boolean(entries[1]))
-  );
+  ) as Partial<FormInputs>;
 
   newFile.title[language] = values.title;
   newFile.info[language] = values.info;
   newFile.assetsURL = values.assetsURL;
   newFile.seasonEndMessage[language] = values.seasonEndMessage;
-  newFile.episodes = mapEpisodesToSeason(values, newFile, language);
+  newFile.competenceAreas = mapFormCompetenceAreasToSeasonCompetenceAreas(
+    values,
+    newFile,
+    language
+  );
+  newFile.episodes = mapFormEpisodesToSeasonEpisodes(values, newFile, language);
 
   return newFile;
 }
 
-function mapEpisodesToSeason(
+function mapFormCompetenceAreasToSeasonCompetenceAreas(
+  values: Partial<FormInputs>,
+  oldValues: SeasonDefinition,
+  language: LanguageCode
+): SeasonDefinition["competenceAreas"] {
+  return (
+    values.competenceAreas?.reduce((accumulator, competenceArea) => {
+      return {
+        ...accumulator,
+        [competenceArea.competenceAreaId]: {
+          name: {
+            ...oldValues.competenceAreas[competenceArea.competenceAreaId]?.name,
+            [language]: competenceArea.name,
+          },
+          competences: mapFormCompetencesToSeasonCompetences(
+            values,
+            oldValues,
+            language,
+            competenceArea.competenceAreaId
+          ),
+        },
+      };
+    }, {}) ?? {}
+  );
+}
+
+function mapFormCompetencesToSeasonCompetences(
+  values: Partial<FormInputs>,
+  oldValues: SeasonDefinition,
+  language: LanguageCode,
+  competenceAreaId: string
+) {
+  const competences = values[`competences-${competenceAreaId}`];
+
+  return (
+    competences?.reduce((accumulator, competence) => {
+      return {
+        ...accumulator,
+        [competence.competenceId]: {
+          name: {
+            ...oldValues.competenceAreas[competence.competenceId]?.name,
+            [language]: competence.name,
+          },
+          subCompetences: mapFormSubCompetencesToSeasonSubCompetences(
+            values,
+            oldValues,
+            language,
+            competenceAreaId,
+            competence.competenceId
+          ),
+        },
+      };
+    }, {}) ?? {}
+  );
+}
+
+function mapFormSubCompetencesToSeasonSubCompetences(
+  values: Partial<FormInputs>,
+  oldValues: SeasonDefinition,
+  language: LanguageCode,
+  competenceAreaId: string,
+  competenceId: string
+) {
+  const subCompetences =
+    values[`subCompetences-${competenceAreaId}-${competenceId}`];
+
+  return (
+    subCompetences?.reduce((accumulator, subCompetence) => {
+      return {
+        ...accumulator,
+        [subCompetence.subCompetenceId]: {
+          name: {
+            ...oldValues.competenceAreas[competenceAreaId]?.competences[
+              competenceId
+            ]?.subCompetences[subCompetence.subCompetenceId]?.name,
+            [language]: subCompetence.name,
+          },
+        },
+      };
+    }, {}) ?? {}
+  );
+}
+
+function mapFormEpisodesToSeasonEpisodes(
   values: Partial<FormInputs>,
   oldValues: SeasonDefinition,
   language: LanguageCode
@@ -258,17 +346,23 @@ function extractEpisodes(
 
 type ExtractCompetencesReturn = {
   competenceAreas: FormInputs["competenceAreas"];
-  competences: FormInputs["competences"];
-  subCompetences: FormInputs["subCompetences"];
+  competences: Record<
+    `competences-${string}`,
+    FormInputs[`competences-${string}`]
+  >;
+  subCompetences: Record<
+    `subCompetences-${string}-${string}`,
+    FormInputs[`subCompetences-${string}-${string}`]
+  >;
 };
 
 function extractCompetences(
   season: SeasonDefinition,
   language: LanguageCode
 ): ExtractCompetencesReturn {
-  const competenceAreas: FormInputs["competenceAreas"] = [];
-  const competences: FormInputs["competences"] = [];
-  const subCompetences: FormInputs["subCompetences"] = [];
+  const competenceAreas: ExtractCompetencesReturn["competenceAreas"] = [];
+  const competences: ExtractCompetencesReturn["competences"] = {};
+  const subCompetences: ExtractCompetencesReturn["subCompetences"] = {};
 
   Object.entries(season.competenceAreas).forEach(
     ([competenceAreaId, competenceAreaValue]) => {
@@ -279,7 +373,12 @@ function extractCompetences(
 
       Object.entries(competenceAreaValue.competences).forEach(
         ([competenceId, competenceValue]) => {
-          competences.push({
+          const competenceKey = `competences-${competenceAreaId}` as const;
+          if (!competences[competenceKey]) {
+            competences[competenceKey] = [];
+          }
+
+          competences[competenceKey].push({
             competenceAreaId,
             competenceId,
             name: competenceValue.name?.[language] ?? "",
@@ -287,7 +386,14 @@ function extractCompetences(
 
           Object.entries(competenceValue.subCompetences).forEach(
             ([subCompetenceId, subCompetenceValue]) => {
-              subCompetences.push({
+              const subCompetenceKey =
+                `subCompetences-${competenceAreaId}-${competenceId}` as const;
+
+              if (!subCompetences[subCompetenceKey]) {
+                subCompetences[subCompetenceKey] = [];
+              }
+
+              subCompetences[subCompetenceKey].push({
                 competenceAreaId,
                 competenceId,
                 subCompetenceId,

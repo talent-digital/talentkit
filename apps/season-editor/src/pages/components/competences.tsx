@@ -13,7 +13,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
   const { register, control } = useFormContext<FormInputs>();
   const { fields: competenceFields, append: appendCompetence } = useFieldArray({
     control,
-    name: "competences",
+    name: `competences-${competenceAreaId}`,
   });
 
   return (
@@ -32,40 +32,42 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
           (competenceField) =>
             competenceField.competenceAreaId === competenceAreaId
         )
-        .map((competenceField, index) => (
-          <div key={competenceField.id}>
-            <Box
-              sx={{
-                display: "flex",
-                gap: 2,
-              }}
-            >
-              <StyledInput short>
-                <label>id</label>
-                <input
-                  disabled
-                  type="text"
-                  {...register(
-                    `competences.${index}.competenceId` as "competences.0.competenceId"
-                  )}
-                />
-              </StyledInput>
-              <StyledInput>
-                <label>name</label>
-                <input
-                  type="text"
-                  {...register(
-                    `competences.${index}.name` as "competences.0.name"
-                  )}
-                />
-              </StyledInput>
-            </Box>
-            <SubCompetences
-              competenceId={competenceField.competenceId}
-              competenceAreaId={competenceAreaId}
-            />
-          </div>
-        ))}
+        .map((competenceField, index) => {
+          return (
+            <div key={competenceField.id}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                }}
+              >
+                <StyledInput short>
+                  <label>id</label>
+                  <input
+                    disabled
+                    type="text"
+                    {...register(
+                      `competences-${competenceAreaId}.${index}.competenceId` as const
+                    )}
+                  />
+                </StyledInput>
+                <StyledInput>
+                  <label>name</label>
+                  <input
+                    type="text"
+                    {...register(
+                      `competences-${competenceAreaId}.${index}.name` as const
+                    )}
+                  />
+                </StyledInput>
+              </Box>
+              <SubCompetences
+                competenceId={competenceField.competenceId}
+                competenceAreaId={competenceAreaId}
+              />
+            </div>
+          );
+        })}
 
       <div>
         <Button

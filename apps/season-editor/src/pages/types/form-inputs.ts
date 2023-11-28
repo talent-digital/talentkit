@@ -7,12 +7,12 @@ export type FormInputs = {
     competenceAreaId: string;
     name: string;
   }[];
-  competences: {
+  [key: `competences-${string}`]: {
     competenceAreaId: string;
     competenceId: string;
     name: string;
   }[];
-  subCompetences: {
+  [key: `subCompetences-${string}-${string}`]: {
     competenceAreaId: string;
     competenceId: string;
     subCompetenceId: string;
@@ -28,3 +28,14 @@ export type FormInputs = {
     formatConfiguration: string;
   }[];
 };
+
+// type MyType = {
+//   [key: `competence-${string}`]: string;
+// }
+
+// const x: MyType = {
+//   "competence-1": "eh",
+//   "competence-2": "ah!!",
+// }
+
+// console.log(x)

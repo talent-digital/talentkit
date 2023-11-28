@@ -23,7 +23,7 @@ export const CompetenceAreas = () => {
                 disabled
                 type="text"
                 {...register(
-                  `competenceAreas.${index}.competenceAreaId` as "competenceAreas.0.name"
+                  `competenceAreas.${index}.competenceAreaId` as const
                 )}
               />
             </StyledInput>
@@ -31,9 +31,7 @@ export const CompetenceAreas = () => {
               <label>name</label>
               <input
                 type="text"
-                {...register(
-                  `competenceAreas.${index}.name` as "competenceAreas.0.name"
-                )}
+                {...register(`competenceAreas.${index}.name` as const)}
               />
             </StyledInput>
           </Box>

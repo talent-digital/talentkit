@@ -17,7 +17,7 @@ export const SubCompetences = ({
   const { fields: subCompetenceFields, append: appendSubCompetence } =
     useFieldArray({
       control,
-      name: "subCompetences",
+      name: `subCompetences-${competenceAreaId}-${competenceId}`,
     });
 
   return (
@@ -51,7 +51,7 @@ export const SubCompetences = ({
                 disabled
                 type="text"
                 {...register(
-                  `subCompetences.${index}.competenceId` as "subCompetences.0.subCompetenceId"
+                  `subCompetences-${competenceAreaId}-${competenceId}.${index}.subCompetenceId` as const
                 )}
               />
             </StyledInput>
@@ -60,7 +60,7 @@ export const SubCompetences = ({
               <input
                 type="text"
                 {...register(
-                  `subCompetences.${index}.name` as "subCompetences.0.name"
+                  `subCompetences-${competenceAreaId}-${competenceId}.${index}.name` as const
                 )}
               />
             </StyledInput>
