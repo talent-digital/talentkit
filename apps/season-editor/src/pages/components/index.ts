@@ -3,3 +3,4 @@ export * from "./episodes";
 export * from "./styled-section-wrapper";
 export * from "./styled-input";
 export * from "./section-visibility-button";
+export * from "./test-items";

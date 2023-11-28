@@ -1,1 +1,5 @@
-export type SectionName = "basicInformation" | "competenceAreas" | "episodes";
+export type SectionName =
+  | "basicInformation"
+  | "competenceAreas"
+  | "episodes"
+  | "testItems";

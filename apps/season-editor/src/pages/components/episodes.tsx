@@ -1,11 +1,7 @@
 import { styled, Button, Box, Typography } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {
-  useFieldArray,
-  useFormContext,
-  FieldArrayWithId,
-} from "react-hook-form";
+import { useFieldArray, useFormContext, FieldArray } from "react-hook-form";
 import { Maturity } from "@talentdigital/season";
 
 import { FormInputs } from "../types";
@@ -24,7 +20,12 @@ export const Episodes = () => {
     name: "episodes",
   });
 
-  const selectOptions: MaturityCode[] = ["ALPHA", "BETA", "PENDING", "PUBLIC"];
+  const maturityOptions: MaturityCode[] = [
+    "ALPHA",
+    "BETA",
+    "PENDING",
+    "PUBLIC",
+  ];
 
   return (
     <>
@@ -36,7 +37,7 @@ export const Episodes = () => {
               <label>title</label>
               <input
                 type="text"
-                {...register(`episodes.${index}.title` as "episodes.0.title")}
+                {...register(`episodes.${index}.title` as const)}
               />
             </StyledInput>
 
@@ -44,9 +45,7 @@ export const Episodes = () => {
               <label>description</label>
               <input
                 type="text"
-                {...register(
-                  `episodes.${index}.description` as "episodes.0.description"
-                )}
+                {...register(`episodes.${index}.description` as const)}
               />
             </StyledInput>
 
@@ -55,20 +54,14 @@ export const Episodes = () => {
                 <label>id</label>
                 <input
                   type="text"
-                  {...register(
-                    `episodes.${index}.episodeId` as "episodes.0.episodeId"
-                  )}
+                  {...register(`episodes.${index}.episodeId` as const)}
                 />
               </StyledInput>
 
               <StyledInput>
                 <label>maturity</label>
-                <select
-                  {...register(
-                    `episodes.${index}.maturity` as "episodes.0.maturity"
-                  )}
-                >
-                  {selectOptions.map((option) => (
+                <select {...register(`episodes.${index}.maturity` as const)}>
+                  {maturityOptions.map((option) => (
                     <option value={option} key={option}>
                       {option}
                     </option>
@@ -79,18 +72,14 @@ export const Episodes = () => {
                 <label>imageUrl</label>
                 <input
                   type="text"
-                  {...register(
-                    `episodes.${index}.imageUrl` as "episodes.0.imageUrl"
-                  )}
+                  {...register(`episodes.${index}.imageUrl` as const)}
                 />
               </StyledInput>
               <StyledInput>
                 <label>format</label>
                 <input
                   type="text"
-                  {...register(
-                    `episodes.${index}.format` as "episodes.0.format"
-                  )}
+                  {...register(`episodes.${index}.format` as const)}
                 />
               </StyledInput>
               <StyledInput>
@@ -98,7 +87,7 @@ export const Episodes = () => {
                 <input
                   type="text"
                   {...register(
-                    `episodes.${index}.formatConfiguration` as "episodes.0.formatConfiguration"
+                    `episodes.${index}.formatConfiguration` as const
                   )}
                 />
               </StyledInput>
@@ -117,37 +106,33 @@ export const Episodes = () => {
         </StyledSectionWrapper>
       ))}
 
-      {episodeFields.length === 0 && (
-        <StyledSectionWrapper>
-          <Typography variant="h5">No episodes</Typography>
-        </StyledSectionWrapper>
-      )}
-
-      <div>
-        <Button
-          variant="contained"
-          type="button"
-          onClick={() =>
-            appendEpisode({
-              episodeId: getNewEpisodeId(episodeFields),
-              title: "",
-              description: "",
-              maturity: "PUBLIC",
-              imageUrl: "",
-              format: "",
-              formatConfiguration: "",
-            })
-          }
-        >
-          Add Episode
-        </Button>
-      </div>
+      <StyledSectionWrapper indented>
+        <div>
+          <Button
+            variant="contained"
+            type="button"
+            onClick={() =>
+              appendEpisode({
+                episodeId: getNewEpisodeId(episodeFields),
+                title: "",
+                description: "",
+                maturity: "PUBLIC",
+                imageUrl: "",
+                format: "",
+                formatConfiguration: "",
+              })
+            }
+          >
+            Add Episode
+          </Button>
+        </div>
+      </StyledSectionWrapper>
     </>
   );
 };
 
 function getNewEpisodeId(
-  episodeFields: FieldArrayWithId<FormInputs, "episodes", "id">[]
+  episodeFields: FieldArray<FormInputs, "episodes">[]
 ): string {
   if (episodeFields.length === 0) {
     return "1";

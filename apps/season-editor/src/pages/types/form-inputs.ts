@@ -3,6 +3,17 @@ export type FormInputs = {
   info: string;
   assetsURL: string;
   seasonEndMessage: string;
+  testItems: {
+    testItemId: string;
+    episode: string;
+    level: string;
+    documentation: string;
+    // search: // TODO
+    //   en:
+    //     links: []
+    //   de:
+    //     links: []
+  }[];
   competenceAreas: {
     competenceAreaId: string;
     name: string;
@@ -28,14 +39,3 @@ export type FormInputs = {
     formatConfiguration: string;
   }[];
 };
-
-// type MyType = {
-//   [key: `competence-${string}`]: string;
-// }
-
-// const x: MyType = {
-//   "competence-1": "eh",
-//   "competence-2": "ah!!",
-// }
-
-// console.log(x)

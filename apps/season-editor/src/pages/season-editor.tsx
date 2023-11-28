@@ -21,6 +21,7 @@ import {
   StyledSectionWrapper,
   StyledInput,
   SectionVisibilityButton,
+  TestItems,
 } from "./components";
 import { FormInputs, SectionName } from "./types";
 
@@ -209,6 +210,24 @@ export const SeasonEditor = () => {
         {hiddenSections.includes("episodes") ? null : (
           <FormProvider {...methods}>
             <Episodes />
+          </FormProvider>
+        )}
+
+        <StyledSectionWrapper>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h5">Test items</Typography>
+
+            <SectionVisibilityButton
+              hiddenSections={hiddenSections}
+              onToggle={handleToggleSectionVisibility}
+              sectionName="testItems"
+            />
+          </Box>
+        </StyledSectionWrapper>
+
+        {hiddenSections.includes("testItems") ? null : (
+          <FormProvider {...methods}>
+            <TestItems />
           </FormProvider>
         )}
       </Box>
