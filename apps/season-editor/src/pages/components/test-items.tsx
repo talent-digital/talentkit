@@ -1,4 +1,4 @@
-import { styled, Button, Box, Typography } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext, FieldArray } from "react-hook-form";
@@ -6,6 +6,7 @@ import { Level } from "@talentdigital/season";
 
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
+import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
 
 type LevelCode = `${Level}`;
 
@@ -41,7 +42,7 @@ export const TestItems = () => {
               />
             </StyledInput>
 
-            <StyledWrapper>
+            <StyledMultilineInputWrapper>
               <StyledInput>
                 <label>id</label>
                 <input
@@ -67,7 +68,7 @@ export const TestItems = () => {
                   {...register(`testItems.${index}.episode` as const)}
                 />
               </StyledInput>
-            </StyledWrapper>
+            </StyledMultilineInputWrapper>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
@@ -76,7 +77,7 @@ export const TestItems = () => {
               color="error"
               onClick={() => removeTestItem(index)}
             >
-              Remove episode
+              Remove Test item
             </Button>
           </Box>
         </StyledSectionWrapper>
@@ -117,13 +118,3 @@ function getNewTestItemId(
 
   return maybeTestItemNumber === "NaN" ? "0" : maybeTestItemNumber;
 }
-
-const StyledWrapper = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexWrap: "wrap",
-  gap: theme.spacing(2),
-
-  "> div": {
-    flex: `0 0 calc(33.333% - ${theme.spacing(2)})`,
-  },
-}));

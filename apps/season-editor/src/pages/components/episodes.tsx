@@ -1,4 +1,4 @@
-import { styled, Button, Box, Typography } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext, FieldArray } from "react-hook-form";
@@ -6,6 +6,7 @@ import { Maturity } from "@talentdigital/season";
 
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
+import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
 
 type MaturityCode = `${Maturity}`;
 
@@ -49,7 +50,7 @@ export const Episodes = () => {
               />
             </StyledInput>
 
-            <StyledWrapper>
+            <StyledMultilineInputWrapper>
               <StyledInput>
                 <label>id</label>
                 <input
@@ -91,7 +92,7 @@ export const Episodes = () => {
                   )}
                 />
               </StyledInput>
-            </StyledWrapper>
+            </StyledMultilineInputWrapper>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
@@ -144,13 +145,3 @@ function getNewEpisodeId(
 
   return maybeEpisodeNumber === "NaN" ? "0" : maybeEpisodeNumber;
 }
-
-const StyledWrapper = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexWrap: "wrap",
-  gap: theme.spacing(2),
-
-  "> div": {
-    flex: `0 0 calc(33.333% - ${theme.spacing(2)})`,
-  },
-}));

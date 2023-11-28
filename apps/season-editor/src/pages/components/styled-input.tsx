@@ -9,6 +9,9 @@ export const StyledInput = styled(Box, {
   display: "flex",
   flexDirection: "column",
   width: short ? "75px" : "100%",
+  "& select": {
+    cursor: "pointer",
+  },
   "& input, & select": {
     borderRadius: theme.shape.borderRadius,
     border: `1px solid ${grey[500]}`,
