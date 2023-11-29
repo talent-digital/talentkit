@@ -6,11 +6,12 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
+import { FeedbackQuestionsAnswers } from "./feedback-questions-answers";
 
 export const FeedbackQuestions = () => {
-  const { register, control } = useFormContext<FormInputs>();
+  const { register, control, setValue } = useFormContext<FormInputs>();
   const {
-    fields: testItemFields,
+    fields: feedbackQuestionFields,
     append: appendFeedbackQuestion,
     remove: removeFeedbackQuestion,
   } = useFieldArray({
@@ -18,10 +19,14 @@ export const FeedbackQuestions = () => {
     name: "feedbackQuestions",
   });
 
+  const handleUpdate = (index: number, answers: string) => {
+    setValue(`feedbackQuestions.${index}.answers`, answers);
+  };
+
   return (
     <>
-      {testItemFields.map((testItem, index) => (
-        <StyledSectionWrapper key={testItem.id} indented>
+      {feedbackQuestionFields.map((feedbackQuestionField, index) => (
+        <StyledSectionWrapper key={feedbackQuestionField.id} indented>
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
             <StyledMultilineInputWrapper>
               <StyledInput>
@@ -81,13 +86,11 @@ export const FeedbackQuestions = () => {
               />
             </StyledInput>
 
-            <StyledInput>
-              <label>answers (comma separated)</label>
-              <input
-                type="text"
-                {...register(`feedbackQuestions.${index}.answers` as const)}
-              />
-            </StyledInput>
+            <FeedbackQuestionsAnswers
+              answers={feedbackQuestionField.answers}
+              feedbackQuestionIndex={index}
+              onUpdate={handleUpdate}
+            />
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button

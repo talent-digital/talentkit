@@ -42,6 +42,12 @@ import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
   - Ensure ids are unique for testItem and feedbackQuestion (or disable the field and generate it automatically)
   - Test item support for toolType and search
   - Add statistics (number of episodes, number of test items, number of test items per episode etc.)
+  - Hide log form button under some dev tools icon
+*/
+
+/*
+  Questions:
+  - Pretty names, e.g. instead of assetsURL -> Assets URL
 */
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
