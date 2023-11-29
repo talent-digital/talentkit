@@ -117,25 +117,26 @@ export const SeasonEditor = () => {
     <Box>
       <StyledNavigation>
         <input type="file" accept=".yml,.yaml" onChange={handleFileChange} />
+        <Button onClick={handleLogForm}>Log form</Button>
+
         <Button variant="contained" onClick={handleExport}>
           Export
         </Button>
-        <FormControl>
-          <InputLabel>Language</InputLabel>
-          <Select
+        <StyledInput short>
+          <label>Language</label>
+          <select
             value={language}
             onChange={(event) =>
               setLanguage(event.target.value as LanguageCode)
             }
           >
-            {availableLanguages.map((language) => (
-              <MenuItem value={language} key={language}>
-                {language}
-              </MenuItem>
+            {availableLanguages.map((option) => (
+              <option value={option} key={option}>
+                {option}
+              </option>
             ))}
-          </Select>
-        </FormControl>
-        <Button onClick={handleLogForm}>Log form</Button>
+          </select>
+        </StyledInput>
       </StyledNavigation>
 
       <Box
@@ -257,6 +258,6 @@ const StyledNavigation = styled("div")(({ theme }) => ({
   boxShadow: theme.shadows[3],
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "flex-end",
   gap: theme.spacing(2),
 }));
