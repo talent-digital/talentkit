@@ -18,6 +18,7 @@ import {
   StyledInput,
   SectionVisibilityButton,
   TestItems,
+  FeedbackQuestions,
 } from "./components";
 import { FormInputs, LanguageCode, SectionName } from "./types";
 import {
@@ -38,6 +39,7 @@ import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
   - Description fields as textarea
   - Select subCompetences in testItems (possibly with text instead of ID) by name and automatically
     fill competence ids
+  - Ensure ids are unique for testItem and feedbackQuestion (or disable the field and generate it automatically)
   - Test item support for toolType and search
   - Add statistics (number of episodes, number of test items, number of test items per episode etc.)
 */
@@ -97,8 +99,13 @@ export const SeasonEditor = () => {
     if (!season) return;
 
     const episodes = extractEpisodes(season, language);
-    const { competenceAreas, competences, subCompetences, testItems } =
-      extractFromCompetences(season, language);
+    const {
+      competenceAreas,
+      competences,
+      subCompetences,
+      testItems,
+      feedbackQuestions,
+    } = extractFromCompetences(season, language);
 
     reset({
       title: season.title[language] ?? "",
@@ -110,6 +117,7 @@ export const SeasonEditor = () => {
       ...subCompetences,
       episodes,
       testItems,
+      feedbackQuestions,
     });
   }, [season, language, reset]);
 
@@ -231,6 +239,24 @@ export const SeasonEditor = () => {
         {hiddenSections.includes("testItems") ? null : (
           <FormProvider {...methods}>
             <TestItems />
+          </FormProvider>
+        )}
+
+        <StyledSectionWrapper>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h5">Feedback questions</Typography>
+
+            <SectionVisibilityButton
+              hiddenSections={hiddenSections}
+              onToggle={handleToggleSectionVisibility}
+              sectionName="feedbackQuestions"
+            />
+          </Box>
+        </StyledSectionWrapper>
+
+        {hiddenSections.includes("feedbackQuestions") ? null : (
+          <FormProvider {...methods}>
+            <FeedbackQuestions />
           </FormProvider>
         )}
       </Box>

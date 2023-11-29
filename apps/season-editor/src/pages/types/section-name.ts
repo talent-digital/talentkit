@@ -2,4 +2,5 @@ export type SectionName =
   | "basicInformation"
   | "competenceAreas"
   | "episodes"
-  | "testItems";
+  | "testItems"
+  | "feedbackQuestions";

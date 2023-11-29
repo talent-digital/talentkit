@@ -114,6 +114,14 @@ function mapToSeasonSubCompetences(
             competenceId,
             subCompetence.subCompetenceId
           ),
+          feedbackQuestions: mapToSeasonFeedbackQuestions(
+            values,
+            oldValues,
+            language,
+            competenceAreaId,
+            competenceId,
+            subCompetence.subCompetenceId
+          ),
         },
       };
     }, {}) ?? {}
@@ -145,14 +153,62 @@ function mapToSeasonTestItems(
       return {
         ...accumulator,
         [testItem.testItemId]: {
+          ...oldTestItem,
           level: testItem.level,
           episode: testItem.episode,
           documentation: {
             ...oldDocumentation,
             [language]: testItem.documentation,
           },
-          // search - TODO
-          // toolType - TODO
+        },
+      };
+    }, {}) ?? {}
+  );
+}
+
+function mapToSeasonFeedbackQuestions(
+  values: Partial<FormInputs>,
+  oldValues: SeasonDefinition,
+  language: LanguageCode,
+  competenceAreaId: string,
+  competenceId: string,
+  subCompetenceId: string
+) {
+  const feedbackQuestions = values.feedbackQuestions?.filter(
+    (feedbackQuestion) =>
+      feedbackQuestion.competenceAreaId === competenceAreaId &&
+      feedbackQuestion.competenceId === competenceId &&
+      feedbackQuestion.subCompetenceId === subCompetenceId
+  );
+
+  return (
+    feedbackQuestions?.reduce((accumulator, feedbackQuestion) => {
+      const oldFeedbackQuestion =
+        oldValues.competenceAreas[competenceAreaId].competences[competenceId]
+          .subCompetences[subCompetenceId].feedbackQuestions?.[
+          feedbackQuestion.feedbackQuestionId
+        ];
+      const oldQuestion = oldFeedbackQuestion?.question ?? {};
+      const oldAnswers = oldFeedbackQuestion?.answers ?? {};
+      const newAnswers = oldFeedbackQuestion?.answers ?? {};
+
+      feedbackQuestion.answers.split(", ").forEach((answer, index) => {
+        newAnswers[index] = {
+          ...oldAnswers[index],
+          [language]: answer,
+        };
+      });
+
+      return {
+        ...accumulator,
+        [feedbackQuestion.feedbackQuestionId]: {
+          ...oldFeedbackQuestion,
+          episode: feedbackQuestion.episode,
+          question: {
+            ...oldQuestion,
+            [language]: feedbackQuestion.question,
+          },
+          answers: newAnswers,
         },
       };
     }, {}) ?? {}

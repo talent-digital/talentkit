@@ -3,15 +3,6 @@ export type FormInputs = {
   info: string;
   assetsURL: string;
   seasonEndMessage: string;
-  testItems: {
-    testItemId: string;
-    competenceAreaId: string;
-    competenceId: string;
-    subCompetenceId: string;
-    episode: string;
-    level: string;
-    documentation: string;
-  }[];
   competenceAreas: {
     competenceAreaId: string;
     name: string;
@@ -35,5 +26,23 @@ export type FormInputs = {
     imageUrl: string;
     format: string;
     formatConfiguration: string;
+  }[];
+  testItems: {
+    testItemId: string;
+    competenceAreaId: string;
+    competenceId: string;
+    subCompetenceId: string;
+    episode: string;
+    level: string;
+    documentation: string;
+  }[];
+  feedbackQuestions: {
+    feedbackQuestionId: string;
+    competenceAreaId: string;
+    competenceId: string;
+    subCompetenceId: string;
+    episode: string;
+    question: string;
+    answers: string;
   }[];
 };

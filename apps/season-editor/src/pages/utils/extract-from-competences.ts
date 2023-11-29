@@ -12,6 +12,7 @@ type ExtractCompetencesReturn = {
     FormInputs[`subCompetences-${string}-${string}`]
   >;
   testItems: FormInputs["testItems"];
+  feedbackQuestions: FormInputs["feedbackQuestions"];
 };
 
 export function extractFromCompetences(
@@ -22,6 +23,7 @@ export function extractFromCompetences(
   const competences: ExtractCompetencesReturn["competences"] = {};
   const subCompetences: ExtractCompetencesReturn["subCompetences"] = {};
   const testItems: ExtractCompetencesReturn["testItems"] = [];
+  const feedbackQuestions: ExtractCompetencesReturn["feedbackQuestions"] = [];
 
   Object.entries(season.competenceAreas).forEach(
     ([competenceAreaId, competenceAreaValue]) => {
@@ -59,22 +61,45 @@ export function extractFromCompetences(
                 name: subCompetenceValue.name?.[language] ?? "",
               });
 
-              if (!subCompetenceValue.testItems) return;
+              if (subCompetenceValue.testItems) {
+                Object.entries(subCompetenceValue.testItems).forEach(
+                  ([testItemId, testItemValue]) => {
+                    testItems.push({
+                      testItemId,
+                      competenceAreaId,
+                      competenceId,
+                      subCompetenceId,
+                      episode: testItemValue.episode,
+                      level: testItemValue.level,
+                      documentation:
+                        testItemValue.documentation?.[language] ?? "",
+                    });
+                  }
+                );
+              }
 
-              Object.entries(subCompetenceValue.testItems).forEach(
-                ([testItemId, testItemValue]) => {
-                  testItems.push({
-                    competenceAreaId,
-                    competenceId,
-                    subCompetenceId,
-                    testItemId,
-                    episode: testItemValue.episode,
-                    level: testItemValue.level,
-                    documentation:
-                      testItemValue.documentation?.[language] ?? "",
-                  });
-                }
-              );
+              if (subCompetenceValue.feedbackQuestions) {
+                Object.entries(subCompetenceValue.feedbackQuestions).forEach(
+                  ([feedbackQuestionId, feedbackQuestionValue]) => {
+                    const answers = Object.values(
+                      feedbackQuestionValue?.answers
+                    )
+                      .map((item) => item[language] ?? "")
+                      .join(", ");
+
+                    feedbackQuestions.push({
+                      feedbackQuestionId,
+                      competenceAreaId,
+                      competenceId,
+                      subCompetenceId,
+                      episode: feedbackQuestionValue.episode,
+                      question:
+                        feedbackQuestionValue.question?.[language] ?? "",
+                      answers,
+                    });
+                  }
+                );
+              }
             }
           );
         }
@@ -82,5 +107,11 @@ export function extractFromCompetences(
     }
   );
 
-  return { competenceAreas, competences, subCompetences, testItems };
+  return {
+    competenceAreas,
+    competences,
+    subCompetences,
+    testItems,
+    feedbackQuestions,
+  };
 }
