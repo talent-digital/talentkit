@@ -11,11 +11,6 @@ export type FormInputs = {
     episode: string;
     level: string;
     documentation: string;
-    // search: // TODO
-    //   en:
-    //     links: []
-    //   de:
-    //     links: []
   }[];
   competenceAreas: {
     competenceAreaId: string;

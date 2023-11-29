@@ -2,10 +2,6 @@ import {
   Alert,
   Box,
   Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
   Snackbar,
   Typography,
   styled,
@@ -35,11 +31,15 @@ import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
 /* TODO:
   - Allow to init without importing a file
   - Add id generator
-  - Add remove options
+  - Add remove competence option
+
   - Add popup for delete confirmation
   - Add sticky header
-  - Episode description as textarea
-  - Select for competences in testItems (possibly with text instead of ID)
+  - Description fields as textarea
+  - Select subCompetences in testItems (possibly with text instead of ID) by name and automatically
+    fill competence ids
+  - Test item support for toolType and search
+  - Add statistics (number of episodes, number of test items, number of test items per episode etc.)
 */
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
