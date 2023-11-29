@@ -1,5 +1,4 @@
 import { Box, Button } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import { StyledInput } from "./styled-input";
 import { useFieldArray, useForm } from "react-hook-form";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -73,7 +72,11 @@ export const FeedbackQuestionsAnswers = ({
             />
           </StyledInput>
           <div>
-            <IconButton onClick={() => removeAnswer(index)} color="error">
+            <IconButton
+              onClick={() => removeAnswer(index)}
+              color="error"
+              title={`Delete answer ${index}`}
+            >
               <DeleteIcon />
             </IconButton>
           </div>

@@ -32,7 +32,6 @@ import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
 
 /* TODO:
   - Add id generator
-  - Add remove competence option
 
   - Add popup for delete confirmation
   - Add sticky header
@@ -44,6 +43,7 @@ import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
   - Add statistics (number of episodes, number of test items, number of test items per episode etc.)
   - Hide log form button under some dev tools icon
   - Add periodic save state and go back to previous state
+  - Pretty load file button
 */
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();

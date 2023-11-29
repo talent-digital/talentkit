@@ -1,16 +1,20 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import { Competences } from "./competences";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const CompetenceAreas = () => {
   const { register, control } = useFormContext<FormInputs>();
-  const { fields: competenceAreaFields, append: appendCompetenceArea } =
-    useFieldArray({
-      control,
-      name: "competenceAreas",
-    });
+  const {
+    fields: competenceAreaFields,
+    append: appendCompetenceArea,
+    remove: removeCompetenceArea,
+  } = useFieldArray({
+    control,
+    name: "competenceAreas",
+  });
 
   return (
     <>
@@ -34,6 +38,15 @@ export const CompetenceAreas = () => {
                 {...register(`competenceAreas.${index}.name` as const)}
               />
             </StyledInput>
+            <div>
+              <IconButton
+                onClick={() => removeCompetenceArea(index)}
+                color="error"
+                title="Delete competence area"
+              >
+                <DeleteIcon />
+              </IconButton>
+            </div>
           </Box>
 
           <Competences

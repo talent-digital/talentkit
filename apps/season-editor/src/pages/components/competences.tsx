@@ -1,9 +1,10 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import { StyledInput } from "./styled-input";
 import { SubCompetences } from "./sub-competences";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 type CompetencesProps = {
   competenceAreaId: string;
@@ -11,7 +12,11 @@ type CompetencesProps = {
 
 export const Competences = ({ competenceAreaId }: CompetencesProps) => {
   const { register, control } = useFormContext<FormInputs>();
-  const { fields: competenceFields, append: appendCompetence } = useFieldArray({
+  const {
+    fields: competenceFields,
+    append: appendCompetence,
+    remove: removeCompetence,
+  } = useFieldArray({
     control,
     name: `competences-${competenceAreaId}`,
   });
@@ -38,6 +43,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
               <Box
                 sx={{
                   display: "flex",
+                  alignItems: "flex-end",
                   gap: 2,
                 }}
               >
@@ -60,6 +66,15 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
                     )}
                   />
                 </StyledInput>
+                <div>
+                  <IconButton
+                    onClick={() => removeCompetence(index)}
+                    color="error"
+                    title="Delete competence"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </div>
               </Box>
               <SubCompetences
                 competenceId={competenceField.competenceId}
