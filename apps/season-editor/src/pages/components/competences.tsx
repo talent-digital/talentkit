@@ -42,7 +42,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
                 }}
               >
                 <StyledInput short>
-                  <label>id</label>
+                  <label>Id</label>
                   <input
                     disabled
                     type="text"
@@ -52,7 +52,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
                   />
                 </StyledInput>
                 <StyledInput>
-                  <label>name</label>
+                  <label>Name</label>
                   <input
                     type="text"
                     {...register(

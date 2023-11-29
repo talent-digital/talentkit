@@ -65,7 +65,7 @@ export const FeedbackQuestionsAnswers = ({
           }}
         >
           <StyledInput>
-            <label>answer {index}</label>
+            <label>Answer {index}</label>
             <input
               type="text"
               {...register(`answers.${index}.text` as const)}

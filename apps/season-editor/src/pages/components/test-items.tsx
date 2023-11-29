@@ -35,7 +35,7 @@ export const TestItems = () => {
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
             <StyledMultilineInputWrapper>
               <StyledInput>
-                <label>testItemId</label>
+                <label>Id</label>
                 <input
                   type="text"
                   {...register(`testItems.${index}.testItemId` as const)}
@@ -43,7 +43,7 @@ export const TestItems = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>competenceAreaId</label>
+                <label>Competence Area Id</label>
                 <input
                   type="text"
                   {...register(`testItems.${index}.competenceAreaId` as const)}
@@ -51,7 +51,7 @@ export const TestItems = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>competenceId</label>
+                <label>Competence Id</label>
                 <input
                   type="text"
                   {...register(`testItems.${index}.competenceId` as const)}
@@ -59,7 +59,7 @@ export const TestItems = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>subCompetenceId</label>
+                <label>Sub-competence Id</label>
                 <input
                   type="text"
                   {...register(`testItems.${index}.subCompetenceId` as const)}
@@ -67,7 +67,7 @@ export const TestItems = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>level</label>
+                <label>Level</label>
                 <select {...register(`testItems.${index}.level` as const)}>
                   {levelOptions.map((option) => (
                     <option value={option} key={option}>
@@ -77,7 +77,7 @@ export const TestItems = () => {
                 </select>
               </StyledInput>
               <StyledInput>
-                <label>episode</label>
+                <label>Episode</label>
                 <input
                   type="text"
                   {...register(`testItems.${index}.episode` as const)}
@@ -86,7 +86,7 @@ export const TestItems = () => {
             </StyledMultilineInputWrapper>
 
             <StyledInput>
-              <label>documentation</label>
+              <label>Documentation</label>
               <input
                 type="text"
                 {...register(`testItems.${index}.documentation` as const)}

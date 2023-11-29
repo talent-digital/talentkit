@@ -30,7 +30,7 @@ export const FeedbackQuestions = () => {
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
             <StyledMultilineInputWrapper>
               <StyledInput>
-                <label>feedbackQuestionId</label>
+                <label>Id</label>
                 <input
                   type="text"
                   {...register(
@@ -40,7 +40,7 @@ export const FeedbackQuestions = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>competenceAreaId</label>
+                <label>Competence Area Id</label>
                 <input
                   type="text"
                   {...register(
@@ -50,7 +50,7 @@ export const FeedbackQuestions = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>competenceId</label>
+                <label>Competence Id</label>
                 <input
                   type="text"
                   {...register(
@@ -60,7 +60,7 @@ export const FeedbackQuestions = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>subCompetenceId</label>
+                <label>Sub-competence Id</label>
                 <input
                   type="text"
                   {...register(
@@ -70,7 +70,7 @@ export const FeedbackQuestions = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>episode</label>
+                <label>Episode</label>
                 <input
                   type="text"
                   {...register(`feedbackQuestions.${index}.episode` as const)}
@@ -79,7 +79,7 @@ export const FeedbackQuestions = () => {
             </StyledMultilineInputWrapper>
 
             <StyledInput>
-              <label>question</label>
+              <label>Question</label>
               <input
                 type="text"
                 {...register(`feedbackQuestions.${index}.question` as const)}

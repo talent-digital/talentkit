@@ -25,12 +25,12 @@ import {
   detectLanguage,
   extractEpisodes,
   extractFromCompetences,
+  getEmptySeason,
   mapToSeasonObject,
 } from "./utils";
 import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
 
 /* TODO:
-  - Allow to init without importing a file
   - Add id generator
   - Add remove competence option
 
@@ -43,17 +43,13 @@ import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
   - Test item support for toolType and search
   - Add statistics (number of episodes, number of test items, number of test items per episode etc.)
   - Hide log form button under some dev tools icon
-*/
-
-/*
-  Questions:
-  - Pretty names, e.g. instead of assetsURL -> Assets URL
+  - Add periodic save state and go back to previous state
 */
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
   const { register, reset, getValues } = methods;
   const [readFileErrorMsg, setReadFileError] = useState<string | null>(null);
-  const [season, setSeason] = useState<SeasonDefinition>();
+  const [season, setSeason] = useState<SeasonDefinition>(getEmptySeason());
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
   const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
 
@@ -77,8 +73,6 @@ export const SeasonEditor = () => {
   };
 
   const handleExport = () => {
-    if (!season) return;
-
     const values = mapToSeasonObject(season, getValues(), language);
     const element = document.createElement("a");
     const file = new Blob([stringify(values)], { type: "text/plain" });
@@ -187,7 +181,7 @@ export const SeasonEditor = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>assetsURL</label>
+                <label>Assets URL</label>
                 <input type="text" {...register("assetsURL")} />
               </StyledInput>
             </>

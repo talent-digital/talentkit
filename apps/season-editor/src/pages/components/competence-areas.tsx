@@ -18,7 +18,7 @@ export const CompetenceAreas = () => {
         <Box key={competenceAreaField.id}>
           <Box sx={{ display: "flex", gap: 2 }}>
             <StyledInput short>
-              <label>id</label>
+              <label>Id</label>
               <input
                 disabled
                 type="text"
@@ -28,7 +28,7 @@ export const CompetenceAreas = () => {
               />
             </StyledInput>
             <StyledInput>
-              <label>name</label>
+              <label>Name</label>
               <input
                 type="text"
                 {...register(`competenceAreas.${index}.name` as const)}
