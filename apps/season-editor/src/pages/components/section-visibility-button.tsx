@@ -5,6 +5,7 @@ import { SectionName } from "../types";
 
 type Props = {
   hiddenSections: SectionName[];
+  // eslint-disable-next-line no-unused-vars
   onToggle: (sectionName: SectionName) => void;
   sectionName: SectionName;
 };

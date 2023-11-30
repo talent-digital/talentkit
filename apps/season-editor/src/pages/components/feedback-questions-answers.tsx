@@ -13,7 +13,8 @@ type AnswersFormInputs = {
 type FeedbackQuestionsAnswersProps = {
   answers: string;
   feedbackQuestionIndex: number;
-  onUpdate: (index: number, asnwers: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  onUpdate: (index: number, answers: string) => void;
 };
 
 export const FeedbackQuestionsAnswers = ({
