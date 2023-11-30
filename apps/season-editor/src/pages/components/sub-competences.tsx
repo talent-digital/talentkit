@@ -4,6 +4,7 @@ import { StyledInput } from "./styled-input";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { getNextCompetenceId } from "../utils";
 
 type SubCompetencesProps = {
   competenceAreaId: string;
@@ -14,7 +15,7 @@ export const SubCompetences = ({
   competenceAreaId,
   competenceId,
 }: SubCompetencesProps) => {
-  const { register, control } = useFormContext<FormInputs>();
+  const { register, control, getValues } = useFormContext<FormInputs>();
   const {
     fields: subCompetenceFields,
     append: appendSubCompetence,
@@ -23,6 +24,19 @@ export const SubCompetences = ({
     control,
     name: `subCompetences-${competenceAreaId}-${competenceId}`,
   });
+
+  const getSubCompetenceId = (): string => {
+    const values = getValues();
+    const subCompetences =
+      values[`subCompetences-${competenceAreaId}-${competenceId}`];
+
+    return getNextCompetenceId(
+      values.idSeed,
+      competenceId,
+      subCompetences,
+      "subCompetenceId"
+    );
+  };
 
   return (
     <Box
@@ -89,7 +103,7 @@ export const SubCompetences = ({
               name: "",
               competenceAreaId: competenceAreaId,
               competenceId: competenceId,
-              subCompetenceId: `${Math.ceil(Math.random() * 100000)}`, // TODO: generate id in a smart way
+              subCompetenceId: getSubCompetenceId(),
             })
           }
         >

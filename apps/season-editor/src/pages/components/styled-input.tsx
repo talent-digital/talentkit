@@ -8,7 +8,7 @@ export const StyledInput = styled(Box, {
 }>(({ theme, short }) => ({
   display: "flex",
   flexDirection: "column",
-  width: short ? "75px" : "100%",
+  width: short ? "85px" : "100%",
   "& select": {
     cursor: "pointer",
   },

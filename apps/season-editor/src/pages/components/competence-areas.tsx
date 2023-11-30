@@ -4,9 +4,10 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import { Competences } from "./competences";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { getNextCompetenceId } from "../utils";
 
 export const CompetenceAreas = () => {
-  const { register, control } = useFormContext<FormInputs>();
+  const { register, control, getValues } = useFormContext<FormInputs>();
   const {
     fields: competenceAreaFields,
     append: appendCompetenceArea,
@@ -15,6 +16,17 @@ export const CompetenceAreas = () => {
     control,
     name: "competenceAreas",
   });
+
+  const getCompetenceAreaId = (): string => {
+    const { idSeed, competenceAreas } = getValues();
+
+    return getNextCompetenceId(
+      idSeed,
+      idSeed,
+      competenceAreas,
+      "competenceAreaId"
+    );
+  };
 
   return (
     <>
@@ -61,7 +73,7 @@ export const CompetenceAreas = () => {
           onClick={() =>
             appendCompetenceArea({
               name: "",
-              competenceAreaId: `${Math.ceil(Math.random() * 100000)}`, // TODO: generate id in a smart way
+              competenceAreaId: getCompetenceAreaId(),
             })
           }
         >

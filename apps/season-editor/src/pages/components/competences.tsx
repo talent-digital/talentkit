@@ -5,13 +5,14 @@ import { FormInputs } from "../types";
 import { StyledInput } from "./styled-input";
 import { SubCompetences } from "./sub-competences";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { getNextCompetenceId } from "../utils";
 
 type CompetencesProps = {
   competenceAreaId: string;
 };
 
 export const Competences = ({ competenceAreaId }: CompetencesProps) => {
-  const { register, control } = useFormContext<FormInputs>();
+  const { register, control, getValues } = useFormContext<FormInputs>();
   const {
     fields: competenceFields,
     append: appendCompetence,
@@ -20,6 +21,18 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
     control,
     name: `competences-${competenceAreaId}`,
   });
+
+  const getCompetenceId = (): string => {
+    const values = getValues();
+    const competences = values[`competences-${competenceAreaId}`];
+
+    return getNextCompetenceId(
+      values.idSeed,
+      competenceAreaId,
+      competences,
+      "competenceId"
+    );
+  };
 
   return (
     <Box
@@ -92,7 +105,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
             appendCompetence({
               name: "",
               competenceAreaId: competenceAreaId,
-              competenceId: `${Math.ceil(Math.random() * 100000)}`, // TODO: generate id in a smart way
+              competenceId: getCompetenceId(),
             })
           }
         >
