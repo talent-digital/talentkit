@@ -13,6 +13,7 @@ export function mapToSeasonObject(
     Object.entries(valuesWithEmpty).filter((entries) => Boolean(entries[1]))
   ) as Partial<FormInputs>;
 
+  newFile.seedId = values.seedId;
   newFile.title[language] = values.title;
   newFile.info[language] = values.info;
   newFile.assetsURL = values.assetsURL;

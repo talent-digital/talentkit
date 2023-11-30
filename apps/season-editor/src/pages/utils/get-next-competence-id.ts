@@ -1,11 +1,11 @@
 export function getNextCompetenceId(
-  idSeed: string,
+  seedId: string,
   parentId: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   arr: any[],
   idKey: string
 ): string {
-  const maybeSeed = parentId.indexOf(idSeed) === -1 ? idSeed : "";
+  const maybeSeed = parentId.indexOf(seedId) === -1 ? seedId : "";
   if (arr.length === 0) {
     return `${parentId}${maybeSeed}01`;
   }

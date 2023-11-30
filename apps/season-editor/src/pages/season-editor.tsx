@@ -48,7 +48,7 @@ export const SeasonEditor = () => {
   const [season, setSeason] = useState<SeasonDefinition>(getEmptySeason());
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
   const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
-  const [idSeedFilled, setIdSeedFilled] = useState<boolean>(false);
+  const [seedIdFilled, setSeedIdFilled] = useState<boolean>(false);
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]) {
@@ -103,8 +103,13 @@ export const SeasonEditor = () => {
       testItems,
       feedbackQuestions,
     } = extractFromCompetences(season, language);
+    const formSeedId = getValues().seedId;
+    if (season.seedId) {
+      setSeedIdFilled(true);
+    }
 
     reset({
+      seedId: season.seedId ?? formSeedId ?? "",
       title: season.title[language] ?? "",
       info: season.info[language] ?? "",
       assetsURL: season.assetsURL ?? "",
@@ -116,12 +121,12 @@ export const SeasonEditor = () => {
       testItems,
       feedbackQuestions,
     });
-  }, [season, language, reset]);
+  }, [season, language, reset, getValues]);
 
   const handleSeedIdSubmit = () => {
-    const { idSeed } = getValues();
-    if (idSeed) {
-      setIdSeedFilled(true);
+    const { seedId } = getValues();
+    if (seedId) {
+      setSeedIdFilled(true);
     }
   };
 
@@ -182,13 +187,22 @@ export const SeasonEditor = () => {
           <Typography variant="h6" sx={{ mb: 2 }}>
             Advanced tools
           </Typography>
-          <Button onClick={handleLogForm} variant="contained">
-            Log form
-          </Button>
+          <Box
+            sx={{
+              gap: 2,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <Button onClick={handleLogForm} variant="contained">
+              Log form
+            </Button>
+          </Box>
         </div>
       </StyledSidebar>
 
-      {!idSeedFilled && (
+      {!seedIdFilled && (
         <StyledContent>
           <StyledSectionWrapper>
             <Typography variant="h5">
@@ -197,7 +211,7 @@ export const SeasonEditor = () => {
 
             <StyledInput>
               <label>Unique season competence Id number (e.g. 100)</label>
-              <input type="text" {...register("idSeed")} />
+              <input type="text" {...register("seedId")} />
             </StyledInput>
 
             <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -209,7 +223,7 @@ export const SeasonEditor = () => {
         </StyledContent>
       )}
 
-      {idSeedFilled && (
+      {seedIdFilled && (
         <StyledContent>
           <StyledSectionWrapper id="basic-information">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -225,7 +239,7 @@ export const SeasonEditor = () => {
               <>
                 <StyledInput>
                   <label>Unique season competence Id number (e.g. 100)</label>
-                  <input type="text" {...register("idSeed")} disabled />
+                  <input type="text" {...register("seedId")} disabled />
                 </StyledInput>
 
                 <StyledInput>

@@ -31,7 +31,7 @@ export const SubCompetences = ({
       values[`subCompetences-${competenceAreaId}-${competenceId}`];
 
     return getNextCompetenceId(
-      values.idSeed,
+      values.seedId,
       competenceId,
       subCompetences,
       "subCompetenceId"

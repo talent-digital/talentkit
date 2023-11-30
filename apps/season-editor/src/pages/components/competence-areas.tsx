@@ -18,11 +18,11 @@ export const CompetenceAreas = () => {
   });
 
   const getCompetenceAreaId = (): string => {
-    const { idSeed, competenceAreas } = getValues();
+    const { seedId, competenceAreas } = getValues();
 
     return getNextCompetenceId(
-      idSeed,
-      idSeed,
+      seedId,
+      seedId,
       competenceAreas,
       "competenceAreaId"
     );

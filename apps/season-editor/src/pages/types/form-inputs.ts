@@ -1,5 +1,5 @@
 export type FormInputs = {
-  idSeed: string;
+  seedId: string;
   title: string;
   info: string;
   assetsURL: string;

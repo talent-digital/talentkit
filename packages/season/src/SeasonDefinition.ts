@@ -39,6 +39,11 @@ export interface SeasonDefinition {
    * A rewarding message to the player when they finish the season.
    */
   seasonEndMessage: LocalizedString;
+
+  /**
+   * Used by the season editor. Should not be set manually.
+   */
+  seedId?: string;
 }
 
 /**

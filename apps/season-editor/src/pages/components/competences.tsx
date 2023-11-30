@@ -27,7 +27,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
     const competences = values[`competences-${competenceAreaId}`];
 
     return getNextCompetenceId(
-      values.idSeed,
+      values.seedId,
       competenceAreaId,
       competences,
       "competenceId"
