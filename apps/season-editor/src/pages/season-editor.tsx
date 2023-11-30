@@ -5,6 +5,7 @@ import {
   Snackbar,
   Typography,
   styled,
+  Divider,
 } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { parse, stringify } from "yaml";
@@ -30,19 +31,16 @@ import {
 } from "./utils";
 import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
 
-/* TODO:
-  - Add popup for delete confirmation
-  - Add sticky header
-  - Description fields as textarea
-  - Select subCompetences in testItems (possibly with text instead of ID) by name and automatically
-    fill competence ids
-  - Ensure ids are unique for testItem and feedbackQuestion (or disable the field and generate it automatically)
-  - Test item support for toolType and search
-  - Add statistics (number of episodes, number of test items, number of test items per episode etc.)
-  - Hide log form button under some dev tools icon
-  - Add periodic save state and go back to previous state
-  - Pretty load file button
-*/
+const navigationList = [
+  "basic-information",
+  "competence-areas",
+  "episodes",
+  "test-items",
+  "feedback-questions",
+];
+
+const SIDEBAR_SIZE = 300;
+
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
   const { register, reset, getValues } = methods;
@@ -128,30 +126,67 @@ export const SeasonEditor = () => {
   };
 
   return (
-    <Box>
-      <StyledNavigation>
-        <input type="file" accept=".yml,.yaml" onChange={handleFileChange} />
-        <Button onClick={handleLogForm}>Log form</Button>
+    <Box sx={{ paddingLeft: `${SIDEBAR_SIZE}px` }}>
+      <StyledSidebar>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            flexDirection: "column",
+            alignItems: "flex-start",
+          }}
+        >
+          <Typography variant="h6">Configuration and actions</Typography>
 
-        <Button variant="contained" onClick={handleExport}>
-          Export
-        </Button>
-        <StyledInput short>
-          <label>Language</label>
-          <select
-            value={language}
-            onChange={(event) =>
-              setLanguage(event.target.value as LanguageCode)
-            }
-          >
-            {availableLanguages.map((option) => (
-              <option value={option} key={option}>
-                {option}
-              </option>
+          <input type="file" accept=".yml,.yaml" onChange={handleFileChange} />
+
+          <StyledInput short>
+            <label>Language</label>
+            <select
+              value={language}
+              onChange={(event) =>
+                setLanguage(event.target.value as LanguageCode)
+              }
+            >
+              {availableLanguages.map((option) => (
+                <option value={option} key={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </StyledInput>
+
+          <Button variant="contained" onClick={handleExport}>
+            Export season.yaml
+          </Button>
+        </Box>
+
+        <Divider />
+
+        <div>
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            Jump to section
+          </Typography>
+          <StyledNavList>
+            {navigationList.map((section) => (
+              <li key={section}>
+                <a href={`#${section}`}>{section.replace("-", " ")}</a>
+              </li>
             ))}
-          </select>
-        </StyledInput>
-      </StyledNavigation>
+          </StyledNavList>
+        </div>
+
+        <Divider />
+
+        <div>
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            Advanced tools
+          </Typography>
+          <Button onClick={handleLogForm} variant="contained">
+            Log form
+          </Button>
+        </div>
+      </StyledSidebar>
 
       {!idSeedFilled && (
         <StyledContent>
@@ -176,7 +211,7 @@ export const SeasonEditor = () => {
 
       {idSeedFilled && (
         <StyledContent>
-          <StyledSectionWrapper>
+          <StyledSectionWrapper id="basic-information">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Basic information</Typography>
 
@@ -211,7 +246,7 @@ export const SeasonEditor = () => {
             )}
           </StyledSectionWrapper>
 
-          <StyledSectionWrapper>
+          <StyledSectionWrapper id="competence-areas">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Competence Areas</Typography>
 
@@ -229,7 +264,7 @@ export const SeasonEditor = () => {
             )}
           </StyledSectionWrapper>
 
-          <StyledSectionWrapper>
+          <StyledSectionWrapper id="episodes">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Episodes</Typography>
 
@@ -247,7 +282,7 @@ export const SeasonEditor = () => {
             </FormProvider>
           )}
 
-          <StyledSectionWrapper>
+          <StyledSectionWrapper id="test-items">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Test items</Typography>
 
@@ -265,7 +300,7 @@ export const SeasonEditor = () => {
             </FormProvider>
           )}
 
-          <StyledSectionWrapper>
+          <StyledSectionWrapper id="feedback-questions">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h5">Feedback questions</Typography>
 
@@ -312,12 +347,34 @@ const StyledContent = styled("div")(({ theme }) => ({
   margin: "auto",
 }));
 
-const StyledNavigation = styled("div")(({ theme }) => ({
-  padding: theme.spacing(2),
+const StyledSidebar = styled("div")(({ theme }) => ({
+  padding: theme.spacing(4, 2),
   background: "#fff",
   boxShadow: theme.shadows[3],
   display: "flex",
-  justifyContent: "center",
-  alignItems: "flex-end",
+  flexDirection: "column",
   gap: theme.spacing(2),
+  position: "fixed",
+  left: 0,
+  width: SIDEBAR_SIZE,
+  height: "100%",
+}));
+
+const StyledNavList = styled("ul")(({ theme }) => ({
+  listStyle: "none",
+  padding: 0,
+  margin: 0,
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(2),
+  "& > li": {
+    "& > a": {
+      color: theme.palette.primary.main,
+      textDecoration: "none",
+      textTransform: "capitalize",
+      "&:hover": {
+        textDecoration: "underline",
+      },
+    },
+  },
 }));
