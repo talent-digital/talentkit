@@ -271,11 +271,19 @@ export const SeasonEditor = () => {
               />
             </Box>
 
-            {hiddenSections.includes("competenceAreas") ? null : (
+            <Box
+              sx={{
+                flexDirection: "column",
+                gap: 2,
+                display: hiddenSections.includes("competenceAreas")
+                  ? "none"
+                  : "flex",
+              }}
+            >
               <FormProvider {...methods}>
                 <CompetenceAreas />
               </FormProvider>
-            )}
+            </Box>
           </StyledSectionWrapper>
 
           <StyledSectionWrapper id="episodes">

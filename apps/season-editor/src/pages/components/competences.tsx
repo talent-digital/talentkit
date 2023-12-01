@@ -20,6 +20,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
   } = useFieldArray({
     control,
     name: `competences-${competenceAreaId}`,
+    shouldUnregister: true,
   });
 
   const getCompetenceId = (): string => {

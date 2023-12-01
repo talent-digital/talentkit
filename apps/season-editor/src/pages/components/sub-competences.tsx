@@ -23,6 +23,7 @@ export const SubCompetences = ({
   } = useFieldArray({
     control,
     name: `subCompetences-${competenceAreaId}-${competenceId}`,
+    shouldUnregister: true,
   });
 
   const getSubCompetenceId = (): string => {
