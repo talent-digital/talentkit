@@ -12,7 +12,8 @@ type CompetencesProps = {
 };
 
 export const Competences = ({ competenceAreaId }: CompetencesProps) => {
-  const { register, control, getValues } = useFormContext<FormInputs>();
+  const { register, control, getValues, setFocus } =
+    useFormContext<FormInputs>();
   const {
     fields: competenceFields,
     append: appendCompetence,
@@ -33,6 +34,19 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
       competences,
       "competenceId"
     );
+  };
+
+  const handleAppendCompetence = () => {
+    appendCompetence({
+      name: "",
+      competenceAreaId: competenceAreaId,
+      competenceId: getCompetenceId(),
+    });
+
+    setTimeout(() => {
+      const index = competenceFields.length;
+      setFocus(`competences-${competenceAreaId}.${index}.name`);
+    });
   };
 
   return (
@@ -102,13 +116,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
         <Button
           variant="contained"
           type="button"
-          onClick={() =>
-            appendCompetence({
-              name: "",
-              competenceAreaId: competenceAreaId,
-              competenceId: getCompetenceId(),
-            })
-          }
+          onClick={handleAppendCompetence}
         >
           Add Competence
         </Button>

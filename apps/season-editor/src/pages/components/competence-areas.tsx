@@ -7,7 +7,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { getNextCompetenceId } from "../utils";
 
 export const CompetenceAreas = () => {
-  const { register, control, getValues } = useFormContext<FormInputs>();
+  const { register, control, getValues, setFocus } =
+    useFormContext<FormInputs>();
   const {
     fields: competenceAreaFields,
     append: appendCompetenceArea,
@@ -26,6 +27,18 @@ export const CompetenceAreas = () => {
       competenceAreas,
       "competenceAreaId"
     );
+  };
+
+  const handleAppendCompetenceArea = () => {
+    appendCompetenceArea({
+      name: "",
+      competenceAreaId: getCompetenceAreaId(),
+    });
+
+    setTimeout(() => {
+      const index = competenceAreaFields.length;
+      setFocus(`competenceAreas.${index}.name`);
+    });
   };
 
   return (
@@ -70,12 +83,7 @@ export const CompetenceAreas = () => {
         <Button
           variant="contained"
           type="button"
-          onClick={() =>
-            appendCompetenceArea({
-              name: "",
-              competenceAreaId: getCompetenceAreaId(),
-            })
-          }
+          onClick={handleAppendCompetenceArea}
         >
           Add Competence Area
         </Button>

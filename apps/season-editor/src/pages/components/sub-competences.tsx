@@ -15,7 +15,8 @@ export const SubCompetences = ({
   competenceAreaId,
   competenceId,
 }: SubCompetencesProps) => {
-  const { register, control, getValues } = useFormContext<FormInputs>();
+  const { register, control, getValues, setFocus } =
+    useFormContext<FormInputs>();
   const {
     fields: subCompetenceFields,
     append: appendSubCompetence,
@@ -37,6 +38,22 @@ export const SubCompetences = ({
       subCompetences,
       "subCompetenceId"
     );
+  };
+
+  const handleAppendSubCompetence = () => {
+    appendSubCompetence({
+      name: "",
+      competenceAreaId: competenceAreaId,
+      competenceId: competenceId,
+      subCompetenceId: getSubCompetenceId(),
+    });
+
+    setTimeout(() => {
+      const index = subCompetenceFields.length;
+      setFocus(
+        `subCompetences-${competenceAreaId}-${competenceId}.${index}.name`
+      );
+    });
   };
 
   return (
@@ -99,14 +116,7 @@ export const SubCompetences = ({
         <Button
           variant="contained"
           type="button"
-          onClick={() =>
-            appendSubCompetence({
-              name: "",
-              competenceAreaId: competenceAreaId,
-              competenceId: competenceId,
-              subCompetenceId: getSubCompetenceId(),
-            })
-          }
+          onClick={handleAppendSubCompetence}
         >
           Add SubCompetence
         </Button>
