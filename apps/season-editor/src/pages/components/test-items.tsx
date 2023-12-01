@@ -7,11 +7,20 @@ import { Level } from "@talentdigital/season";
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
+import { useState } from "react";
 
 type LevelCode = `${Level}`;
 
+const levelOptions: LevelCode[] = [
+  "FOUNDATION",
+  "INTERMEDIATE",
+  "ADVANCED",
+  "HIGHLY_SPECIALISED",
+];
+
 export const TestItems = () => {
-  const { register, control } = useFormContext<FormInputs>();
+  const [episodeOptions, setEpisodeOptions] = useState<string[]>([]);
+  const { register, control, getValues } = useFormContext<FormInputs>();
   const {
     fields: testItemFields,
     append: appendTestItem,
@@ -21,12 +30,10 @@ export const TestItems = () => {
     name: "testItems",
   });
 
-  const levelOptions: LevelCode[] = [
-    "FOUNDATION",
-    "INTERMEDIATE",
-    "ADVANCED",
-    "HIGHLY_SPECIALISED",
-  ];
+  const updateEpisodeList = () => {
+    const episodes = getValues("episodes").map((episode) => episode.episodeId);
+    setEpisodeOptions(episodes);
+  };
 
   return (
     <>
@@ -76,12 +83,19 @@ export const TestItems = () => {
                   ))}
                 </select>
               </StyledInput>
+
               <StyledInput>
                 <label>Episode</label>
-                <input
-                  type="text"
+                <select
                   {...register(`testItems.${index}.episode` as const)}
-                />
+                  onClick={updateEpisodeList}
+                >
+                  {episodeOptions.map((option) => (
+                    <option value={option} key={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
               </StyledInput>
             </StyledMultilineInputWrapper>
 

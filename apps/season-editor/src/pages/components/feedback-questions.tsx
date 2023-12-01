@@ -7,9 +7,12 @@ import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
 import { FeedbackQuestionsAnswers } from "./feedback-questions-answers";
+import { useState } from "react";
 
 export const FeedbackQuestions = () => {
-  const { register, control, setValue } = useFormContext<FormInputs>();
+  const [episodeOptions, setEpisodeOptions] = useState<string[]>([]);
+  const { register, control, setValue, getValues } =
+    useFormContext<FormInputs>();
   const {
     fields: feedbackQuestionFields,
     append: appendFeedbackQuestion,
@@ -21,6 +24,11 @@ export const FeedbackQuestions = () => {
 
   const handleUpdate = (index: number, answers: string) => {
     setValue(`feedbackQuestions.${index}.answers`, answers);
+  };
+
+  const updateEpisodeList = () => {
+    const episodes = getValues("episodes").map((episode) => episode.episodeId);
+    setEpisodeOptions(episodes);
   };
 
   return (
@@ -71,10 +79,16 @@ export const FeedbackQuestions = () => {
 
               <StyledInput>
                 <label>Episode</label>
-                <input
-                  type="text"
+                <select
                   {...register(`feedbackQuestions.${index}.episode` as const)}
-                />
+                  onClick={updateEpisodeList}
+                >
+                  {episodeOptions.map((option) => (
+                    <option value={option} key={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
               </StyledInput>
             </StyledMultilineInputWrapper>
 
