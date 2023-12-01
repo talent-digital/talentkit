@@ -211,11 +211,15 @@ export const SeasonEditor = () => {
 
             <StyledInput>
               <label>Unique season competence Id number (e.g. 100)</label>
-              <input type="text" {...register("seedId")} />
+              <input type="text" {...register("seedId")} autoFocus />
             </StyledInput>
 
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Button variant="contained" onClick={handleSeedIdSubmit}>
+              <Button
+                variant="contained"
+                onClick={handleSeedIdSubmit}
+                type="submit"
+              >
                 Start
               </Button>
             </Box>
@@ -359,7 +363,7 @@ export const SeasonEditor = () => {
   );
 };
 
-const StyledContent = styled("div")(({ theme }) => ({
+const StyledContent = styled("form")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   flexDirection: "column",
