@@ -1,3 +1,5 @@
+import { FromInputSubCompetence } from "./form-input-sub-competence";
+
 export type FormInputs = {
   seedId: string;
   title: string;
@@ -13,12 +15,7 @@ export type FormInputs = {
     competenceId: string;
     name: string;
   }[];
-  [key: `subCompetences-${string}-${string}`]: {
-    competenceAreaId: string;
-    competenceId: string;
-    subCompetenceId: string;
-    name: string;
-  }[];
+  [key: `subCompetences-${string}-${string}`]: FromInputSubCompetence[];
   episodes: {
     episodeId: string;
     title: string;

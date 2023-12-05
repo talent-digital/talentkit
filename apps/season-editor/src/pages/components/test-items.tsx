@@ -7,7 +7,8 @@ import { Level } from "@talentdigital/season";
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { FromInputSubCompetence } from "../types/form-input-sub-competence";
 
 type LevelCode = `${Level}`;
 
@@ -20,7 +21,11 @@ const levelOptions: LevelCode[] = [
 
 export const TestItems = () => {
   const [episodeOptions, setEpisodeOptions] = useState<string[]>([]);
-  const { register, control, getValues } = useFormContext<FormInputs>();
+  const [subCompetenceOptions, setSubCompetenceOptions] = useState<
+    FromInputSubCompetence[]
+  >([]);
+  const { register, control, getValues, setValue } =
+    useFormContext<FormInputs>();
   const {
     fields: testItemFields,
     append: appendTestItem,
@@ -30,9 +35,36 @@ export const TestItems = () => {
     name: "testItems",
   });
 
+  const handleSubCompetenceSelect = (
+    event: ChangeEvent<HTMLSelectElement>,
+    index: number
+  ) => {
+    const selected = subCompetenceOptions.find(
+      (item) => getSubCompetenceKey(item) === event.target.value
+    );
+
+    if (selected) {
+      setValue(
+        `testItems.${index}.competenceAreaId`,
+        selected?.competenceAreaId
+      );
+      setValue(`testItems.${index}.competenceId`, selected?.competenceId);
+      setValue(`testItems.${index}.subCompetenceId`, selected?.subCompetenceId);
+    }
+  };
+
   const updateEpisodeList = () => {
     const episodes = getValues("episodes").map((episode) => episode.episodeId);
     setEpisodeOptions(episodes);
+  };
+
+  const updateSubCompetenceList = () => {
+    const values = getValues();
+    const list: FromInputSubCompetence[] = Object.entries(values)
+      .filter(([key]) => key.startsWith("subCompetences"))
+      .flatMap(([_, value]) => value as unknown as FromInputSubCompetence);
+
+    setSubCompetenceOptions(list);
   };
 
   return (
@@ -52,6 +84,7 @@ export const TestItems = () => {
               <StyledInput>
                 <label>Competence Area Id</label>
                 <input
+                  disabled
                   type="text"
                   {...register(`testItems.${index}.competenceAreaId` as const)}
                 />
@@ -60,6 +93,7 @@ export const TestItems = () => {
               <StyledInput>
                 <label>Competence Id</label>
                 <input
+                  disabled
                   type="text"
                   {...register(`testItems.${index}.competenceId` as const)}
                 />
@@ -68,9 +102,27 @@ export const TestItems = () => {
               <StyledInput>
                 <label>Sub-competence Id</label>
                 <input
+                  disabled
                   type="text"
                   {...register(`testItems.${index}.subCompetenceId` as const)}
                 />
+              </StyledInput>
+
+              <StyledInput>
+                <label>Sub-competence</label>
+                <select
+                  onClick={updateSubCompetenceList}
+                  onChange={(event) => handleSubCompetenceSelect(event, index)}
+                >
+                  {subCompetenceOptions.map((option) => (
+                    <option
+                      value={getSubCompetenceKey(option)}
+                      key={getSubCompetenceKey(option)}
+                    >
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
               </StyledInput>
 
               <StyledInput>
@@ -143,4 +195,8 @@ export const TestItems = () => {
       </StyledSectionWrapper>
     </>
   );
+};
+
+const getSubCompetenceKey = (subCompetence: FromInputSubCompetence) => {
+  return `${subCompetence.competenceAreaId}-${subCompetence.competenceId}-${subCompetence.subCompetenceId}`;
 };
