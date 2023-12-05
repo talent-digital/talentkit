@@ -70,7 +70,7 @@ export const CompetenceAreas = () => {
             <StyledInput short>
               <label>Id</label>
               <input
-                disabled
+                readOnly
                 type="text"
                 {...register(
                   `competenceAreas.${index}.competenceAreaId` as const

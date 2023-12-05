@@ -19,6 +19,8 @@ const levelOptions: LevelCode[] = [
   "HIGHLY_SPECIALISED",
 ];
 
+const EMPTY_OPTION = "";
+
 export const TestItems = () => {
   const [episodeOptions, setEpisodeOptions] = useState<string[]>([]);
   const [subCompetenceOptions, setSubCompetenceOptions] = useState<
@@ -42,6 +44,8 @@ export const TestItems = () => {
     const selected = subCompetenceOptions.find(
       (item) => getSubCompetenceKey(item) === event.target.value
     );
+
+    console.log(selected);
 
     if (selected) {
       setValue(
@@ -72,6 +76,24 @@ export const TestItems = () => {
       {testItemFields.map((testItem, index) => (
         <StyledSectionWrapper key={testItem.id} indented>
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
+            <input
+              hidden
+              type="text"
+              {...register(`testItems.${index}.competenceAreaId` as const)}
+            />
+
+            <input
+              hidden
+              type="text"
+              {...register(`testItems.${index}.competenceId` as const)}
+            />
+
+            <input
+              hidden
+              type="text"
+              {...register(`testItems.${index}.subCompetenceId` as const)}
+            />
+
             <StyledMultilineInputWrapper>
               <StyledInput>
                 <label>Id</label>
@@ -79,50 +101,6 @@ export const TestItems = () => {
                   type="text"
                   {...register(`testItems.${index}.testItemId` as const)}
                 />
-              </StyledInput>
-
-              <StyledInput>
-                <label>Competence Area Id</label>
-                <input
-                  disabled
-                  type="text"
-                  {...register(`testItems.${index}.competenceAreaId` as const)}
-                />
-              </StyledInput>
-
-              <StyledInput>
-                <label>Competence Id</label>
-                <input
-                  disabled
-                  type="text"
-                  {...register(`testItems.${index}.competenceId` as const)}
-                />
-              </StyledInput>
-
-              <StyledInput>
-                <label>Sub-competence Id</label>
-                <input
-                  disabled
-                  type="text"
-                  {...register(`testItems.${index}.subCompetenceId` as const)}
-                />
-              </StyledInput>
-
-              <StyledInput>
-                <label>Sub-competence</label>
-                <select
-                  onClick={updateSubCompetenceList}
-                  onChange={(event) => handleSubCompetenceSelect(event, index)}
-                >
-                  {subCompetenceOptions.map((option) => (
-                    <option
-                      value={getSubCompetenceKey(option)}
-                      key={getSubCompetenceKey(option)}
-                    >
-                      {option.name}
-                    </option>
-                  ))}
-                </select>
               </StyledInput>
 
               <StyledInput>
@@ -150,6 +128,25 @@ export const TestItems = () => {
                 </select>
               </StyledInput>
             </StyledMultilineInputWrapper>
+
+            <StyledInput>
+              <label>Sub-competence</label>
+              <select
+                defaultValue={EMPTY_OPTION}
+                onClick={updateSubCompetenceList}
+                onChange={(event) => handleSubCompetenceSelect(event, index)}
+              >
+                <option value={EMPTY_OPTION}>{EMPTY_OPTION}</option>
+                {subCompetenceOptions.map((option) => (
+                  <option
+                    value={getSubCompetenceKey(option)}
+                    key={getSubCompetenceKey(option)}
+                  >
+                    {option.name}
+                  </option>
+                ))}
+              </select>
+            </StyledInput>
 
             <StyledInput>
               <label>Documentation</label>

@@ -93,10 +93,22 @@ export const SubCompetences = ({
               gap: 2,
             }}
           >
+            <input
+              type="hidden"
+              {...register(
+                `subCompetences-${competenceAreaId}-${competenceId}.${index}.competenceAreaId` as const
+              )}
+            />
+            <input
+              type="hidden"
+              {...register(
+                `subCompetences-${competenceAreaId}-${competenceId}.${index}.competenceId` as const
+              )}
+            />
             <StyledInput short>
               <label>Id</label>
               <input
-                disabled
+                readOnly
                 type="text"
                 {...register(
                   `subCompetences-${competenceAreaId}-${competenceId}.${index}.subCompetenceId` as const

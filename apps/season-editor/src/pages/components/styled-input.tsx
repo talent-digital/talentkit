@@ -17,7 +17,16 @@ export const StyledInput = styled(Box, {
     border: `1px solid ${grey[500]}`,
     padding: theme.spacing(1),
 
+    "&[readonly]": {
+      backgroundColor: theme.palette.grey[100],
+      cursor: "default",
+    },
+
     "&:focus": {
+      outline: "none",
+    },
+
+    "&:not([readonly]):focus": {
       outline: `1px solid ${theme.palette.primary.main}`,
       border: `1px solid ${theme.palette.primary.main}`,
     },

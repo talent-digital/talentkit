@@ -88,10 +88,16 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
                   gap: 2,
                 }}
               >
+                <input
+                  type="hidden"
+                  {...register(
+                    `competences-${competenceAreaId}.${index}.competenceAreaId` as const
+                  )}
+                />
                 <StyledInput short>
                   <label>Id</label>
                   <input
-                    disabled
+                    readOnly
                     type="text"
                     {...register(
                       `competences-${competenceAreaId}.${index}.competenceId` as const
