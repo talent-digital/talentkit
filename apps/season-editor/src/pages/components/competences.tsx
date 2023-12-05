@@ -49,6 +49,39 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
     });
   };
 
+  const handleRemoveCompetence = (index: number) => {
+    const values = getValues();
+    const competenceId = competenceFields[index].competenceId;
+    const childSubCompetences: string[] = values[
+      `subCompetences-${competenceAreaId}-${competenceId}`
+    ].map(
+      (item) => item.competenceAreaId + item.competenceId + item.subCompetenceId
+    );
+
+    const subCompetenceUsedInTestItems: boolean = values.testItems
+      .map(
+        (item) =>
+          item.competenceAreaId + item.competenceId + item.subCompetenceId
+      )
+      .some((id) => childSubCompetences.includes(id));
+
+    const subCompetenceUsedInFeedbackQuestions: boolean =
+      values.feedbackQuestions
+        .map(
+          (item) =>
+            item.competenceAreaId + item.competenceId + item.subCompetenceId
+        )
+        .some((id) => childSubCompetences.includes(id));
+
+    if (subCompetenceUsedInTestItems || subCompetenceUsedInFeedbackQuestions) {
+      alert(
+        "Cannot delete competence because one of it's sub-competences is used in a test item or feedback question."
+      );
+    } else {
+      removeCompetence(index);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -96,7 +129,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
                 </StyledInput>
                 <div>
                   <IconButton
-                    onClick={() => removeCompetence(index)}
+                    onClick={() => handleRemoveCompetence(index)}
                     color="error"
                     title="Delete competence"
                   >

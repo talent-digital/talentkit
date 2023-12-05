@@ -41,11 +41,52 @@ export const CompetenceAreas = () => {
     });
   };
 
+  const handleRemoveCompetenceArea = (index: number) => {
+    const values = getValues();
+    const competenceAreaId = competenceAreaFields[index].competenceAreaId;
+
+    const competenceIdList = values[`competences-${competenceAreaId}`].map(
+      ({ competenceId }) => competenceId
+    );
+
+    const childSubCompetences = competenceIdList
+      .flatMap((competenceId) => {
+        return values[`subCompetences-${competenceAreaId}-${competenceId}`];
+      })
+      .map(
+        (item) =>
+          item.competenceAreaId + item.competenceId + item.subCompetenceId
+      );
+
+    const subCompetenceUsedInTestItems: boolean = values.testItems
+      .map(
+        (item) =>
+          item.competenceAreaId + item.competenceId + item.subCompetenceId
+      )
+      .some((id) => childSubCompetences.includes(id));
+
+    const subCompetenceUsedInFeedbackQuestions: boolean =
+      values.feedbackQuestions
+        .map(
+          (item) =>
+            item.competenceAreaId + item.competenceId + item.subCompetenceId
+        )
+        .some((id) => childSubCompetences.includes(id));
+
+    if (subCompetenceUsedInTestItems || subCompetenceUsedInFeedbackQuestions) {
+      alert(
+        "Cannot delete competence because one of it's sub-competences is used in a test item or feedback question."
+      );
+    } else {
+      removeCompetenceArea(index);
+    }
+  };
+
   return (
     <>
       {competenceAreaFields.map((competenceAreaField, index) => (
         <Box key={competenceAreaField.id}>
-          <Box sx={{ display: "flex", gap: 2 }}>
+          <Box sx={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
             <StyledInput short>
               <label>Id</label>
               <input
@@ -65,7 +106,7 @@ export const CompetenceAreas = () => {
             </StyledInput>
             <div>
               <IconButton
-                onClick={() => removeCompetenceArea(index)}
+                onClick={() => handleRemoveCompetenceArea(index)}
                 color="error"
                 title="Delete competence area"
               >

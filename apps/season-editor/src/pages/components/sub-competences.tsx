@@ -56,6 +56,32 @@ export const SubCompetences = ({
     });
   };
 
+  const handleRemoveSubCompetence = (index: number) => {
+    const values = getValues();
+    const subCompetenceId = subCompetenceFields[index].subCompetenceId;
+    const subCompetenceUsedInTestItems = values.testItems
+      .map(
+        (item) =>
+          item.competenceAreaId + item.competenceId + item.subCompetenceId
+      )
+      .includes(competenceAreaId + competenceId + subCompetenceId);
+
+    const subCompetenceUsedInFeedbackQuestions = values.feedbackQuestions
+      .map(
+        (item) =>
+          item.competenceAreaId + item.competenceId + item.subCompetenceId
+      )
+      .includes(competenceAreaId + competenceId + subCompetenceId);
+
+    if (subCompetenceUsedInTestItems || subCompetenceUsedInFeedbackQuestions) {
+      alert(
+        "Cannot delete sub-competence because it is used in a test item or feedback question."
+      );
+    } else {
+      removeSubCompetence(index);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -103,7 +129,7 @@ export const SubCompetences = ({
             </StyledInput>
             <div>
               <IconButton
-                onClick={() => removeSubCompetence(index)}
+                onClick={() => handleRemoveSubCompetence(index)}
                 color="error"
                 title="Delete sub-competence"
               >
