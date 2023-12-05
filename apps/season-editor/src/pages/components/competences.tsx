@@ -5,7 +5,7 @@ import { FormInputs } from "../types";
 import { StyledInput } from "./styled-input";
 import { SubCompetences } from "./sub-competences";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getNextCompetenceId } from "../utils";
+import { getNextCompetenceId, tryRemoveCompetence } from "../utils";
 
 type CompetencesProps = {
   competenceAreaId: string;
@@ -51,6 +51,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
 
   const handleRemoveCompetence = (index: number) => {
     const values = getValues();
+    const removeFn = () => removeCompetence(index);
     const competenceId = competenceFields[index].competenceId;
     const childSubCompetences: string[] = values[
       `subCompetences-${competenceAreaId}-${competenceId}`
@@ -58,28 +59,7 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
       (item) => item.competenceAreaId + item.competenceId + item.subCompetenceId
     );
 
-    const subCompetenceUsedInTestItems: boolean = values.testItems
-      .map(
-        (item) =>
-          item.competenceAreaId + item.competenceId + item.subCompetenceId
-      )
-      .some((id) => childSubCompetences.includes(id));
-
-    const subCompetenceUsedInFeedbackQuestions: boolean =
-      values.feedbackQuestions
-        .map(
-          (item) =>
-            item.competenceAreaId + item.competenceId + item.subCompetenceId
-        )
-        .some((id) => childSubCompetences.includes(id));
-
-    if (subCompetenceUsedInTestItems || subCompetenceUsedInFeedbackQuestions) {
-      alert(
-        "Cannot delete competence because one of it's sub-competences is used in a test item or feedback question."
-      );
-    } else {
-      removeCompetence(index);
-    }
+    tryRemoveCompetence(values, childSubCompetences, removeFn);
   };
 
   return (

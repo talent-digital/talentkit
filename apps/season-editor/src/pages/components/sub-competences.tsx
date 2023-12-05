@@ -4,7 +4,7 @@ import { StyledInput } from "./styled-input";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getNextCompetenceId } from "../utils";
+import { getNextCompetenceId, tryRemoveCompetence } from "../utils";
 
 type SubCompetencesProps = {
   competenceAreaId: string;
@@ -58,28 +58,13 @@ export const SubCompetences = ({
 
   const handleRemoveSubCompetence = (index: number) => {
     const values = getValues();
+    const removeFn = () => removeSubCompetence(index);
     const subCompetenceId = subCompetenceFields[index].subCompetenceId;
-    const subCompetenceUsedInTestItems = values.testItems
-      .map(
-        (item) =>
-          item.competenceAreaId + item.competenceId + item.subCompetenceId
-      )
-      .includes(competenceAreaId + competenceId + subCompetenceId);
+    const subCompetenceIdsToCheck = [
+      competenceAreaId + competenceId + subCompetenceId,
+    ];
 
-    const subCompetenceUsedInFeedbackQuestions = values.feedbackQuestions
-      .map(
-        (item) =>
-          item.competenceAreaId + item.competenceId + item.subCompetenceId
-      )
-      .includes(competenceAreaId + competenceId + subCompetenceId);
-
-    if (subCompetenceUsedInTestItems || subCompetenceUsedInFeedbackQuestions) {
-      alert(
-        "Cannot delete sub-competence because it is used in a test item or feedback question."
-      );
-    } else {
-      removeSubCompetence(index);
-    }
+    tryRemoveCompetence(values, subCompetenceIdsToCheck, removeFn);
   };
 
   return (
