@@ -8,7 +8,7 @@ export function mapToSeasonObject(
 ) {
   const newFile: SeasonDefinition = JSON.parse(
     JSON.stringify(originalFileLoaded)
-  );
+  ) as SeasonDefinition;
   const values: Partial<FormInputs> = Object.fromEntries(
     Object.entries(valuesWithEmpty).filter((entries) => Boolean(entries[1]))
   ) as Partial<FormInputs>;

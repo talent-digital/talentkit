@@ -10,6 +10,8 @@ import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
 
 type MaturityCode = `${Maturity}`;
 
+const maturityOptions: MaturityCode[] = ["ALPHA", "BETA", "PENDING", "PUBLIC"];
+
 export const Episodes = () => {
   const { register, control } = useFormContext<FormInputs>();
   const {
@@ -21,13 +23,6 @@ export const Episodes = () => {
     name: "episodes",
   });
 
-  const maturityOptions: MaturityCode[] = [
-    "ALPHA",
-    "BETA",
-    "PENDING",
-    "PUBLIC",
-  ];
-
   return (
     <>
       {episodeFields.map((episode, index) => (
@@ -35,7 +30,7 @@ export const Episodes = () => {
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
             <StyledMultilineInputWrapper>
               <StyledInput>
-                <label>id</label>
+                <label>Id</label>
                 <input
                   type="text"
                   {...register(`episodes.${index}.episodeId` as const)}
@@ -43,7 +38,7 @@ export const Episodes = () => {
               </StyledInput>
 
               <StyledInput>
-                <label>maturity</label>
+                <label>Maturity</label>
                 <select {...register(`episodes.${index}.maturity` as const)}>
                   {maturityOptions.map((option) => (
                     <option value={option} key={option}>
@@ -53,21 +48,21 @@ export const Episodes = () => {
                 </select>
               </StyledInput>
               <StyledInput>
-                <label>imageUrl</label>
+                <label>Image Url</label>
                 <input
                   type="text"
                   {...register(`episodes.${index}.imageUrl` as const)}
                 />
               </StyledInput>
               <StyledInput>
-                <label>format</label>
+                <label>Format</label>
                 <input
                   type="text"
                   {...register(`episodes.${index}.format` as const)}
                 />
               </StyledInput>
               <StyledInput>
-                <label>formatConfiguration</label>
+                <label>Format configuration</label>
                 <input
                   type="text"
                   {...register(
@@ -78,7 +73,7 @@ export const Episodes = () => {
             </StyledMultilineInputWrapper>
 
             <StyledInput>
-              <label>title</label>
+              <label>Title</label>
               <input
                 type="text"
                 {...register(`episodes.${index}.title` as const)}
@@ -86,7 +81,7 @@ export const Episodes = () => {
             </StyledInput>
 
             <StyledInput>
-              <label>description</label>
+              <label>Description</label>
               <input
                 type="text"
                 {...register(`episodes.${index}.description` as const)}

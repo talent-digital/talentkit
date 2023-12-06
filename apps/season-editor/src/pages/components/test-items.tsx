@@ -4,11 +4,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Level } from "@talentdigital/season";
 
-import { FormInputs } from "../types";
+import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
 import { ChangeEvent, useState } from "react";
-import { FromInputSubCompetence } from "../types/form-input-sub-competence";
 
 type LevelCode = `${Level}`;
 
@@ -44,8 +43,6 @@ export const TestItems = () => {
     const selected = subCompetenceOptions.find(
       (item) => getSubCompetenceKey(item) === event.target.value
     );
-
-    console.log(selected);
 
     if (selected) {
       setValue(
