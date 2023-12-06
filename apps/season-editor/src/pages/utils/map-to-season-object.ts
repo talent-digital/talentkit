@@ -147,8 +147,8 @@ function mapToSeasonTestItems(
   return (
     testItems?.reduce((accumulator, testItem) => {
       const oldTestItem =
-        oldValues.competenceAreas[competenceAreaId].competences[competenceId]
-          .subCompetences[subCompetenceId].testItems?.[testItem.testItemId];
+        oldValues.competenceAreas[competenceAreaId]?.competences[competenceId]
+          ?.subCompetences[subCompetenceId]?.testItems?.[testItem.testItemId];
       const oldDocumentation = oldTestItem?.documentation ?? {};
 
       return {
@@ -185,8 +185,8 @@ function mapToSeasonFeedbackQuestions(
   return (
     feedbackQuestions?.reduce((accumulator, feedbackQuestion) => {
       const oldFeedbackQuestion =
-        oldValues.competenceAreas[competenceAreaId].competences[competenceId]
-          .subCompetences[subCompetenceId].feedbackQuestions?.[
+        oldValues.competenceAreas[competenceAreaId]?.competences[competenceId]
+          ?.subCompetences[subCompetenceId]?.feedbackQuestions?.[
           feedbackQuestion.feedbackQuestionId
         ];
       const oldQuestion = oldFeedbackQuestion?.question ?? {};
