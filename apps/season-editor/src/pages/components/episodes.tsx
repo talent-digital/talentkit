@@ -5,8 +5,8 @@ import { useFieldArray, useFormContext, FieldArray } from "react-hook-form";
 import { Maturity } from "@talentdigital/season";
 
 import { FormInputs } from "../types";
-import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
+import { grey } from "@mui/material/colors";
 
 type MaturityCode = `${Maturity}`;
 
@@ -24,9 +24,15 @@ export const Episodes = () => {
   });
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
       {episodeFields.map((episode, index) => (
-        <StyledSectionWrapper key={episode.id} indented>
+        <Box
+          key={episode.id}
+          sx={{
+            pb: 4,
+            borderBottom: `3px solid ${grey[600]}`,
+          }}
+        >
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
             <StyledMultilineInputWrapper>
               <StyledInput>
@@ -87,42 +93,40 @@ export const Episodes = () => {
                 {...register(`episodes.${index}.description` as const)}
               />
             </StyledInput>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                startIcon={<DeleteIcon />}
+                variant="contained"
+                color="error"
+                onClick={() => removeEpisode(index)}
+              >
+                Remove episode
+              </Button>
+            </Box>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button
-              startIcon={<DeleteIcon />}
-              variant="contained"
-              color="error"
-              onClick={() => removeEpisode(index)}
-            >
-              Remove episode
-            </Button>
-          </Box>
-        </StyledSectionWrapper>
+        </Box>
       ))}
 
-      <StyledSectionWrapper indented>
-        <div>
-          <Button
-            variant="contained"
-            type="button"
-            onClick={() =>
-              appendEpisode({
-                episodeId: getNewEpisodeId(episodeFields),
-                title: "",
-                description: "",
-                maturity: "PUBLIC",
-                imageUrl: "",
-                format: "",
-                formatConfiguration: "",
-              })
-            }
-          >
-            Add Episode
-          </Button>
-        </div>
-      </StyledSectionWrapper>
-    </>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          variant="contained"
+          type="button"
+          onClick={() =>
+            appendEpisode({
+              episodeId: getNewEpisodeId(episodeFields),
+              title: "",
+              description: "",
+              maturity: "PUBLIC",
+              imageUrl: "",
+              format: "",
+              formatConfiguration: "",
+            })
+          }
+        >
+          Add Episode
+        </Button>
+      </Box>
+    </Box>
   );
 };
 

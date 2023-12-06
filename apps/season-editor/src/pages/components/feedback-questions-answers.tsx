@@ -48,7 +48,6 @@ export const FeedbackQuestionsAnswers = ({
   return (
     <Box
       sx={{
-        paddingLeft: 4,
         marginTop: 2,
         display: "flex",
         flexDirection: "column",

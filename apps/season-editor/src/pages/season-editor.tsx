@@ -300,13 +300,13 @@ export const SeasonEditor = () => {
                 sectionName="episodes"
               />
             </Box>
-          </StyledSectionWrapper>
 
-          {hiddenSections.includes("episodes") ? null : (
-            <FormProvider {...methods}>
-              <Episodes />
-            </FormProvider>
-          )}
+            {hiddenSections.includes("episodes") ? null : (
+              <FormProvider {...methods}>
+                <Episodes />
+              </FormProvider>
+            )}
+          </StyledSectionWrapper>
 
           <StyledSectionWrapper id="test-items">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -318,13 +318,13 @@ export const SeasonEditor = () => {
                 sectionName="testItems"
               />
             </Box>
-          </StyledSectionWrapper>
 
-          {hiddenSections.includes("testItems") ? null : (
-            <FormProvider {...methods}>
-              <TestItems />
-            </FormProvider>
-          )}
+            {hiddenSections.includes("testItems") ? null : (
+              <FormProvider {...methods}>
+                <TestItems />
+              </FormProvider>
+            )}
+          </StyledSectionWrapper>
 
           <StyledSectionWrapper id="feedback-questions">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -336,13 +336,13 @@ export const SeasonEditor = () => {
                 sectionName="feedbackQuestions"
               />
             </Box>
-          </StyledSectionWrapper>
 
-          {hiddenSections.includes("feedbackQuestions") ? null : (
-            <FormProvider {...methods}>
-              <FeedbackQuestions />
-            </FormProvider>
-          )}
+            {hiddenSections.includes("feedbackQuestions") ? null : (
+              <FormProvider {...methods}>
+                <FeedbackQuestions />
+              </FormProvider>
+            )}
+          </StyledSectionWrapper>
         </StyledContent>
       )}
 

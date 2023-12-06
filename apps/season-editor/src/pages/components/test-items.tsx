@@ -5,9 +5,9 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { Level } from "@talentdigital/season";
 
 import { FormInputs, FromInputSubCompetence } from "../types";
-import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
 import { ChangeEvent, useState } from "react";
+import { grey } from "@mui/material/colors";
 
 type LevelCode = `${Level}`;
 
@@ -80,9 +80,15 @@ export const TestItems = () => {
   };
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
       {testItemFields.map((testItem, index) => (
-        <StyledSectionWrapper key={testItem.id} indented>
+        <Box
+          key={testItem.id}
+          sx={{
+            pb: 4,
+            borderBottom: `3px solid ${grey[600]}`,
+          }}
+        >
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
             <input
               hidden
@@ -164,42 +170,40 @@ export const TestItems = () => {
                 {...register(`testItems.${index}.documentation` as const)}
               />
             </StyledInput>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                startIcon={<DeleteIcon />}
+                variant="contained"
+                color="error"
+                onClick={() => removeTestItem(index)}
+              >
+                Remove Test item
+              </Button>
+            </Box>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button
-              startIcon={<DeleteIcon />}
-              variant="contained"
-              color="error"
-              onClick={() => removeTestItem(index)}
-            >
-              Remove Test item
-            </Button>
-          </Box>
-        </StyledSectionWrapper>
+        </Box>
       ))}
 
-      <StyledSectionWrapper indented>
-        <div>
-          <Button
-            variant="contained"
-            type="button"
-            onClick={() =>
-              appendTestItem({
-                competenceAreaId: "",
-                competenceId: "",
-                subCompetenceId: "",
-                testItemId: getTestItemId(),
-                episode: "",
-                level: "FOUNDATION",
-                documentation: "",
-              })
-            }
-          >
-            Add Test Item
-          </Button>
-        </div>
-      </StyledSectionWrapper>
-    </>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          variant="contained"
+          type="button"
+          onClick={() =>
+            appendTestItem({
+              competenceAreaId: "",
+              competenceId: "",
+              subCompetenceId: "",
+              testItemId: getTestItemId(),
+              episode: "",
+              level: "FOUNDATION",
+              documentation: "",
+            })
+          }
+        >
+          Add Test Item
+        </Button>
+      </Box>
+    </Box>
   );
 };
 

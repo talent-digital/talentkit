@@ -4,10 +4,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
 import { FormInputs, FromInputSubCompetence } from "../types";
-import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
 import { FeedbackQuestionsAnswers } from "./feedback-questions-answers";
 import { ChangeEvent, useState } from "react";
+import { grey } from "@mui/material/colors";
 
 const EMPTY_OPTION = "";
 
@@ -83,9 +83,15 @@ export const FeedbackQuestions = () => {
   };
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
       {feedbackQuestionFields.map((feedbackQuestionField, index) => (
-        <StyledSectionWrapper key={feedbackQuestionField.id} indented>
+        <Box
+          key={feedbackQuestionField.id}
+          sx={{
+            pb: 4,
+            borderBottom: `3px solid ${grey[600]}`,
+          }}
+        >
           <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
             <input
               type="text"
@@ -167,42 +173,40 @@ export const FeedbackQuestions = () => {
               feedbackQuestionIndex={index}
               onUpdate={handleUpdate}
             />
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                startIcon={<DeleteIcon />}
+                variant="contained"
+                color="error"
+                onClick={() => removeFeedbackQuestion(index)}
+              >
+                Remove Feedback Question
+              </Button>
+            </Box>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button
-              startIcon={<DeleteIcon />}
-              variant="contained"
-              color="error"
-              onClick={() => removeFeedbackQuestion(index)}
-            >
-              Remove Feedback Question
-            </Button>
-          </Box>
-        </StyledSectionWrapper>
+        </Box>
       ))}
 
-      <StyledSectionWrapper indented>
-        <div>
-          <Button
-            variant="contained"
-            type="button"
-            onClick={() =>
-              appendFeedbackQuestion({
-                competenceAreaId: "",
-                competenceId: "",
-                subCompetenceId: "",
-                feedbackQuestionId: getFeedbackQuestionId(),
-                episode: "",
-                question: "",
-                answers: "",
-              })
-            }
-          >
-            Add Feedback Question
-          </Button>
-        </div>
-      </StyledSectionWrapper>
-    </>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          variant="contained"
+          type="button"
+          onClick={() =>
+            appendFeedbackQuestion({
+              competenceAreaId: "",
+              competenceId: "",
+              subCompetenceId: "",
+              feedbackQuestionId: getFeedbackQuestionId(),
+              episode: "",
+              question: "",
+              answers: "",
+            })
+          }
+        >
+          Add Feedback Question
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
