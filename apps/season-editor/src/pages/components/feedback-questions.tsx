@@ -69,6 +69,19 @@ export const FeedbackQuestions = () => {
     setSubCompetenceOptions(list);
   };
 
+  const getFeedbackQuestionId = () => {
+    const DIVIDER = "--";
+    const seedId = getValues("seedId");
+    const lastTestId =
+      feedbackQuestionFields[
+        feedbackQuestionFields.length - 1
+      ]?.feedbackQuestionId.split(DIVIDER)[1];
+    const lastTestIdIsNumber = !isNaN(Number(lastTestId));
+    const newTestId = lastTestIdIsNumber ? Number(lastTestId) + 1 : 1;
+
+    return `feedback-${seedId}${DIVIDER}${newTestId}`;
+  };
+
   return (
     <>
       {feedbackQuestionFields.map((feedbackQuestionField, index) => (
@@ -100,6 +113,7 @@ export const FeedbackQuestions = () => {
                 <label>Id</label>
                 <input
                   type="text"
+                  readOnly
                   {...register(
                     `feedbackQuestions.${index}.feedbackQuestionId` as const
                   )}
@@ -177,7 +191,7 @@ export const FeedbackQuestions = () => {
                 competenceAreaId: "",
                 competenceId: "",
                 subCompetenceId: "",
-                feedbackQuestionId: "",
+                feedbackQuestionId: getFeedbackQuestionId(),
                 episode: "",
                 question: "",
                 answers: "",
@@ -192,6 +206,6 @@ export const FeedbackQuestions = () => {
   );
 };
 
-const getSubCompetenceKey = (subCompetence: FromInputSubCompetence) => {
+function getSubCompetenceKey(subCompetence: FromInputSubCompetence) {
   return `${subCompetence.competenceAreaId}-${subCompetence.competenceId}-${subCompetence.subCompetenceId}`;
-};
+}

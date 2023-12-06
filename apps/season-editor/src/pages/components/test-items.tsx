@@ -68,6 +68,17 @@ export const TestItems = () => {
     setSubCompetenceOptions(list);
   };
 
+  const getTestItemId = () => {
+    const DIVIDER = "--";
+    const seedId = getValues("seedId");
+    const lastTestId =
+      testItemFields[testItemFields.length - 1]?.testItemId.split(DIVIDER)[1];
+    const lastTestIdIsNumber = !isNaN(Number(lastTestId));
+    const newTestId = lastTestIdIsNumber ? Number(lastTestId) + 1 : 1;
+
+    return `test-${seedId}${DIVIDER}${newTestId}`;
+  };
+
   return (
     <>
       {testItemFields.map((testItem, index) => (
@@ -95,6 +106,7 @@ export const TestItems = () => {
               <StyledInput>
                 <label>Id</label>
                 <input
+                  readOnly
                   type="text"
                   {...register(`testItems.${index}.testItemId` as const)}
                 />
@@ -176,7 +188,7 @@ export const TestItems = () => {
                 competenceAreaId: "",
                 competenceId: "",
                 subCompetenceId: "",
-                testItemId: "",
+                testItemId: getTestItemId(),
                 episode: "",
                 level: "FOUNDATION",
                 documentation: "",
@@ -191,6 +203,6 @@ export const TestItems = () => {
   );
 };
 
-const getSubCompetenceKey = (subCompetence: FromInputSubCompetence) => {
+function getSubCompetenceKey(subCompetence: FromInputSubCompetence) {
   return `${subCompetence.competenceAreaId}-${subCompetence.competenceId}-${subCompetence.subCompetenceId}`;
-};
+}
