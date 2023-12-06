@@ -7,7 +7,7 @@ import { Level } from "@talentdigital/season";
 import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 type LevelCode = `${Level}`;
 
@@ -21,6 +21,9 @@ const levelOptions: LevelCode[] = [
 const EMPTY_OPTION = "";
 
 export const TestItems = () => {
+  const [subCompetenceValues, setSubCompetenceValues] = useState<
+    Record<string, string>
+  >({});
   const [episodeOptions, setEpisodeOptions] = useState<string[]>([]);
   const [subCompetenceOptions, setSubCompetenceOptions] = useState<
     FromInputSubCompetence[]
@@ -45,28 +48,30 @@ export const TestItems = () => {
     );
 
     if (selected) {
-      setValue(
-        `testItems.${index}.competenceAreaId`,
-        selected?.competenceAreaId
-      );
-      setValue(`testItems.${index}.competenceId`, selected?.competenceId);
-      setValue(`testItems.${index}.subCompetenceId`, selected?.subCompetenceId);
+      const { competenceAreaId, competenceId, subCompetenceId } = selected;
+      setValue(`testItems.${index}.competenceAreaId`, competenceAreaId);
+      setValue(`testItems.${index}.competenceId`, competenceId);
+      setValue(`testItems.${index}.subCompetenceId`, subCompetenceId);
+      setSubCompetenceValues((prev) => ({
+        ...prev,
+        [index]: `${competenceAreaId}-${competenceId}-${subCompetenceId}`,
+      }));
     }
   };
 
-  const updateEpisodeList = () => {
+  const updateEpisodeList = useCallback(() => {
     const episodes = getValues("episodes").map((episode) => episode.episodeId);
     setEpisodeOptions(episodes);
-  };
+  }, [getValues]);
 
-  const updateSubCompetenceList = () => {
+  const updateSubCompetenceList = useCallback(() => {
     const values = getValues();
     const list: FromInputSubCompetence[] = Object.entries(values)
       .filter(([key]) => key.startsWith("subCompetences"))
       .flatMap(([_, value]) => value as unknown as FromInputSubCompetence);
 
     setSubCompetenceOptions(list);
-  };
+  }, [getValues]);
 
   const getTestItemId = () => {
     const DIVIDER = "--";
@@ -78,6 +83,29 @@ export const TestItems = () => {
 
     return `test-${seedId}${DIVIDER}${newTestId}`;
   };
+
+  useEffect(() => {
+    testItemFields.forEach((_, index) => {
+      const { competenceAreaId, competenceId, subCompetenceId } =
+        testItemFields[index];
+      setSubCompetenceValues((prev) => ({
+        ...prev,
+        [index]: `${competenceAreaId}-${competenceId}-${subCompetenceId}`,
+      }));
+    });
+  }, [testItemFields]);
+
+  useEffect(() => {
+    updateEpisodeList();
+    // Without this initial update the selected sub-competence is emtpy
+    const timeout = setTimeout(() => {
+      updateSubCompetenceList();
+    });
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [updateSubCompetenceList, updateEpisodeList]);
 
   return (
     <>
@@ -141,7 +169,7 @@ export const TestItems = () => {
             <StyledInput>
               <label>Sub-competence</label>
               <select
-                defaultValue={EMPTY_OPTION}
+                value={subCompetenceValues[index]}
                 onClick={updateSubCompetenceList}
                 onChange={(event) => handleSubCompetenceSelect(event, index)}
               >

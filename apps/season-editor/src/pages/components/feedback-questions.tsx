@@ -7,11 +7,14 @@ import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
 import { FeedbackQuestionsAnswers } from "./feedback-questions-answers";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 const EMPTY_OPTION = "";
 
 export const FeedbackQuestions = () => {
+  const [subCompetenceValues, setSubCompetenceValues] = useState<
+    Record<string, string>
+  >({});
   const [episodeOptions, setEpisodeOptions] = useState<string[]>([]);
   const [subCompetenceOptions, setSubCompetenceOptions] = useState<
     FromInputSubCompetence[]
@@ -55,19 +58,19 @@ export const FeedbackQuestions = () => {
     }
   };
 
-  const updateEpisodeList = () => {
+  const updateEpisodeList = useCallback(() => {
     const episodes = getValues("episodes").map((episode) => episode.episodeId);
     setEpisodeOptions(episodes);
-  };
+  }, [getValues]);
 
-  const updateSubCompetenceList = () => {
+  const updateSubCompetenceList = useCallback(() => {
     const values = getValues();
     const list: FromInputSubCompetence[] = Object.entries(values)
       .filter(([key]) => key.startsWith("subCompetences"))
       .flatMap(([_, value]) => value as unknown as FromInputSubCompetence);
 
     setSubCompetenceOptions(list);
-  };
+  }, [getValues]);
 
   const getFeedbackQuestionId = () => {
     const DIVIDER = "--";
@@ -81,6 +84,29 @@ export const FeedbackQuestions = () => {
 
     return `feedback-${seedId}${DIVIDER}${newTestId}`;
   };
+
+  useEffect(() => {
+    feedbackQuestionFields.forEach((_, index) => {
+      const { competenceAreaId, competenceId, subCompetenceId } =
+        feedbackQuestionFields[index];
+      setSubCompetenceValues((prev) => ({
+        ...prev,
+        [index]: `${competenceAreaId}-${competenceId}-${subCompetenceId}`,
+      }));
+    });
+  }, [feedbackQuestionFields]);
+
+  useEffect(() => {
+    updateEpisodeList();
+    // Without this initial update the selected sub-competence is emtpy
+    const timeout = setTimeout(() => {
+      updateSubCompetenceList();
+    });
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [updateSubCompetenceList, updateEpisodeList]);
 
   return (
     <>
@@ -123,7 +149,7 @@ export const FeedbackQuestions = () => {
               <StyledInput>
                 <label>Sub-competence</label>
                 <select
-                  defaultValue={EMPTY_OPTION}
+                  value={subCompetenceValues[index]}
                   onClick={updateSubCompetenceList}
                   onChange={(event) => handleSubCompetenceSelect(event, index)}
                 >
