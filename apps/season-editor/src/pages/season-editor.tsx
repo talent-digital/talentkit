@@ -231,7 +231,7 @@ export const SeasonEditor = () => {
         <StyledContent>
           <StyledSectionWrapper id="basic-information">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Basic information</Typography>
+              <Typography variant="h5">Season description</Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}

@@ -15,7 +15,9 @@ export const FeedbackQuestions = () => {
   const [subCompetenceValues, setSubCompetenceValues] = useState<
     Record<string, string>
   >({});
-  const [episodeOptions, setEpisodeOptions] = useState<string[]>([]);
+  const [episodeOptions, setEpisodeOptions] = useState<string[] | undefined>(
+    undefined
+  );
   const [subCompetenceOptions, setSubCompetenceOptions] = useState<
     FromInputSubCompetence[]
   >([]);
@@ -43,18 +45,14 @@ export const FeedbackQuestions = () => {
     );
 
     if (selected) {
-      setValue(
-        `feedbackQuestions.${index}.competenceAreaId`,
-        selected?.competenceAreaId
-      );
-      setValue(
-        `feedbackQuestions.${index}.competenceId`,
-        selected?.competenceId
-      );
-      setValue(
-        `feedbackQuestions.${index}.subCompetenceId`,
-        selected?.subCompetenceId
-      );
+      const { competenceAreaId, competenceId, subCompetenceId } = selected;
+      setValue(`feedbackQuestions.${index}.competenceAreaId`, competenceAreaId);
+      setValue(`feedbackQuestions.${index}.competenceId`, competenceId);
+      setValue(`feedbackQuestions.${index}.subCompetenceId`, subCompetenceId);
+      setSubCompetenceValues((prev) => ({
+        ...prev,
+        [index]: `${competenceAreaId}-${competenceId}-${subCompetenceId}`,
+      }));
     }
   };
 
@@ -165,19 +163,21 @@ export const FeedbackQuestions = () => {
                 </select>
               </StyledInput>
 
-              <StyledInput>
-                <label>Episode</label>
-                <select
-                  {...register(`feedbackQuestions.${index}.episode` as const)}
-                  onClick={updateEpisodeList}
-                >
-                  {episodeOptions.map((option) => (
-                    <option value={option} key={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </StyledInput>
+              {episodeOptions !== undefined && (
+                <StyledInput>
+                  <label>Episode</label>
+                  <select
+                    {...register(`feedbackQuestions.${index}.episode` as const)}
+                    onClick={updateEpisodeList}
+                  >
+                    {episodeOptions.map((option) => (
+                      <option value={option} key={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </StyledInput>
+              )}
             </StyledMultilineInputWrapper>
 
             <StyledInput>

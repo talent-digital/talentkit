@@ -24,7 +24,9 @@ export const TestItems = () => {
   const [subCompetenceValues, setSubCompetenceValues] = useState<
     Record<string, string>
   >({});
-  const [episodeOptions, setEpisodeOptions] = useState<string[]>([]);
+  const [episodeOptions, setEpisodeOptions] = useState<string[] | undefined>(
+    undefined
+  );
   const [subCompetenceOptions, setSubCompetenceOptions] = useState<
     FromInputSubCompetence[]
   >([]);
@@ -151,19 +153,21 @@ export const TestItems = () => {
                 </select>
               </StyledInput>
 
-              <StyledInput>
-                <label>Episode</label>
-                <select
-                  {...register(`testItems.${index}.episode` as const)}
-                  onClick={updateEpisodeList}
-                >
-                  {episodeOptions.map((option) => (
-                    <option value={option} key={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </StyledInput>
+              {episodeOptions !== undefined && (
+                <StyledInput>
+                  <label>Episode</label>
+                  <select
+                    {...register(`testItems.${index}.episode` as const)}
+                    onClick={updateEpisodeList}
+                  >
+                    {episodeOptions.map((option) => (
+                      <option value={option} key={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </StyledInput>
+              )}
             </StyledMultilineInputWrapper>
 
             <StyledInput>

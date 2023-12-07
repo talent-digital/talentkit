@@ -36,7 +36,7 @@ export const FeedbackQuestionsAnswers = ({
     name: `answers`,
   });
 
-  const handleOnBlur = () => {
+  const updateValues = () => {
     onUpdate(
       feedbackQuestionIndex,
       getValues()
@@ -48,7 +48,6 @@ export const FeedbackQuestionsAnswers = ({
   return (
     <Box
       sx={{
-        paddingLeft: 4,
         marginTop: 2,
         display: "flex",
         flexDirection: "column",
@@ -69,12 +68,15 @@ export const FeedbackQuestionsAnswers = ({
             <input
               type="text"
               {...register(`answers.${index}.text` as const)}
-              onBlur={handleOnBlur}
+              onBlur={updateValues}
             />
           </StyledInput>
           <div>
             <IconButton
-              onClick={() => removeAnswer(index)}
+              onClick={() => {
+                removeAnswer(index);
+                updateValues();
+              }}
               color="error"
               title={`Delete answer ${index}`}
             >

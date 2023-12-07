@@ -1,4 +1,4 @@
-import { SeasonDefinition } from "@talentdigital/season";
+import { LocalizedString, SeasonDefinition } from "@talentdigital/season";
 import { FormInputs, LanguageCode } from "../types";
 
 export function mapToSeasonObject(
@@ -191,14 +191,18 @@ function mapToSeasonFeedbackQuestions(
         ];
       const oldQuestion = oldFeedbackQuestion?.question ?? {};
       const oldAnswers = oldFeedbackQuestion?.answers ?? {};
-      const newAnswers = oldFeedbackQuestion?.answers ?? {};
+      const newAnswers: { [x: string]: LocalizedString } = {};
 
-      feedbackQuestion.answers.split(", ").forEach((answer, index) => {
-        newAnswers[index] = {
-          ...oldAnswers[index],
-          [language]: answer,
-        };
-      });
+      feedbackQuestion.answers
+        .split(",")
+        .map((answer) => answer.trim())
+        .filter(Boolean)
+        .forEach((answer, index) => {
+          newAnswers[index] = {
+            ...oldAnswers[index],
+            [language]: answer,
+          };
+        });
 
       return {
         ...accumulator,
