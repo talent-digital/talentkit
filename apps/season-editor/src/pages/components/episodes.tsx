@@ -13,7 +13,7 @@ type MaturityCode = `${Maturity}`;
 const maturityOptions: MaturityCode[] = ["ALPHA", "BETA", "PENDING", "PUBLIC"];
 
 export const Episodes = () => {
-  const { register, control } = useFormContext<FormInputs>();
+  const { register, control, getValues } = useFormContext<FormInputs>();
   const {
     fields: episodeFields,
     append: appendEpisode,
@@ -22,6 +22,25 @@ export const Episodes = () => {
     control,
     name: "episodes",
   });
+
+  const handleRemoveEpisode = (index: number, episodeId: string) => {
+    const values = getValues();
+    const usedInTestItems = values.testItems.some(
+      (item) => item.episode === episodeId
+    );
+    const usedInFeedbackQuestion = values.feedbackQuestions.some(
+      (item) => item.episode === episodeId
+    );
+
+    if (usedInTestItems || usedInFeedbackQuestion) {
+      alert(
+        "Cannot delete episode because it is used in a test item or a feedback question."
+      );
+      return;
+    }
+
+    removeEpisode(index);
+  };
 
   return (
     <>
@@ -93,7 +112,7 @@ export const Episodes = () => {
               startIcon={<DeleteIcon />}
               variant="contained"
               color="error"
-              onClick={() => removeEpisode(index)}
+              onClick={() => handleRemoveEpisode(index, episode.episodeId)}
             >
               Remove episode
             </Button>

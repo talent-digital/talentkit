@@ -19,7 +19,7 @@ export function tryRemoveCompetence(
 
   if (subCompetenceUsedInTestItems || subCompetenceUsedInFeedbackQuestions) {
     alert(
-      "Cannot delete competence because one of it's sub-competences is used in a test item or feedback question."
+      "Cannot delete competence because one of it's sub-competences is used in a test item or a feedback question."
     );
   } else {
     removeFn();
