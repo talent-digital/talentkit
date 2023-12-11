@@ -22,7 +22,7 @@
   "author": "talent::digital",
   "license": "SEE LICENSE IN LICENCE.md",
   "devDependencies": {
-    "@modyfi/vite-plugin-yaml": "^1.0.3",
+    "@modyfi/vite-plugin-yaml": "^1.0.4",
     "@talentdigital/season": "workspace:*",
     "@types/marked": "^4.0.8",
     "@types/node": "^18.7.18",
@@ -31,8 +31,8 @@
     "jsdom": "^20.0.2",
     "logrocket": "^2.2.1",
     "tsconfig": "workspace:*",
-    "typescript": "^4.8.3",
-    "vite": "^3.1.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.12",
     "vite-plugin-dts": "^1.6.4",
     "vitest": "^0.31.0"
   },
