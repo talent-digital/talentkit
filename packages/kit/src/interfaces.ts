@@ -33,7 +33,6 @@ export type AuthClient = Pick<
   | "token"
   | "tokenParsed"
   | "onAuthSuccess"
-  | "updateToken"
 >;
 
 export interface ID {
