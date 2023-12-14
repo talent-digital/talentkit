@@ -5,13 +5,13 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.1",
-    "eslint": "^8.27.0",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "eslint": "^8.55.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-turbo": "latest",
     "tsconfig": "workspace:*",
-    "typescript": "^4.7.4"
+    "typescript": "^5.0.2"
   },
   "publishConfig": {
     "access": "public"
