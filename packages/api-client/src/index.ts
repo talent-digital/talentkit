@@ -12,6 +12,24 @@ export interface TalentUserRequestWebBoolean {
   value: boolean;
 }
 
+export interface TalentGroupWeb {
+  name?: string;
+  /** @format int64 */
+  talentGroupParentId?: number;
+}
+
+export interface TagRequestWeb {
+  type?: string;
+  name?: string;
+}
+
+export interface TagWeb {
+  /** @format int64 */
+  id?: number;
+  name?: string;
+  type?: string;
+}
+
 export interface SignalModuleWeb {
   /** @format int64 */
   signalType?: number;
@@ -364,21 +382,6 @@ export interface SeasonWeb {
   assetsURL?: string;
   competenceAreas?: Record<string, SeasonDefinitionCompetenceAreaWeb>;
   episodes?: Record<string, EpisodeWeb>;
-}
-
-export interface TagWeb {
-  /** @format int64 */
-  id?: number;
-  name?: string;
-  type?: string;
-}
-
-export interface TalentGroupWeb {
-  /** @format int64 */
-  id?: number;
-  name?: string;
-  /** @format int64 */
-  talentGroupParentId?: number;
 }
 
 export interface TalentUserWeb {
@@ -1040,6 +1043,214 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     loadTalentUser1: (params: RequestParams = {}) =>
       this.request<TalentUserWeb, any>({
         path: `/api/v1/talent`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+  };
+  domainModelTalentGroup = {
+    /**
+     * @description This endpoint updates an existing talent group by id. You can change both name and parent group id
+     *
+     * @tags Domain model: Talent group
+     * @name UpdateTalentGroup
+     * @summary Update existing talent group
+     * @request PUT:/api/v1/talent-groups/{id}
+     * @secure
+     */
+    updateTalentGroup: (id: number, data: TalentGroupWeb, params: RequestParams = {}) =>
+      this.request<TalentGroupWeb, any>({
+        path: `/api/v1/talent-groups/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint deletes a talent group by id
+     *
+     * @tags Domain model: Talent group
+     * @name DeleteTalentGroup
+     * @summary Delete talent group
+     * @request DELETE:/api/v1/talent-groups/{id}
+     * @secure
+     */
+    deleteTalentGroup: (id: number, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/v1/talent-groups/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Domain model: Talent group
+     * @name GetAllGroups
+     * @request GET:/api/v1/talent-groups
+     * @secure
+     */
+    getAllGroups: (params: RequestParams = {}) =>
+      this.request<TalentGroupWeb[], any>({
+        path: `/api/v1/talent-groups`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint adds a new talent group
+     *
+     * @tags Domain model: Talent group
+     * @name AddTalentGroup
+     * @summary Add new talent group
+     * @request POST:/api/v1/talent-groups
+     * @secure
+     */
+    addTalentGroup: (data: TalentGroupWeb, params: RequestParams = {}) =>
+      this.request<TalentGroupWeb, any>({
+        path: `/api/v1/talent-groups`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Domain model: Talent group
+     * @name LoadTalentGroups
+     * @request GET:/api/v1/talent-groups/by-parent/{parentGroupId}
+     * @secure
+     */
+    loadTalentGroups: (parentGroupId: number, params: RequestParams = {}) =>
+      this.request<TalentGroupWeb[], any>({
+        path: `/api/v1/talent-groups/by-parent/${parentGroupId}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Domain model: Talent group
+     * @name LoadTalentGroups1
+     * @request GET:/api/v1/talent-groups/by-parent
+     * @secure
+     */
+    loadTalentGroups1: (params: RequestParams = {}) =>
+      this.request<TalentGroupWeb[], any>({
+        path: `/api/v1/talent-groups/by-parent`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+  };
+  domainModelTags = {
+    /**
+     * @description This endpoint changes an existing tag by id. You can change both type and name
+     *
+     * @tags Domain model: Tags
+     * @name UpdateTag
+     * @summary Update existing tag
+     * @request PUT:/api/v1/tags/{id}
+     * @secure
+     */
+    updateTag: (id: number, data: TagRequestWeb, params: RequestParams = {}) =>
+      this.request<TagWeb, any>({
+        path: `/api/v1/tags/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint deletes a tag by id
+     *
+     * @tags Domain model: Tags
+     * @name DeleteTag
+     * @summary Delete tag
+     * @request DELETE:/api/v1/tags/{id}
+     * @secure
+     */
+    deleteTag: (id: number, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/v1/tags/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Domain model: Tags
+     * @name GetAllTags
+     * @request GET:/api/v1/tags
+     * @secure
+     */
+    getAllTags: (params: RequestParams = {}) =>
+      this.request<TagWeb[], any>({
+        path: `/api/v1/tags`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint adds a new tag
+     *
+     * @tags Domain model: Tags
+     * @name AddTag
+     * @summary Add new tag
+     * @request POST:/api/v1/tags
+     * @secure
+     */
+    addTag: (data: TagRequestWeb, params: RequestParams = {}) =>
+      this.request<TagWeb, any>({
+        path: `/api/v1/tags`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Domain model: Tags
+     * @name LoadTagsTypes
+     * @request GET:/api/v1/tags/types
+     * @secure
+     */
+    loadTagsTypes: (params: RequestParams = {}) =>
+      this.request<string[], any>({
+        path: `/api/v1/tags/types`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Domain model: Tags
+     * @name FindTagsByType
+     * @request GET:/api/v1/tags/by-type/{tagType}
+     * @secure
+     */
+    findTagsByType: (tagType: string, params: RequestParams = {}) =>
+      this.request<TagWeb[], any>({
+        path: `/api/v1/tags/by-type/${tagType}`,
         method: "GET",
         secure: true,
         ...params,
@@ -2183,72 +2394,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<void, any>({
         path: `/api/v1/season/${seasonId}/episode/${episodeId}/badge/${badgeId}`,
         method: "DELETE",
-        secure: true,
-        ...params,
-      }),
-  };
-  domainModelTalentGroup = {
-    /**
-     * No description
-     *
-     * @tags Domain model: Talent group
-     * @name LoadTalentGroups
-     * @request GET:/api/v1/talent-groups/by-parent/{parentGroupId}
-     * @secure
-     */
-    loadTalentGroups: (parentGroupId: number, params: RequestParams = {}) =>
-      this.request<TalentGroupWeb[], any>({
-        path: `/api/v1/talent-groups/by-parent/${parentGroupId}`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Domain model: Talent group
-     * @name LoadTalentGroups1
-     * @request GET:/api/v1/talent-groups/by-parent
-     * @secure
-     */
-    loadTalentGroups1: (params: RequestParams = {}) =>
-      this.request<TalentGroupWeb[], any>({
-        path: `/api/v1/talent-groups/by-parent`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-  };
-  domainModelTags = {
-    /**
-     * No description
-     *
-     * @tags Domain model: Tags
-     * @name LoadTagsTypes
-     * @request GET:/api/v1/tags/types
-     * @secure
-     */
-    loadTagsTypes: (params: RequestParams = {}) =>
-      this.request<string[], any>({
-        path: `/api/v1/tags/types`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Domain model: Tags
-     * @name FindTagsByType
-     * @request GET:/api/v1/tags/by-type/{tagType}
-     * @secure
-     */
-    findTagsByType: (tagType: string, params: RequestParams = {}) =>
-      this.request<TagWeb[], any>({
-        path: `/api/v1/tags/by-type/${tagType}`,
-        method: "GET",
         secure: true,
         ...params,
       }),
