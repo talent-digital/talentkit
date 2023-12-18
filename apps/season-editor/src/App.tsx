@@ -14,7 +14,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <SeasonEditor />
-      {/* @ts-expect-error Library typing error, Toaster works fine */}
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+      {/* @ts-ignore Library typing error, Toaster works fine, try to remove after package updates */}
       <Toaster position="bottom-right" toastOptions={getToastOptions(theme)} />
     </ThemeProvider>
   );
