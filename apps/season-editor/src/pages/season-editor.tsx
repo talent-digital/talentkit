@@ -92,7 +92,9 @@ export const SeasonEditor = () => {
       }
     });
 
-    toast.error("Error, some test items have duplicate test item ids");
+    toast.error(
+      `Error, Duplicate test item ids: ${testItemIdDuplicates.join(", ")}`
+    );
   };
 
   const handleLogForm = () => {

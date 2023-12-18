@@ -113,10 +113,6 @@ export const TestItems = () => {
     };
   }, [updateSubCompetenceList, updateEpisodeList]);
 
-  // const clearErrors = (index: number) => {
-  //   clearError(`testItems.${index}.testItemId`);
-  // }
-
   return (
     <>
       {testItemFields.map((testItem, index) => (
