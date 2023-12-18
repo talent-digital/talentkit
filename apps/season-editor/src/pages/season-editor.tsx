@@ -1,16 +1,9 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Snackbar,
-  Typography,
-  styled,
-  Divider,
-} from "@mui/material";
+import { Box, Button, Typography, styled, Divider } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { parse, stringify } from "yaml";
 import { SeasonDefinition } from "@talentdigital/season";
 import { ChangeEvent, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 import {
   CompetenceAreas,
@@ -45,7 +38,6 @@ const SIDEBAR_SIZE = 300;
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
   const { register, reset, getValues, setError } = methods;
-  const [readFileErrorMsg, setReadFileError] = useState<string | null>(null);
   const [season, setSeason] = useState<SeasonDefinition>(getEmptySeason());
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
   const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
@@ -65,7 +57,7 @@ export const SeasonEditor = () => {
       setSeason(parsedFiled);
     } catch (error) {
       if (error instanceof Error) {
-        setReadFileError(error.message);
+        toast.error(error.message);
       }
     }
   };
@@ -99,6 +91,8 @@ export const SeasonEditor = () => {
         });
       }
     });
+
+    toast.error("Error, some test items have duplicate test item ids");
   };
 
   const handleLogForm = () => {
@@ -378,20 +372,6 @@ export const SeasonEditor = () => {
           )}
         </StyledContent>
       )}
-
-      <Snackbar
-        open={readFileErrorMsg !== null}
-        message={readFileErrorMsg}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={() => setReadFileError(null)}
-          severity="error"
-          sx={{ width: "100%" }}
-        >
-          {readFileErrorMsg}
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };

@@ -5,7 +5,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 
 import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
-import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
+import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
 import { FeedbackQuestionsAnswers } from "./feedback-questions-answers";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 

@@ -6,7 +6,7 @@ import { Level } from "@talentdigital/season";
 
 import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
-import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
+import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 type LevelCode = `${Level}`;
