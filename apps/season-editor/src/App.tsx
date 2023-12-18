@@ -14,6 +14,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <SeasonEditor />
+      {/* @ts-expect-error Library typing error, Toaster works fine */}
       <Toaster position="bottom-right" toastOptions={getToastOptions(theme)} />
     </ThemeProvider>
   );
