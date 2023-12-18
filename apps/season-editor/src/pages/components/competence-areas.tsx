@@ -66,7 +66,7 @@ export const CompetenceAreas = () => {
     <>
       {competenceAreaFields.map((competenceAreaField, index) => (
         <Box key={competenceAreaField.id}>
-          <Box sx={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
+          <Box sx={{ display: "flex", gap: [0, 2], alignItems: "center" }}>
             <StyledInput short>
               <label>Id</label>
               <input

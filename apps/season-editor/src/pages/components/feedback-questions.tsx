@@ -110,7 +110,7 @@ export const FeedbackQuestions = () => {
     <>
       {feedbackQuestionFields.map((feedbackQuestionField, index) => (
         <StyledSectionWrapper key={feedbackQuestionField.id} indented>
-          <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
             <input
               type="text"
               hidden

@@ -59,8 +59,7 @@ export const FeedbackQuestionsAnswers = ({
           key={answersField.id}
           sx={{
             display: "flex",
-            alignItems: "flex-end",
-            gap: 2,
+            alignItems: "center",
           }}
         >
           <StyledInput>

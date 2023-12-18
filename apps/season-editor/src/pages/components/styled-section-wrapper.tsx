@@ -12,7 +12,6 @@ export const StyledSectionWrapper = styled("div", {
   width: `calc(100% - ${indented ? theme.spacing(3) : "0px"})`,
   marginLeft: indented ? theme.spacing(3) : "0px",
   display: "flex",
-  gap: theme.spacing(2),
   flexDirection: "column",
   background: "#fff",
   borderLeft: indented ? `5px solid ${grey["600"]}` : "none",

@@ -27,6 +27,7 @@ import {
   extractEpisodes,
   extractFromCompetences,
   getEmptySeason,
+  isErrorObject,
   mapToSeasonObject,
 } from "./utils";
 import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
@@ -43,7 +44,7 @@ const SIDEBAR_SIZE = 300;
 
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
-  const { register, reset, getValues } = methods;
+  const { register, reset, getValues, setError } = methods;
   const [readFileErrorMsg, setReadFileError] = useState<string | null>(null);
   const [season, setSeason] = useState<SeasonDefinition>(getEmptySeason());
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
@@ -70,12 +71,34 @@ export const SeasonEditor = () => {
   };
 
   const handleExport = () => {
-    const values = mapToSeasonObject(season, getValues(), language);
+    const values = getValues();
+    const maybeSeason = mapToSeasonObject(season, getValues(), language);
+
+    if (isErrorObject(maybeSeason)) {
+      validateTestItems(values, maybeSeason.testItemIdDuplicates);
+
+      return;
+    }
+
     const element = document.createElement("a");
-    const file = new Blob([stringify(values)], { type: "text/plain" });
+    const file = new Blob([stringify(maybeSeason)], { type: "text/plain" });
     element.href = URL.createObjectURL(file);
     element.download = "season.yaml";
     element.click();
+  };
+
+  const validateTestItems = (
+    values: FormInputs,
+    testItemIdDuplicates: string[]
+  ) => {
+    values.testItems.forEach((item, index) => {
+      if (testItemIdDuplicates.includes(item.testItemId)) {
+        const fieldId = `testItems[${index}].testItemId` as "testItems";
+        setError(fieldId, {
+          message: "Duplicate test item id",
+        });
+      }
+    });
   };
 
   const handleLogForm = () => {
@@ -205,7 +228,7 @@ export const SeasonEditor = () => {
       {!seedIdFilled && (
         <StyledContent>
           <StyledSectionWrapper>
-            <Typography variant="h5">
+            <Typography variant="h5" sx={{ mb: 2 }}>
               To start provide an unique Id or load a file that contains it
             </Typography>
 
@@ -231,7 +254,9 @@ export const SeasonEditor = () => {
         <StyledContent>
           <StyledSectionWrapper id="basic-information">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Season description</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Season description
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}
@@ -266,7 +291,9 @@ export const SeasonEditor = () => {
 
           <StyledSectionWrapper id="competence-areas">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Competence Areas</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Competence Areas
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}
@@ -292,7 +319,9 @@ export const SeasonEditor = () => {
 
           <StyledSectionWrapper id="episodes">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Episodes</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Episodes
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}
@@ -310,7 +339,9 @@ export const SeasonEditor = () => {
 
           <StyledSectionWrapper id="test-items">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Test items</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Test items
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}
@@ -328,7 +359,9 @@ export const SeasonEditor = () => {
 
           <StyledSectionWrapper id="feedback-questions">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Feedback questions</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Feedback questions
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}

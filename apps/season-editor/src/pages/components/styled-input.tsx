@@ -6,9 +6,20 @@ export const StyledInput = styled(Box, {
 })<{
   short?: boolean;
 }>(({ theme, short }) => ({
+  position: "relative",
   display: "flex",
   flexDirection: "column",
   width: short ? "85px" : "100%",
+  marginBottom: theme.spacing(2),
+
+  "& span": {
+    position: "absolute",
+    bottom: "-16px",
+    left: 0,
+    color: theme.palette.error.main,
+    fontSize: "11px",
+  },
+
   "& select": {
     cursor: "pointer",
   },
