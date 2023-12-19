@@ -1,5 +1,11 @@
 # @talentdigital/api-client
 
+## 0.4.1
+
+### Patch Changes
+
+- 023189a: Version alignment
+
 ## 0.4.0
 
 ### Minor Changes
