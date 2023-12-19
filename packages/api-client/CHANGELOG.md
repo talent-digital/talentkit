@@ -1,5 +1,12 @@
 # @talentdigital/api-client
 
+## 0.4.0
+
+### Minor Changes
+
+- cf812a1: Expand tags and talentgroup api endpoint typings
+- 73b463b: Update vite, typescript and eslint package versions
+
 ## 0.3.2
 
 ### Patch Changes
