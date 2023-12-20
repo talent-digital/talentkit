@@ -1,16 +1,33 @@
 import { LocalizedString, SeasonDefinition } from "@talentdigital/season";
-import { FormInputs, LanguageCode } from "../types";
+import { ErrorObject, FormInputs, LanguageCode } from "../types";
 
 export function mapToSeasonObject(
   originalFileLoaded: SeasonDefinition,
   valuesWithEmpty: FormInputs,
   language: LanguageCode
-) {
+): SeasonDefinition | ErrorObject {
   const originalFileLoadedCopy = deepCloneSeason(originalFileLoaded);
   const newFile = deepCloneSeason(originalFileLoaded);
   const values: Partial<FormInputs> = Object.fromEntries(
     Object.entries(valuesWithEmpty).filter((entries) => Boolean(entries[1]))
   ) as Partial<FormInputs>;
+
+  const testItemIds = values.testItems?.map(({ testItemId }) => testItemId);
+  const hasDuplicatedTestItemIds =
+    testItemIds?.length !== new Set(testItemIds).size;
+
+  if (hasDuplicatedTestItemIds) {
+    const foundDuplicates = new Set(
+      testItemIds?.filter(
+        (testItemId, index) => testItemIds.indexOf(testItemId) !== index
+      )
+    );
+
+    return {
+      isError: true,
+      testItemIdDuplicates: [...foundDuplicates],
+    };
+  }
 
   newFile.seedId = values.seedId;
   newFile.title[language] = values.title;

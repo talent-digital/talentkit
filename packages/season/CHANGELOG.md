@@ -1,5 +1,12 @@
 # @talentdigital/season
 
+## 0.7.0
+
+### Minor Changes
+
+- 73b463b: Update vite, typescript and eslint package versions
+- c52e185: Add seedId property for season editor
+
 ## 0.6.2
 
 ### Patch Changes

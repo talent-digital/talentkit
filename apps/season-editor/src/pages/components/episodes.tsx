@@ -6,7 +6,7 @@ import { Maturity } from "@talentdigital/season";
 
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
-import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
+import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
 
 type MaturityCode = `${Maturity}`;
 
@@ -46,7 +46,7 @@ export const Episodes = () => {
     <>
       {episodeFields.map((episode, index) => (
         <StyledSectionWrapper key={episode.id} indented>
-          <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
             <StyledMultilineInputWrapper>
               <StyledInput>
                 <label>Id</label>

@@ -6,9 +6,20 @@ export const StyledInput = styled(Box, {
 })<{
   short?: boolean;
 }>(({ theme, short }) => ({
+  position: "relative",
   display: "flex",
   flexDirection: "column",
   width: short ? "85px" : "100%",
+  marginBottom: theme.spacing(2),
+
+  "& span": {
+    position: "absolute",
+    bottom: "-16px",
+    left: 0,
+    color: theme.palette.error.main,
+    fontSize: "11px",
+  },
+
   "& select": {
     cursor: "pointer",
   },
@@ -16,6 +27,7 @@ export const StyledInput = styled(Box, {
     borderRadius: theme.shape.borderRadius,
     border: `1px solid ${grey[500]}`,
     padding: theme.spacing(1),
+    width: "100%",
 
     "&[readonly]": {
       backgroundColor: theme.palette.grey[100],

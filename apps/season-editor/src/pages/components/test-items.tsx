@@ -6,7 +6,7 @@ import { Level } from "@talentdigital/season";
 
 import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
-import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
+import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 type LevelCode = `${Level}`;
@@ -19,6 +19,7 @@ const levelOptions: LevelCode[] = [
 ];
 
 const EMPTY_OPTION = "";
+const TEST_ID_DIVIDER = "--";
 
 export const TestItems = () => {
   const [subCompetenceValues, setSubCompetenceValues] = useState<
@@ -30,8 +31,14 @@ export const TestItems = () => {
   const [subCompetenceOptions, setSubCompetenceOptions] = useState<
     FromInputSubCompetence[]
   >([]);
-  const { register, control, getValues, setValue } =
-    useFormContext<FormInputs>();
+  const {
+    register,
+    control,
+    getValues,
+    setValue,
+    formState: { errors },
+    clearErrors,
+  } = useFormContext<FormInputs>();
   const {
     fields: testItemFields,
     append: appendTestItem,
@@ -76,14 +83,11 @@ export const TestItems = () => {
   }, [getValues]);
 
   const getTestItemId = () => {
-    const DIVIDER = "--";
     const seedId = getValues("seedId");
-    const lastTestId =
-      testItemFields[testItemFields.length - 1]?.testItemId.split(DIVIDER)[1];
-    const lastTestIdIsNumber = !isNaN(Number(lastTestId));
-    const newTestId = lastTestIdIsNumber ? Number(lastTestId) + 1 : 1;
+    const testItems = getValues("testItems");
+    const newTestId = getNewTestId(seedId, testItems);
 
-    return `test-${seedId}${DIVIDER}${newTestId}`;
+    return `test-${seedId}${TEST_ID_DIVIDER}${newTestId}`;
   };
 
   useEffect(() => {
@@ -113,7 +117,7 @@ export const TestItems = () => {
     <>
       {testItemFields.map((testItem, index) => (
         <StyledSectionWrapper key={testItem.id} indented>
-          <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
             <input
               hidden
               type="text"
@@ -136,10 +140,12 @@ export const TestItems = () => {
               <StyledInput>
                 <label>Id</label>
                 <input
-                  readOnly
                   type="text"
-                  {...register(`testItems.${index}.testItemId` as const)}
+                  {...register(`testItems.${index}.testItemId` as const, {
+                    onBlur: () => clearErrors(`testItems.${index}.testItemId`),
+                  })}
                 />
+                <span>{errors?.testItems?.[index]?.testItemId?.message}</span>
               </StyledInput>
 
               <StyledInput>
@@ -237,4 +243,23 @@ export const TestItems = () => {
 
 function getSubCompetenceKey(subCompetence: FromInputSubCompetence) {
   return `${subCompetence.competenceAreaId}-${subCompetence.competenceId}-${subCompetence.subCompetenceId}`;
+}
+
+function getNewTestId(
+  seedId: string,
+  testItmes: FormInputs["testItems"]
+): number {
+  if (testItmes.length === 0) {
+    return 1;
+  }
+
+  const lastTestId =
+    testItmes[testItmes.length - 1]?.testItemId.split(TEST_ID_DIVIDER)[1];
+  const lastTestIdIsNumber = !isNaN(Number(lastTestId));
+
+  if (!lastTestIdIsNumber) {
+    return getNewTestId(seedId, testItmes.slice(0, -1));
+  }
+
+  return Number(lastTestId) + 1;
 }
