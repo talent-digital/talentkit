@@ -84,7 +84,7 @@ function mapToSeasonCompetences(
         ...accumulator,
         [competence.competenceId]: {
           name: {
-            ...oldValues.competenceAreas[competenceAreaId].competences[
+            ...oldValues.competenceAreas[competenceAreaId]?.competences[
               competence.competenceId
             ]?.name,
             [language]: competence.name,
