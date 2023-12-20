@@ -1,16 +1,9 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Snackbar,
-  Typography,
-  styled,
-  Divider,
-} from "@mui/material";
+import { Box, Button, Typography, styled, Divider } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { parse, stringify } from "yaml";
 import { SeasonDefinition } from "@talentdigital/season";
 import { ChangeEvent, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 import {
   CompetenceAreas,
@@ -27,6 +20,7 @@ import {
   extractEpisodes,
   extractFromCompetences,
   getEmptySeason,
+  isErrorObject,
   mapToSeasonObject,
 } from "./utils";
 import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
@@ -43,8 +37,7 @@ const SIDEBAR_SIZE = 300;
 
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
-  const { register, reset, getValues } = methods;
-  const [readFileErrorMsg, setReadFileError] = useState<string | null>(null);
+  const { register, reset, getValues, setError } = methods;
   const [season, setSeason] = useState<SeasonDefinition>(getEmptySeason());
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
   const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
@@ -64,18 +57,46 @@ export const SeasonEditor = () => {
       setSeason(parsedFiled);
     } catch (error) {
       if (error instanceof Error) {
-        setReadFileError(error.message);
+        toast.error(error.message);
       }
     }
   };
 
   const handleExport = () => {
-    const values = mapToSeasonObject(season, getValues(), language);
+    const values = getValues();
+    const maybeSeason = mapToSeasonObject(season, getValues(), language);
+
+    if (isErrorObject(maybeSeason)) {
+      validateTestItems(values, maybeSeason.testItemIdDuplicates);
+
+      return;
+    }
+
     const element = document.createElement("a");
-    const file = new Blob([stringify(values)], { type: "text/plain" });
+    const file = new Blob([stringify(maybeSeason)], { type: "text/plain" });
     element.href = URL.createObjectURL(file);
     element.download = "season.yaml";
     element.click();
+  };
+
+  const validateTestItems = (
+    values: FormInputs,
+    testItemIdDuplicates: string[]
+  ) => {
+    values.testItems.forEach((item, index) => {
+      if (testItemIdDuplicates.includes(item.testItemId)) {
+        const fieldId = `testItems[${index}].testItemId` as "testItems";
+        setError(fieldId, {
+          message: "Duplicate test item id",
+        });
+      }
+    });
+
+    toast.error(
+      `Error: Duplicate Test IDs. Please make sure your Test IDs are unique for this season. Duplicates found: ${testItemIdDuplicates.join(
+        ", "
+      )}`
+    );
   };
 
   const handleLogForm = () => {
@@ -205,7 +226,7 @@ export const SeasonEditor = () => {
       {!seedIdFilled && (
         <StyledContent>
           <StyledSectionWrapper>
-            <Typography variant="h5">
+            <Typography variant="h5" sx={{ mb: 2 }}>
               To start provide an unique Id or load a file that contains it
             </Typography>
 
@@ -231,7 +252,9 @@ export const SeasonEditor = () => {
         <StyledContent>
           <StyledSectionWrapper id="basic-information">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Season description</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Season description
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}
@@ -266,7 +289,9 @@ export const SeasonEditor = () => {
 
           <StyledSectionWrapper id="competence-areas">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Competence Areas</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Competence Areas
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}
@@ -292,7 +317,9 @@ export const SeasonEditor = () => {
 
           <StyledSectionWrapper id="episodes">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Episodes</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Episodes
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}
@@ -310,7 +337,9 @@ export const SeasonEditor = () => {
 
           <StyledSectionWrapper id="test-items">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Test items</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Test items
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}
@@ -328,7 +357,9 @@ export const SeasonEditor = () => {
 
           <StyledSectionWrapper id="feedback-questions">
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5">Feedback questions</Typography>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Feedback questions
+              </Typography>
 
               <SectionVisibilityButton
                 hiddenSections={hiddenSections}
@@ -345,20 +376,6 @@ export const SeasonEditor = () => {
           )}
         </StyledContent>
       )}
-
-      <Snackbar
-        open={readFileErrorMsg !== null}
-        message={readFileErrorMsg}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={() => setReadFileError(null)}
-          severity="error"
-          sx={{ width: "100%" }}
-        >
-          {readFileErrorMsg}
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };
@@ -369,7 +386,8 @@ const StyledContent = styled("form")(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(4),
   padding: theme.spacing(4),
-  width: 900,
+  maxWidth: 900,
+  width: "100%",
   margin: "auto",
 }));
 

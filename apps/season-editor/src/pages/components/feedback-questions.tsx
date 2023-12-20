@@ -5,7 +5,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 
 import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
-import { StyledMultilineInputWrapper } from "./styled-multiline-werapper";
+import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
 import { FeedbackQuestionsAnswers } from "./feedback-questions-answers";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
@@ -110,7 +110,7 @@ export const FeedbackQuestions = () => {
     <>
       {feedbackQuestionFields.map((feedbackQuestionField, index) => (
         <StyledSectionWrapper key={feedbackQuestionField.id} indented>
-          <Box sx={{ display: "flex", gap: 2, flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
             <input
               type="text"
               hidden

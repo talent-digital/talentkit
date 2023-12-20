@@ -84,8 +84,8 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "flex-end",
-                  gap: 2,
+                  alignItems: "center",
+                  gap: [0, 2],
                 }}
               >
                 <input
