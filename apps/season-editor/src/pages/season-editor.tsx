@@ -93,7 +93,9 @@ export const SeasonEditor = () => {
     });
 
     toast.error(
-      `Error, Duplicate test item ids: ${testItemIdDuplicates.join(", ")}`
+      `Error: Duplicate Test IDs. Please make sure your Test IDs are unique for this season. Duplicates found: ${testItemIdDuplicates.join(
+        ", "
+      )}`
     );
   };
 
