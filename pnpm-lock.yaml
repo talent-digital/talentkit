@@ -197,7 +197,7 @@ importers:
   packages/kit:
     dependencies:
       '@talentdigital/api-client':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^0.4.0
         version: link:../api-client
       '@vitest/web-worker':
         specifier: 0.31.4
