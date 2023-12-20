@@ -1,5 +1,17 @@
 # @talentdigital/kit
 
+## 0.29.0
+
+### Minor Changes
+
+- 73b463b: Update vite, typescript and eslint package versions
+
+### Patch Changes
+
+- Updated dependencies [cf812a1]
+- Updated dependencies [73b463b]
+  - @talentdigital/api-client@0.4.0
+
 ## 0.28.0
 
 ### Minor Changes
