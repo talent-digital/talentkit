@@ -386,7 +386,8 @@ const StyledContent = styled("form")(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(4),
   padding: theme.spacing(4),
-  width: 900,
+  maxWidth: 900,
+  width: "100%",
   margin: "auto",
 }));
 

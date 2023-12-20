@@ -27,6 +27,7 @@ export const StyledInput = styled(Box, {
     borderRadius: theme.shape.borderRadius,
     border: `1px solid ${grey[500]}`,
     padding: theme.spacing(1),
+    width: "100%",
 
     "&[readonly]": {
       backgroundColor: theme.palette.grey[100],
