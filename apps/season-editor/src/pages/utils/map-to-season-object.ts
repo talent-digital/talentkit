@@ -6,9 +6,8 @@ export function mapToSeasonObject(
   valuesWithEmpty: FormInputs,
   language: LanguageCode
 ): SeasonDefinition | ErrorObject {
-  const newFile: SeasonDefinition = JSON.parse(
-    JSON.stringify(originalFileLoaded)
-  ) as SeasonDefinition;
+  const originalFileLoadedCopy = deepCloneSeason(originalFileLoaded);
+  const newFile = deepCloneSeason(originalFileLoaded);
   const values: Partial<FormInputs> = Object.fromEntries(
     Object.entries(valuesWithEmpty).filter((entries) => Boolean(entries[1]))
   ) as Partial<FormInputs>;
@@ -37,7 +36,7 @@ export function mapToSeasonObject(
   newFile.seasonEndMessage[language] = values.seasonEndMessage;
   newFile.competenceAreas = mapToSeasonCompetenceAreas(
     values,
-    newFile,
+    originalFileLoadedCopy,
     language
   );
   newFile.episodes = mapToSeasonEpisodes(values, newFile, language);
@@ -85,7 +84,9 @@ function mapToSeasonCompetences(
         ...accumulator,
         [competence.competenceId]: {
           name: {
-            ...oldValues.competenceAreas[competence.competenceId]?.name,
+            ...oldValues.competenceAreas[competenceAreaId]?.competences[
+              competence.competenceId
+            ]?.name,
             [language]: competence.name,
           },
           subCompetences: mapToSeasonSubCompetences(
@@ -263,4 +264,8 @@ function mapToSeasonEpisodes(
       };
     }, {}) ?? {}
   );
+}
+
+function deepCloneSeason(file: SeasonDefinition): SeasonDefinition {
+  return JSON.parse(JSON.stringify(file)) as SeasonDefinition;
 }
