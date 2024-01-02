@@ -32,7 +32,7 @@
     "react": ">=17 <=18",
     "tsconfig": "workspace:*",
     "typescript": "^5.0.2",
-    "vite": "^4.4.12",
+    "vite": "^4.5.1",
     "vite-plugin-dts": "^1.6.4"
   },
   "peerDependencies": {
