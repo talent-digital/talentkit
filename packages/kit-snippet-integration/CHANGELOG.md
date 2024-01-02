@@ -1,5 +1,11 @@
 # @talentdigital/kit-snippet-integration
 
+## 0.30.1
+
+### Patch Changes
+
+- @talentdigital/kit@0.29.1
+
 ## 0.30.0
 
 ### Minor Changes
