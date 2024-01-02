@@ -12,7 +12,15 @@ export interface TalentUserRequestWebBoolean {
   value: boolean;
 }
 
+export interface TalentGroupRequestWeb {
+  name?: string;
+  /** @format int64 */
+  talentGroupParentId?: number;
+}
+
 export interface TalentGroupWeb {
+  /** @format int64 */
+  id?: number;
   name?: string;
   /** @format int64 */
   talentGroupParentId?: number;
@@ -1058,7 +1066,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/api/v1/talent-groups/{id}
      * @secure
      */
-    updateTalentGroup: (id: number, data: TalentGroupWeb, params: RequestParams = {}) =>
+    updateTalentGroup: (id: number, data: TalentGroupRequestWeb, params: RequestParams = {}) =>
       this.request<TalentGroupWeb, any>({
         path: `/api/v1/talent-groups/${id}`,
         method: "PUT",
@@ -1110,7 +1118,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/v1/talent-groups
      * @secure
      */
-    addTalentGroup: (data: TalentGroupWeb, params: RequestParams = {}) =>
+    addTalentGroup: (data: TalentGroupRequestWeb, params: RequestParams = {}) =>
       this.request<TalentGroupWeb, any>({
         path: `/api/v1/talent-groups`,
         method: "POST",
