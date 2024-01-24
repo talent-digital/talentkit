@@ -1896,7 +1896,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query: {
         id: string;
         seasonId: string;
-        episodeId: string;
       },
       params: RequestParams = {},
     ) =>
