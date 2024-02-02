@@ -1,6 +1,6 @@
 title:
-  de: OpenBlue Solutioneer
-  en: OpenBlue Solutioneer
+  de: OpenSky Solutions Provider
+  en: OpenSky Solutions Provider
 info:
   de: Corona-Pandemie, drastisch steigende Energiekosten, ESR-Meldepflicht ... was bedeutet das für meine Kunden und meinen Umsatz?
   en: Corona pandemic, drastically increasing cost of energy, mandatory ESR reporting ... what does it mean for my customers and my sales?
@@ -42,13 +42,13 @@ competenceAreas:
                     de: Gutes Zusatzpotential zu den Geräten.
                     en: Additional potential on top of the devices.
                   "2":
-                    de: Wichtiger Differentiator für Johnson Controls auf dem Markt.
-                    en: Key market differentiator for Johnson Controls.
+                    de: Wichtiger Differentiator für Control Frontier Services auf dem Markt.
+                    en: Key market differentiator for Control Frontier Services.
 episodes:
   "01":
     title:
-      de: SAAT & GUT Co. KGaA, Frau Hennings
-      en: SAAT & GUT Co. KGaA, Mrs. Hennings
+      de: VORTEX & AURA Enterprises, Frau Schmidt
+      en: VORTEX & AURA Enterprises, Mrs. Schmidt
     description:
       de: Du wirst überraschend zu einem Termin mit dem Thema "Wartungsvertrag Brandmeldetechnik" eingeladen, dabei ist der Vetrag längst unter Dach und Fach. Was ist das los?
       en: You are unexpectedly invited to an appointment with the topic "maintenance contract fire alarm technology", although the contract has long been signed and sealed. What's going on?
@@ -64,8 +64,8 @@ episodes:
         image: coffee-hand.svg
   "02":
     title:
-      de: SAAT & GUT Co. KGaA, Dr. Alexander Varus
-      en: SAAT & GUT Co. KGaA, Dr. Alexander Varus
+      de: VORTEX & AURA Enterprises, Dr. Alexander Varus
+      en: VORTEX & AURA Enterprises, Dr. Alexander Varus
     description:
       de: Dir ist es gelungen, die Situation zu drehen und das Interesse des Kunden zu wecken. Kannst du SAAT & GUT mit digitalen Mitteln aus der Klemme helfen?
       en: You have managed to turn the situation around and get the customer's interest. Can you help SAAT & GUT digitally out of a tight spot?
@@ -85,5 +85,5 @@ episodes:
     format: /quiztaxi
     formatConfiguration: dialog02.json
 seasonEndMessage:
-  de: Du hast es geschafft! Jetzt kannst du dich mit Fug und Recht "OpenBlue Solutioneer" nennen.
-  en: You have done it! Now you can really call yourself an "OpenBlue Solutioneer".
+  de: Du hast es geschafft! Jetzt kannst du dich mit Fug und Recht "OpenSky Solutions Provider" nennen.
+  en: You have done it! Now you can really call yourself an "OpenSky Solutions Provider".
