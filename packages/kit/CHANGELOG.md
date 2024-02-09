@@ -1,5 +1,13 @@
 # @talentdigital/kit
 
+## 0.29.2
+
+### Patch Changes
+
+- c94ddb4: Change canary season text
+- Updated dependencies [50e34c3]
+  - @talentdigital/api-client@0.6.0
+
 ## 0.29.1
 
 ### Patch Changes
