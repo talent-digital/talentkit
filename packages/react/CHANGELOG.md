@@ -1,5 +1,13 @@
 # @talentdigital/react
 
+## 0.29.2
+
+### Patch Changes
+
+- 70ea9e7: Improve typescript support for useKit
+- Updated dependencies [c94ddb4]
+  - @talentdigital/kit@0.29.2
+
 ## 0.29.1
 
 ### Patch Changes

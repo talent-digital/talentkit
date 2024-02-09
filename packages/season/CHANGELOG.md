@@ -1,5 +1,11 @@
 # @talentdigital/season
 
+## 0.7.1
+
+### Patch Changes
+
+- c94ddb4: Change canary season text
+
 ## 0.7.0
 
 ### Minor Changes

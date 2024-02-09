@@ -1,5 +1,11 @@
 # @talentdigital/api-client
 
+## 0.6.0
+
+### Minor Changes
+
+- 50e34c3: Remove episodeId from deleteQuestion parameters
+
 ## 0.5.0
 
 ### Minor Changes
