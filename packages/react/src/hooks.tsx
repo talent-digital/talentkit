@@ -5,7 +5,7 @@ const kitAtom = atom<TalentKit<unknown> | undefined>(undefined);
 
 let pending = false;
 
-export const useKit = <T = Record<string, unknown>,>(config?: Config) => {
+export function useKit<T = Record<string, unknown>>(config?: Config) {
   const [kit, setKit] = useAtom(kitAtom);
 
   if (!kit && !pending) {
@@ -19,4 +19,4 @@ export const useKit = <T = Record<string, unknown>,>(config?: Config) => {
   }
 
   return kit as TalentKit<T> | undefined;
-};
+}
