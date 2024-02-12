@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.29.4
+
+### Patch Changes
+
+- ef3e132: Improve types export from talentkit
+
 ## 0.29.2
 
 ### Patch Changes
