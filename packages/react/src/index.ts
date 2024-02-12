@@ -5,7 +5,7 @@ import TalentKit, {
   SeasonStorage,
 } from "@talentdigital/kit";
 
-export * from "./hooks";
+export { useKit } from "./hooks";
 
 export type {
   TalentKit,
