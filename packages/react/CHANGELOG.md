@@ -1,5 +1,11 @@
 # @talentdigital/react
 
+## 0.29.3
+
+### Patch Changes
+
+- fe24ce5: Change usekit export of types
+
 ## 0.29.2
 
 ### Patch Changes
