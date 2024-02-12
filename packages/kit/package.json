@@ -10,7 +10,8 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/talent-kit.js"
+      "import": "./dist/talent-kit.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
