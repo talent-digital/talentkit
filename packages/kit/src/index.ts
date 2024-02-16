@@ -27,7 +27,6 @@ import Test from "./test";
 import Tracker from "./tracker";
 import LogRocket from "logrocket";
 
-export const applicationId = "talentApplicationProfileTwo";
 export const savegameKey = "SEASONS";
 
 const defaultProfile = {
@@ -44,11 +43,17 @@ const getIdFromUrlParamsOrStorage = (): ID => {
   const STORAGE_PREFIX = "td";
   const params = new URLSearchParams(location.search);
 
-  const season = params.get("sid") || localStorage.getItem(`${STORAGE_PREFIX}-sid`);
-  const episode = params.get("eid") || localStorage.getItem(`${STORAGE_PREFIX}-eid`);
-  const redirectUrl = params.get("redirectUrl") || localStorage.getItem(`${STORAGE_PREFIX}-redirectUrl`);
-  const configUrl = params.get("configUrl") || localStorage.getItem(`${STORAGE_PREFIX}-configUrl`) || undefined;
-
+  const season =
+    params.get("sid") || localStorage.getItem(`${STORAGE_PREFIX}-sid`);
+  const episode =
+    params.get("eid") || localStorage.getItem(`${STORAGE_PREFIX}-eid`);
+  const redirectUrl =
+    params.get("redirectUrl") ||
+    localStorage.getItem(`${STORAGE_PREFIX}-redirectUrl`);
+  const configUrl =
+    params.get("configUrl") ||
+    localStorage.getItem(`${STORAGE_PREFIX}-configUrl`) ||
+    undefined;
 
   if (!season || !episode)
     throw "Could not retrieve season or episode id from URL";
@@ -178,6 +183,11 @@ class TalentKit<T = unknown> {
     let storage: StorageService;
 
     const id = config.id || getIdFromUrlParamsOrStorage();
+    const savegameKeyId = config?.savegameKeyId;
+
+    if (!savegameKeyId) {
+      throw new Error("savegameKeyId not found");
+    }
 
     if (!id.season || !id.episode) {
       throw new Error("sid or eid not found");
@@ -208,10 +218,12 @@ class TalentKit<T = unknown> {
         tenant: config.tenant,
         localBackendURL: config.localBackendURL,
       });
-      storage = new StorageService(await RemoteStorage.create(apiClient));
+      storage = new StorageService(
+        await RemoteStorage.create(apiClient, savegameKeyId)
+      );
     }
 
-    if (!apiClient) throw new Error(`Coudn't initialize the library`);
+    if (!apiClient) throw new Error(`Couldn't initialize the library`);
 
     const { data: episode } = await apiClient.domainModelSeasons.getEpisode(
       id.season,
@@ -244,15 +256,20 @@ class TalentKit<T = unknown> {
       });
     }
 
-    const tests: Tests = Test.createForEpisode(id, episode, apiClient);
+    const tests: Tests = Test.createForEpisode(
+      id,
+      episode,
+      apiClient,
+      savegameKeyId
+    );
     const feedbackQuestions: FeedbackQuestions =
-      FeedbackQuestion.createForEpisode(id, episode, apiClient);
+      FeedbackQuestion.createForEpisode(id, episode, apiClient, savegameKeyId);
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
     const badges = Badge.createForEpisode(episode, storage);
     const profileStorage =
       storage.getItem<ProfileStorage>("SETTINGS") || defaultProfile;
-    const events = new Events(apiClient, storage, id);
+    const events = new Events(apiClient, storage, id, savegameKeyId);
     let tracker: Tracker | undefined;
     if (config.logRocketId && auth?.user) {
       tracker = await Tracker.create({

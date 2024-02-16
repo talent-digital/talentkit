@@ -1,5 +1,5 @@
 import LogRocket from "logrocket";
-import { applicationId, savegameKey } from ".";
+import { savegameKey } from ".";
 import { ApiClient, ID, SavegameStorage } from "./interfaces";
 import StorageService from "./storage.service";
 
@@ -7,13 +7,15 @@ class Events {
   constructor(
     private api: ApiClient,
     private storage: StorageService,
-    private id: ID
+    private id: ID,
+    private savegameKeyId: string
   ) {}
 
   /**
    * @description Mark the episode as completed and return to the dashboard
    */
   async end() {
+    const applicationId = this.savegameKeyId;
     const seasonId = this.id.season;
     const episodeId = this.id.episode;
     const events = [
@@ -24,7 +26,12 @@ class Events {
       },
     ];
 
-    await this.api.domainModelEvents.saveEvent({ applicationId, events, seasonId, episodeId });
+    await this.api.domainModelEvents.saveEvent({
+      applicationId,
+      events,
+      seasonId,
+      episodeId,
+    });
 
     let savegames = this.storage.getItem<SavegameStorage>(savegameKey) || {};
 

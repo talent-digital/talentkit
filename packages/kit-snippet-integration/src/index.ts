@@ -1,4 +1,4 @@
-import TalentKit from "@talentdigital/kit";
+import TalentKit, { Config } from "@talentdigital/kit";
 
 const EPISODE_END = "td-episode-end";
 const TEST_PASS = "td-test-pass";
@@ -181,8 +181,9 @@ function goToOriginalUrl(event: Event) {
   }
 }
 
-function getConfig() {
+function getConfig(): Config {
   const host = window.location.hostname.split(".")?.[0];
+  const savegameKeyId = window.location.pathname.split("/").pop() || "webflow";
   const tenant =
     host.startsWith("localhost") ||
     window.location.hostname.endsWith("webflow.io")
@@ -191,6 +192,7 @@ function getConfig() {
 
   return {
     tenant,
+    savegameKeyId,
   };
 }
 

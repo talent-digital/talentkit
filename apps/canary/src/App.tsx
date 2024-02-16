@@ -1,28 +1,24 @@
 import { useKit } from "@talentdigital/react";
 import "./App.css";
 import { FormatConfiguration } from "./main";
-
-const Child = () => {
-  const kit = useKit<FormatConfiguration>();
-
-  return <p>{kit?.formatConfiguration?.introText}</p>;
-};
-
-const Image = () => {
-  const kit = useKit<FormatConfiguration>();
-
-  const imageUrl = kit?.formatConfiguration?.backgroundImage
-    ? kit.assets.getUrl(kit.formatConfiguration.backgroundImage)
-    : "";
-
-  return <img src={imageUrl} />;
-};
+import { useEffect } from "react";
 
 function App() {
   const kit = useKit<FormatConfiguration>({
     tenant: "devtd2",
+    savegameKeyId: "canaryapp",
+    // localBackendURL: "http://localhost:8081",
     // logRocketId: "hdghyj/canary-kgdjy",
   });
+
+  useEffect(() => {
+    // Set default season config for testing if not present in the url
+    const hasSid = new URLSearchParams(window.location.search).get("sid");
+    if (!hasSid) {
+      window.location.search =
+        "?sid=talent-digital-canary-season&eid=2&redirectUrl=https://cockpit-talentdigital.netlify.app";
+    }
+  }, []);
 
   return (
     <div className="App">

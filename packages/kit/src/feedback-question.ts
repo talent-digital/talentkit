@@ -1,5 +1,4 @@
 import { EpisodeWeb, LocalizedString } from "@talentdigital/api-client";
-import { applicationId } from ".";
 import { ApiClient, FeedbackQuestions, ID } from "./interfaces";
 import LogRocket from "logrocket";
 
@@ -10,13 +9,15 @@ class FeedbackQuestion {
     readonly answers: Record<string, LocalizedString>,
     private api: ApiClient,
     private seasonId: string,
-    private episodeId: string
+    private episodeId: string,
+    private savegameKeyId: string
   ) {}
 
   static createForEpisode(
     { season, episode }: ID,
     info: EpisodeWeb,
-    api: ApiClient
+    api: ApiClient,
+    savegameKeyId: string
   ): FeedbackQuestions {
     if (!info?.feedbackQuestions) {
       return {};
@@ -32,7 +33,8 @@ class FeedbackQuestion {
             answers as Record<string, LocalizedString>,
             api,
             season,
-            episode
+            episode,
+            savegameKeyId
           ),
         ];
       })
@@ -64,7 +66,7 @@ class FeedbackQuestion {
     ];
 
     return this.api.domainModelEvents.saveEvent({
-      applicationId,
+      applicationId: this.savegameKeyId,
       events,
       seasonId: this.seasonId,
       episodeId: this.episodeId,
