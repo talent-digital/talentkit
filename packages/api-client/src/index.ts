@@ -467,6 +467,7 @@ export interface FeedbackAnswerWeb {
 
 export interface FeedbackStatisticsWeb {
   id?: string;
+  seasonId?: string;
   text?: string;
   answers?: FeedbackAnswerWeb[];
 }
