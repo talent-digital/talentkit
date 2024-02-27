@@ -467,6 +467,7 @@ export interface FeedbackAnswerWeb {
 
 export interface FeedbackStatisticsWeb {
   id?: string;
+  seasonId?: string;
   text?: string;
   answers?: FeedbackAnswerWeb[];
 }
@@ -2190,7 +2191,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   };
   domainModelEvents = {
     /**
-     * @description This endpoint accepts an <a href="#web-EventCreationRequest"> EventCreationRequest </a> object and tries to save it. This object should has a valid application ID (e.g. "talentApplicationProfileTwo"). Providing at least one event in json format is mandatory. Game results in profile 2.0 is passed through "result" property of the event; "result" property of the event consists of the "id" (a string  which is test-id) and the "value" (numeric; failed=0, passed=1) properties. If test result-ID (result.id) is not already mapped to the proper sub-competence-ID, the result will not reflected in reports. (See <a href="#operations-test-item-controller-saveTestItem"> Test Item registry/update </a>).
+     * @description This endpoint accepts an <a href="#web-EventCreationRequest"> EventCreationRequest </a> object and tries to save it. Providing at least one event in json format is mandatory. Game results in profile 2.0 is passed through "result" property of the event; "result" property of the event consists of the "id" (a string  which is test-id) and the "value" (numeric; failed=0, passed=1) properties. If test result-ID (result.id) is not already mapped to the proper sub-competence-ID, the result will not reflected in reports. (See <a href="#operations-test-item-controller-saveTestItem"> Test Item registry/update </a>).
      *
      * @tags Domain model: Events
      * @name SaveEvent
