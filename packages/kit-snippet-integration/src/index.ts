@@ -183,7 +183,8 @@ function goToOriginalUrl(event: Event) {
 
 function getConfig(): Config {
   const host = window.location.hostname.split(".")?.[0];
-  const savegameKeyId = window.location.pathname.split("/").pop() || "webflow";
+  const match = window.location.pathname.match(/app\/webflow\/(.*?)\//);
+  const savegameKeyId = match ? match[1] : "webflow";
   const tenant =
     host.startsWith("localhost") ||
     window.location.hostname.endsWith("webflow.io")

@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "copyfiles --flat node_modules/@talentdigital/kit-snippet-integration/dist/talent-kit-snippet-integration.umd.js ./libs && http-server",
+    "dev": "copyfiles --flat node_modules/@talentdigital/kit-snippet-integration/dist/talent-kit-snippet-integration.umd.js ./app/webflow/testid1337/libs && http-server",
     "e2e:open": "cypress open",
     "e2e:local": "cross-env RECORD=false cypress run",
     "e2e": "cypress run"
