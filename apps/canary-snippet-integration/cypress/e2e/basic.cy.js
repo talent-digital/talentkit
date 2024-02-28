@@ -18,7 +18,7 @@ describe("Basic", () => {
           req.reply({
             statusCode: 200,
             body: {
-              applicationId: "talentApplicationProfileTwo",
+              applicationId: "webflow",
               state: JSON.stringify(getSavegame(true)),
             },
           });
