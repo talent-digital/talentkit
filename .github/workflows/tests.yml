@@ -62,7 +62,7 @@ jobs:
         uses: pnpm/action-setup@v2
         id: pnpm-install
         with:
-          version: latest
+          version: 7
           run_install: false
 
       - name: Install Dependencies in root folder

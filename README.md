@@ -1,4 +1,7 @@
+
 # talent::digital
+
+TEST
 
 talent::digital provides a suite of tools to enable developers and content creators to create their own learning [content](/docs/GLOSSARY.md#content) and publishing it through the talent::digital [platform](/docs/GLOSSARY.md#platform).
 
