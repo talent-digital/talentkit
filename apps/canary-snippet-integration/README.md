@@ -5,13 +5,13 @@ Use this as a testing grounds for the kit-snippet-integration package.
 ## Starting
 
 - Run `pnpm dev` (this also copies the snippet from node_modules to libs folder for cypress to run properly on github actions CI)
-- Go to e.g. `http://localhost:8080/?sid=talent-digital-canary-season&eid=1&redirectUrl=https://devtd2.talentdigit.al`
+- Go to e.g. `http://localhost:8080/app/webflow/testid1337?sid=talent-digital-canary-season&eid=1&redirectUrl=https://devtd2.talentdigit.al`
 
 ## Debugging
 
 The script has several debug logs, to see them switch to "verbose" in chrome devtools.
 
-Add a query param of `no-savegame` to ignore the savegame load functionality. e.g. `http://localhost:8080/?sid=talent-digital-canary-season&eid=1&redirectUrl=https://devtd2.talentdigit.al&no-savegame`
+Add a query param of `no-savegame` to ignore the savegame load functionality. e.g. `http://localhost:8080/app/webflow/testid1337?sid=talent-digital-canary-season&eid=1&redirectUrl=https://devtd2.talentdigit.al&no-savegame`
 
 ## Cypress setup
 

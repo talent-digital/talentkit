@@ -3,7 +3,6 @@ import {
   LocalizedString,
   TestItemWeb,
 } from "@talentdigital/api-client";
-import { applicationId } from ".";
 import { ApiClient, ID, Tests } from "./interfaces";
 
 enum TestResult {
@@ -11,7 +10,7 @@ enum TestResult {
   "pass" = 1,
 }
 
-type TestData = Record<string, unknown> | Record<string, unknown>[]
+type TestData = Record<string, unknown> | Record<string, unknown>[];
 
 class Test {
   result: TestResult | undefined;
@@ -22,10 +21,16 @@ class Test {
     readonly level: TestItemWeb["level"],
     private api: ApiClient,
     private seasonId: string,
-    private episodeId: string
+    private episodeId: string,
+    private savegameKeyId: string
   ) {}
 
-  static createForEpisode(id: ID, info: EpisodeWeb, api: ApiClient): Tests {
+  static createForEpisode(
+    id: ID,
+    info: EpisodeWeb,
+    api: ApiClient,
+    savegameKeyId: string
+  ): Tests {
     if (!info?.testItems) {
       return {};
     }
@@ -40,7 +45,8 @@ class Test {
             test.level as TestItemWeb["level"],
             api,
             id.season,
-            id.episode
+            id.episode,
+            savegameKeyId
           ),
         ];
       })
@@ -71,14 +77,14 @@ class Test {
           test: this.id,
           data: data || {},
           failed: !result,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         },
         result: { id: this.id, value: result },
       },
     ];
 
     return {
-      applicationId,
+      applicationId: this.savegameKeyId,
       events,
       seasonId: this.seasonId,
       episodeId: this.episodeId,

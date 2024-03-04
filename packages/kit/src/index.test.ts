@@ -14,6 +14,7 @@ describe("Sdk Base Tests", () => {
     kit = await TalentKit.create({
       seasonDefinition,
       id: { season: "SeasonID", episode: "1" },
+      savegameKeyId: "talent-kit-test",
     });
   });
 

@@ -1,5 +1,10 @@
 /// <reference types="cypress" />
 
+const BASE_URL =
+  "/app/webflow/testid1337/?sid=talent-digital-canary-season&eid=1&redirectUrl=https://devtd2.talentdigit.al";
+
+const APPLICATION_ID = "testid1337";
+
 describe("Basic", () => {
   it("should work for basic scenario", () => {
     cy.intercept("POST", "/api/v1/event", {
@@ -8,30 +13,24 @@ describe("Basic", () => {
 
     let requestCount = 0;
 
-    cy.intercept(
-      "GET",
-      "/api/v1/savegame/talentApplicationProfileTwo",
-      (req) => {
-        requestCount++;
+    cy.intercept("GET", `/api/v1/savegame/${APPLICATION_ID}`, (req) => {
+      requestCount++;
 
-        if (requestCount === 1) {
-          req.reply({
-            statusCode: 200,
-            body: {
-              applicationId: "talentApplicationProfileTwo",
-              state: JSON.stringify(getSavegame(true)),
-            },
-          });
-        } else {
-          req.continue();
-        }
+      if (requestCount === 1) {
+        req.reply({
+          statusCode: 200,
+          body: {
+            applicationId: APPLICATION_ID,
+            state: JSON.stringify(getSavegame(true)),
+          },
+        });
+      } else {
+        req.continue();
       }
-    ).as("apiSavegame");
+    }).as("apiSavegame");
 
     // Login
-    cy.visit(
-      "/?sid=talent-digital-canary-season&eid=1&redirectUrl=https://devtd2.talentdigit.al"
-    );
+    cy.visit(BASE_URL);
     cy.origin(Cypress.env("devUrl"), () => {
       cy.get("#username").type(Cypress.env("username"));
       cy.get("#password").type(Cypress.env("password"));
@@ -47,7 +46,7 @@ describe("Basic", () => {
       const timestamp = body.events[0].payload.timestamp;
 
       const expectedBody = {
-        applicationId: "talentApplicationProfileTwo",
+        applicationId: "testid1337",
         events: [
           {
             type: "test.complete",
@@ -68,11 +67,7 @@ describe("Basic", () => {
     });
 
     // Go to index and see if savegame mechanism redirects to the next page
-    cy.wait("@apiSavegame")
-      .wait(1000)
-      .visit(
-        "/?sid=talent-digital-canary-season&eid=1&redirectUrl=https://devtd2.talentdigit.al"
-      );
+    cy.wait("@apiSavegame").wait(1000).visit(BASE_URL);
     cy.get("h2").contains("Pass");
 
     // Fail test and go to next page
@@ -83,7 +78,7 @@ describe("Basic", () => {
       const timestamp = body.events[0].payload.timestamp;
 
       const expectedBody = {
-        applicationId: "talentApplicationProfileTwo",
+        applicationId: APPLICATION_ID,
         events: [
           {
             type: "test.complete",
@@ -116,7 +111,7 @@ describe("Basic", () => {
       const body = interception.request.body;
 
       const expectedBody = {
-        applicationId: "talentApplicationProfileTwo",
+        applicationId: APPLICATION_ID,
         events: [
           {
             eventTypeId: "episode.end",

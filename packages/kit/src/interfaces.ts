@@ -12,6 +12,7 @@ export interface Config {
   seasonDefinition?: SeasonDefinition;
   id?: ID;
   logRocketId?: string;
+  savegameKeyId: string;
 }
 
 export type AuthConfig = KeycloakConfig;

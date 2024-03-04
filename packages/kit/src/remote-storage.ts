@@ -1,23 +1,23 @@
-import { applicationId } from ".";
 import { ApiClient } from "./interfaces";
 
 class RemoteStorage implements Storage {
   private constructor(
     private api: ApiClient,
-    private state: Record<string, unknown> = {}
+    private state: Record<string, unknown> = {},
+    private savegameKeyId: string
   ) {}
   get length(): number {
     return Object.keys(this.state).length;
   }
 
-  static async create(api: ApiClient) {
-    const { data } = await api.utilitiesSavegame.getResult(applicationId);
+  static async create(api: ApiClient, savegameKeyId: string) {
+    const { data } = await api.utilitiesSavegame.getResult(savegameKeyId);
 
     const state = data?.state
       ? (JSON.parse(data.state) as Record<string, unknown>)
       : {};
 
-    return new RemoteStorage(api, state);
+    return new RemoteStorage(api, state, savegameKeyId);
   }
   clear(): void {
     this.state = {};
@@ -43,7 +43,7 @@ class RemoteStorage implements Storage {
 
   private sync() {
     void this.api.utilitiesSavegame.saveOrUpdateState({
-      applicationId,
+      applicationId: this.savegameKeyId,
       state: JSON.stringify(this.state),
     });
   }

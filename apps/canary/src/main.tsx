@@ -9,12 +9,6 @@ export interface FormatConfiguration {
   questions: any[];
 }
 
-// const kit = await TalentKit.create<FormatConfiguration>({
-//   tenant: "devtd2",
-//   // seasonDefinition,
-//   // localBackendURL: "http://localhost:8081",
-// });
-
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <App />
