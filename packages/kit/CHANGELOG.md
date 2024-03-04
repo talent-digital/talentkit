@@ -1,5 +1,11 @@
 # @talentdigital/kit
 
+## 0.30.0
+
+### Minor Changes
+
+- 0fba432: Add savegame scoping through savegameKeyId
+
 ## 0.29.4
 
 ### Patch Changes

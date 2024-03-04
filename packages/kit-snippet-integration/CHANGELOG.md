@@ -1,5 +1,16 @@
 # @talentdigital/kit-snippet-integration
 
+## 0.32.0
+
+### Minor Changes
+
+- 0fba432: Add savegame scoping through savegameKeyId
+
+### Patch Changes
+
+- Updated dependencies [0fba432]
+  - @talentdigital/kit@0.30.0
+
 ## 0.31.1
 
 ### Patch Changes
