@@ -1,6 +1,6 @@
 {
   "name": "@talentdigital/kit-snippet-integration",
-  "version": "0.32.0",
+  "version": "0.32.1",
   "description": "talent::digital Software Development Kit single file integration",
   "files": [
     "dist"
