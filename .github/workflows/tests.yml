@@ -41,9 +41,6 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-pnpm-store-
 
-      - name: pnpm store prune
-        run: pnpm store prune
-
       - name: Install dependencies
         run: pnpm install
 
@@ -65,7 +62,7 @@ jobs:
         uses: pnpm/action-setup@v2
         id: pnpm-install
         with:
-          version: 7
+          version: latest
           run_install: false
 
       - name: Install Dependencies in root folder
