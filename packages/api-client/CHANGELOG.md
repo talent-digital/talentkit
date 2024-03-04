@@ -1,5 +1,11 @@
 # @talentdigital/api-client
 
+## 0.7.0
+
+### Minor Changes
+
+- 47c22a1: Add seasonId to feedback question statistics
+
 ## 0.6.0
 
 ### Minor Changes
