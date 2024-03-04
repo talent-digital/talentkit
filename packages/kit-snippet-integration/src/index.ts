@@ -183,7 +183,19 @@ function goToOriginalUrl(event: Event) {
 
 function getConfig(): Config {
   const host = window.location.hostname.split(".")?.[0];
-  const match = window.location.pathname.match(/app\/webflow\/(.*?)\//);
+  /**
+   * Extract id from url. Id that is after webflow/ and before / or ?
+   * Should extract 1a2-3b4 from:
+   * const test1 = "www.site.pl/app/webflow/1a2-3b4/";
+   * const test2 = "www.site.pl/app/webflow/1a2-3b4";
+   * const test3 = "www.site.pl/app/webflow/1a2-3b4?param=1";
+   * const test4 = "www.site.pl/app/webflow/1a2-3b4/stuff";
+   * const test5 = "www.site.pl/app/webflow/1a2-3b4/stuff?param=1";
+   *
+   * TODO: possibly add unit tests and move this comment there
+   */
+  const regex = /app\/webflow\/([^\/?]+)(\/|(?=\?|$))/;
+  const match = window.location.pathname.match(regex);
   const savegameKeyId = match ? match[1] : "webflow";
   const tenant =
     host.startsWith("localhost") ||
