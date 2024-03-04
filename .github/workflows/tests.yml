@@ -29,20 +29,20 @@ jobs:
           version: 7
           run_install: false
 
-      # - name: Get pnpm store directory
-      #   id: pnpm-cache
-      #   shell: bash
-      #   run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      # - name: Setup pnpm cache
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-      #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #     restore-keys: ${{ runner.os }}-pnpm-store-
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install
 
       - name: Build project
         run: pnpm build
@@ -53,40 +53,40 @@ jobs:
       - name: Run tests
         run: pnpm test
 
-  # e2e:
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - uses: actions/checkout@v3
+  e2e:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - name: Install pnpm
-  #       uses: pnpm/action-setup@v2
-  #       id: pnpm-install
-  #       with:
-  #         version: 7
-  #         run_install: false
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
 
-  #     - name: Install Dependencies in root folder
-  #       uses: cypress-io/github-action@v5
-  #       with:
-  #         runTests: false
+      - name: Install Dependencies in root folder
+        uses: cypress-io/github-action@v5
+        with:
+          runTests: false
 
-  #     - name: Install dependencies
-  #       run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
-  #     - name: Cypress tests
-  #       uses: cypress-io/github-action@v5
-  #       with:
-  #         install: false
-  #         working-directory: apps/canary-snippet-integration
-  #         start: npm run dev
-  #       env:
-  #         WEB_USERNAME: ${{ secrets.CYPRESS_WEB_USERNAME}}
-  #         WEB_PASSWORD: ${{secrets.CYPRESS_WEB_PASSWORD}}
+      - name: Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          install: false
+          working-directory: apps/canary-snippet-integration
+          start: npm run dev
+        env:
+          WEB_USERNAME: ${{ secrets.CYPRESS_WEB_USERNAME}}
+          WEB_PASSWORD: ${{secrets.CYPRESS_WEB_PASSWORD}}
 
-  #     - name: Archive cypress video web
-  #       uses: actions/upload-artifact@v3
-  #       if: ${{ success() || failure() }}
-  #       with:
-  #         name: cypress-video
-  #         path: apps/canary-snippet-integration/cypress/videos/**/*.mp4
-  #         retention-days: 30
+      - name: Archive cypress video web
+        uses: actions/upload-artifact@v3
+        if: ${{ success() || failure() }}
+        with:
+          name: cypress-video
+          path: apps/canary-snippet-integration/cypress/videos/**/*.mp4
+          retention-days: 30
