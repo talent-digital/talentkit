@@ -1,5 +1,11 @@
 # @talentdigital/kit-snippet-integration
 
+## 0.32.2
+
+### Patch Changes
+
+- cd3ba70: Change savegame key id extraction regex
+
 ## 0.32.1
 
 ### Patch Changes
