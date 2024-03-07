@@ -18,7 +18,7 @@ importers:
         version: 3.2.5
       turbo:
         specifier: latest
-        version: 1.12.4
+        version: 1.12.5
 
   apps/canary:
     dependencies:
@@ -149,8 +149,8 @@ importers:
   packages/api-client:
     devDependencies:
       '@types/node':
-        specifier: ^18.7.18
-        version: 18.7.18
+        specifier: ^20.11.25
+        version: 20.11.25
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -165,7 +165,7 @@ importers:
         version: 5.0.2
       vite:
         specifier: ^4.5.2
-        version: 4.5.2(@types/node@18.7.18)
+        version: 4.5.2(@types/node@20.11.25)
       vite-plugin-dts:
         specifier: ^1.6.4
         version: 1.6.4(vite@4.5.2)
@@ -186,7 +186,7 @@ importers:
         version: 8.5.0(eslint@8.55.0)
       eslint-config-turbo:
         specifier: latest
-        version: 1.12.4(eslint@8.55.0)
+        version: 1.12.5(eslint@8.55.0)
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
@@ -225,8 +225,8 @@ importers:
         specifier: ^4.0.8
         version: 4.0.8
       '@types/node':
-        specifier: ^18.7.18
-        version: 18.7.18
+        specifier: ^20.11.25
+        version: 20.11.25
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -247,7 +247,7 @@ importers:
         version: 5.0.2
       vite:
         specifier: ^4.5.2
-        version: 4.5.2(@types/node@18.7.18)
+        version: 4.5.2(@types/node@20.11.25)
       vite-plugin-dts:
         specifier: ^1.6.4
         version: 1.6.4(vite@4.5.2)
@@ -262,8 +262,8 @@ importers:
         version: link:../kit
     devDependencies:
       '@types/node':
-        specifier: ^18.7.18
-        version: 18.7.18
+        specifier: ^20.11.25
+        version: 20.11.25
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -275,7 +275,7 @@ importers:
         version: 5.0.2
       vite:
         specifier: ^4.5.2
-        version: 4.5.2(@types/node@18.7.18)
+        version: 4.5.2(@types/node@20.11.25)
 
   packages/react:
     dependencies:
@@ -287,8 +287,8 @@ importers:
         version: 1.13.0(react@18.2.0)
     devDependencies:
       '@types/node':
-        specifier: ^18.7.18
-        version: 18.7.18
+        specifier: ^20.11.25
+        version: 20.11.25
       '@types/react':
         specifier: ^18.0.17
         version: 18.0.20
@@ -312,7 +312,7 @@ importers:
         version: 5.0.2
       vite:
         specifier: ^4.5.2
-        version: 4.5.2(@types/node@18.7.18)
+        version: 4.5.2(@types/node@20.11.25)
       vite-plugin-dts:
         specifier: ^1.6.4
         version: 1.6.4(vite@4.5.2)
@@ -1775,8 +1775,10 @@ packages:
       undici-types: 5.26.5
     dev: true
 
-  /@types/node@18.7.18:
-    resolution: {integrity: sha512-m+6nTEOadJZuTPkKR/SYK3A2d7FZrgElol9UP1Kae90VVU4a6mxnPuLiIW1m4Cq4gZ/nWb9GrdVXJCoCazDAbg==}
+  /@types/node@20.11.25:
+    resolution: {integrity: sha512-TBHyJxk2b7HceLVGFcpAUjsa5zIdsPWlR6XHfyGzd0SFu+/NFgQgMAl96MSDZgQDvJAvV6BKsFOrt6zIL09JDw==}
+    dependencies:
+      undici-types: 5.26.5
 
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -1851,7 +1853,7 @@ packages:
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==}
     requiresBuild: true
     dependencies:
-      '@types/node': 18.18.9
+      '@types/node': 20.11.25
     dev: true
     optional: true
 
@@ -3054,13 +3056,13 @@ packages:
       eslint: 8.55.0
     dev: false
 
-  /eslint-config-turbo@1.12.4(eslint@8.55.0):
-    resolution: {integrity: sha512-5hqEaV6PNmAYLL4RTmq74OcCt8pgzOLnfDVPG/7PUXpQ0Mpz0gr926oCSFukywKKXjdum3VHD84S7Z9A/DqTAw==}
+  /eslint-config-turbo@1.12.5(eslint@8.55.0):
+    resolution: {integrity: sha512-wXytbX+vTzQ6rwgM6sIr447tjYJBlRj5V/eBFNGNXw5Xs1R715ppPYhbmxaFbkrWNQSGJsWRrYGAlyq0sT/OsQ==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
       eslint: 8.55.0
-      eslint-plugin-turbo: 1.12.4(eslint@8.55.0)
+      eslint-plugin-turbo: 1.12.5(eslint@8.55.0)
     dev: false
 
   /eslint-plugin-react-hooks@4.6.0(eslint@8.55.0):
@@ -3080,8 +3082,8 @@ packages:
       eslint: 8.55.0
     dev: true
 
-  /eslint-plugin-turbo@1.12.4(eslint@8.55.0):
-    resolution: {integrity: sha512-3AGmXvH7E4i/XTWqBrcgu+G7YKZJV/8FrEn79kTd50ilNsv+U3nS2IlcCrQB6Xm2m9avGD9cadLzKDR1/UF2+g==}
+  /eslint-plugin-turbo@1.12.5(eslint@8.55.0):
+    resolution: {integrity: sha512-cXy7mCzAdngBTJIWH4DASXHy0vQpujWDBqRTu0YYqCN/QEGsi3HWM+STZEbPYELdjtm5EsN2HshOSSqWnjdRHg==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
@@ -5761,64 +5763,64 @@ packages:
       safe-buffer: 5.1.2
     dev: true
 
-  /turbo-darwin-64@1.12.4:
-    resolution: {integrity: sha512-dBwFxhp9isTa9RS/fz2gDVk5wWhKQsPQMozYhjM7TT4jTrnYn0ZJMzr7V3B/M/T8QF65TbniW7w1gtgxQgX5Zg==}
+  /turbo-darwin-64@1.12.5:
+    resolution: {integrity: sha512-0GZ8reftwNQgIQLHkHjHEXTc/Z1NJm+YjsrBP+qhM/7yIZ3TEy9gJhuogDt2U0xIWwFgisTyzbtU7xNaQydtoA==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64@1.12.4:
-    resolution: {integrity: sha512-1Uo5iI6xsJ1j9ObsqxYRsa3W26mEbUe6fnj4rQYV6kDaqYD54oAMJ6hM53q9rB8JvFxwdrUXGp3PwTw9A0qqkA==}
+  /turbo-darwin-arm64@1.12.5:
+    resolution: {integrity: sha512-8WpOLNNzvH6kohQOjihD+gaWL+ZFNfjvBwhOF0rjEzvW+YR3Pa7KjhulrjWyeN2yMFqAPubTbZIGOz1EVXLuQA==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64@1.12.4:
-    resolution: {integrity: sha512-ONg2aSqKP7LAQOg7ysmU5WpEQp4DGNxSlAiR7um+LKtbmC/UxogbR5+T+Uuq6zGuQ5kJyKjWJ4NhtvUswOqBsA==}
+  /turbo-linux-64@1.12.5:
+    resolution: {integrity: sha512-INit73+bNUpwqGZCxgXCR3I+cQsdkQ3/LkfkgSOibkpg+oGqxJRzeXw3sp990d7SCoE8QOcs3iw+PtiFX/LDAA==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64@1.12.4:
-    resolution: {integrity: sha512-9FPufkwdgfIKg/9jj87Cdtftw8o36y27/S2vLN7FTR2pp9c0MQiTBOLVYadUr1FlShupddmaMbTkXEhyt9SdrA==}
+  /turbo-linux-arm64@1.12.5:
+    resolution: {integrity: sha512-6lkRBvxtI/GQdGtaAec9LvVQUoRw6nXFp0kM+Eu+5PbZqq7yn6cMkgDJLI08zdeui36yXhone8XGI8pHg8bpUQ==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64@1.12.4:
-    resolution: {integrity: sha512-2mOtxHW5Vjh/5rDVu/aFwsMzI+chs8XcEuJHlY1sYOpEymYTz+u6AXbnzRvwZFMrLKr7J7fQOGl+v96sLKbNdA==}
+  /turbo-windows-64@1.12.5:
+    resolution: {integrity: sha512-gQYbOhZg5Ww0bQ/bC0w/4W6yQRwBumUUnkB+QPo15VznwxZe2a7bo6JM+9Xy9dKLa/kn+p7zTqme4OEp6M3/Yg==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64@1.12.4:
-    resolution: {integrity: sha512-nOY5wae9qnxPOpT1fRuYO0ks6dTwpKMPV6++VkDkamFDLFHUDVM/9kmD2UTeh1yyrKnrZksbb9zmShhmfj1wog==}
+  /turbo-windows-arm64@1.12.5:
+    resolution: {integrity: sha512-auvhZ9FrhnvQ4mgBlY9O68MT4dIfprYGvd2uPICba/mHUZZvVy5SGgbHJ0KbMwaJfnnFoPgLJO6M+3N2gDprKw==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo@1.12.4:
-    resolution: {integrity: sha512-yUJ7elEUSToiGwFZogXpYKJpQ0BvaMbkEuQECIWtkBLcmWzlMOt6bActsIm29oN83mRU0WbzGt4e8H1KHWedhg==}
+  /turbo@1.12.5:
+    resolution: {integrity: sha512-FATU5EnhrYG8RvQJYFJnDd18DpccDjyvd53hggw9T9JEg9BhWtIEoeaKtBjYbpXwOVrJQMDdXcIB4f2nD3QPPg==}
     hasBin: true
     optionalDependencies:
-      turbo-darwin-64: 1.12.4
-      turbo-darwin-arm64: 1.12.4
-      turbo-linux-64: 1.12.4
-      turbo-linux-arm64: 1.12.4
-      turbo-windows-64: 1.12.4
-      turbo-windows-arm64: 1.12.4
+      turbo-darwin-64: 1.12.5
+      turbo-darwin-arm64: 1.12.5
+      turbo-linux-64: 1.12.5
+      turbo-linux-arm64: 1.12.5
+      turbo-windows-64: 1.12.5
+      turbo-windows-arm64: 1.12.5
     dev: true
 
   /tweetnacl@0.14.5:
@@ -5901,7 +5903,6 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
-    dev: true
 
   /union@0.5.0:
     resolution: {integrity: sha512-N6uOhuW6zO95P3Mel2I2zMsbsanvvtgn6jVqJv4vbVcz/JN0OkL9suomjQGmWtxJQXOCqUJvquc1sMeNz/IwlA==}
@@ -5995,7 +5996,7 @@ packages:
       extsprintf: 1.3.0
     dev: true
 
-  /vite-node@0.31.4(@types/node@18.7.18):
+  /vite-node@0.31.4(@types/node@20.11.25):
     resolution: {integrity: sha512-uzL377GjJtTbuc5KQxVbDu2xfU/x0wVjUtXQR2ihS21q/NK6ROr4oG0rsSkBBddZUVCwzfx22in76/0ZZHXgkQ==}
     engines: {node: '>=v14.18.0'}
     dependencies:
@@ -6004,7 +6005,7 @@ packages:
       mlly: 1.3.0
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.5.2(@types/node@18.7.18)
+      vite: 4.5.2(@types/node@20.11.25)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -6030,7 +6031,7 @@ packages:
       fs-extra: 10.1.0
       kolorist: 1.6.0
       ts-morph: 16.0.0
-      vite: 4.5.2(@types/node@18.7.18)
+      vite: 4.5.2(@types/node@20.11.25)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6070,7 +6071,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite@4.5.2(@types/node@18.7.18):
+  /vite@4.5.2(@types/node@20.11.25):
     resolution: {integrity: sha512-tBCZBNSBbHQkaGyhGCDUGqeo2ph8Fstyp6FMSvTtsXeZSPpSMGlviAOav2hxVTqFcx8Hj/twtWKsMJXNY0xI8w==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -6098,7 +6099,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.7.18
+      '@types/node': 20.11.25
       esbuild: 0.18.20
       postcss: 8.4.31
       rollup: 3.29.4
@@ -6138,7 +6139,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.5
       '@types/chai-subset': 1.3.3
-      '@types/node': 18.7.18
+      '@types/node': 20.11.25
       '@vitest/expect': 0.31.4
       '@vitest/runner': 0.31.4
       '@vitest/snapshot': 0.31.4
@@ -6160,8 +6161,8 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.5.0
-      vite: 4.5.2(@types/node@18.7.18)
-      vite-node: 0.31.4(@types/node@18.7.18)
+      vite: 4.5.2(@types/node@20.11.25)
+      vite-node: 0.31.4(@types/node@20.11.25)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
