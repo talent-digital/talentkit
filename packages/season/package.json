@@ -13,8 +13,8 @@
   "author": "talent::digital",
   "license": "ISC",
   "devDependencies": {
-    "ts-json-schema-generator": "^1.1.2",
+    "ts-json-schema-generator": "^1.5.0",
     "tsconfig": "workspace:*",
-    "typescript": "^5.0.2"
+    "typescript": "^5.4.2"
   }
 }
