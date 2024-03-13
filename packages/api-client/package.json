@@ -26,6 +26,6 @@
     "tsconfig": "workspace:*",
     "typescript": "^5.4.2",
     "vite": "^5.1.6",
-    "vite-plugin-dts": "^2.0.2"
+    "vite-plugin-dts": "^2.3.0"
   }
 }
