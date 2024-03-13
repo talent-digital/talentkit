@@ -25,27 +25,26 @@
   "devDependencies": {
     "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@talentdigital/season": "workspace:*",
-    "@types/marked": "^4.0.8",
-    "@types/node": "^20.11.25",
+    "@types/node": "^20.11.27",
     "eslint-config-custom": "workspace:*",
-    "happy-dom": "^9.20.3",
-    "jsdom": "^20.0.2",
-    "logrocket": "^2.2.1",
+    "happy-dom": "^13.8.2",
+    "jsdom": "^24.0.0",
+    "logrocket": "^8.1.0",
     "tsconfig": "workspace:*",
-    "typescript": "^5.0.2",
+    "typescript": "^5.4.2",
     "vite": "^5.1.6",
     "vite-plugin-dts": "^2.0.2",
-    "vitest": "^0.31.0"
+    "vitest": "^1.3.1"
   },
   "peerDependencies": {
     "logrocket": "^2.2.1"
   },
   "dependencies": {
-    "@talentdigital/api-client": "workspace:^0.7.0",
-    "@vitest/web-worker": "0.31.4",
-    "keycloak-js": "^17",
-    "marked": "^4.2.5",
+    "@talentdigital/api-client": "workspace:^",
+    "@vitest/web-worker": "1.3.1",
+    "keycloak-js": "^17.0.1",
+    "marked": "^12.0.1",
     "toml": "^3.0.0",
-    "yaml": "^2.2.1"
+    "yaml": "^2.4.1"
   }
 }
