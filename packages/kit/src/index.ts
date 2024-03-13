@@ -26,6 +26,7 @@ import StorageService from "./storage.service";
 import Test from "./test";
 import Tracker from "./tracker";
 import LogRocket from "logrocket";
+import { KeycloakTokenParsed } from "keycloak-js";
 
 export const savegameKey = "SEASONS";
 
@@ -169,7 +170,7 @@ class TalentKit<T = unknown> {
     /**
      * Currently logged in user's authentication information
      */
-    readonly authUser?: Keycloak.KeycloakTokenParsed
+    readonly authUser?: KeycloakTokenParsed
   ) {}
 
   /**

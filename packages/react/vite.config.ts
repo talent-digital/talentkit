@@ -13,7 +13,7 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     rollupOptions: { external: ["@talentdigital/kit", "react"] },
-    target: ["es2015"],
+    target: ["es2019"],
   },
   plugins: [dts(), react()],
 });
