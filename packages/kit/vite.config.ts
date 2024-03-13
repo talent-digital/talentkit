@@ -15,7 +15,7 @@ export default defineConfig({
     rollupOptions: {
       external: ["keycloak-js", "ky", "logrocket"],
     },
-    target: ["es2015"],
+    target: ["es2017"],
   },
   plugins: [dts(), ViteYaml()],
   test: {

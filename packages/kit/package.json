@@ -34,7 +34,7 @@
     "tsconfig": "workspace:*",
     "typescript": "^5.0.2",
     "vite": "^5.1.6",
-    "vite-plugin-dts": "^1.6.4",
+    "vite-plugin-dts": "^2.0.2",
     "vitest": "^0.31.0"
   },
   "peerDependencies": {
@@ -43,7 +43,7 @@
   "dependencies": {
     "@talentdigital/api-client": "workspace:^0.7.0",
     "@vitest/web-worker": "0.31.4",
-    "keycloak-js": "^15",
+    "keycloak-js": "^17",
     "marked": "^4.2.5",
     "toml": "^3.0.0",
     "yaml": "^2.2.1"
