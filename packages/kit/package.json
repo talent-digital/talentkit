@@ -23,7 +23,7 @@
   "author": "talent::digital",
   "license": "SEE LICENSE IN LICENCE.md",
   "devDependencies": {
-    "@modyfi/vite-plugin-yaml": "^1.0.4",
+    "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@talentdigital/season": "workspace:*",
     "@types/marked": "^4.0.8",
     "@types/node": "^20.11.25",
@@ -33,7 +33,7 @@
     "logrocket": "^2.2.1",
     "tsconfig": "workspace:*",
     "typescript": "^5.0.2",
-    "vite": "^4.5.2",
+    "vite": "^5.1.6",
     "vite-plugin-dts": "^1.6.4",
     "vitest": "^0.31.0"
   },
