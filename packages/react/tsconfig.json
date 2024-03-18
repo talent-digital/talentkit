@@ -1,17 +1,10 @@
 {
   "extends": "tsconfig/base.json",
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules"
-  ],
+  "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "outDir": "dist",
-    "target": "ES6",
-    "lib": [
-      "ES2019.Object",
-      "DOM"
-    ],
+    "target": "es2017",
+    "lib": ["ES2019.Object", "DOM"],
     "jsx": "react"
   }
 }
