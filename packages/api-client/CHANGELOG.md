@@ -1,5 +1,15 @@
 # @talentdigital/api-client
 
+## 0.8.0
+
+### Minor Changes
+
+- a56faff: Change getCompanyLastCompletedEpisodeStatistics endpoint to getCompanyCompletedEpisodeStatistics
+
+### Patch Changes
+
+- 9f64d4d: Update node version to 20
+
 ## 0.7.0
 
 ### Minor Changes

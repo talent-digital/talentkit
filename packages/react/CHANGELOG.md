@@ -1,5 +1,14 @@
 # @talentdigital/react
 
+## 0.31.0
+
+### Patch Changes
+
+- 9f64d4d: Update node version to 20
+- Updated dependencies [9f64d4d]
+- Updated dependencies [0063f45]
+  - @talentdigital/kit@0.31.0
+
 ## 0.30.1
 
 ### Patch Changes

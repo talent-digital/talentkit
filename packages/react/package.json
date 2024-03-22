@@ -1,6 +1,6 @@
 {
   "name": "@talentdigital/react",
-  "version": "0.30.1",
+  "version": "0.31.0",
   "description": "React hooks and components for the talent::digital Software Development Kit",
   "type": "module",
   "files": [

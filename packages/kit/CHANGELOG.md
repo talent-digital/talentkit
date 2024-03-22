@@ -1,5 +1,18 @@
 # @talentdigital/kit
 
+## 0.31.0
+
+### Minor Changes
+
+- 0063f45: Update keycloak to version 19 to match BE version
+
+### Patch Changes
+
+- 9f64d4d: Update node version to 20
+- Updated dependencies [9f64d4d]
+- Updated dependencies [a56faff]
+  - @talentdigital/api-client@0.8.0
+
 ## 0.30.1
 
 ### Patch Changes
