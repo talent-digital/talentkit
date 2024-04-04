@@ -588,13 +588,12 @@ export interface CompanyNumberOfUsersStatisticsReportWeb {
   previousPeriodRegisteredUsers?: number;
 }
 
-export interface CompanyLastCompletedEpisodesStatisticsReportWeb {
-  lastCompletedEpisodes?: CompletedEpisodeStatisticsWeb[];
+export interface CompanyCompletedEpisodesStatisticsReportWeb {
+  completedEpisodes?: CompletedEpisodeStatisticsWeb[];
 }
 
 export interface CompletedEpisodeStatisticsWeb {
-  /** @format int32 */
-  episode?: number;
+  episode?: string;
   /** @format int32 */
   numberOfUsers?: number;
 }
@@ -2609,22 +2608,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description This endpoint returns information about the last completed episodes in a given season.<br> Admin role required.
+     * @description This endpoint returns information about completed episodes in a given season. It also returns an NO_EPISODE_COMPLETED entry with the total number of users for the given season. Admin role required.
      *
      * @tags Organisation analytics: Report
-     * @name GetCompanyLastCompletedEpisodeStatistics
+     * @name GetCompanyCompletedEpisodeStatistics
      * @summary Company statistics report - last completed episodes
-     * @request GET:/api/v1/company-report/last-completed-episodes
+     * @request GET:/api/v1/company-report/completed-episodes
      * @secure
      */
-    getCompanyLastCompletedEpisodeStatistics: (
+    getCompanyCompletedEpisodeStatistics: (
       query: {
         season: string;
       },
       params: RequestParams = {},
     ) =>
-      this.request<CompanyLastCompletedEpisodesStatisticsReportWeb, any>({
-        path: `/api/v1/company-report/last-completed-episodes`,
+      this.request<CompanyCompletedEpisodesStatisticsReportWeb, any>({
+        path: `/api/v1/company-report/completed-episodes`,
         method: "GET",
         query: query,
         secure: true,
