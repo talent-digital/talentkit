@@ -16,6 +16,6 @@ export default defineConfig({
         manualChunks: undefined,
       },
     },
-    target: ["es2015"],
-  }
+    target: ["es2017"],
+  },
 });

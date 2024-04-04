@@ -1,21 +1,11 @@
 {
   "extends": "tsconfig/base.json",
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules"
-  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "module": "es2020",
     "outDir": "dist",
-    "target": "es2015",
-    "lib": [
-      "ES2015",
-      "ES2019.Object",
-      "DOM"
-    ]
+    "target": "es2017",
+    "lib": ["es2019", "ES2019.Object", "DOM"]
   }
 }
