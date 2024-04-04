@@ -2608,7 +2608,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description This endpoint returns information about completed episodes in a given season. It also returns an NO_EPISODE_COMPLETED entry with the total number of users for the given season. Admin role required.
+     * @description This endpoint returns information about the completed episodes in a given season.<br> Admin role required.
      *
      * @tags Organisation analytics: Report
      * @name GetCompanyCompletedEpisodeStatistics
