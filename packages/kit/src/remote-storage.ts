@@ -11,11 +11,21 @@ class RemoteStorage implements Storage {
   }
 
   static async create(api: ApiClient, savegameKeyId: string) {
-    const { data } = await api.utilitiesSavegame.getResult(savegameKeyId);
+    const data = await Promise.all([
+      api.utilitiesSavegame.getResult(savegameKeyId),
+      api.utilitiesSavegame.getResult("cockpit"),
+    ]);
 
-    const state = data?.state
-      ? (JSON.parse(data.state) as Record<string, unknown>)
-      : {};
+    const [appState, cockpitState] = data.map((item) => {
+      return item.data?.state
+        ? (JSON.parse(item.data.state) as Record<string, unknown>)
+        : {};
+    });
+
+    const state = {
+      ...appState,
+      cockpit: cockpitState,
+    };
 
     return new RemoteStorage(api, state, savegameKeyId);
   }

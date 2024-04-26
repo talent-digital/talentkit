@@ -30,14 +30,10 @@ import { KeycloakTokenParsed } from "keycloak-js";
 
 export const savegameKey = "SEASONS";
 
-const defaultProfile = {
-  id: "player",
-  companyName: "ACME Inc.",
-  companyLogo: "/logos/logo1.svg",
+const defaultProfile: ProfileStorage = {
   playerName: "Teammitglied",
   playerAvatar: "/avatars/avatar5.svg",
   leadingColor: "#d3e553",
-  playerEmailAddress: "teammitglied@acme.com",
 };
 
 const getIdFromUrlParamsOrStorage = (): ID => {
@@ -268,15 +264,17 @@ class TalentKit<T = unknown> {
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
     const badges = Badge.createForEpisode(episode, storage);
+
     const profileStorage =
-      storage.getItem<ProfileStorage>("SETTINGS") || defaultProfile;
+      storage.getItem<{ profile: ProfileStorage }>("cockpit")?.profile ||
+      defaultProfile;
     const events = new Events(apiClient, storage, id, savegameKeyId);
     let tracker: Tracker | undefined;
     if (config.logRocketId && auth?.user) {
       tracker = await Tracker.create({
         logRocketId: config.logRocketId,
         userInfo: auth.user,
-        playerName: profileStorage.playerName,
+        playerName: profileStorage.playerName ?? "undefined player name",
       });
     }
 
