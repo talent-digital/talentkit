@@ -60,16 +60,6 @@ export interface SecurityDataType {
 
 export type ApiClient = Api<SecurityDataType>;
 
-export interface ProfileStorage {
-  companyLogo: string;
-  companyName: string;
-  id: string;
-  leadingColor: string;
-  playerAvatar: string;
-  playerEmailAddress: string;
-  playerName: string;
-}
-
 export interface EngagementPointsStorage {
   points: number;
   openedArticles: string[];
