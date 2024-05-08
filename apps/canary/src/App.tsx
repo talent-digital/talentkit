@@ -24,35 +24,47 @@ function App() {
     <div className="App">
       {kit ? (
         <>
-          <p>Hello {kit.profile.playerName}</p>
+          <p>Hello {kit.profile.data.avatarName}</p>
           <p>Episode intro text: {kit.formatConfiguration?.introText}</p>
         </>
       ) : (
         <p>Loading...</p>
       )}
-      <button
-        onClick={() => {
-          const savegame = kit?.savegame.load() as Record<string, unknown>;
-          console.log(savegame);
-          kit?.savegame.save({ ...savegame, a: "dadas" });
-        }}
-      >
-        Save
-      </button>
-      <button
-        onClick={() => {
-          void kit?.events.end();
-        }}
-      >
-        End
-      </button>
-      <button
-        onClick={() => {
-          kit?.events.pause();
-        }}
-      >
-        Pause
-      </button>
+      <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+        <button
+          onClick={() => {
+            const savegame = kit?.savegame.load() as Record<string, unknown>;
+            console.log(savegame);
+            kit?.savegame.save({ ...savegame, a: "dadas" });
+          }}
+        >
+          Save
+        </button>
+        <button
+          onClick={() => {
+            void kit?.events.end();
+          }}
+        >
+          End
+        </button>
+        <button
+          onClick={() => {
+            kit?.events.pause();
+          }}
+        >
+          Pause
+        </button>
+        <button
+          onClick={() => {
+            kit?.profile.update({
+              ...kit.profile.data,
+              avatarName: `Random name ${Math.floor(Math.random() * 100)}`,
+            });
+          }}
+        >
+          Change name to random
+        </button>
+      </div>
     </div>
   );
 }
