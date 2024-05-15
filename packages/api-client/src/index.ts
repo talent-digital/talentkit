@@ -12,12 +12,6 @@ export interface TalentUserRequestWebBoolean {
   value: boolean;
 }
 
-export interface TalentUserProfileRequestWeb {
-  avatarName?: string;
-  avatarImage?: string;
-  avatarLeadingColor?: string;
-}
-
 export interface TalentGroupRequestWeb {
   name?: string;
   /** @format int64 */
@@ -404,9 +398,6 @@ export interface TalentUserWeb {
   talentGroup?: TalentGroupWeb;
   tagItems?: TagWeb[];
   supportUser?: boolean;
-  avatarName?: string;
-  avatarImage?: string;
-  avatarLeadingColor?: string;
 }
 
 export interface WebSignalWeb {
@@ -972,25 +963,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateTalentSupportUserFlag: (userId: string, data: TalentUserRequestWebBoolean, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/v1/talent/${userId}/support`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * @description This endpoint allows you to set the value of the talent's profile information. The profile information is used to display the talent's in-game persona.
-     *
-     * @tags Domain model: Talent
-     * @name UpdateTalentUserProfile
-     * @summary Edit talent's profile information
-     * @request PUT:/api/v1/talent/update-profile
-     * @secure
-     */
-    updateTalentUserProfile: (data: TalentUserProfileRequestWeb, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/api/v1/talent/update-profile`,
         method: "PUT",
         body: data,
         secure: true,
