@@ -1,5 +1,15 @@
 # @talentdigital/kit-snippet-integration
 
+## 0.32.4
+
+### Patch Changes
+
+- 7779ec1: Update build and readme
+- 19fefcb: Update package dependencies
+- Updated dependencies [19fefcb]
+- Updated dependencies [7779ec1]
+  - @talentdigital/kit@0.32.0
+
 ## 0.32.3
 
 ### Patch Changes
