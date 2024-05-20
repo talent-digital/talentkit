@@ -1,5 +1,21 @@
 # @talentdigital/kit
 
+## 0.32.0
+
+### Minor Changes
+
+- 7779ec1: Update api-client dependency
+
+### Patch Changes
+
+- 19fefcb: Update package dependencies
+- Updated dependencies [4b97b2b]
+- Updated dependencies [e21b244]
+- Updated dependencies [19fefcb]
+- Updated dependencies [449298a]
+- Updated dependencies [ec2816b]
+  - @talentdigital/api-client@0.9.0
+
 ## 0.31.0
 
 ### Minor Changes

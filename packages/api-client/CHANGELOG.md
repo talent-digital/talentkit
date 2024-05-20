@@ -1,5 +1,18 @@
 # @talentdigital/api-client
 
+## 0.9.0
+
+### Minor Changes
+
+- 4b97b2b: Extend talent endpoint with profile information
+- ec2816b: Change getCompanyCompletedEpisodeStatistics endpoint description
+
+### Patch Changes
+
+- e21b244: Update getCompanyCompletedEpisodeStatistics endpoint description
+- 19fefcb: Update package dependencies
+- 449298a: Update endpoint description
+
 ## 0.8.0
 
 ### Minor Changes

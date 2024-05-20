@@ -1,5 +1,14 @@
 # @talentdigital/react
 
+## 0.32.0
+
+### Patch Changes
+
+- 19fefcb: Update package dependencies
+- Updated dependencies [19fefcb]
+- Updated dependencies [7779ec1]
+  - @talentdigital/kit@0.32.0
+
 ## 0.31.0
 
 ### Patch Changes

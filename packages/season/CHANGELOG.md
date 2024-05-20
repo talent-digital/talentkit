@@ -1,5 +1,11 @@
 # @talentdigital/season
 
+## 0.7.2
+
+### Patch Changes
+
+- 19fefcb: Update package dependencies
+
 ## 0.7.1
 
 ### Patch Changes
