@@ -984,7 +984,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Domain model: Talent
      * @name UpdateTalentUserProfile
-     * @summary Edit talent's profile information
+     * @summary Edit talent's profile information.
      * @request PUT:/api/v1/talent/update-profile
      * @secure
      */
