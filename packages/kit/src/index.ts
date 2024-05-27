@@ -13,7 +13,6 @@ import {
   Config,
   FeedbackQuestions,
   ID,
-  ProfileStorage,
   Tests,
   SavegameStorage,
   SeasonStorage,
@@ -27,18 +26,9 @@ import Test from "./test";
 import Tracker from "./tracker";
 import LogRocket from "logrocket";
 import { KeycloakTokenParsed } from "keycloak-js";
+import Profile from "./profile";
 
 export const savegameKey = "SEASONS";
-
-const defaultProfile = {
-  id: "player",
-  companyName: "ACME Inc.",
-  companyLogo: "/logos/logo1.svg",
-  playerName: "Teammitglied",
-  playerAvatar: "/avatars/avatar5.svg",
-  leadingColor: "#d3e553",
-  playerEmailAddress: "teammitglied@acme.com",
-};
 
 const getIdFromUrlParamsOrStorage = (): ID => {
   const STORAGE_PREFIX = "td";
@@ -153,9 +143,9 @@ class TalentKit<T = unknown> {
     readonly id: ID,
 
     /**
-     * The current player's profile settings
+     * Read and save player's profile information
      */
-    readonly profile: ProfileStorage,
+    readonly profile: Profile,
 
     /**
      * The parsed formatConfiguration for the loaded episode
@@ -268,15 +258,14 @@ class TalentKit<T = unknown> {
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
     const badges = Badge.createForEpisode(episode, storage);
-    const profileStorage =
-      storage.getItem<ProfileStorage>("SETTINGS") || defaultProfile;
+    const profile = await Profile.init(apiClient);
     const events = new Events(apiClient, storage, id, savegameKeyId);
     let tracker: Tracker | undefined;
     if (config.logRocketId && auth?.user) {
       tracker = await Tracker.create({
         logRocketId: config.logRocketId,
         userInfo: auth.user,
-        playerName: profileStorage.playerName,
+        playerName: profile.data.avatarName ?? "Unkown player name",
       });
     }
 
@@ -290,7 +279,7 @@ class TalentKit<T = unknown> {
       engagement,
       events,
       id,
-      profileStorage,
+      profile,
       formatConfiguration,
       tracker,
       auth?.user
