@@ -302,6 +302,11 @@ export interface TestItemWeb {
   documentation?: string;
 }
 
+export interface TalentBadgeWeb {
+  badgeId: string;
+  seasonId: string;
+}
+
 export interface BadgeWeb {
   /** The data with text localization. Should be an correct ISO language. */
   name: LocalizedString;
@@ -2308,6 +2313,43 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/timeline`,
         method: "GET",
         secure: true,
+        ...params,
+      }),
+  };
+  domainModelTalentBadges = {
+    /**
+     * No description
+     *
+     * @tags Domain model: Talent badges
+     * @name GetAwarded
+     * @summary Get all badges awarded to user
+     * @request GET:/api/v1/talent-badges
+     * @secure
+     */
+    getAwarded: (params: RequestParams = {}) =>
+      this.request<TalentBadgeWeb[], any>({
+        path: `/api/v1/talent-badges`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Domain model: Talent badges
+     * @name Award
+     * @summary Award a badge to a user for a specific season
+     * @request POST:/api/v1/talent-badges
+     * @secure
+     */
+    award: (data: TalentBadgeWeb, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/v1/talent-badges`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
   };
