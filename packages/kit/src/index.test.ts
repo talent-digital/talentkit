@@ -42,7 +42,7 @@ describe("Sdk Base Tests", () => {
 
   it("Can award a badge", () => {
     expect(kit.badges["caffeine"].awarded).toBeFalsy();
-    kit.badges["caffeine"].award();
+    void kit.badges["caffeine"].award();
     expect(kit.badges["caffeine"].awarded).toBeTruthy();
   });
 
