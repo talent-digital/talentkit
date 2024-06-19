@@ -257,7 +257,7 @@ class TalentKit<T = unknown> {
       FeedbackQuestion.createForEpisode(id, episode, apiClient, savegameKeyId);
     const savegame: Savegame = new Savegame(id, storage);
     const engagement = new Engagement(storage);
-    const badges = Badge.createForEpisode(episode, storage);
+    const badges = await Badge.createForEpisode(episode, id.season, apiClient);
     const profile = await Profile.init(apiClient);
     const events = new Events(apiClient, storage, id, savegameKeyId);
     let tracker: Tracker | undefined;
@@ -265,7 +265,7 @@ class TalentKit<T = unknown> {
       tracker = await Tracker.create({
         logRocketId: config.logRocketId,
         userInfo: auth.user,
-        playerName: profile.data.avatarName ?? "Unkown player name",
+        playerName: profile.data.avatarName ?? "Unknown player name",
       });
     }
 

@@ -50,6 +50,10 @@ export const createCustomFetch =
         return Promise.resolve(new Response(JSON.stringify(testItems)));
       }
 
+      if ((m = /talent-badges/.exec(fullPath)) !== null) {
+        return Promise.resolve(new Response("[]"));
+      }
+
       if ((m = /talent/.exec(fullPath)) !== null) {
         return Promise.resolve(new Response("{}"));
       }
