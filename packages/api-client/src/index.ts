@@ -400,8 +400,6 @@ export interface SeasonWeb {
   seasonEndMessage: LocalizedString;
   assetsURL?: string;
   linearSeason?: boolean;
-  /** @format int32 */
-  episodeCompletedThreshold?: number;
   competenceAreas?: Record<string, SeasonDefinitionCompetenceAreaWeb>;
   episodes?: Record<string, EpisodeWeb>;
 }
