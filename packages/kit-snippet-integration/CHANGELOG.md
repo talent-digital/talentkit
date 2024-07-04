@@ -1,5 +1,18 @@
 # @talentdigital/kit-snippet-integration
 
+## 0.33.0
+
+### Minor Changes
+
+- f436939: Replace internal badge storage from local to backend
+- 2ce775f: BREAKING CHANGE. Change talentkit's profile property to have a data and update method for accessing and modifying the users profile information.
+
+### Patch Changes
+
+- Updated dependencies [f436939]
+- Updated dependencies [2ce775f]
+  - @talentdigital/kit@0.33.0
+
 ## 0.32.4
 
 ### Patch Changes

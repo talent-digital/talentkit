@@ -1,5 +1,11 @@
 # @talentdigital/season
 
+## 0.8.0
+
+### Minor Changes
+
+- 475879e: Add linearSeason option to season configuration
+
 ## 0.7.2
 
 ### Patch Changes

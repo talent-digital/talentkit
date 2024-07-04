@@ -1,5 +1,12 @@
 # @talentdigital/api-client
 
+## 0.10.0
+
+### Minor Changes
+
+- 475879e: Add linearSeason option to season configuration
+- 3d71421: Add domainModelTalentBadges endpoints
+
 ## 0.9.0
 
 ### Minor Changes
