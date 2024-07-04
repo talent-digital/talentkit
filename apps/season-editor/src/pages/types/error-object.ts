@@ -1,4 +1,5 @@
 export type ErrorObject = {
   isError: true;
-  testItemIdDuplicates: string[];
+  notNumericEpisodes?: string[];
+  testItemIdDuplicates?: string[];
 };
