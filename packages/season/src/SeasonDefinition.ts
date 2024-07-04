@@ -44,6 +44,12 @@ export interface SeasonDefinition {
    * Used by the season editor. Should not be set manually.
    */
   seedId?: string;
+
+  /**
+   * Linear seasons show episodes initially in a fixed order based on their
+   * episode id (e.g., "1", "2", "3", ...). Requires for the episode ids to be numbers.
+   */
+  linearSeason?: boolean;
 }
 
 /**

@@ -5,6 +5,7 @@ export type FormInputs = {
   title: string;
   info: string;
   assetsURL: string;
+  linearSeason: boolean;
   seasonEndMessage: string;
   competenceAreas: {
     competenceAreaId: string;

@@ -13,7 +13,13 @@ type MaturityCode = `${Maturity}`;
 const maturityOptions: MaturityCode[] = ["ALPHA", "BETA", "PENDING", "PUBLIC"];
 
 export const Episodes = () => {
-  const { register, control, getValues } = useFormContext<FormInputs>();
+  const {
+    register,
+    control,
+    getValues,
+    clearErrors,
+    formState: { errors },
+  } = useFormContext<FormInputs>();
   const {
     fields: episodeFields,
     append: appendEpisode,
@@ -52,8 +58,11 @@ export const Episodes = () => {
                 <label>Id</label>
                 <input
                   type="text"
-                  {...register(`episodes.${index}.episodeId` as const)}
+                  {...register(`episodes.${index}.episodeId` as const, {
+                    onBlur: () => clearErrors(`episodes.${index}.episodeId`),
+                  })}
                 />
+                <span>{errors?.episodes?.[index]?.episodeId?.message}</span>
               </StyledInput>
 
               <StyledInput>

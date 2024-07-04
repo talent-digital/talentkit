@@ -67,7 +67,12 @@ export const SeasonEditor = () => {
     const maybeSeason = mapToSeasonObject(season, getValues(), language);
 
     if (isErrorObject(maybeSeason)) {
-      validateTestItems(values, maybeSeason.testItemIdDuplicates);
+      if (maybeSeason.testItemIdDuplicates) {
+        validateTestItems(values, maybeSeason.testItemIdDuplicates);
+      }
+      if (maybeSeason.notNumericEpisodes) {
+        validateNumericEpisodes(values, maybeSeason.notNumericEpisodes);
+      }
 
       return;
     }
@@ -94,6 +99,26 @@ export const SeasonEditor = () => {
 
     toast.error(
       `Error: Duplicate Test IDs. Please make sure your Test IDs are unique for this season. Duplicates found: ${testItemIdDuplicates.join(
+        ", "
+      )}`
+    );
+  };
+
+  const validateNumericEpisodes = (
+    values: FormInputs,
+    notNumericEpisodes: string[]
+  ) => {
+    values.episodes.forEach((item, index) => {
+      if (notNumericEpisodes.includes(item.episodeId)) {
+        const fieldId = `episodes[${index}].episodeId` as "episodes";
+        setError(fieldId, {
+          message: "Episode id must be numeric",
+        });
+      }
+    });
+
+    toast.error(
+      `Error: episode ids must be numeric when linear season is checked. Non numeric episode ids found: ${notNumericEpisodes.join(
         ", "
       )}`
     );
@@ -283,6 +308,11 @@ export const SeasonEditor = () => {
                   <label>Assets URL</label>
                   <input type="text" {...register("assetsURL")} />
                 </StyledInput>
+
+                <div>
+                  <input type="checkbox" {...register("linearSeason")} />
+                  <label>Linear season</label>
+                </div>
               </>
             )}
           </StyledSectionWrapper>

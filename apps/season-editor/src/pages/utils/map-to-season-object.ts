@@ -29,6 +29,23 @@ export function mapToSeasonObject(
     };
   }
 
+  const notNumericEpisodes = values.episodes?.filter((episode) =>
+    isNaN(Number(episode.episodeId))
+  );
+
+  if (
+    values.linearSeason &&
+    notNumericEpisodes &&
+    notNumericEpisodes.length > 0
+  ) {
+    return {
+      isError: true,
+      notNumericEpisodes: notNumericEpisodes.map(
+        (episode) => episode.episodeId
+      ),
+    };
+  }
+
   newFile.seedId = values.seedId;
   newFile.title[language] = values.title;
   newFile.info[language] = values.info;
