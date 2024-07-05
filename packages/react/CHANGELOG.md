@@ -1,5 +1,11 @@
 # @talentdigital/react
 
+## 0.33.1
+
+### Patch Changes
+
+- @talentdigital/kit@0.33.1
+
 ## 0.33.0
 
 ### Patch Changes

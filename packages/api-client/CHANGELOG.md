@@ -1,5 +1,11 @@
 # @talentdigital/api-client
 
+## 0.10.1
+
+### Patch Changes
+
+- d7ebee8: Add image property to microlearning timeline event
+
 ## 0.10.0
 
 ### Minor Changes
