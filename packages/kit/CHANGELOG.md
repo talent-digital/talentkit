@@ -1,5 +1,12 @@
 # @talentdigital/kit
 
+## 0.33.1
+
+### Patch Changes
+
+- Updated dependencies [d7ebee8]
+  - @talentdigital/api-client@0.10.1
+
 ## 0.33.0
 
 ### Minor Changes
