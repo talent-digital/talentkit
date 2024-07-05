@@ -253,6 +253,7 @@ export type TimelineMicrolearning = TimelineItem & {
   test?: string;
   title?: string;
   url?: string;
+  image?: string;
 };
 
 export type TimelineEpisode = TimelineItem & {
