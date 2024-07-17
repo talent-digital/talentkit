@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { DialogContent, Typography } from "@mui/material";
 
 type ConfirmDialogContextType = {
-  confirmChoice?: (title: string, description?: string) => Promise<boolean>;
+  confirmChoice?: (_title: string, _description?: string) => Promise<boolean>;
 };
 
 const ConfirmDialogContext = createContext<ConfirmDialogContextType>({
@@ -22,7 +22,7 @@ const ConfirmDialogContextProvider = ({
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const fn = useRef<(accept: boolean) => void>();
+  const fn = useRef<(_accept: boolean) => void>();
 
   const confirmChoice = (title: string, description?: string) => {
     setTitle(title);
