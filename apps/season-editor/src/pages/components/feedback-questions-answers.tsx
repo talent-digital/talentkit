@@ -3,6 +3,8 @@ import { StyledInput } from "./styled-input";
 import { useFieldArray, useForm } from "react-hook-form";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
+import { useContext } from "react";
+import { ConfirmDialogContext } from "../context";
 
 type AnswersFormInputs = {
   answers: {
@@ -22,6 +24,7 @@ export const FeedbackQuestionsAnswers = ({
   feedbackQuestionIndex,
   onUpdate,
 }: FeedbackQuestionsAnswersProps) => {
+  const { confirmChoice } = useContext(ConfirmDialogContext);
   const { register, control, getValues } = useForm<AnswersFormInputs>({
     defaultValues: {
       answers: answers?.split(",").map((text) => ({ text })) ?? [],
@@ -43,6 +46,16 @@ export const FeedbackQuestionsAnswers = ({
         .answers.map(({ text }) => text)
         .join(",")
     );
+  };
+
+  const handleRemoveAnswer = async (index: number) => {
+    const confirmed = confirmChoice && (await confirmChoice("Are you sure?"));
+    if (!confirmed) {
+      return;
+    }
+
+    removeAnswer(index);
+    updateValues();
   };
 
   return (
@@ -73,8 +86,7 @@ export const FeedbackQuestionsAnswers = ({
           <div>
             <IconButton
               onClick={() => {
-                removeAnswer(index);
-                updateValues();
+                handleRemoveAnswer(index);
               }}
               color="error"
               title={`Delete answer ${index}`}

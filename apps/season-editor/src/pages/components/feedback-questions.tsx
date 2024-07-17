@@ -7,11 +7,19 @@ import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
 import { FeedbackQuestionsAnswers } from "./feedback-questions-answers";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { ConfirmDialogContext } from "../context";
 
 const EMPTY_OPTION = "";
 
 export const FeedbackQuestions = () => {
+  const { confirmChoice } = useContext(ConfirmDialogContext);
   const [subCompetenceValues, setSubCompetenceValues] = useState<
     Record<string, string>
   >({});
@@ -81,6 +89,15 @@ export const FeedbackQuestions = () => {
     const newTestId = lastTestIdIsNumber ? Number(lastTestId) + 1 : 1;
 
     return `feedback-${seedId}${DIVIDER}${newTestId}`;
+  };
+
+  const handleRemoveFeedbackQuestion = async (index: number) => {
+    const confirmed = confirmChoice && (await confirmChoice("Are you sure?"));
+    if (!confirmed) {
+      return;
+    }
+
+    removeFeedbackQuestion(index);
   };
 
   useEffect(() => {
@@ -199,7 +216,7 @@ export const FeedbackQuestions = () => {
               startIcon={<DeleteIcon />}
               variant="contained"
               color="error"
-              onClick={() => removeFeedbackQuestion(index)}
+              onClick={() => handleRemoveFeedbackQuestion(index)}
             >
               Remove Feedback Question
             </Button>

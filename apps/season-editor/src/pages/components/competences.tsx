@@ -1,17 +1,20 @@
 import { Box, Button, IconButton } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useFieldArray, useFormContext } from "react-hook-form";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useContext } from "react";
 import { FormInputs } from "../types";
 import { StyledInput } from "./styled-input";
 import { SubCompetences } from "./sub-competences";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { getNextCompetenceId, tryRemoveCompetence } from "../utils";
+import { ConfirmDialogContext } from "../context";
 
 type CompetencesProps = {
   competenceAreaId: string;
 };
 
 export const Competences = ({ competenceAreaId }: CompetencesProps) => {
+  const { confirmChoice } = useContext(ConfirmDialogContext);
   const { register, control, getValues, setFocus } =
     useFormContext<FormInputs>();
   const {
@@ -49,7 +52,11 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
     });
   };
 
-  const handleRemoveCompetence = (index: number) => {
+  const handleRemoveCompetence = async (index: number) => {
+    const confirmed = confirmChoice && (await confirmChoice("Are you sure?"));
+    if (!confirmed) {
+      return;
+    }
     const values = getValues();
     const removeFn = () => removeCompetence(index);
     const competenceId = competenceFields[index].competenceId;

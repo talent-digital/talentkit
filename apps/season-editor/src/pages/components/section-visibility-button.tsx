@@ -16,12 +16,14 @@ export const SectionVisibilityButton = ({
   hiddenSections,
 }: Props) => {
   return (
-    <IconButton onClick={() => onToggle(sectionName)}>
-      {hiddenSections.includes(sectionName) ? (
-        <VisibilityOffIcon />
-      ) : (
-        <VisibilityIcon />
-      )}
-    </IconButton>
+    <div>
+      <IconButton onClick={() => onToggle(sectionName)}>
+        {hiddenSections.includes(sectionName) ? (
+          <VisibilityOffIcon />
+        ) : (
+          <VisibilityIcon />
+        )}
+      </IconButton>
+    </div>
   );
 };

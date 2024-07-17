@@ -7,7 +7,14 @@ import { Level } from "@talentdigital/season";
 import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { ConfirmDialogContext } from "../context";
 
 type LevelCode = `${Level}`;
 
@@ -22,6 +29,7 @@ const EMPTY_OPTION = "";
 const TEST_ID_DIVIDER = "--";
 
 export const TestItems = () => {
+  const { confirmChoice } = useContext(ConfirmDialogContext);
   const [subCompetenceValues, setSubCompetenceValues] = useState<
     Record<string, string>
   >({});
@@ -88,6 +96,15 @@ export const TestItems = () => {
     const newTestId = getNewTestId(seedId, testItems);
 
     return `test-${seedId}${TEST_ID_DIVIDER}${newTestId}`;
+  };
+
+  const handleRemoveTestItem = async (index: number) => {
+    const confirmed = confirmChoice && (await confirmChoice("Are you sure?"));
+    if (!confirmed) {
+      return;
+    }
+
+    removeTestItem(index);
   };
 
   useEffect(() => {
@@ -208,7 +225,7 @@ export const TestItems = () => {
               startIcon={<DeleteIcon />}
               variant="contained"
               color="error"
-              onClick={() => removeTestItem(index)}
+              onClick={() => handleRemoveTestItem(index)}
             >
               Remove Test item
             </Button>
