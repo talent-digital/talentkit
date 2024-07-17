@@ -5,6 +5,8 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getNextCompetenceId, tryRemoveCompetence } from "../utils";
+import { useContext } from "react";
+import { ConfirmDialogContext } from "../context";
 
 type SubCompetencesProps = {
   competenceAreaId: string;
@@ -15,6 +17,7 @@ export const SubCompetences = ({
   competenceAreaId,
   competenceId,
 }: SubCompetencesProps) => {
+  const { confirmChoice } = useContext(ConfirmDialogContext);
   const { register, control, getValues, setFocus } =
     useFormContext<FormInputs>();
   const {
@@ -56,7 +59,11 @@ export const SubCompetences = ({
     });
   };
 
-  const handleRemoveSubCompetence = (index: number) => {
+  const handleRemoveSubCompetence = async (index: number) => {
+    const confirmed = confirmChoice && (await confirmChoice("Are you sure?"));
+    if (!confirmed) {
+      return;
+    }
     const values = getValues();
     const removeFn = () => removeSubCompetence(index);
     const subCompetenceId = subCompetenceFields[index].subCompetenceId;

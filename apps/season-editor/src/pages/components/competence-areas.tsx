@@ -5,8 +5,11 @@ import { FormInputs } from "../types";
 import { Competences } from "./competences";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getNextCompetenceId, tryRemoveCompetence } from "../utils";
+import { ConfirmDialogContext } from "../context";
+import { useContext } from "react";
 
 export const CompetenceAreas = () => {
+  const { confirmChoice } = useContext(ConfirmDialogContext);
   const { register, control, getValues, setFocus } =
     useFormContext<FormInputs>();
   const {
@@ -41,7 +44,12 @@ export const CompetenceAreas = () => {
     });
   };
 
-  const handleRemoveCompetenceArea = (index: number) => {
+  const handleRemoveCompetenceArea = async (index: number) => {
+    const confirmed = confirmChoice && (await confirmChoice("Are you sure?"));
+    if (!confirmed) {
+      return;
+    }
+
     const values = getValues();
     const removeFn = () => removeCompetenceArea(index);
     const competenceAreaId = competenceAreaFields[index].competenceAreaId;

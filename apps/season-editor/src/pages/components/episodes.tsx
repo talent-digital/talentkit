@@ -7,12 +7,15 @@ import { Maturity } from "@talentdigital/season";
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
+import { useContext } from "react";
+import { ConfirmDialogContext } from "../context";
 
 type MaturityCode = `${Maturity}`;
 
 const maturityOptions: MaturityCode[] = ["ALPHA", "BETA", "PENDING", "PUBLIC"];
 
 export const Episodes = () => {
+  const { confirmChoice } = useContext(ConfirmDialogContext);
   const {
     register,
     control,
@@ -29,7 +32,11 @@ export const Episodes = () => {
     name: "episodes",
   });
 
-  const handleRemoveEpisode = (index: number, episodeId: string) => {
+  const handleRemoveEpisode = async (index: number, episodeId: string) => {
+    const confirmed = confirmChoice && (await confirmChoice("Are you sure?"));
+    if (!confirmed) {
+      return;
+    }
     const values = getValues();
     const usedInTestItems = values.testItems.some(
       (item) => item.episode === episodeId
