@@ -1,9 +1,20 @@
-import { Box, Button, Typography, styled, Divider } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  styled,
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { parse, stringify } from "yaml";
 import { SeasonDefinition } from "@talentdigital/season";
 import { ChangeEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import UploadIcon from "@mui/icons-material/Upload";
 
 import {
   CompetenceAreas,
@@ -42,12 +53,14 @@ export const SeasonEditor = () => {
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
   const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
   const [seedIdFilled, setSeedIdFilled] = useState<boolean>(false);
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]) {
       return;
     }
 
+    setSelectedFileName(event.target.files[0].name);
     const file = event.target.files[0];
     const readFile = await file.text();
     try {
@@ -182,32 +195,51 @@ export const SeasonEditor = () => {
         <Box
           sx={{
             display: "flex",
-            gap: 2,
+            gap: 3,
             flexDirection: "column",
             alignItems: "flex-start",
           }}
         >
           <Typography variant="h6">Configuration and actions</Typography>
 
-          <input type="file" accept=".yml,.yaml" onChange={handleFileChange} />
-
-          <StyledInput short>
-            <label>Language</label>
-            <select
-              value={language}
-              onChange={(event) =>
-                setLanguage(event.target.value as LanguageCode)
-              }
+          <Box sx={{ width: "100%" }}>
+            <Button
+              fullWidth
+              color="primary"
+              variant="contained"
+              component="label"
+              startIcon={<UploadIcon />}
             >
-              {availableLanguages.map((option) => (
-                <option value={option} key={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </StyledInput>
+              Select file
+              <input type="file" hidden onChange={handleFileChange} />
+            </Button>
+            {selectedFileName && (
+              <Typography variant="caption">
+                Selected file: {selectedFileName}
+              </Typography>
+            )}
+          </Box>
 
-          <Button variant="contained" onClick={handleExport}>
+          <Box sx={{ width: "100%", textAlign: "left" }}>
+            <FormControl fullWidth size="small">
+              <InputLabel>Language</InputLabel>
+              <Select
+                value={language}
+                label="Language"
+                onChange={(event) =>
+                  setLanguage(event.target.value as LanguageCode)
+                }
+              >
+                {availableLanguages.map((option) => (
+                  <MenuItem value={option} key={option}>
+                    {translateLanguage(option)}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+
+          <Button variant="outlined" onClick={handleExport} fullWidth>
             Export season.yaml
           </Button>
         </Box>
@@ -241,7 +273,7 @@ export const SeasonEditor = () => {
               alignItems: "flex-start",
             }}
           >
-            <Button onClick={handleLogForm} variant="contained">
+            <Button onClick={handleLogForm} variant="outlined" fullWidth>
               Log form
             </Button>
           </Box>
@@ -408,6 +440,17 @@ export const SeasonEditor = () => {
       )}
     </Box>
   );
+};
+
+const translateLanguage = (language: LanguageCode) => {
+  switch (language) {
+    case "en":
+      return "English";
+    case "de":
+      return "German";
+    default:
+      return language;
+  }
 };
 
 const StyledContent = styled("form")(({ theme }) => ({
