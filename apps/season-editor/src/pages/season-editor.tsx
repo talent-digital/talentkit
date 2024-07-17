@@ -301,7 +301,7 @@ export const SeasonEditor = () => {
 
                 <StyledInput>
                   <label>Info</label>
-                  <input type="text" {...register("info")} />
+                  <textarea rows={3} {...register("info")} />
                 </StyledInput>
 
                 <StyledInput>
