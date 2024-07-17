@@ -23,11 +23,14 @@ export const StyledInput = styled(Box, {
   "& select": {
     cursor: "pointer",
   },
-  "& input, & select": {
+  "& input, & select, & textarea": {
     borderRadius: theme.shape.borderRadius,
     border: `1px solid ${grey[500]}`,
     padding: theme.spacing(1),
     width: "100%",
+    fontFamily: theme.typography.fontFamily,
+    resize: "vertical",
+    lineHeight: "1.4",
 
     "&[readonly]": {
       backgroundColor: theme.palette.grey[100],

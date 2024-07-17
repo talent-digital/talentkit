@@ -14,5 +14,5 @@ export const StyledSectionWrapper = styled("div", {
   display: "flex",
   flexDirection: "column",
   background: "#fff",
-  borderLeft: indented ? `5px solid ${grey["600"]}` : "none",
+  borderLeft: indented ? `5px solid ${grey["800"]}` : "none",
 }));

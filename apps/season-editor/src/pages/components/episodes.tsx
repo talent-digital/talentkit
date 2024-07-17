@@ -110,8 +110,8 @@ export const Episodes = () => {
 
             <StyledInput>
               <label>Description</label>
-              <input
-                type="text"
+              <textarea
+                rows={2}
                 {...register(`episodes.${index}.description` as const)}
               />
             </StyledInput>
