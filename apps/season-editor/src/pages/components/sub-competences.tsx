@@ -5,7 +5,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getNextCompetenceId, tryRemoveCompetence } from "../utils";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ConfirmDialogContext } from "../context";
 
 type SubCompetencesProps = {
@@ -13,11 +13,18 @@ type SubCompetencesProps = {
   competenceId: string;
 };
 
+type TestItemsAttached = {
+  [id: string]: number;
+};
+
 export const SubCompetences = ({
   competenceAreaId,
   competenceId,
 }: SubCompetencesProps) => {
   const { confirmChoice } = useContext(ConfirmDialogContext);
+  const [testItemsAttached, setTestItemsAttached] = useState<TestItemsAttached>(
+    {}
+  );
   const { register, control, getValues, setFocus } =
     useFormContext<FormInputs>();
   const {
@@ -74,6 +81,24 @@ export const SubCompetences = ({
     tryRemoveCompetence(values, subCompetenceIdsToCheck, removeFn);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const values = getValues();
+
+      const newTestItemsAttached: TestItemsAttached = {};
+      subCompetenceFields.forEach((subCompetence) => {
+        newTestItemsAttached[subCompetence.subCompetenceId] =
+          values.testItems.filter(
+            (test) => test.subCompetenceId === subCompetence.subCompetenceId
+          ).length;
+      });
+
+      setTestItemsAttached(newTestItemsAttached);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [subCompetenceFields, getValues]);
+
   return (
     <Box
       sx={{
@@ -123,7 +148,17 @@ export const SubCompetences = ({
               />
             </StyledInput>
             <StyledInput>
-              <label>Name</label>
+              <label>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  Name{" "}
+                  <i style={{ fontSize: 12 }}>
+                    (Test items attached:{" "}
+                    {testItemsAttached[subCompetenceField.subCompetenceId] ??
+                      "⏳"}{" "}
+                    )
+                  </i>
+                </Box>
+              </label>
               <input
                 type="text"
                 {...register(

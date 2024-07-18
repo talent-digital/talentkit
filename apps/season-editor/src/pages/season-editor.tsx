@@ -35,6 +35,7 @@ import {
   mapToSeasonObject,
 } from "./utils";
 import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
+import { Statistics } from "./components/statistics";
 
 const navigationList = [
   "basic-information",
@@ -237,6 +238,10 @@ export const SeasonEditor = () => {
                 ))}
               </Select>
             </FormControl>
+
+            <Typography variant="caption">
+              * Changing language might lose changes
+            </Typography>
           </Box>
 
           <Button variant="outlined" onClick={handleExport} fullWidth>
@@ -258,6 +263,12 @@ export const SeasonEditor = () => {
             ))}
           </StyledNavList>
         </div>
+
+        <Divider />
+
+        <FormProvider {...methods}>
+          <Statistics />
+        </FormProvider>
 
         <Divider />
 
@@ -475,6 +486,7 @@ const StyledSidebar = styled("div")(({ theme }) => ({
   left: 0,
   width: SIDEBAR_SIZE,
   height: "100%",
+  overflowY: "auto",
 }));
 
 const StyledNavList = styled("ul")(({ theme }) => ({
