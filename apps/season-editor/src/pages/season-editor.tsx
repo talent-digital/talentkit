@@ -1,20 +1,7 @@
-import {
-  Box,
-  Button,
-  Typography,
-  styled,
-  Divider,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Box, Button, Typography, styled } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
-import { parse, stringify } from "yaml";
 import { SeasonDefinition } from "@talentdigital/season";
-import { ChangeEvent, useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import UploadIcon from "@mui/icons-material/Upload";
+import { useEffect, useState } from "react";
 
 import {
   CompetenceAreas,
@@ -24,123 +11,23 @@ import {
   SectionVisibilityButton,
   TestItems,
   FeedbackQuestions,
+  Sidebar,
 } from "./components";
 import { FormInputs, LanguageCode, SectionName } from "./types";
 import {
-  detectLanguage,
   extractEpisodes,
   extractFromCompetences,
   getEmptySeason,
-  isErrorObject,
-  mapToSeasonObject,
 } from "./utils";
-import { DEFAULT_LANGUAGE, availableLanguages } from "./dictionaries";
-import { Statistics } from "./components/statistics";
-
-const navigationList = [
-  "basic-information",
-  "competence-areas",
-  "episodes",
-  "test-items",
-  "feedback-questions",
-];
-
-const SIDEBAR_SIZE = 300;
+import { DEFAULT_LANGUAGE, SIDEBAR_SIZE } from "./dictionaries";
 
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
-  const { register, reset, getValues, setError } = methods;
+  const { register, reset, getValues } = methods;
   const [season, setSeason] = useState<SeasonDefinition>(getEmptySeason());
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
   const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
   const [seedIdFilled, setSeedIdFilled] = useState<boolean>(false);
-  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
-
-  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files || !event.target.files[0]) {
-      return;
-    }
-
-    setSelectedFileName(event.target.files[0].name);
-    const file = event.target.files[0];
-    const readFile = await file.text();
-    try {
-      const parsedFiled: SeasonDefinition = parse(readFile);
-      const detectedLanguage = detectLanguage(parsedFiled);
-      setLanguage(detectedLanguage);
-      setSeason(parsedFiled);
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      }
-    }
-  };
-
-  const handleExport = () => {
-    const values = getValues();
-    const maybeSeason = mapToSeasonObject(season, getValues(), language);
-
-    if (isErrorObject(maybeSeason)) {
-      if (maybeSeason.testItemIdDuplicates) {
-        validateTestItems(values, maybeSeason.testItemIdDuplicates);
-      }
-      if (maybeSeason.notNumericEpisodes) {
-        validateNumericEpisodes(values, maybeSeason.notNumericEpisodes);
-      }
-
-      return;
-    }
-
-    const element = document.createElement("a");
-    const file = new Blob([stringify(maybeSeason)], { type: "text/plain" });
-    element.href = URL.createObjectURL(file);
-    element.download = "season.yaml";
-    element.click();
-  };
-
-  const validateTestItems = (
-    values: FormInputs,
-    testItemIdDuplicates: string[]
-  ) => {
-    values.testItems.forEach((item, index) => {
-      if (testItemIdDuplicates.includes(item.testItemId)) {
-        const fieldId = `testItems[${index}].testItemId` as "testItems";
-        setError(fieldId, {
-          message: "Duplicate test item id",
-        });
-      }
-    });
-
-    toast.error(
-      `Error: Duplicate Test IDs. Please make sure your Test IDs are unique for this season. Duplicates found: ${testItemIdDuplicates.join(
-        ", "
-      )}`
-    );
-  };
-
-  const validateNumericEpisodes = (
-    values: FormInputs,
-    notNumericEpisodes: string[]
-  ) => {
-    values.episodes.forEach((item, index) => {
-      if (notNumericEpisodes.includes(item.episodeId)) {
-        const fieldId = `episodes[${index}].episodeId` as "episodes";
-        setError(fieldId, {
-          message: "Episode id must be numeric",
-        });
-      }
-    });
-
-    toast.error(
-      `Error: episode ids must be numeric when linear season is checked. Non numeric episode ids found: ${notNumericEpisodes.join(
-        ", "
-      )}`
-    );
-  };
-
-  const handleLogForm = () => {
-    console.log(getValues());
-  };
 
   const handleToggleSectionVisibility = (sectionName: SectionName) => {
     if (hiddenSections.includes(sectionName)) {
@@ -192,104 +79,14 @@ export const SeasonEditor = () => {
 
   return (
     <Box sx={{ paddingLeft: `${SIDEBAR_SIZE}px` }}>
-      <StyledSidebar>
-        <Box
-          sx={{
-            display: "flex",
-            gap: 3,
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <Typography variant="h6">Configuration and actions</Typography>
-
-          <Box sx={{ width: "100%" }}>
-            <Button
-              fullWidth
-              color="primary"
-              variant="contained"
-              component="label"
-              startIcon={<UploadIcon />}
-            >
-              Select file
-              <input type="file" hidden onChange={handleFileChange} />
-            </Button>
-            {selectedFileName && (
-              <Typography variant="caption">
-                Selected file: {selectedFileName}
-              </Typography>
-            )}
-          </Box>
-
-          <Box sx={{ width: "100%", textAlign: "left" }}>
-            <FormControl fullWidth size="small">
-              <InputLabel>Language</InputLabel>
-              <Select
-                value={language}
-                label="Language"
-                onChange={(event) =>
-                  setLanguage(event.target.value as LanguageCode)
-                }
-              >
-                {availableLanguages.map((option) => (
-                  <MenuItem value={option} key={option}>
-                    {translateLanguage(option)}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
-            <Typography variant="caption">
-              * Changing language might lose changes
-            </Typography>
-          </Box>
-
-          <Button variant="outlined" onClick={handleExport} fullWidth>
-            Export season.yaml
-          </Button>
-        </Box>
-
-        <Divider />
-
-        <div>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            Jump to section
-          </Typography>
-          <StyledNavList>
-            {navigationList.map((section) => (
-              <li key={section}>
-                <a href={`#${section}`}>{section.replace("-", " ")}</a>
-              </li>
-            ))}
-          </StyledNavList>
-        </div>
-
-        <Divider />
-
-        <FormProvider {...methods}>
-          <Statistics />
-        </FormProvider>
-
-        <Divider />
-
-        <div>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            Advanced tools
-          </Typography>
-          <Box
-            sx={{
-              gap: 2,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <Button onClick={handleLogForm} variant="outlined" fullWidth>
-              Log form
-            </Button>
-          </Box>
-        </div>
-      </StyledSidebar>
+      <FormProvider {...methods}>
+        <Sidebar
+          language={language}
+          season={season}
+          onLanguageChange={(lang) => setLanguage(lang)}
+          onSeasonChange={(season) => setSeason(season)}
+        />
+      </FormProvider>
 
       {!seedIdFilled && (
         <StyledContent>
@@ -453,17 +250,6 @@ export const SeasonEditor = () => {
   );
 };
 
-const translateLanguage = (language: LanguageCode) => {
-  switch (language) {
-    case "en":
-      return "English";
-    case "de":
-      return "German";
-    default:
-      return language;
-  }
-};
-
 const StyledContent = styled("form")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -473,37 +259,4 @@ const StyledContent = styled("form")(({ theme }) => ({
   maxWidth: 900,
   width: "100%",
   margin: "auto",
-}));
-
-const StyledSidebar = styled("div")(({ theme }) => ({
-  padding: theme.spacing(4, 2),
-  background: "#fff",
-  boxShadow: theme.shadows[3],
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(2),
-  position: "fixed",
-  left: 0,
-  width: SIDEBAR_SIZE,
-  height: "100%",
-  overflowY: "auto",
-}));
-
-const StyledNavList = styled("ul")(({ theme }) => ({
-  listStyle: "none",
-  padding: 0,
-  margin: 0,
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(2),
-  "& > li": {
-    "& > a": {
-      color: theme.palette.primary.main,
-      textDecoration: "none",
-      textTransform: "capitalize",
-      "&:hover": {
-        textDecoration: "underline",
-      },
-    },
-  },
 }));
