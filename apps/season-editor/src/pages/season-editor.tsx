@@ -238,6 +238,10 @@ export const SeasonEditor = () => {
                 ))}
               </Select>
             </FormControl>
+
+            <Typography variant="caption">
+              * Changing language might lose changes
+            </Typography>
           </Box>
 
           <Button variant="outlined" onClick={handleExport} fullWidth>
