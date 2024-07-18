@@ -1,4 +1,4 @@
-import { Button, Box } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext, FieldArray } from "react-hook-form";
@@ -7,15 +7,21 @@ import { Maturity } from "@talentdigital/season";
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ConfirmDialogContext } from "../context";
 
 type MaturityCode = `${Maturity}`;
+type EpsidoeTestItems = {
+  [id: string]: number;
+};
 
 const maturityOptions: MaturityCode[] = ["ALPHA", "BETA", "PENDING", "PUBLIC"];
 
 export const Episodes = () => {
   const { confirmChoice } = useContext(ConfirmDialogContext);
+  const [episodeTestItems, setEpisodeTestItems] = useState<EpsidoeTestItems>(
+    {}
+  );
   const {
     register,
     control,
@@ -31,6 +37,23 @@ export const Episodes = () => {
     control,
     name: "episodes",
   });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const values = getValues();
+
+      const newEpisodeTestItems: EpsidoeTestItems = {};
+      episodeFields.forEach((episode) => {
+        newEpisodeTestItems[episode.episodeId] = values.testItems.filter(
+          (test) => test.episode === episode.episodeId
+        ).length;
+      });
+
+      setEpisodeTestItems(newEpisodeTestItems);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [episodeFields, getValues]);
 
   const handleRemoveEpisode = async (index: number, episodeId: string) => {
     const confirmed = confirmChoice && (await confirmChoice("Are you sure?"));
@@ -123,7 +146,17 @@ export const Episodes = () => {
               />
             </StyledInput>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography variant="caption">
+              Number of test items:{" "}
+              <b>{episodeTestItems[episode.episodeId] ?? "⏳"}</b>
+            </Typography>
             <Button
               startIcon={<DeleteIcon />}
               variant="contained"
