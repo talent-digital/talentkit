@@ -2,8 +2,9 @@ import { Typography } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import { useEffect, useState } from "react";
+import { StyledSidebarSection } from "./styled-sidebar-section";
 
-export const Statistics = () => {
+export const SidebarStatistics = () => {
   const [values, setValues] = useState<FormInputs | undefined>(undefined);
   const { getValues } = useFormContext<FormInputs>();
 
@@ -16,8 +17,9 @@ export const Statistics = () => {
   }, [getValues]);
 
   return (
-    <>
+    <StyledSidebarSection>
       <Typography variant="h6">Statistics</Typography>
+
       <Typography variant="body2">
         Competence areas: <b>{values?.competenceAreas?.length ?? 0}</b>
       </Typography>
@@ -36,7 +38,7 @@ export const Statistics = () => {
       <Typography variant="body2">
         Feedback questions: <b>{values?.feedbackQuestions.length}</b>
       </Typography>
-    </>
+    </StyledSidebarSection>
   );
 };
 
