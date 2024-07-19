@@ -3,7 +3,6 @@ import {
   Button,
   Typography,
   styled,
-  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -17,17 +16,13 @@ import { parse, stringify } from "yaml";
 import toast from "react-hot-toast";
 
 import { availableLanguages, SIDEBAR_SIZE } from "../dictionaries";
-import { Statistics } from "./statistics";
+import { SidebarStatistics } from "./sidebar-statistics";
 import { FormInputs, LanguageCode } from "../types";
 import { detectLanguage, isErrorObject, mapToSeasonObject } from "../utils";
-
-const navigationList = [
-  "basic-information",
-  "competence-areas",
-  "episodes",
-  "test-items",
-  "feedback-questions",
-];
+import { SidebarHistory } from "./sidebar-history";
+import { SidebarJumpToSection } from "./sidebar-just-to-section";
+import { SidebarAdvancedTools } from "./sidebar-advanced-tools";
+import { StyledSidebarSection } from "./styled-sidebar-section";
 
 export const Sidebar = ({
   language,
@@ -125,20 +120,9 @@ export const Sidebar = ({
     );
   };
 
-  const handleLogForm = () => {
-    console.log(getValues());
-  };
-
   return (
     <StyledSidebar>
-      <Box
-        sx={{
-          display: "flex",
-          gap: 3,
-          flexDirection: "column",
-          alignItems: "flex-start",
-        }}
-      >
+      <StyledSidebarSection>
         <Typography variant="h6">Configuration and actions</Typography>
 
         <Box sx={{ width: "100%" }}>
@@ -171,7 +155,7 @@ export const Sidebar = ({
             >
               {availableLanguages.map((option) => (
                 <MenuItem value={option} key={option}>
-                  {translateLanguage(option)}
+                  {languageToFullForm(option)}
                 </MenuItem>
               ))}
             </Select>
@@ -185,46 +169,12 @@ export const Sidebar = ({
         <Button variant="outlined" onClick={handleExport} fullWidth>
           Export season.yaml
         </Button>
-      </Box>
+      </StyledSidebarSection>
 
-      <Divider />
-
-      <div>
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          Jump to section
-        </Typography>
-        <StyledNavList>
-          {navigationList.map((section) => (
-            <li key={section}>
-              <a href={`#${section}`}>{section.replace("-", " ")}</a>
-            </li>
-          ))}
-        </StyledNavList>
-      </div>
-
-      <Divider />
-
-      <Statistics />
-
-      <Divider />
-
-      <div>
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          Advanced tools
-        </Typography>
-        <Box
-          sx={{
-            gap: 2,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <Button onClick={handleLogForm} variant="outlined" fullWidth>
-            Log form
-          </Button>
-        </Box>
-      </div>
+      <SidebarJumpToSection />
+      <SidebarHistory />
+      <SidebarStatistics />
+      <SidebarAdvancedTools />
     </StyledSidebar>
   );
 };
@@ -241,28 +191,14 @@ const StyledSidebar = styled("div")(({ theme }) => ({
   width: SIDEBAR_SIZE,
   height: "100%",
   overflowY: "auto",
-}));
 
-const StyledNavList = styled("ul")(({ theme }) => ({
-  listStyle: "none",
-  padding: 0,
-  margin: 0,
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(2),
-  "& > li": {
-    "& > a": {
-      color: theme.palette.primary.main,
-      textDecoration: "none",
-      textTransform: "capitalize",
-      "&:hover": {
-        textDecoration: "underline",
-      },
-    },
+  "& > div:not(:last-child)": {
+    paddingBottom: theme.spacing(2),
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
 }));
 
-const translateLanguage = (language: LanguageCode) => {
+const languageToFullForm = (language: LanguageCode) => {
   switch (language) {
     case "en":
       return "English";
