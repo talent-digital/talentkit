@@ -44,9 +44,9 @@ export const SidebarHistory = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const values = getValues();
-      const saveAlreadyExists = savedList.some(
-        (state) => JSON.stringify(state.values) === JSON.stringify(values)
+      const values = structuredClone(getValues());
+      const saveAlreadyExists = savedList.some((state) =>
+        isEqual(state.values, values)
       );
 
       if (saveAlreadyExists) {
@@ -87,7 +87,7 @@ export const SidebarHistory = () => {
     const newSave = {
       timestamp: Date.now(),
       name: manualSaveName,
-      values: getValues(),
+      values: structuredClone(getValues()),
       long: true,
     };
     setManualSaved([newSave, ...manualSaved]);
@@ -256,3 +256,14 @@ export const StyledSaveItem = styled(Box, {
     background: isChosen ? blue[300] : blue[100],
   },
 }));
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isEqual = (x: any, y: any): boolean => {
+  const ok = Object.keys,
+    tx = typeof x,
+    ty = typeof y;
+  return x && y && tx === "object" && tx === ty
+    ? ok(x).length === ok(y).length &&
+        ok(x).every((key) => isEqual(x[key], y[key]))
+    : x === y;
+};
