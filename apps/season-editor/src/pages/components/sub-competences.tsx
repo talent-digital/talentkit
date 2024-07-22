@@ -13,7 +13,7 @@ type SubCompetencesProps = {
   competenceId: string;
 };
 
-type TestItemsAttached = {
+type StatisticsObject = {
   [id: string]: number;
 };
 
@@ -22,9 +22,11 @@ export const SubCompetences = ({
   competenceId,
 }: SubCompetencesProps) => {
   const { confirmChoice } = useContext(ConfirmDialogContext);
-  const [testItemsAttached, setTestItemsAttached] = useState<TestItemsAttached>(
+  const [testItemsAttached, setTestItemsAttached] = useState<StatisticsObject>(
     {}
   );
+  const [feedbackQuestionsAttached, setFeedbackQuestionsAttached] =
+    useState<StatisticsObject>({});
   const { register, control, getValues, setFocus } =
     useFormContext<FormInputs>();
   const {
@@ -85,19 +87,34 @@ export const SubCompetences = ({
     const interval = setInterval(() => {
       const values = getValues();
 
-      const newTestItemsAttached: TestItemsAttached = {};
+      const newFeedbackQuestionsAttached: StatisticsObject = {};
+      const newTestItemsAttached: StatisticsObject = {};
       subCompetenceFields.forEach((subCompetence) => {
         newTestItemsAttached[subCompetence.subCompetenceId] =
           values.testItems.filter(
             (test) => test.subCompetenceId === subCompetence.subCompetenceId
           ).length;
+
+        newFeedbackQuestionsAttached[subCompetence.subCompetenceId] =
+          values.feedbackQuestions.filter(
+            (feedback) =>
+              feedback.subCompetenceId === subCompetence.subCompetenceId
+          ).length;
       });
 
       setTestItemsAttached(newTestItemsAttached);
+      setFeedbackQuestionsAttached(newFeedbackQuestionsAttached);
     }, 3000);
 
     return () => clearInterval(interval);
   }, [subCompetenceFields, getValues]);
+
+  const getStatisticsText = (subCompetenceId: string) => {
+    const testItems = testItemsAttached[subCompetenceId] ?? "⏳";
+    const feedbackQuestions =
+      feedbackQuestionsAttached[subCompetenceId] ?? "⏳";
+    return `(Test items: ${testItems}, feedback questions: ${feedbackQuestions})`;
+  };
 
   return (
     <Box
@@ -152,10 +169,7 @@ export const SubCompetences = ({
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   Name{" "}
                   <i style={{ fontSize: 12 }}>
-                    (Test items attached:{" "}
-                    {testItemsAttached[subCompetenceField.subCompetenceId] ??
-                      "⏳"}{" "}
-                    )
+                    {getStatisticsText(subCompetenceField.subCompetenceId)}
                   </i>
                 </Box>
               </label>
