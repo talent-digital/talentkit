@@ -11,7 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import { ConfirmDialogContext } from "../context";
 
 type MaturityCode = `${Maturity}`;
-type EpsidoeTestItems = {
+type StatisticsObject = {
   [id: string]: number;
 };
 
@@ -19,9 +19,11 @@ const maturityOptions: MaturityCode[] = ["ALPHA", "BETA", "PENDING", "PUBLIC"];
 
 export const Episodes = () => {
   const { confirmChoice } = useContext(ConfirmDialogContext);
-  const [episodeTestItems, setEpisodeTestItems] = useState<EpsidoeTestItems>(
+  const [episodeTestItems, setEpisodeTestItems] = useState<StatisticsObject>(
     {}
   );
+  const [episodeFeedbackQuestions, setEpisodeFeedbackQuestions] =
+    useState<StatisticsObject>({});
   const {
     register,
     control,
@@ -42,18 +44,24 @@ export const Episodes = () => {
     const interval = setInterval(() => {
       const values = getValues();
 
-      const newEpisodeTestItems: EpsidoeTestItems = {};
+      const newEpisodeTestItems: StatisticsObject = {};
+      const newEpisodeFeedbackQuestions: StatisticsObject = {};
       episodeFields.forEach((episode) => {
         newEpisodeTestItems[episode.episodeId] = values.testItems.filter(
           (test) => test.episode === episode.episodeId
         ).length;
+        newEpisodeFeedbackQuestions[episode.episodeId] =
+          values.feedbackQuestions.filter(
+            (test) => test.episode === episode.episodeId
+          ).length;
       });
 
       setEpisodeTestItems(newEpisodeTestItems);
+      setEpisodeFeedbackQuestions(newEpisodeFeedbackQuestions);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [episodeFields, getValues]);
+  }, [episodeFields, getValues, setEpisodeTestItems]);
 
   const handleRemoveEpisode = async (index: number, episodeId: string) => {
     const confirmed = confirmChoice && (await confirmChoice("Are you sure?"));
@@ -154,8 +162,9 @@ export const Episodes = () => {
             }}
           >
             <Typography variant="caption">
-              Number of test items:{" "}
-              <b>{episodeTestItems[episode.episodeId] ?? "⏳"}</b>
+              Test items: <b>{episodeTestItems[episode.episodeId] ?? "⏳"}</b>,
+              feedback questions:{" "}
+              <b>{episodeFeedbackQuestions[episode.episodeId] ?? "⏳"}</b>
             </Typography>
             <Button
               startIcon={<DeleteIcon />}
