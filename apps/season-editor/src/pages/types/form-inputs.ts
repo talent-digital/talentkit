@@ -37,6 +37,7 @@ export type FormInputs = {
     searchGeneric: string;
     searchLinks: string;
     searchTool: string;
+    toolType: string;
   }[];
   feedbackQuestions: {
     feedbackQuestionId: string;

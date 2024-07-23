@@ -2,7 +2,7 @@ import { Button, Box, Typography } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { Level } from "@talentdigital/season";
+import { Level, ToolType } from "@talentdigital/season";
 
 import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
@@ -24,6 +24,18 @@ const levelOptions: LevelCode[] = [
   "INTERMEDIATE",
   "ADVANCED",
   "HIGHLY_SPECIALISED",
+];
+
+type ToolTypeCode = `${ToolType}`;
+
+const toolTypeOptions: ToolTypeCode[] = [
+  "video-conference",
+  "chat",
+  "chatbot",
+  "calendar-services",
+  "project-collaboration",
+  "crm",
+  "document-creation",
 ];
 
 const EMPTY_OPTION = "";
@@ -120,6 +132,7 @@ export const TestItems = () => {
         searchGeneric,
         searchLinks,
         searchTool,
+        toolType,
       } = testItemFields[index];
       setSubCompetenceValues((prev) => ({
         ...prev,
@@ -129,7 +142,8 @@ export const TestItems = () => {
       const hasLegacyOptionsUsed =
         searchGeneric.length > 0 ||
         searchLinks.length > 0 ||
-        searchTool.length > 0;
+        searchTool.length > 0 ||
+        Boolean(toolType);
 
       if (hasLegacyOptionsUsed) {
         setLegacyOptionsExpanded((prev) => [...prev, index]);
@@ -266,7 +280,18 @@ export const TestItems = () => {
             </div>
 
             {legacyOptionsExpanded.includes(index) && (
-              <>
+              <Box sx={{ mt: 2 }}>
+                <StyledInput>
+                  <label>Tool type</label>
+                  <select {...register(`testItems.${index}.toolType` as const)}>
+                    <option value={""} />
+                    {toolTypeOptions.map((option) => (
+                      <option value={option} key={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </StyledInput>
                 <InputList
                   formFieldName="searchGeneric"
                   list={testItemField.searchGeneric}
@@ -296,7 +321,7 @@ export const TestItems = () => {
                   itemIndex={index}
                   label="Search Tool"
                 />
-              </>
+              </Box>
             )}
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -329,6 +354,7 @@ export const TestItems = () => {
                 searchGeneric: "",
                 searchLinks: "",
                 searchTool: "",
+                toolType: "",
               })
             }
           >

@@ -84,6 +84,7 @@ export function extractFromCompetences(
                       searchLinks,
                       searchGeneric,
                       searchTool,
+                      toolType: testItemValue?.toolType ?? "",
                     });
                   }
                 );

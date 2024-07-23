@@ -198,6 +198,7 @@ function mapToSeasonTestItems(
             ...oldDocumentation,
             [language]: testItem.documentation,
           },
+          toolType: testItem.toolType,
           search: {
             ...oldSearch,
             [language]: {
