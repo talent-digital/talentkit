@@ -162,7 +162,7 @@ export enum ToolType {
  * A search specification for finding educational material for a topic depending on the language of the user.
  */
 export type LocalizedSearchDefinition = {
-  [key in LanguageCode]: SearchDefinition;
+  [key in LanguageCode]?: SearchDefinition;
 };
 
 /**
