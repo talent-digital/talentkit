@@ -149,6 +149,13 @@ export const SeasonEditor = () => {
                   <input type="text" {...register("assetsURL")} />
                 </StyledInput>
 
+                <StyledInput>
+                  <label>
+                    Season end message <i>(legacy option)</i>
+                  </label>
+                  <textarea rows={3} {...register("seasonEndMessage")} />
+                </StyledInput>
+
                 <div>
                   <input type="checkbox" {...register("linearSeason")} />
                   <label>Linear season</label>

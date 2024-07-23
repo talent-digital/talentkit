@@ -6,7 +6,6 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
-import { FeedbackQuestionsAnswers } from "./feedback-questions-answers";
 import {
   ChangeEvent,
   useCallback,
@@ -15,6 +14,7 @@ import {
   useState,
 } from "react";
 import { ConfirmDialogContext } from "../context";
+import { InputList } from "./input-list";
 
 const EMPTY_OPTION = "";
 
@@ -205,10 +205,12 @@ export const FeedbackQuestions = () => {
               />
             </StyledInput>
 
-            <FeedbackQuestionsAnswers
-              answers={feedbackQuestionField.answers}
-              feedbackQuestionIndex={index}
+            <InputList
+              formFieldName="answers"
+              list={feedbackQuestionField.answers}
               onUpdate={handleUpdate}
+              itemIndex={index}
+              label="answer"
             />
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

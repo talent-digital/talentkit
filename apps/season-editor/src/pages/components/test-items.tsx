@@ -1,4 +1,4 @@
-import { Button, Box } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext } from "react-hook-form";
@@ -15,6 +15,7 @@ import {
   useState,
 } from "react";
 import { ConfirmDialogContext } from "../context";
+import { InputList } from "./input-list";
 
 type LevelCode = `${Level}`;
 
@@ -30,6 +31,9 @@ const TEST_ID_DIVIDER = "--";
 
 export const TestItems = () => {
   const { confirmChoice } = useContext(ConfirmDialogContext);
+  const [legacyOptionsExpanded, setLegacyOptionsExpanded] = useState<number[]>(
+    []
+  );
   const [subCompetenceValues, setSubCompetenceValues] = useState<
     Record<string, string>
   >({});
@@ -109,12 +113,27 @@ export const TestItems = () => {
 
   useEffect(() => {
     testItemFields.forEach((_, index) => {
-      const { competenceAreaId, competenceId, subCompetenceId } =
-        testItemFields[index];
+      const {
+        competenceAreaId,
+        competenceId,
+        subCompetenceId,
+        searchGeneric,
+        searchLinks,
+        searchTool,
+      } = testItemFields[index];
       setSubCompetenceValues((prev) => ({
         ...prev,
         [index]: `${competenceAreaId}-${competenceId}-${subCompetenceId}`,
       }));
+
+      const hasLegacyOptionsUsed =
+        searchGeneric.length > 0 ||
+        searchLinks.length > 0 ||
+        searchTool.length > 0;
+
+      if (hasLegacyOptionsUsed) {
+        setLegacyOptionsExpanded((prev) => [...prev, index]);
+      }
     });
   }, [testItemFields]);
 
@@ -123,7 +142,7 @@ export const TestItems = () => {
     // Without this initial update the selected sub-competence is emtpy
     const timeout = setTimeout(() => {
       updateSubCompetenceList();
-    });
+    }, 500);
 
     return () => {
       clearTimeout(timeout);
@@ -132,8 +151,8 @@ export const TestItems = () => {
 
   return (
     <>
-      {testItemFields.map((testItem, index) => (
-        <StyledSectionWrapper key={testItem.id} indented>
+      {testItemFields.map((testItemField, index) => (
+        <StyledSectionWrapper key={testItemField.id} indented>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <input
               hidden
@@ -219,6 +238,66 @@ export const TestItems = () => {
                 {...register(`testItems.${index}.documentation` as const)}
               />
             </StyledInput>
+
+            <div>
+              <Typography
+                component="button"
+                type="button"
+                sx={{
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                  background: "none",
+                  border: "none",
+                  p: 0,
+                }}
+                variant="caption"
+                onClick={() => {
+                  setLegacyOptionsExpanded((prev) => {
+                    return prev.includes(index)
+                      ? prev.filter((item) => item !== index)
+                      : [...prev, index];
+                  });
+                }}
+              >
+                {legacyOptionsExpanded.includes(index)
+                  ? "Hide legacy options"
+                  : "Show legacy options"}
+              </Typography>
+            </div>
+
+            {legacyOptionsExpanded.includes(index) && (
+              <>
+                <InputList
+                  formFieldName="searchGeneric"
+                  list={testItemField.searchGeneric}
+                  onUpdate={(idx, list) => {
+                    setValue(`testItems.${idx}.searchGeneric`, list);
+                  }}
+                  itemIndex={index}
+                  label="Search generic"
+                />
+
+                <InputList
+                  formFieldName="searchLinks"
+                  list={testItemField.searchLinks}
+                  onUpdate={(idx, list) => {
+                    setValue(`testItems.${idx}.searchLinks`, list);
+                  }}
+                  itemIndex={index}
+                  label="Search Link"
+                />
+
+                <InputList
+                  formFieldName="searchTool"
+                  list={testItemField.searchTool}
+                  onUpdate={(idx, list) => {
+                    setValue(`testItems.${idx}.searchTool`, list);
+                  }}
+                  itemIndex={index}
+                  label="Search Tool"
+                />
+              </>
+            )}
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
@@ -244,9 +323,12 @@ export const TestItems = () => {
                 competenceId: "",
                 subCompetenceId: "",
                 testItemId: getTestItemId(),
+                documentation: "",
                 episode: "",
                 level: "FOUNDATION",
-                documentation: "",
+                searchGeneric: "",
+                searchLinks: "",
+                searchTool: "",
               })
             }
           >

@@ -185,6 +185,8 @@ function mapToSeasonTestItems(
         oldValues.competenceAreas[competenceAreaId]?.competences[competenceId]
           ?.subCompetences[subCompetenceId]?.testItems?.[testItem.testItemId];
       const oldDocumentation = oldTestItem?.documentation ?? {};
+      const oldSearch = oldTestItem?.search ?? ({} as Record<string, unknown>);
+      const oldSearchLanguage = oldSearch[language] ?? {};
 
       return {
         ...accumulator,
@@ -195,6 +197,17 @@ function mapToSeasonTestItems(
           documentation: {
             ...oldDocumentation,
             [language]: testItem.documentation,
+          },
+          search: {
+            ...oldSearch,
+            [language]: {
+              ...oldSearchLanguage,
+              generic: testItem.searchGeneric
+                .split(",")
+                .map((item) => item.trim()),
+              links: testItem.searchLinks.split(",").map((item) => item.trim()),
+              tool: testItem.searchTool.split(",").map((item) => item.trim()),
+            },
           },
         },
       };
