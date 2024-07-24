@@ -12,10 +12,11 @@ import {
   TestItems,
   FeedbackQuestions,
   Sidebar,
+  Badges,
 } from "./components";
 import { FormInputs, LanguageCode, SectionName } from "./types";
 import {
-  extractEpisodes,
+  extractFromEpisodes,
   extractFromCompetences,
   getEmptySeason,
 } from "./utils";
@@ -42,7 +43,7 @@ export const SeasonEditor = () => {
   useEffect(() => {
     if (!season) return;
 
-    const episodes = extractEpisodes(season, language);
+    const { episodes, badges } = extractFromEpisodes(season, language);
     const {
       competenceAreas,
       competences,
@@ -67,6 +68,7 @@ export const SeasonEditor = () => {
       episodes,
       testItems,
       feedbackQuestions,
+      badges,
     });
   }, [season, language, reset, getValues]);
 
@@ -249,6 +251,26 @@ export const SeasonEditor = () => {
           {hiddenSections.includes("feedbackQuestions") ? null : (
             <FormProvider {...methods}>
               <FeedbackQuestions />
+            </FormProvider>
+          )}
+
+          <StyledSectionWrapper id="badges">
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Badges
+              </Typography>
+
+              <SectionVisibilityButton
+                hiddenSections={hiddenSections}
+                onToggle={handleToggleSectionVisibility}
+                sectionName="badges"
+              />
+            </Box>
+          </StyledSectionWrapper>
+
+          {hiddenSections.includes("badges") ? null : (
+            <FormProvider {...methods}>
+              <Badges />
             </FormProvider>
           )}
         </StyledContent>

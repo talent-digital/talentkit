@@ -1,4 +1,8 @@
-import { LocalizedString, SeasonDefinition } from "@talentdigital/season";
+import {
+  EpisodeDefinition,
+  LocalizedString,
+  SeasonDefinition,
+} from "@talentdigital/season";
 import { ErrorObject, FormInputs, LanguageCode } from "../types";
 
 export function mapToSeasonObject(
@@ -276,6 +280,23 @@ function mapToSeasonEpisodes(
 ): SeasonDefinition["episodes"] {
   return (
     values.episodes?.reduce((accumulator, episode) => {
+      const newBadges: EpisodeDefinition["badges"] = values.badges
+        ?.filter((badge) => badge.episode === episode.episodeId)
+        .reduce((accumulator, badge) => {
+          return {
+            ...accumulator,
+            [badge.badgeId]: {
+              name: {
+                ...(oldValues.episodes?.[episode.episodeId]?.badges?.[
+                  badge.badgeId
+                ]?.name ?? {}),
+                [language]: badge.name,
+              },
+              image: badge.image,
+            },
+          };
+        }, {});
+
       return {
         ...accumulator,
         [episode.episodeId]: {
@@ -291,6 +312,10 @@ function mapToSeasonEpisodes(
           imageUrl: episode.imageUrl,
           format: episode.format,
           formatConfiguration: episode.formatConfiguration,
+          badges: {
+            ...(oldValues.episodes[episode.episodeId]?.badges ?? {}),
+            ...newBadges,
+          },
         },
       };
     }, {}) ?? {}

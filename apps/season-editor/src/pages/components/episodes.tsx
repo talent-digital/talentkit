@@ -24,6 +24,7 @@ export const Episodes = () => {
   );
   const [episodeFeedbackQuestions, setEpisodeFeedbackQuestions] =
     useState<StatisticsObject>({});
+  const [episodeBadges, setEpisodeBadges] = useState<StatisticsObject>({});
   const {
     register,
     control,
@@ -46,18 +47,23 @@ export const Episodes = () => {
 
       const newEpisodeTestItems: StatisticsObject = {};
       const newEpisodeFeedbackQuestions: StatisticsObject = {};
+      const newEpisodeBadges: StatisticsObject = {};
       episodeFields.forEach((episode) => {
         newEpisodeTestItems[episode.episodeId] = values.testItems.filter(
-          (test) => test.episode === episode.episodeId
+          (item) => item.episode === episode.episodeId
         ).length;
         newEpisodeFeedbackQuestions[episode.episodeId] =
           values.feedbackQuestions.filter(
-            (test) => test.episode === episode.episodeId
+            (item) => item.episode === episode.episodeId
           ).length;
+        newEpisodeBadges[episode.episodeId] = values.badges.filter(
+          (item) => item.episode === episode.episodeId
+        ).length;
       });
 
       setEpisodeTestItems(newEpisodeTestItems);
       setEpisodeFeedbackQuestions(newEpisodeFeedbackQuestions);
+      setEpisodeBadges(newEpisodeBadges);
     }, 3000);
 
     return () => clearInterval(interval);
@@ -164,7 +170,8 @@ export const Episodes = () => {
             <Typography variant="caption">
               Test items: <b>{episodeTestItems[episode.episodeId] ?? "⏳"}</b>,
               feedback questions:{" "}
-              <b>{episodeFeedbackQuestions[episode.episodeId] ?? "⏳"}</b>
+              <b>{episodeFeedbackQuestions[episode.episodeId] ?? "⏳"}</b>,
+              badges: <b>{episodeBadges[episode.episodeId] ?? "⏳"}</b>
             </Typography>
             <Button
               startIcon={<DeleteIcon />}

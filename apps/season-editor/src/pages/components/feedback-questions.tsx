@@ -81,14 +81,14 @@ export const FeedbackQuestions = () => {
   const getFeedbackQuestionId = () => {
     const DIVIDER = "--";
     const seedId = getValues("seedId");
-    const lastTestId =
+    const lastId =
       feedbackQuestionFields[
         feedbackQuestionFields.length - 1
       ]?.feedbackQuestionId.split(DIVIDER)[1];
-    const lastTestIdIsNumber = !isNaN(Number(lastTestId));
-    const newTestId = lastTestIdIsNumber ? Number(lastTestId) + 1 : 1;
+    const lastIdIsNumber = !isNaN(Number(lastId));
+    const newId = lastIdIsNumber ? Number(lastId) + 1 : 1;
 
-    return `feedback-${seedId}${DIVIDER}${newTestId}`;
+    return `feedback-${seedId}${DIVIDER}${newId}`;
   };
 
   const handleRemoveFeedbackQuestion = async (index: number) => {

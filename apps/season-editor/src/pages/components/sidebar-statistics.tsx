@@ -38,6 +38,9 @@ export const SidebarStatistics = () => {
       <Typography variant="body2">
         Feedback questions: <b>{values?.feedbackQuestions.length}</b>
       </Typography>
+      <Typography variant="body2">
+        Badges: <b>{values?.badges.length}</b>
+      </Typography>
     </StyledSidebarSection>
   );
 };

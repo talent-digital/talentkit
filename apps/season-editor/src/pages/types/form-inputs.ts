@@ -48,4 +48,10 @@ export type FormInputs = {
     question: string;
     answers: string;
   }[];
+  badges: {
+    badgeId: string;
+    episode: string;
+    image: string;
+    name: string;
+  }[];
 };
