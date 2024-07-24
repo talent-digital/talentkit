@@ -6,8 +6,10 @@ import {
   TextField,
   useTheme,
   Tooltip,
+  Theme,
+  lighten,
 } from "@mui/material";
-import { blue, grey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import { useContext, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import RestoreIcon from "@mui/icons-material/Restore";
@@ -227,9 +229,13 @@ const isChosen = (
   return state.timestamp === chosenSave.timestamp;
 };
 
-const getChosenBackground = (isChosen?: boolean, isLastChosen?: boolean) => {
+const getChosenBackground = (
+  theme: Theme,
+  isChosen?: boolean,
+  isLastChosen?: boolean
+) => {
   if (isChosen) {
-    return blue[500];
+    return theme.palette.primary.main;
   }
   if (isLastChosen) {
     return grey[300];
@@ -244,16 +250,18 @@ export const StyledSaveItem = styled(Box, {
 })<{
   isChosen?: boolean;
   isLastChosen?: boolean;
-}>(({ isChosen, isLastChosen }) => ({
+}>(({ theme, isChosen, isLastChosen }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   padding: "4px",
   color: isChosen ? "#fff" : "initial",
-  background: getChosenBackground(isChosen, isLastChosen),
+  background: getChosenBackground(theme, isChosen, isLastChosen),
 
   "&:hover": {
-    background: isChosen ? blue[300] : blue[100],
+    background: isChosen
+      ? theme.palette.primary.light
+      : lighten(theme.palette.primary.light, 0.8),
   },
 }));
 
