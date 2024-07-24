@@ -7,6 +7,7 @@ const navigationList = [
   "episodes",
   "test-items",
   "feedback-questions",
+  "badges",
 ];
 
 export const SidebarJumpToSection = () => {

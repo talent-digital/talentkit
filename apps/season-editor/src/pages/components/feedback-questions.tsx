@@ -6,7 +6,6 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs, FromInputSubCompetence } from "../types";
 import { StyledSectionWrapper } from ".";
 import { StyledMultilineInputWrapper } from "./styled-multiline-wrapper";
-import { FeedbackQuestionsAnswers } from "./feedback-questions-answers";
 import {
   ChangeEvent,
   useCallback,
@@ -15,6 +14,7 @@ import {
   useState,
 } from "react";
 import { ConfirmDialogContext } from "../context";
+import { InputList } from "./input-list";
 
 const EMPTY_OPTION = "";
 
@@ -81,14 +81,14 @@ export const FeedbackQuestions = () => {
   const getFeedbackQuestionId = () => {
     const DIVIDER = "--";
     const seedId = getValues("seedId");
-    const lastTestId =
+    const lastId =
       feedbackQuestionFields[
         feedbackQuestionFields.length - 1
       ]?.feedbackQuestionId.split(DIVIDER)[1];
-    const lastTestIdIsNumber = !isNaN(Number(lastTestId));
-    const newTestId = lastTestIdIsNumber ? Number(lastTestId) + 1 : 1;
+    const lastIdIsNumber = !isNaN(Number(lastId));
+    const newId = lastIdIsNumber ? Number(lastId) + 1 : 1;
 
-    return `feedback-${seedId}${DIVIDER}${newTestId}`;
+    return `feedback-${seedId}${DIVIDER}${newId}`;
   };
 
   const handleRemoveFeedbackQuestion = async (index: number) => {
@@ -205,10 +205,12 @@ export const FeedbackQuestions = () => {
               />
             </StyledInput>
 
-            <FeedbackQuestionsAnswers
-              answers={feedbackQuestionField.answers}
-              feedbackQuestionIndex={index}
+            <InputList
+              formFieldName="answers"
+              list={feedbackQuestionField.answers}
               onUpdate={handleUpdate}
+              itemIndex={index}
+              label="answer"
             />
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

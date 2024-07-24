@@ -34,6 +34,10 @@ export type FormInputs = {
     episode: string;
     level: string;
     documentation: string;
+    searchGeneric: string;
+    searchLinks: string;
+    searchTool: string;
+    toolType: string;
   }[];
   feedbackQuestions: {
     feedbackQuestionId: string;
@@ -43,5 +47,11 @@ export type FormInputs = {
     episode: string;
     question: string;
     answers: string;
+  }[];
+  badges: {
+    badgeId: string;
+    episode: string;
+    image: string;
+    name: string;
   }[];
 };

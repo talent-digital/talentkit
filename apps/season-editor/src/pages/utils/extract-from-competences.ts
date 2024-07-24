@@ -64,6 +64,14 @@ export function extractFromCompetences(
               if (subCompetenceValue.testItems) {
                 Object.entries(subCompetenceValue.testItems).forEach(
                   ([testItemId, testItemValue]) => {
+                    const searchLinks =
+                      testItemValue?.search[language]?.links?.join(", ") ?? "";
+                    const searchGeneric =
+                      testItemValue?.search[language]?.generic?.join(", ") ??
+                      "";
+                    const searchTool =
+                      testItemValue?.search[language]?.tool?.join(", ") ?? "";
+
                     testItems.push({
                       testItemId,
                       competenceAreaId,
@@ -73,6 +81,10 @@ export function extractFromCompetences(
                       level: testItemValue.level,
                       documentation:
                         testItemValue.documentation?.[language] ?? "",
+                      searchLinks,
+                      searchGeneric,
+                      searchTool,
+                      toolType: testItemValue?.toolType ?? "",
                     });
                   }
                 );

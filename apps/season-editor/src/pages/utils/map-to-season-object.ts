@@ -1,4 +1,8 @@
-import { LocalizedString, SeasonDefinition } from "@talentdigital/season";
+import {
+  EpisodeDefinition,
+  LocalizedString,
+  SeasonDefinition,
+} from "@talentdigital/season";
 import { ErrorObject, FormInputs, LanguageCode } from "../types";
 
 export function mapToSeasonObject(
@@ -185,6 +189,8 @@ function mapToSeasonTestItems(
         oldValues.competenceAreas[competenceAreaId]?.competences[competenceId]
           ?.subCompetences[subCompetenceId]?.testItems?.[testItem.testItemId];
       const oldDocumentation = oldTestItem?.documentation ?? {};
+      const oldSearch = oldTestItem?.search ?? ({} as Record<string, unknown>);
+      const oldSearchLanguage = oldSearch[language] ?? {};
 
       return {
         ...accumulator,
@@ -195,6 +201,18 @@ function mapToSeasonTestItems(
           documentation: {
             ...oldDocumentation,
             [language]: testItem.documentation,
+          },
+          toolType: testItem.toolType,
+          search: {
+            ...oldSearch,
+            [language]: {
+              ...oldSearchLanguage,
+              generic: testItem.searchGeneric
+                .split(",")
+                .map((item) => item.trim()),
+              links: testItem.searchLinks.split(",").map((item) => item.trim()),
+              tool: testItem.searchTool.split(",").map((item) => item.trim()),
+            },
           },
         },
       };
@@ -262,6 +280,23 @@ function mapToSeasonEpisodes(
 ): SeasonDefinition["episodes"] {
   return (
     values.episodes?.reduce((accumulator, episode) => {
+      const newBadges: EpisodeDefinition["badges"] = values.badges
+        ?.filter((badge) => badge.episode === episode.episodeId)
+        .reduce((accumulator, badge) => {
+          return {
+            ...accumulator,
+            [badge.badgeId]: {
+              name: {
+                ...(oldValues.episodes?.[episode.episodeId]?.badges?.[
+                  badge.badgeId
+                ]?.name ?? {}),
+                [language]: badge.name,
+              },
+              image: badge.image,
+            },
+          };
+        }, {});
+
       return {
         ...accumulator,
         [episode.episodeId]: {
@@ -277,6 +312,10 @@ function mapToSeasonEpisodes(
           imageUrl: episode.imageUrl,
           format: episode.format,
           formatConfiguration: episode.formatConfiguration,
+          badges: {
+            ...(oldValues.episodes[episode.episodeId]?.badges ?? {}),
+            ...newBadges,
+          },
         },
       };
     }, {}) ?? {}
