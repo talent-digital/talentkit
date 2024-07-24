@@ -1,6 +1,7 @@
 import { Button, Box, Typography } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Level, ToolType } from "@talentdigital/season";
 
@@ -167,7 +168,7 @@ export const TestItems = () => {
     <>
       {testItemFields.map((testItemField, index) => (
         <StyledSectionWrapper key={testItemField.id} indented>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", p: 2 }}>
             <input
               hidden
               type="text"
@@ -324,10 +325,10 @@ export const TestItems = () => {
               </Box>
             )}
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", p: 2 }}>
             <Button
               startIcon={<DeleteIcon />}
-              variant="contained"
+              variant="outlined"
               color="error"
               onClick={() => handleRemoveTestItem(index)}
             >
@@ -337,31 +338,31 @@ export const TestItems = () => {
         </StyledSectionWrapper>
       ))}
 
-      <StyledSectionWrapper indented>
-        <div>
-          <Button
-            variant="contained"
-            type="button"
-            onClick={() =>
-              appendTestItem({
-                competenceAreaId: "",
-                competenceId: "",
-                subCompetenceId: "",
-                testItemId: getTestItemId(),
-                documentation: "",
-                episode: "",
-                level: "FOUNDATION",
-                searchGeneric: "",
-                searchLinks: "",
-                searchTool: "",
-                toolType: "",
-              })
-            }
-          >
-            Add Test Item
-          </Button>
-        </div>
-      </StyledSectionWrapper>
+      <Box sx={{ display: "flex", alignSelf: "flex-start", pl: 3 }}>
+        <Button
+          variant="outlined"
+          sx={{ background: "#fff" }}
+          type="button"
+          startIcon={<AddIcon />}
+          onClick={() =>
+            appendTestItem({
+              competenceAreaId: "",
+              competenceId: "",
+              subCompetenceId: "",
+              testItemId: getTestItemId(),
+              documentation: "",
+              episode: "",
+              level: "FOUNDATION",
+              searchGeneric: "",
+              searchLinks: "",
+              searchTool: "",
+              toolType: "",
+            })
+          }
+        >
+          Add Test Item
+        </Button>
+      </Box>
     </>
   );
 };

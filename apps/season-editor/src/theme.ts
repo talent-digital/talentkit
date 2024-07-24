@@ -6,7 +6,7 @@ const PRIMARY_LIGHT = "#1B9D96";
 const theme = createTheme({
   palette: {
     background: {
-      default: grey[100],
+      default: grey[200],
     },
     primary: {
       main: "#116E6B",

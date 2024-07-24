@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import { Box, Button, IconButton } from "@mui/material";
 
 import { ConfirmDialogContext } from "../context";
-import { Box, Button, IconButton } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import { FormInputs } from "../types";
 
@@ -107,7 +108,8 @@ export const InputList = ({
       ))}
       <div>
         <Button
-          variant="contained"
+          variant="outlined"
+          startIcon={<AddIcon />}
           type="button"
           onClick={() =>
             append({

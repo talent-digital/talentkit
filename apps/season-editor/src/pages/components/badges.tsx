@@ -2,6 +2,7 @@ import { Button, Box } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext } from "react-hook-form";
+import AddIcon from "@mui/icons-material/Add";
 
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
@@ -57,7 +58,7 @@ export const Badges = () => {
     <>
       {badgesFields.map((badgeField, index) => (
         <StyledSectionWrapper key={badgeField.id} indented>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", p: 2 }}>
             <StyledMultilineInputWrapper>
               <StyledInput>
                 <label>id</label>
@@ -101,10 +102,10 @@ export const Badges = () => {
               )}
             </StyledMultilineInputWrapper>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", p: 2 }}>
             <Button
               startIcon={<DeleteIcon />}
-              variant="contained"
+              variant="outlined"
               color="error"
               onClick={() => handleRemoveBadge(index)}
             >
@@ -114,24 +115,24 @@ export const Badges = () => {
         </StyledSectionWrapper>
       ))}
 
-      <StyledSectionWrapper indented>
-        <div>
-          <Button
-            variant="contained"
-            type="button"
-            onClick={() =>
-              appendBadge({
-                badgeId: getBadgeId(),
-                episode: "",
-                image: "",
-                name: "",
-              })
-            }
-          >
-            Add Badge
-          </Button>
-        </div>
-      </StyledSectionWrapper>
+      <Box sx={{ display: "flex", alignSelf: "flex-start", pl: 3 }}>
+        <Button
+          variant="outlined"
+          startIcon={<AddIcon />}
+          type="button"
+          sx={{ background: "#fff" }}
+          onClick={() =>
+            appendBadge({
+              badgeId: getBadgeId(),
+              episode: "",
+              image: "",
+              name: "",
+            })
+          }
+        >
+          Add Badge
+        </Button>
+      </Box>
     </>
   );
 };

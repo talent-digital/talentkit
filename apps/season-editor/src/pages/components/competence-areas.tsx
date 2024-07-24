@@ -4,6 +4,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import { Competences } from "./competences";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import { getNextCompetenceId, tryRemoveCompetence } from "../utils";
 import { ConfirmDialogContext } from "../context";
 import { useContext } from "react";
@@ -110,9 +111,10 @@ export const CompetenceAreas = () => {
       ))}
       <div>
         <Button
-          variant="contained"
+          variant="outlined"
           type="button"
           onClick={handleAppendCompetenceArea}
+          startIcon={<AddIcon />}
         >
           Add Competence Area
         </Button>
