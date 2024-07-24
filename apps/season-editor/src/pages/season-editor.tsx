@@ -1,4 +1,4 @@
-import { Box, Button, Typography, styled } from "@mui/material";
+import { Box, Button, Typography, styled, useTheme } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { SeasonDefinition } from "@talentdigital/season";
 import { useEffect, useState } from "react";
@@ -8,11 +8,12 @@ import {
   Episodes,
   StyledSectionWrapper,
   StyledInput,
-  SectionVisibilityButton,
   TestItems,
   FeedbackQuestions,
   Sidebar,
   Badges,
+  SectionWrapper,
+  BasicInfo,
 } from "./components";
 import { FormInputs, LanguageCode, SectionName } from "./types";
 import {
@@ -29,6 +30,7 @@ export const SeasonEditor = () => {
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
   const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
   const [seedIdFilled, setSeedIdFilled] = useState<boolean>(false);
+  const theme = useTheme();
 
   const handleToggleSectionVisibility = (sectionName: SectionName) => {
     if (hiddenSections.includes(sectionName)) {
@@ -93,23 +95,32 @@ export const SeasonEditor = () => {
       {!seedIdFilled && (
         <StyledContent>
           <StyledSectionWrapper>
-            <Typography variant="h5" sx={{ mb: 2 }}>
+            <Typography
+              variant="h5"
+              sx={{
+                background: theme.palette.primary.main,
+                color: "#fff",
+                p: 2,
+              }}
+            >
               To start provide an unique Id or load a file that contains it
             </Typography>
 
-            <StyledInput>
-              <label>Unique season competence Id number (e.g. 100)</label>
-              <input type="text" {...register("seedId")} autoFocus />
-            </StyledInput>
+            <Box sx={{ p: 2 }}>
+              <StyledInput>
+                <label>Unique season competence Id number (e.g. 100)</label>
+                <input type="text" {...register("seedId")} autoFocus />
+              </StyledInput>
 
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Button
-                variant="contained"
-                onClick={handleSeedIdSubmit}
-                type="submit"
-              >
-                Start
-              </Button>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  variant="contained"
+                  onClick={handleSeedIdSubmit}
+                  type="submit"
+                >
+                  Start
+                </Button>
+              </Box>
             </Box>
           </StyledSectionWrapper>
         </StyledContent>
@@ -117,68 +128,23 @@ export const SeasonEditor = () => {
 
       {seedIdFilled && (
         <StyledContent>
-          <StyledSectionWrapper id="basic-information">
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5" sx={{ mb: 2 }}>
-                Season description
-              </Typography>
+          <SectionWrapper
+            hiddenSections={hiddenSections}
+            onToggleSectionVisibility={handleToggleSectionVisibility}
+            sectionName="basicInformation"
+            title="Season description"
+          >
+            <FormProvider {...methods}>
+              <BasicInfo />
+            </FormProvider>
+          </SectionWrapper>
 
-              <SectionVisibilityButton
-                hiddenSections={hiddenSections}
-                onToggle={handleToggleSectionVisibility}
-                sectionName="basicInformation"
-              />
-            </Box>
-            {hiddenSections.includes("basicInformation") ? null : (
-              <>
-                <StyledInput>
-                  <label>Unique season competence Id number (e.g. 100)</label>
-                  <input type="text" {...register("seedId")} disabled />
-                </StyledInput>
-
-                <StyledInput>
-                  <label>Title</label>
-                  <input type="text" {...register("title")} />
-                </StyledInput>
-
-                <StyledInput>
-                  <label>Info</label>
-                  <textarea rows={3} {...register("info")} />
-                </StyledInput>
-
-                <StyledInput>
-                  <label>Assets URL</label>
-                  <input type="text" {...register("assetsURL")} />
-                </StyledInput>
-
-                <StyledInput>
-                  <label>
-                    Season end message <i>(legacy option)</i>
-                  </label>
-                  <textarea rows={3} {...register("seasonEndMessage")} />
-                </StyledInput>
-
-                <div>
-                  <input type="checkbox" {...register("linearSeason")} />
-                  <label>Linear season</label>
-                </div>
-              </>
-            )}
-          </StyledSectionWrapper>
-
-          <StyledSectionWrapper id="competence-areas">
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5" sx={{ mb: 2 }}>
-                Competence Areas
-              </Typography>
-
-              <SectionVisibilityButton
-                hiddenSections={hiddenSections}
-                onToggle={handleToggleSectionVisibility}
-                sectionName="competenceAreas"
-              />
-            </Box>
-
+          <SectionWrapper
+            hiddenSections={hiddenSections}
+            onToggleSectionVisibility={handleToggleSectionVisibility}
+            sectionName="competenceAreas"
+            title="Competence Areas"
+          >
             <Box
               sx={{
                 flexDirection: "column",
@@ -192,87 +158,55 @@ export const SeasonEditor = () => {
                 <CompetenceAreas />
               </FormProvider>
             </Box>
-          </StyledSectionWrapper>
+          </SectionWrapper>
 
-          <StyledSectionWrapper id="episodes">
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5" sx={{ mb: 2 }}>
-                Episodes
-              </Typography>
-
-              <SectionVisibilityButton
-                hiddenSections={hiddenSections}
-                onToggle={handleToggleSectionVisibility}
-                sectionName="episodes"
-              />
-            </Box>
-          </StyledSectionWrapper>
-
-          {hiddenSections.includes("episodes") ? null : (
+          <SectionWrapper
+            childrenOutsideWrapper={true}
+            hiddenSections={hiddenSections}
+            onToggleSectionVisibility={handleToggleSectionVisibility}
+            sectionName="episodes"
+            title="Episodes"
+          >
             <FormProvider {...methods}>
               <Episodes />
             </FormProvider>
-          )}
+          </SectionWrapper>
 
-          <StyledSectionWrapper id="test-items">
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5" sx={{ mb: 2 }}>
-                Test items
-              </Typography>
-
-              <SectionVisibilityButton
-                hiddenSections={hiddenSections}
-                onToggle={handleToggleSectionVisibility}
-                sectionName="testItems"
-              />
-            </Box>
-          </StyledSectionWrapper>
-
-          {hiddenSections.includes("testItems") ? null : (
+          <SectionWrapper
+            childrenOutsideWrapper={true}
+            hiddenSections={hiddenSections}
+            onToggleSectionVisibility={handleToggleSectionVisibility}
+            sectionName="testItems"
+            title="Test items"
+          >
             <FormProvider {...methods}>
               <TestItems />
             </FormProvider>
-          )}
+          </SectionWrapper>
 
-          <StyledSectionWrapper id="feedback-questions">
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5" sx={{ mb: 2 }}>
-                Feedback questions
-              </Typography>
-
-              <SectionVisibilityButton
-                hiddenSections={hiddenSections}
-                onToggle={handleToggleSectionVisibility}
-                sectionName="feedbackQuestions"
-              />
-            </Box>
-          </StyledSectionWrapper>
-
-          {hiddenSections.includes("feedbackQuestions") ? null : (
+          <SectionWrapper
+            childrenOutsideWrapper={true}
+            hiddenSections={hiddenSections}
+            onToggleSectionVisibility={handleToggleSectionVisibility}
+            sectionName="feedbackQuestions"
+            title="Feedback questions"
+          >
             <FormProvider {...methods}>
               <FeedbackQuestions />
             </FormProvider>
-          )}
+          </SectionWrapper>
 
-          <StyledSectionWrapper id="badges">
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <Typography variant="h5" sx={{ mb: 2 }}>
-                Badges
-              </Typography>
-
-              <SectionVisibilityButton
-                hiddenSections={hiddenSections}
-                onToggle={handleToggleSectionVisibility}
-                sectionName="badges"
-              />
-            </Box>
-          </StyledSectionWrapper>
-
-          {hiddenSections.includes("badges") ? null : (
+          <SectionWrapper
+            childrenOutsideWrapper={true}
+            hiddenSections={hiddenSections}
+            onToggleSectionVisibility={handleToggleSectionVisibility}
+            sectionName="badges"
+            title="Badges"
+          >
             <FormProvider {...methods}>
               <Badges />
             </FormProvider>
-          )}
+          </SectionWrapper>
         </StyledContent>
       )}
     </Box>

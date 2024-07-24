@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { FormInputs } from "../types";
 import { StyledInput } from "./styled-input";
 import { SubCompetences } from "./sub-competences";
+import AddIcon from "@mui/icons-material/Add";
 import { getNextCompetenceId, tryRemoveCompetence } from "../utils";
 import { ConfirmDialogContext } from "../context";
 
@@ -140,9 +141,10 @@ export const Competences = ({ competenceAreaId }: CompetencesProps) => {
 
       <div>
         <Button
-          variant="contained"
+          variant="outlined"
           type="button"
           onClick={handleAppendCompetence}
+          startIcon={<AddIcon />}
         >
           Add Competence
         </Button>

@@ -5,8 +5,7 @@ import { SectionName } from "../types";
 
 type Props = {
   hiddenSections: SectionName[];
-  // eslint-disable-next-line no-unused-vars
-  onToggle: (sectionName: SectionName) => void;
+  onToggle: (_sectionName: SectionName) => void;
   sectionName: SectionName;
 };
 
@@ -17,7 +16,7 @@ export const SectionVisibilityButton = ({
 }: Props) => {
   return (
     <div>
-      <IconButton onClick={() => onToggle(sectionName)}>
+      <IconButton onClick={() => onToggle(sectionName)} sx={{ color: "#fff" }}>
         {hiddenSections.includes(sectionName) ? (
           <VisibilityOffIcon />
         ) : (

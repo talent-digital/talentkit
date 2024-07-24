@@ -1,6 +1,7 @@
 import { Button, Box } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
 import { FormInputs, FromInputSubCompetence } from "../types";
@@ -127,7 +128,7 @@ export const FeedbackQuestions = () => {
     <>
       {feedbackQuestionFields.map((feedbackQuestionField, index) => (
         <StyledSectionWrapper key={feedbackQuestionField.id} indented>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", p: 2 }}>
             <input
               type="text"
               hidden
@@ -213,10 +214,10 @@ export const FeedbackQuestions = () => {
               label="answer"
             />
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", p: 2 }}>
             <Button
               startIcon={<DeleteIcon />}
-              variant="contained"
+              variant="outlined"
               color="error"
               onClick={() => handleRemoveFeedbackQuestion(index)}
             >
@@ -226,27 +227,27 @@ export const FeedbackQuestions = () => {
         </StyledSectionWrapper>
       ))}
 
-      <StyledSectionWrapper indented>
-        <div>
-          <Button
-            variant="contained"
-            type="button"
-            onClick={() =>
-              appendFeedbackQuestion({
-                competenceAreaId: "",
-                competenceId: "",
-                subCompetenceId: "",
-                feedbackQuestionId: getFeedbackQuestionId(),
-                episode: "",
-                question: "",
-                answers: "",
-              })
-            }
-          >
-            Add Feedback Question
-          </Button>
-        </div>
-      </StyledSectionWrapper>
+      <Box sx={{ display: "flex", alignSelf: "flex-start", pl: 3 }}>
+        <Button
+          variant="outlined"
+          type="button"
+          startIcon={<AddIcon />}
+          sx={{ background: "#fff" }}
+          onClick={() =>
+            appendFeedbackQuestion({
+              competenceAreaId: "",
+              competenceId: "",
+              subCompetenceId: "",
+              feedbackQuestionId: getFeedbackQuestionId(),
+              episode: "",
+              question: "",
+              answers: "",
+            })
+          }
+        >
+          Add Feedback Question
+        </Button>
+      </Box>
     </>
   );
 };

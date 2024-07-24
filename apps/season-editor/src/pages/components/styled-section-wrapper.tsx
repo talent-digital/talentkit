@@ -6,13 +6,14 @@ export const StyledSectionWrapper = styled("div", {
 })<{
   indented?: boolean;
 }>(({ theme, indented }) => ({
-  boxShadow: theme.shadows[3],
+  border: `1px solid ${grey["500"]}`,
   borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(2),
   width: `calc(100% - ${indented ? theme.spacing(3) : "0px"})`,
   marginLeft: indented ? theme.spacing(3) : "0px",
   display: "flex",
   flexDirection: "column",
   background: "#fff",
-  borderLeft: indented ? `5px solid ${grey["800"]}` : "none",
+  borderLeft: indented
+    ? `5px solid ${theme.palette.primary.main}`
+    : `1px solid ${grey["500"]}`,
 }));

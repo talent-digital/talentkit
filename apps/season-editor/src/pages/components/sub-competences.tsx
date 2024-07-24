@@ -4,6 +4,7 @@ import { StyledInput } from "./styled-input";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormInputs } from "../types";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import { getNextCompetenceId, tryRemoveCompetence } from "../utils";
 import { useContext, useEffect, useState } from "react";
 import { ConfirmDialogContext } from "../context";
@@ -193,9 +194,10 @@ export const SubCompetences = ({
         ))}
       <div>
         <Button
-          variant="contained"
+          variant="outlined"
           type="button"
           onClick={handleAppendSubCompetence}
+          startIcon={<AddIcon />}
         >
           Add SubCompetence
         </Button>
