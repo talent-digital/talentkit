@@ -1,7 +1,16 @@
-import { Box, Button, Typography, styled, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Typography,
+  styled,
+  useTheme,
+} from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { SeasonDefinition } from "@talentdigital/season";
 import { useEffect, useState } from "react";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 
 import {
   CompetenceAreas,
@@ -30,6 +39,7 @@ export const SeasonEditor = () => {
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
   const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
   const [seedIdFilled, setSeedIdFilled] = useState<boolean>(false);
+  const [fullscreenMode, setFullscreenMode] = useState<boolean>(false);
   const theme = useTheme();
 
   const handleToggleSectionVisibility = (sectionName: SectionName) => {
@@ -82,134 +92,153 @@ export const SeasonEditor = () => {
   };
 
   return (
-    <Box sx={{ paddingLeft: `${SIDEBAR_SIZE}px` }}>
-      <FormProvider {...methods}>
-        <Sidebar
-          language={language}
-          season={season}
-          onLanguageChange={(lang) => setLanguage(lang)}
-          onSeasonChange={(season) => setSeason(season)}
-        />
-      </FormProvider>
+    <>
+      <Box
+        sx={{
+          position: "fixed",
+          right: theme.spacing(3),
+          top: theme.spacing(3),
+        }}
+      >
+        <IconButton
+          onClick={() => setFullscreenMode((value) => !value)}
+          title="Toggle fullscreen mode"
+        >
+          {fullscreenMode ? <FullscreenExitIcon /> : <FullscreenIcon />}
+        </IconButton>
+      </Box>
 
-      {!seedIdFilled && (
-        <StyledContent>
-          <StyledSectionWrapper>
-            <Typography
-              variant="h5"
-              sx={{
-                background: theme.palette.primary.main,
-                color: "#fff",
-                p: 2,
-              }}
-            >
-              To start provide an unique Id or load a file that contains it
-            </Typography>
+      <Box sx={{ paddingLeft: fullscreenMode ? 0 : `${SIDEBAR_SIZE}px` }}>
+        {!fullscreenMode && (
+          <FormProvider {...methods}>
+            <Sidebar
+              language={language}
+              season={season}
+              onLanguageChange={(lang) => setLanguage(lang)}
+              onSeasonChange={(season) => setSeason(season)}
+            />
+          </FormProvider>
+        )}
 
-            <Box sx={{ p: 2 }}>
-              <StyledInput>
-                <label>Unique season competence Id number (e.g. 100)</label>
-                <input type="text" {...register("seedId")} autoFocus />
-              </StyledInput>
+        {!seedIdFilled && (
+          <StyledContent>
+            <StyledSectionWrapper>
+              <Typography
+                variant="h5"
+                sx={{
+                  background: theme.palette.primary.main,
+                  color: "#fff",
+                  p: 2,
+                }}
+              >
+                To start provide an unique Id or load a file that contains it
+              </Typography>
 
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Button
-                  variant="contained"
-                  onClick={handleSeedIdSubmit}
-                  type="submit"
-                >
-                  Start
-                </Button>
+              <Box sx={{ p: 2 }}>
+                <StyledInput>
+                  <label>Unique season competence Id number (e.g. 100)</label>
+                  <input type="text" {...register("seedId")} autoFocus />
+                </StyledInput>
+
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <Button
+                    variant="contained"
+                    onClick={handleSeedIdSubmit}
+                    type="submit"
+                  >
+                    Start
+                  </Button>
+                </Box>
               </Box>
-            </Box>
-          </StyledSectionWrapper>
-        </StyledContent>
-      )}
+            </StyledSectionWrapper>
+          </StyledContent>
+        )}
 
-      {seedIdFilled && (
-        <StyledContent>
-          <SectionWrapper
-            hiddenSections={hiddenSections}
-            onToggleSectionVisibility={handleToggleSectionVisibility}
-            sectionName="basicInformation"
-            title="Season description"
-          >
-            <FormProvider {...methods}>
-              <BasicInfo />
-            </FormProvider>
-          </SectionWrapper>
-
-          <SectionWrapper
-            hiddenSections={hiddenSections}
-            onToggleSectionVisibility={handleToggleSectionVisibility}
-            sectionName="competenceAreas"
-            title="Competence Areas"
-          >
-            <Box
-              sx={{
-                flexDirection: "column",
-                gap: 2,
-                display: hiddenSections.includes("competenceAreas")
-                  ? "none"
-                  : "flex",
-              }}
+        {seedIdFilled && (
+          <StyledContent>
+            <SectionWrapper
+              hiddenSections={hiddenSections}
+              onToggleSectionVisibility={handleToggleSectionVisibility}
+              sectionName="basicInformation"
+              title="Season description"
             >
               <FormProvider {...methods}>
-                <CompetenceAreas />
+                <BasicInfo />
               </FormProvider>
-            </Box>
-          </SectionWrapper>
+            </SectionWrapper>
 
-          <SectionWrapper
-            childrenOutsideWrapper={true}
-            hiddenSections={hiddenSections}
-            onToggleSectionVisibility={handleToggleSectionVisibility}
-            sectionName="episodes"
-            title="Episodes"
-          >
-            <FormProvider {...methods}>
-              <Episodes />
-            </FormProvider>
-          </SectionWrapper>
+            <SectionWrapper
+              hiddenSections={hiddenSections}
+              onToggleSectionVisibility={handleToggleSectionVisibility}
+              sectionName="competenceAreas"
+              title="Competence Areas"
+            >
+              <Box
+                sx={{
+                  flexDirection: "column",
+                  gap: 2,
+                  display: hiddenSections.includes("competenceAreas")
+                    ? "none"
+                    : "flex",
+                }}
+              >
+                <FormProvider {...methods}>
+                  <CompetenceAreas />
+                </FormProvider>
+              </Box>
+            </SectionWrapper>
 
-          <SectionWrapper
-            childrenOutsideWrapper={true}
-            hiddenSections={hiddenSections}
-            onToggleSectionVisibility={handleToggleSectionVisibility}
-            sectionName="testItems"
-            title="Test items"
-          >
-            <FormProvider {...methods}>
-              <TestItems />
-            </FormProvider>
-          </SectionWrapper>
+            <SectionWrapper
+              childrenOutsideWrapper={true}
+              hiddenSections={hiddenSections}
+              onToggleSectionVisibility={handleToggleSectionVisibility}
+              sectionName="episodes"
+              title="Episodes"
+            >
+              <FormProvider {...methods}>
+                <Episodes />
+              </FormProvider>
+            </SectionWrapper>
 
-          <SectionWrapper
-            childrenOutsideWrapper={true}
-            hiddenSections={hiddenSections}
-            onToggleSectionVisibility={handleToggleSectionVisibility}
-            sectionName="feedbackQuestions"
-            title="Feedback questions"
-          >
-            <FormProvider {...methods}>
-              <FeedbackQuestions />
-            </FormProvider>
-          </SectionWrapper>
+            <SectionWrapper
+              childrenOutsideWrapper={true}
+              hiddenSections={hiddenSections}
+              onToggleSectionVisibility={handleToggleSectionVisibility}
+              sectionName="testItems"
+              title="Test items"
+            >
+              <FormProvider {...methods}>
+                <TestItems />
+              </FormProvider>
+            </SectionWrapper>
 
-          <SectionWrapper
-            childrenOutsideWrapper={true}
-            hiddenSections={hiddenSections}
-            onToggleSectionVisibility={handleToggleSectionVisibility}
-            sectionName="badges"
-            title="Badges"
-          >
-            <FormProvider {...methods}>
-              <Badges />
-            </FormProvider>
-          </SectionWrapper>
-        </StyledContent>
-      )}
-    </Box>
+            <SectionWrapper
+              childrenOutsideWrapper={true}
+              hiddenSections={hiddenSections}
+              onToggleSectionVisibility={handleToggleSectionVisibility}
+              sectionName="feedbackQuestions"
+              title="Feedback questions"
+            >
+              <FormProvider {...methods}>
+                <FeedbackQuestions />
+              </FormProvider>
+            </SectionWrapper>
+
+            <SectionWrapper
+              childrenOutsideWrapper={true}
+              hiddenSections={hiddenSections}
+              onToggleSectionVisibility={handleToggleSectionVisibility}
+              sectionName="badges"
+              title="Badges"
+            >
+              <FormProvider {...methods}>
+                <Badges />
+              </FormProvider>
+            </SectionWrapper>
+          </StyledContent>
+        )}
+      </Box>
+    </>
   );
 };
 
