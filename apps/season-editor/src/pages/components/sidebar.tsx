@@ -69,6 +69,9 @@ export const Sidebar = ({
       if (maybeSeason.notNumericEpisodes) {
         validateNumericEpisodes(values, maybeSeason.notNumericEpisodes);
       }
+      if (maybeSeason.feedbackQuesionsHaveTooLongAnswers) {
+        validateFeedbackQuesionsHaveTooLongAnswers();
+      }
 
       return;
     }
@@ -118,6 +121,10 @@ export const Sidebar = ({
         ", "
       )}`
     );
+  };
+
+  const validateFeedbackQuesionsHaveTooLongAnswers = () => {
+    toast.error(`Error: Feedback questions have too long answers.`);
   };
 
   return (

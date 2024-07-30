@@ -1,4 +1,4 @@
-import { Button, Box } from "@mui/material";
+import { Button, Box, Alert } from "@mui/material";
 import { StyledInput } from "./styled-input";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
@@ -16,6 +16,7 @@ import {
 } from "react";
 import { ConfirmDialogContext } from "../context";
 import { InputList } from "./input-list";
+import { MAX_FEEDBACK_QUESTIONS_ANSWERS_LENGTH } from "../dictionaries";
 
 const EMPTY_OPTION = "";
 
@@ -27,6 +28,9 @@ export const FeedbackQuestions = () => {
   const [episodeOptions, setEpisodeOptions] = useState<string[] | undefined>(
     undefined
   );
+  const [longAnswersErrorFieldIds, setLongAnswersErrorFieldIds] = useState<
+    number[]
+  >([]);
   const [subCompetenceOptions, setSubCompetenceOptions] = useState<
     FromInputSubCompetence[]
   >([]);
@@ -43,6 +47,18 @@ export const FeedbackQuestions = () => {
 
   const handleUpdate = (index: number, answers: string) => {
     setValue(`feedbackQuestions.${index}.answers`, answers);
+
+    const answersLength = JSON.stringify(
+      answers.split(",").map((answer, index) => ({
+        id: index,
+        de: answer,
+      }))
+    ).length;
+    const newAnswersError =
+      answersLength > MAX_FEEDBACK_QUESTIONS_ANSWERS_LENGTH
+        ? longAnswersErrorFieldIds.concat(index)
+        : longAnswersErrorFieldIds.filter((id) => id !== index);
+    setLongAnswersErrorFieldIds(newAnswersError);
   };
 
   const handleSubCompetenceSelect = (
@@ -206,12 +222,20 @@ export const FeedbackQuestions = () => {
               />
             </StyledInput>
 
+            {longAnswersErrorFieldIds.includes(index) && (
+              <Alert severity="error">
+                The combined text from all of your answers is too long. Try
+                shortening them or remove some answers.
+              </Alert>
+            )}
+
             <InputList
               formFieldName="answers"
-              list={feedbackQuestionField.answers}
-              onUpdate={handleUpdate}
+              hasError={longAnswersErrorFieldIds.includes(index)}
               itemIndex={index}
               label="answer"
+              list={feedbackQuestionField.answers}
+              onUpdate={handleUpdate}
             />
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end", p: 2 }}>
