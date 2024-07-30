@@ -1,4 +1,5 @@
 import { FormInputs } from "../types";
+import toast from "react-hot-toast";
 
 export function tryRemoveCompetence(
   values: FormInputs,
@@ -18,8 +19,8 @@ export function tryRemoveCompetence(
     .some((id) => subCompetenceIdsToCheck.includes(id));
 
   if (subCompetenceUsedInTestItems || subCompetenceUsedInFeedbackQuestions) {
-    alert(
-      "Cannot delete competence because one of it's sub-competences is used in a test item or a feedback question."
+    toast.error(
+      "Cannot delete because the element or its child is used in a test item or a feedback question."
     );
   } else {
     removeFn();

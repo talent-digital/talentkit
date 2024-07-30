@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useFieldArray, useFormContext, FieldArray } from "react-hook-form";
 import { Maturity } from "@talentdigital/season";
 import AddIcon from "@mui/icons-material/Add";
+import toast from "react-hot-toast";
 
 import { FormInputs } from "../types";
 import { StyledSectionWrapper } from ".";
@@ -84,7 +85,7 @@ export const Episodes = () => {
     );
 
     if (usedInTestItems || usedInFeedbackQuestion) {
-      alert(
+      toast.error(
         "Cannot delete episode because it is used in a test item or a feedback question."
       );
       return;
