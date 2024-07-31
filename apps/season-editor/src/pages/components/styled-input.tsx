@@ -1,11 +1,12 @@
 import { Box, styled } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { grey, red } from "@mui/material/colors";
 
 export const StyledInput = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "short",
+  shouldForwardProp: (prop: string) => !["short", "hasError"].includes(prop),
 })<{
   short?: boolean;
-}>(({ theme, short }) => ({
+  hasError?: boolean;
+}>(({ theme, short, hasError }) => ({
   position: "relative",
   display: "flex",
   flexDirection: "column",
@@ -25,7 +26,7 @@ export const StyledInput = styled(Box, {
   },
   "& input, & select, & textarea": {
     borderRadius: theme.shape.borderRadius,
-    border: `1px solid ${grey[500]}`,
+    border: hasError ? `1px solid ${red[500]}` : `1px solid ${grey[500]}`,
     padding: theme.spacing(1),
     width: "100%",
     fontFamily: theme.typography.fontFamily,

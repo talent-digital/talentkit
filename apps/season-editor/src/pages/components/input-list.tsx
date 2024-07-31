@@ -25,12 +25,14 @@ type ListFormInputs = {
 
 export const InputList = ({
   formFieldName,
+  hasError = false,
   itemIndex,
   label,
   list,
   onUpdate,
 }: {
   formFieldName: FormInputsKeys;
+  hasError?: boolean;
   itemIndex: number;
   label: string;
   list: string;
@@ -83,7 +85,7 @@ export const InputList = ({
             alignItems: "center",
           }}
         >
-          <StyledInput>
+          <StyledInput hasError={hasError}>
             <label style={{ textTransform: "capitalize" }}>
               {label} {index}
             </label>

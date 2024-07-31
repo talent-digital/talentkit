@@ -4,6 +4,7 @@ import {
   SeasonDefinition,
 } from "@talentdigital/season";
 import { ErrorObject, FormInputs, LanguageCode } from "../types";
+import { MAX_FEEDBACK_QUESTIONS_ANSWERS_LENGTH } from "../dictionaries";
 
 export function mapToSeasonObject(
   originalFileLoaded: SeasonDefinition,
@@ -47,6 +48,25 @@ export function mapToSeasonObject(
       notNumericEpisodes: notNumericEpisodes.map(
         (episode) => episode.episodeId
       ),
+    };
+  }
+
+  const hasTooLongFeedbackQuestionAnswers = values.feedbackQuestions?.some(
+    (feedbackQuestion) => {
+      const answersLength = JSON.stringify(
+        feedbackQuestion.answers.split(",").map((answer, index) => ({
+          id: index,
+          de: answer,
+        }))
+      ).length;
+      return answersLength > MAX_FEEDBACK_QUESTIONS_ANSWERS_LENGTH;
+    }
+  );
+
+  if (hasTooLongFeedbackQuestionAnswers) {
+    return {
+      isError: true,
+      feedbackQuesionsHaveTooLongAnswers: true,
     };
   }
 
