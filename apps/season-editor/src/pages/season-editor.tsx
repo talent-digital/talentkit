@@ -29,18 +29,32 @@ import {
   extractFromEpisodes,
   extractFromCompetences,
   getEmptySeason,
+  mapToSeasonObject,
+  validateSeason,
 } from "./utils";
 import { DEFAULT_LANGUAGE, SIDEBAR_SIZE } from "./dictionaries";
 
 export const SeasonEditor = () => {
   const methods = useForm<FormInputs>();
-  const { register, reset, getValues } = methods;
+  const { register, reset, getValues, setError } = methods;
   const [season, setSeason] = useState<SeasonDefinition>(getEmptySeason());
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
   const [hiddenSections, setHiddenSections] = useState<SectionName[]>([]);
   const [seedIdFilled, setSeedIdFilled] = useState<boolean>(false);
   const [fullscreenMode, setFullscreenMode] = useState<boolean>(false);
   const theme = useTheme();
+
+  const handleLanguageChange = (newLanguage: LanguageCode) => {
+    const values = getValues();
+    const maybeSeason = mapToSeasonObject(season, getValues(), language);
+
+    if (!validateSeason(maybeSeason, values, setError)) {
+      return;
+    }
+
+    setSeason(maybeSeason);
+    setLanguage(newLanguage);
+  };
 
   const handleToggleSectionVisibility = (sectionName: SectionName) => {
     if (hiddenSections.includes(sectionName)) {
@@ -114,7 +128,7 @@ export const SeasonEditor = () => {
             <Sidebar
               language={language}
               season={season}
-              onLanguageChange={(lang) => setLanguage(lang)}
+              onLanguageChange={(lang) => handleLanguageChange(lang)}
               onSeasonChange={(season) => setSeason(season)}
             />
           </FormProvider>
