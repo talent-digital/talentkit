@@ -23,6 +23,7 @@ import { SidebarHistory } from "./sidebar-history";
 import { SidebarJumpToSection } from "./sidebar-just-to-section";
 import { SidebarAdvancedTools } from "./sidebar-advanced-tools";
 import { StyledSidebarSection } from "./styled-sidebar-section";
+import { SidebarTranslateSection } from "./sidebar-translate-section";
 
 export const Sidebar = ({
   language,
@@ -120,12 +121,28 @@ export const Sidebar = ({
         </Button>
       </StyledSidebarSection>
 
+      <SidebarTranslateSection
+        season={season}
+        onSeasonChange={onSeasonChange}
+        language={language}
+      />
       <SidebarJumpToSection />
       <SidebarHistory />
       <SidebarStatistics />
       <SidebarAdvancedTools />
     </StyledSidebar>
   );
+};
+
+const languageToFullForm = (language: LanguageCode) => {
+  switch (language) {
+    case "en":
+      return "English";
+    case "de":
+      return "German";
+    default:
+      return language;
+  }
 };
 
 const StyledSidebar = styled("div")(({ theme }) => ({
@@ -146,14 +163,3 @@ const StyledSidebar = styled("div")(({ theme }) => ({
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
 }));
-
-const languageToFullForm = (language: LanguageCode) => {
-  switch (language) {
-    case "en":
-      return "English";
-    case "de":
-      return "German";
-    default:
-      return language;
-  }
-};
