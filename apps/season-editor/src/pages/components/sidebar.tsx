@@ -18,7 +18,12 @@ import toast from "react-hot-toast";
 import { availableLanguages, SIDEBAR_SIZE } from "../dictionaries";
 import { SidebarStatistics } from "./sidebar-statistics";
 import { FormInputs, LanguageCode } from "../types";
-import { detectLanguage, validateSeason, mapToSeasonObject } from "../utils";
+import {
+  detectLanguage,
+  validateSeason,
+  mapToSeasonObject,
+  languageToFullForm,
+} from "../utils";
 import { SidebarHistory } from "./sidebar-history";
 import { SidebarJumpToSection } from "./sidebar-just-to-section";
 import { SidebarAdvancedTools } from "./sidebar-advanced-tools";
@@ -132,17 +137,6 @@ export const Sidebar = ({
       <SidebarAdvancedTools />
     </StyledSidebar>
   );
-};
-
-const languageToFullForm = (language: LanguageCode) => {
-  switch (language) {
-    case "en":
-      return "English";
-    case "de":
-      return "German";
-    default:
-      return language;
-  }
 };
 
 const StyledSidebar = styled("div")(({ theme }) => ({
