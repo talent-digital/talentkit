@@ -1,8 +1,10 @@
 import {
   EpisodeDefinition,
+  LocalizedSearchDefinition,
   LocalizedString,
   SeasonDefinition,
 } from "@talentdigital/season";
+
 import { ErrorObject, FormInputs, LanguageCode } from "../types";
 import { MAX_FEEDBACK_QUESTIONS_ANSWERS_LENGTH } from "../dictionaries";
 
@@ -211,6 +213,7 @@ function mapToSeasonTestItems(
       const oldDocumentation = oldTestItem?.documentation ?? {};
       const oldSearch = oldTestItem?.search ?? ({} as Record<string, unknown>);
       const oldSearchLanguage = oldSearch[language] ?? {};
+      const toolType = testItem.toolType;
 
       return {
         ...accumulator,
@@ -222,16 +225,15 @@ function mapToSeasonTestItems(
             ...oldDocumentation,
             [language]: testItem.documentation,
           },
-          toolType: testItem.toolType,
+          ...(toolType && { toolType }),
           search: {
+            ...getEmptySearch(),
             ...oldSearch,
             [language]: {
               ...oldSearchLanguage,
-              generic: testItem.searchGeneric
-                .split(",")
-                .map((item) => item.trim()),
-              links: testItem.searchLinks.split(",").map((item) => item.trim()),
-              tool: testItem.searchTool.split(",").map((item) => item.trim()),
+              generic: stringToArray(testItem.searchGeneric),
+              links: stringToArray(testItem.searchLinks),
+              tool: stringToArray(testItem.searchTool),
             },
           },
         },
@@ -317,6 +319,8 @@ function mapToSeasonEpisodes(
           };
         }, {});
 
+      const formatConfiguration = episode.formatConfiguration;
+
       return {
         ...accumulator,
         [episode.episodeId]: {
@@ -331,7 +335,7 @@ function mapToSeasonEpisodes(
           maturity: episode.maturity,
           imageUrl: episode.imageUrl,
           format: episode.format,
-          formatConfiguration: episode.formatConfiguration,
+          ...(formatConfiguration && { formatConfiguration }),
           badges: {
             ...(oldValues.episodes[episode.episodeId]?.badges ?? {}),
             ...newBadges,
@@ -342,6 +346,27 @@ function mapToSeasonEpisodes(
   );
 }
 
-function deepCloneSeason(file: SeasonDefinition): SeasonDefinition {
+const stringToArray = (value: string): string[] =>
+  value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+const getEmptySearch = (): LocalizedSearchDefinition => {
+  return {
+    de: {
+      generic: [],
+      links: [],
+      tool: [],
+    },
+    en: {
+      generic: [],
+      links: [],
+      tool: [],
+    },
+  };
+};
+
+const deepCloneSeason = (file: SeasonDefinition): SeasonDefinition => {
   return JSON.parse(JSON.stringify(file)) as SeasonDefinition;
-}
+};

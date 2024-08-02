@@ -134,7 +134,7 @@ export const Sidebar = ({
       <SidebarJumpToSection />
       <SidebarHistory />
       <SidebarStatistics />
-      <SidebarAdvancedTools />
+      <SidebarAdvancedTools season={season} />
     </StyledSidebar>
   );
 };

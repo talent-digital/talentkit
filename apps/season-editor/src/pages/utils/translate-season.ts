@@ -50,14 +50,17 @@ const markDeepForTranslation = (
 ): Record<string, unknown> => {
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => {
-      if (typeof value === "object") {
+      if (isObject(value)) {
         if (typeof value[fromLanguage] === "string" && !value[toLanguage]) {
           const { hash, markedValue } = markForTranslation(
             value,
             fromLanguage,
             toLanguage
           );
-          translationObject[hash] = value[fromLanguage];
+          const valueFromLanguage = value[fromLanguage];
+          if (typeof valueFromLanguage === "string") {
+            translationObject[hash] = valueFromLanguage;
+          }
 
           return [
             key,
@@ -165,14 +168,8 @@ const mapTranslationsToSeason = (
 ): Record<string, unknown> => {
   return Object.fromEntries(
     Object.entries(season).map(([key, value]) => {
-      if (typeof value === "object") {
-        return [
-          key,
-          mapTranslationsToSeason(
-            value as Record<string, unknown>,
-            translations
-          ),
-        ];
+      if (isObject(value)) {
+        return [key, mapTranslationsToSeason(value, translations)];
       }
       if (typeof value === "string") {
         const maybeTranslatedValue = translations[value] || value;
@@ -183,4 +180,8 @@ const mapTranslationsToSeason = (
       return [key, value];
     })
   );
+};
+
+const isObject = (input: unknown): input is Record<string, unknown> => {
+  return typeof input === "object" && !Array.isArray(input);
 };
