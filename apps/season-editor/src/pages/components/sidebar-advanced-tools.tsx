@@ -1,10 +1,15 @@
 import { Typography, Box, Button } from "@mui/material";
 import { useFormContext } from "react-hook-form";
+import { SeasonDefinition } from "@talentdigital/season";
 
 import { FormInputs } from "../types";
 import { StyledSidebarSection } from "./styled-sidebar-section";
 
-export const SidebarAdvancedTools = () => {
+export const SidebarAdvancedTools = ({
+  season,
+}: {
+  season: SeasonDefinition;
+}) => {
   const { getValues } = useFormContext<FormInputs>();
 
   return (
@@ -26,6 +31,16 @@ export const SidebarAdvancedTools = () => {
           fullWidth
         >
           Log form
+        </Button>
+
+        <Button
+          onClick={() => {
+            console.log(season);
+          }}
+          variant="outlined"
+          fullWidth
+        >
+          Log season
         </Button>
       </Box>
     </StyledSidebarSection>
