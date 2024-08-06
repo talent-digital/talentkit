@@ -344,6 +344,15 @@ export interface SearchDefinitionWeb {
   links?: string[];
 }
 
+export interface SeasonCertificateWeb {
+  /** The data with text localization. Should be an correct ISO language. */
+  certificateName: LocalizedString;
+  subCompetence: number[];
+  level: "START" | "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
+  color: string;
+  groupName: string;
+}
+
 /** Competence Area model used only in Season Definition */
 export interface SeasonDefinitionCompetenceAreaWeb {
   /** The data with text localization. Should be an correct ISO language. */
@@ -403,6 +412,7 @@ export interface SeasonWeb {
   linearSeason?: boolean;
   competenceAreas?: Record<string, SeasonDefinitionCompetenceAreaWeb>;
   episodes?: Record<string, EpisodeWeb>;
+  certificates?: Record<string, SeasonCertificateWeb>;
 }
 
 export interface TalentUserWeb {
