@@ -50,6 +50,12 @@ export interface SeasonDefinition {
    * episode id (e.g., "1", "2", "3", ...). Requires for the episode ids to be numbers.
    */
   linearSeason?: boolean;
+
+  /**
+   * Issued by accredible and displayed within the platform as proves of learning certain material.
+   * The ID can be simply e.g. "01", "02", ...
+   */
+  certificates?: { [id in string]: CertificateDefinition };
 }
 
 /**
@@ -259,6 +265,36 @@ export interface Badge {
    * The URL of an image representing the badge.
    */
   image: URL;
+}
+
+/**
+ * A certificate definition represents an achievement or qualification that a user can receive.
+ */
+export interface CertificateDefinition {
+  /**
+   * The display name of the certificate, localized for different languages.
+   */
+  certificateName: LocalizedString;
+
+  /**
+   * Sub-competence ids that need to be achieved by the user in order to earn this certificate
+   */
+  subCompetence: number[];
+
+  /**
+   * The level of achievement that the certificate represents.
+   */
+  level: Level;
+
+  /**
+   * The color used to visually represent the certificate.
+   */
+  color: string;
+
+  /**
+   * Accredible group name, used to connect the certificate in the platform with accredible issued certificate.
+   */
+  groupName: string;
 }
 
 /**
