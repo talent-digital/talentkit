@@ -25,7 +25,7 @@
     "swagger-typescript-api": "^13.0.3",
     "tsconfig": "workspace:*",
     "typescript": "^5.4.2",
-    "vite": "^5.1.6",
+    "vite": "^5.2.14",
     "vite-plugin-dts": "^2.3.0"
   }
 }
