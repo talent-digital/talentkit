@@ -347,6 +347,8 @@ export interface SearchDefinitionWeb {
 export interface SeasonCertificateWeb {
   /** The data with text localization. Should be an correct ISO language. */
   certificateName: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  description: LocalizedString;
   subCompetence: number[];
   level: "START" | "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
   color: string;
