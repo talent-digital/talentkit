@@ -27,7 +27,7 @@
     "@talentdigital/season": "workspace:*",
     "@types/node": "^20.11.27",
     "eslint-config-custom": "workspace:*",
-    "happy-dom": "^13.8.2",
+    "happy-dom": "^15.10.1",
     "jsdom": "^24.0.0",
     "logrocket": "^8.1.0",
     "tsconfig": "workspace:*",
