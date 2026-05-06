@@ -54,7 +54,7 @@ jobs:
         run: pnpm test
 
   e2e:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
