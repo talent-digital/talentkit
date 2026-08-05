@@ -347,6 +347,8 @@ export interface SearchDefinitionWeb {
 export interface SeasonCertificateWeb {
   /** The data with text localization. Should be an correct ISO language. */
   certificateName: LocalizedString;
+  /** The data with text localization. Should be an correct ISO language. */
+  description: LocalizedString;
   subCompetence: number[];
   level: "START" | "FOUNDATION" | "INTERMEDIATE" | "ADVANCED" | "HIGHLY_SPECIALISED";
   color: string;
@@ -413,6 +415,87 @@ export interface SeasonWeb {
   competenceAreas?: Record<string, SeasonDefinitionCompetenceAreaWeb>;
   episodes?: Record<string, EpisodeWeb>;
   certificates?: Record<string, SeasonCertificateWeb>;
+}
+
+export interface ThreadDto {
+  id?: string;
+  metadata?: Record<string, object>;
+  object?: string;
+  /** @format int64 */
+  created_at?: number;
+  tool_resources?: Record<string, object>;
+}
+
+export interface RunWeb {
+  assistant_id?: string;
+}
+
+export interface RunDto {
+  id?: string;
+  assistantId?: string;
+  /** @format int64 */
+  cancelledAt?: number;
+  /** @format int64 */
+  completedAt?: number;
+  /** @format int64 */
+  createdAt?: number;
+  /** @format int64 */
+  expiresAt?: number;
+  /** @format int64 */
+  failedAt?: number;
+  incompleteDetails?: Record<string, object>;
+  instructions?: string;
+  lastError?: Record<string, object>;
+  /** @format int32 */
+  maxCompletionTokens?: number;
+  /** @format int32 */
+  maxPromptTokens?: number;
+  metadata?: Record<string, object>;
+  model?: string;
+  object?: string;
+  requiredAction?: Record<string, object>;
+  responseFormat?: Record<string, object>;
+  /** @format int64 */
+  startedAt?: number;
+  status?: string;
+  threadId?: string;
+  toolChoice?: Record<string, object>;
+  tools?: Record<string, object>[];
+  truncationStrategy?: Record<string, object>;
+  usage?: Record<string, object>;
+  /** @format double */
+  temperature?: number;
+  /** @format double */
+  topP?: number;
+}
+
+export interface MessageWeb {
+  role?: string;
+  content?: string;
+}
+
+export interface Content {
+  type?: string;
+  text?: Text;
+}
+
+export interface MessageDto {
+  id?: string;
+  object?: string;
+  role?: string;
+  content?: Content[];
+  attachments?: object[];
+  metadata?: Record<string, object>;
+  /** @format int64 */
+  created_at?: number;
+  assistant_id?: string;
+  thread_id?: string;
+  run_id?: string;
+}
+
+export interface Text {
+  value?: string;
+  annotations?: object[];
 }
 
 export interface TalentUserWeb {
@@ -2484,6 +2567,62 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/season/${seasonId}/episode/${episodeId}/badge/${badgeId}`,
         method: "DELETE",
         secure: true,
+        ...params,
+      }),
+  };
+  domainModelChatBot = {
+    /**
+     * No description
+     *
+     * @tags Domain model: Chat bot
+     * @name CreateThread
+     * @summary Create a thread
+     * @request POST:/api/v1/chat-bot/threads
+     * @secure
+     */
+    createThread: (params: RequestParams = {}) =>
+      this.request<ThreadDto, any>({
+        path: `/api/v1/chat-bot/threads`,
+        method: "POST",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Domain model: Chat bot
+     * @name CreateRun
+     * @summary Create a run
+     * @request POST:/api/v1/chat-bot/threads/{threadId}/runs
+     * @secure
+     */
+    createRun: (threadId: string, data: RunWeb, params: RequestParams = {}) =>
+      this.request<RunDto, any>({
+        path: `/api/v1/chat-bot/threads/${threadId}/runs`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Domain model: Chat bot
+     * @name PostMessage
+     * @summary Post a message
+     * @request POST:/api/v1/chat-bot/threads/{threadId}/messages
+     * @secure
+     */
+    postMessage: (threadId: string, data: MessageWeb, params: RequestParams = {}) =>
+      this.request<MessageDto, any>({
+        path: `/api/v1/chat-bot/threads/${threadId}/messages`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         ...params,
       }),
   };
